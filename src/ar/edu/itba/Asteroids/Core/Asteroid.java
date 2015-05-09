@@ -82,6 +82,8 @@ public class Asteroid {
 		o.vel.y = newVelY2;
 		o.x+= o.vel.x;
 		o.y+= o.vel.y;
+		
+		
 		shape.begin(ShapeType.Filled);
 		shape.setColor(0,1,0,1);
 		shape.circle(collisionPointX, collisionPointY, 10);
