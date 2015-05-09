@@ -20,7 +20,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		//a = new Asteroid(50,50,2,2,50);
 		//b = new Asteroid(200,100,5,0,2);
 		e = new ArrayList<Asteroid>();
-		for(int i = 0; i< 6; i++){
+		for(int i = 0; i< 30; i++){
 			float width = (float)Math.random() * Gdx.graphics.getWidth();
 			float height = (float)Math.random() * Gdx.graphics.getHeight();
 			float mass = (float)Math.random() * 1 +1;

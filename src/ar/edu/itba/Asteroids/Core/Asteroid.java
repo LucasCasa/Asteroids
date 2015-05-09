@@ -9,7 +9,7 @@ public class Asteroid {
 	ShapeRenderer shape = new ShapeRenderer();
 	float x;
 	float y;
-	float radius = 30;
+	float radius = 15;
 	int mass = 1;
 	Vector2 vel = new Vector2(2,3);
 	Vector2 acel = new Vector2(0,0);
@@ -18,7 +18,7 @@ public class Asteroid {
 		vel.y = vely;
 		x = a;
 		y = b;
-		this.mass = (int)mass; 
+		this.mass = 1; 
 	}
 	
 	public void update(){
@@ -26,21 +26,21 @@ public class Asteroid {
 		y+= vel.y;
 		vel.x += acel.x;
 		vel.y += acel.y;
-		if(x + 30 > Gdx.graphics.getWidth() || x - 30 < 0){
-			if(x -30 < 0){
-				x = 31;
+		if(x + radius > Gdx.graphics.getWidth() || x - radius < 0){
+			if(x -radius < 0){
+				x = radius + 1;
 			}else{
-				x = Gdx.graphics.getWidth() - 30;
+				x = Gdx.graphics.getWidth() - radius;
 			}
 			
 			vel.x*=-1;
 			acel.x*=-1;
 		}
-		if(y + 30 > Gdx.graphics.getHeight() || y - 30 < 0){
-			if(y -30 < 0){
-				y = 31;
+		if(y + radius > Gdx.graphics.getHeight() || y - radius < 0){
+			if(y -radius < 0){
+				y = radius + 1;
 			}else{
-				y = Gdx.graphics.getHeight() - 30;
+				y = Gdx.graphics.getHeight() - radius;
 			}
 			
 			vel.y*=-1;
@@ -53,18 +53,16 @@ public class Asteroid {
 	public void draw(){
 		shape.begin(ShapeType.Filled);
 		shape.setColor(0, 0, 1, 1);
-		shape.circle(x, y, radius,500);
+		shape.circle(x, y, radius);
 		shape.end();
 
 	}
 	public void collision(Asteroid o){
 		float dist = (float)(Math.pow(o.x - x,2) + Math.pow(o.y - y, 2));
-		if(dist <= 3600){
+		if(dist <= 4 * radius * radius){
 			//acel.x = acel.y = vel.y = vel.x = 0;
-			System.out.println("BINGO");
 			checkNew(o);
 		}
-		System.out.println(dist);
 	}
 	public void checkNew(Asteroid o){
 		float collisionPointX = ((x * o.radius) + (o.x * radius)) / (radius + o.radius);		 
