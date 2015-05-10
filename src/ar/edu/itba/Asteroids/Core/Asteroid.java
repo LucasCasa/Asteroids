@@ -1,6 +1,8 @@
 package ar.edu.itba.Asteroids.Core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
@@ -13,6 +15,7 @@ public class Asteroid {
 	int mass = 1;
 	Vector2 vel = new Vector2(2,3);
 	Vector2 acel = new Vector2(0,0);
+	Texture t = new Texture("aster.png");
 	public Asteroid(float a, float b,float velx, float vely,float mass){
 		vel.x = velx;
 		vel.y = vely;
@@ -21,7 +24,7 @@ public class Asteroid {
 		this.mass = 1; 
 	}
 	
-	public void update(){
+	public void update(SpriteBatch batch){
 		x+= vel.x;
 		y+= vel.y;
 		vel.x += acel.x;
@@ -47,14 +50,11 @@ public class Asteroid {
 			acel.y*=-1;
 		}
 		
-		draw();
+		draw(batch);
 	}
 	
-	public void draw(){
-		shape.begin(ShapeType.Filled);
-		shape.setColor(0, 0, 1, 1);
-		shape.circle(x, y, radius);
-		shape.end();
+	public void draw(SpriteBatch batch){
+		batch.draw(t,x - radius,y - radius,radius *2, radius *2); 
 
 	}
 	public void collision(Asteroid o){
@@ -65,11 +65,11 @@ public class Asteroid {
 		}
 	}
 	public void checkNew(Asteroid o){
+		
 		float collisionPointX = ((x * o.radius) + (o.x * radius)) / (radius + o.radius);		 
 		float collisionPointY = ((y * o.radius) + (o.y * radius)) / (radius + o.radius);
 		float newVelX =  (vel.x * (mass - o.mass) + (2 * o.mass * o.vel.x)) / (mass + o.mass);
 		float newVelY1 = (vel.y * (mass - o.mass) + (2 * o.mass * o.vel.y)) / (mass + o.mass);
-
 		float newVelX2 =  (o.vel.x * (o.mass - mass) + (2 * mass * vel.x)) / (o.mass + mass);
 		float newVelY2 = (o.vel.y * (o.mass - mass) + (2 * mass * vel.y)) / (o.mass + mass);
 		vel.x = newVelX;
@@ -81,11 +81,13 @@ public class Asteroid {
 		o.x+= o.vel.x;
 		o.y+= o.vel.y;
 		
-		
 		shape.begin(ShapeType.Filled);
 		shape.setColor(0,1,0,1);
 		shape.circle(collisionPointX, collisionPointY, 10);
 		shape.end();
+		
+        
+		
 	}
 	
 	
