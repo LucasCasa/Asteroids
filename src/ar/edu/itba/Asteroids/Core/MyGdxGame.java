@@ -46,7 +46,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(img, 0, 0,2048,1536);
-		font.draw(batch, "Hola Grupo", 50, 50);
+		font.draw(batch, "Asteroides", 50, 50);
+		font.draw(batch, ":)", 200, 500);
 		font.draw(batch, "HOLAAAA", 500, 200);
 		font.setColor((float)Math.cos(time) + 1, (float)Math.sin(time)+1,(float)(Math.cos(time) - Math.sin(time)) + 2,1);
 		
