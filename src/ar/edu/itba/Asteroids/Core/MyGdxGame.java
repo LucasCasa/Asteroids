@@ -34,6 +34,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		img = new Texture("background.png");
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));
+		MyInputProcessor MYP = new MyInputProcessor();
+		Gdx.input.setInputProcessor(MYP); // el que se encarga del manejo del input
 	}
 
 	@Override

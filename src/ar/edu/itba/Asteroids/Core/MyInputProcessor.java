@@ -8,12 +8,12 @@ public class MyInputProcessor implements InputProcessor {
 
 	}
 	@Override
-	public boolean keyDown (int keycode) {
+	public boolean keyDown (int keyCode) {
 		return false;
 	}
 
 	@Override
-	public boolean keyUp (int keycode) {
+	public boolean keyUp (int keyCode) {
 		return false;
 	}
 
