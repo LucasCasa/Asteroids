@@ -1,7 +1,5 @@
 package ar.edu.itba.Asteroids.Core;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,7 +12,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	Texture img;
 	Asteroid a;
 	Asteroid b;
-	ArrayList<Asteroid> e;
+	WorldManagerUI wmUI;
 	BitmapFont font;
 	float time;
 	
@@ -23,15 +21,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		//a = new Asteroid(50,50,2,2,50);
 		//b = new Asteroid(200,100,5,0,2);
-		e = new ArrayList<Asteroid>();
-		for(int i = 0; i< 30; i++){
-			float width = (float)Math.random() * Gdx.graphics.getWidth();
-			float height = (float)Math.random() * Gdx.graphics.getHeight();
-			float mass = (float)Math.random() * 1 + 1;
-			float velx = (float)Math.random() * 5 ;
-			float vely = (float)Math.random() * 5 ;
-			e.add(new Asteroid(width,height,velx,vely,(int)mass));
-		}
+		wmUI = new WorldManagerUI(WorldManager.getInstance());
 		img = new Texture("background.png");
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 		MyInputProcessor MYP = new MyInputProcessor();
@@ -45,21 +35,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(img, 0, 0,2048,1536);
-		font.draw(batch, "Asteroides", 50, 50);
-		font.draw(batch, ":)", 200, 500);
-		font.draw(batch, "HOLAAAA", 500, 200);
-		font.setColor((float)Math.cos(time) + 1, (float)Math.sin(time)+1,(float)(Math.cos(time) - Math.sin(time)) + 2,1);
-		
-		for(Asteroid as: e){
-			as.update(batch);
-		}
+		// font.draw(batch, "Asteroides", 50, 50); queda como ejemplo
+		WorldManager.getInstance().update();
+		wmUI.draw(batch);
 		batch.end();
-		for(int i = 0; i<e.size();i++){
-			Asteroid aux = e.get(i);
-			for(int j = i+1; j < e.size();j++){
-				aux.collision(e.get(j));
-			}
-		}
 
 	}
 }

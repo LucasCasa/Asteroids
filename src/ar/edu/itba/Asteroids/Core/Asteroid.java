@@ -24,7 +24,7 @@ public class Asteroid {
 		this.mass = 1; 
 	}
 	
-	public void update(SpriteBatch batch){
+	public void update(){
 		x+= vel.x;
 		y+= vel.y;
 		vel.x += acel.x;
@@ -49,8 +49,6 @@ public class Asteroid {
 			vel.y*=-1;
 			acel.y*=-1;
 		}
-		
-		draw(batch);
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -81,10 +79,10 @@ public class Asteroid {
 		o.x+= o.vel.x;
 		o.y+= o.vel.y;
 		
-		shape.begin(ShapeType.Filled);
+		/*shape.begin(ShapeType.Filled);
 		shape.setColor(0,0.8f,0,1);
 		shape.circle(collisionPointX, collisionPointY, 10);
-		shape.end();
+		shape.end();*/
 		
         
 		

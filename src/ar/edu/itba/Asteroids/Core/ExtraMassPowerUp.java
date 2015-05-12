@@ -7,7 +7,7 @@ public class ExtraMassPowerUp extends PowerUp{
 	}
 
 	public void effect(SpaceShip s) {
-		s.addMass(s.getMass());
+		//s.addMass());
 	}
 	
 
