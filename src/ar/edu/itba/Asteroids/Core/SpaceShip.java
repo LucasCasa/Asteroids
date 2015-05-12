@@ -41,57 +41,44 @@ public class SpaceShip implements Logical {
 		this.cont=0;
 	}
 
-	/* Esto deja muy desprotegido a acel, ademas de que asi no tendria
-	 * que funcionar 
-	 * public void changeAcceleration(float x, float y){
-		acel.x=x;
-		acel.y=y;
-	}
-	 */
-	/* Desde afuera no se cambia la velocidad, lo hace la nave misma
-	 *  public void changeVelocity(float x, float y){
-		this.vel.x=x;
-		this.vel.y=y;
-	}
-	 */
 	
-		public void acelUp(boolean b){
-			if(b){
-				acel.y+= acelModifier;
-			}else{
-				acel.y-= acelModifier;
-			}
+	public void acelUp(boolean b){
+		if(b){
+		acel.y+= acelModifier;
+		}else{
+			acel.y-= acelModifier;
 		}
-		public void acelDown(boolean b){
-			if(!b){
-				acel.y+= acelModifier;
-			}else{
-				acel.y-= acelModifier;
-			}
+	}
+	public void acelDown(boolean b){
+		if(!b){
+			acel.y+= acelModifier;
+		}else{
+			acel.y-= acelModifier;
 		}
-		public void acelLeft(boolean b){
-			if(b){
-				acel.x-= acelModifier;
-			}else{
-				acel.x+= acelModifier;
-			}
+	}
+	public void acelLeft(boolean b){
+		if(b){
+			acel.x-= acelModifier;
+		}else{
+			acel.x+= acelModifier;
 		}
-		public void acelRight(boolean b){
-			if(!b){
-				acel.x-= acelModifier;
-			}else{
-				acel.x+= acelModifier;
-			}
+	}
+	public void acelRight(boolean b){
+		if(!b){
+		acel.x-= acelModifier;
+		}else{
+			acel.x+= acelModifier;
 		}
-		
-		private void updateVelocity(){
-			if(Math.abs(vel.x) < maxVel || vel.x * acel.x <= 0){
+	}
+	
+	private void updateVelocity(){
+		if(Math.abs(vel.x) < maxVel || vel.x * acel.x <= 0){
 			vel.x += acel.x;
-			}
-			if(Math.abs(vel.y) < maxVel || vel.y * acel.y <= 0){
+		}	
+		if(Math.abs(vel.y) < maxVel || vel.y * acel.y <= 0){
 			vel.y += acel.y;
-			}
 		}
+	}
 		
 	public void damage(int amount){
 		if(!this.invincible){
