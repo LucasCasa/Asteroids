@@ -6,6 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class AsteroidUI {
 	private Asteroid back;
+	
+	/**
+	 * 
+	 * @param a; asteroid
+	 */
 	public AsteroidUI(Asteroid a){
 		back = a;
 	}

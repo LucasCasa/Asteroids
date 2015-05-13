@@ -9,6 +9,11 @@ public class SpaceShipUI implements Drawable{
 	private SpaceShip s;
 	private Texture texture;
 	
+	/**
+	 * 
+	 * @param s; the SpaceShip
+	 * @param texture; the texture the SpaceShip is going to have
+	 */
 	public SpaceShipUI(SpaceShip s, Texture texture) {
 		this.s=s;
 		this.texture=texture;

@@ -19,18 +19,17 @@ public class SpaceShip extends Collisionable implements Logical {
 	private float cont;
 
 	/**
-	 * @param position ; the initial position of the SpaceShip
-	 * @param radius ; the initial radius of the SpaceShip
-	 * @param mass ; the initial mass of the SpaceShip
-	 * @param vel ; the max velocity of the SpaceShip
-	 * @param acel ; the acceleration of the SpaceShip when a key is press
+	 * 
+	 * @param x; initial position, in the x component
+	 * @param y; initial position, in the y component
+	 * @param radius; radius of the SpaceShip
+	 * @param mass; mass of the spaceShip
+	 * @param vel; initial velocity of the spaceShip
+	 * @param acel; initial acceleration of the spaceShip
+	 * @param lives; initial amount of lives that the spaceShip has
 	 */
-	public SpaceShip(float x, float y,int radius, int mass, int vel, int acel,int lives) throws IllegalArgumentException {
+	public SpaceShip(float x, float y,int radius, int mass, int vel, int acel,int lives){
 		super(new Vector2(x,y), new Vector2(0,0),mass, radius);
-		
-		if(radius<=0 || mass<=0 || lives<=0) {
-			throw new IllegalArgumentException();
-		}
 		this.maxVel=vel;
 		this.acelModifier=acel;
 		this.lives=lives;
@@ -38,10 +37,10 @@ public class SpaceShip extends Collisionable implements Logical {
 		this.cont=0;
 	}
 
-	
+
 	public void acelUp(boolean b){
 		if(b){
-		acel.y+= acelModifier;
+			acel.y+= acelModifier;
 		}else{
 			acel.y-= acelModifier;
 		}
@@ -62,12 +61,12 @@ public class SpaceShip extends Collisionable implements Logical {
 	}
 	public void acelRight(boolean b){
 		if(!b){
-		acel.x-= acelModifier;
+			acel.x-= acelModifier;
 		}else{
 			acel.x+= acelModifier;
 		}
 	}
-	
+
 	private void updateVelocity(){
 		if(Math.abs(getSpeed().x) < maxVel || getSpeed().x * acel.x <= 0){
 			getSpeed().x += acel.x;
@@ -76,7 +75,7 @@ public class SpaceShip extends Collisionable implements Logical {
 			getSpeed().y += acel.y;
 		}
 	}
-		
+
 	public void damage(int amount){
 		if(!this.invincible){
 			this.lives-=amount;
@@ -90,7 +89,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	public void addLives(int amount){
 		this.lives+=amount;
 	}
-	
+
 	/**
 	 * Sets the time for which the SpaceShip is going to be invincible
 	 * @param time
@@ -103,15 +102,15 @@ public class SpaceShip extends Collisionable implements Logical {
 	public int getLives() {
 		return this.lives;
 	}
-	
+
 	public boolean getInvincible(){
 		return this.invincible;
 	}
-	
+
 	public Vector2 getacel(){
 		return this.acel;
 	}
-	
+
 	@Override
 	public void update() {
 		cont+=Gdx.graphics.getDeltaTime();

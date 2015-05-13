@@ -11,6 +11,15 @@ import com.badlogic.gdx.math.Vector2;
 public class Asteroid extends Collisionable implements Logical{
 	ShapeRenderer shape = new ShapeRenderer();
 	Texture t = new Texture("aster.png");
+	
+	/**
+	 * 
+	 * @param a; position in the x component
+	 * @param b; position in the y component
+	 * @param velx; velocity in the x component
+	 * @param vely; velocity in the y component
+	 * @param mass; mass of the asteroid
+	 */
 	public Asteroid(float a, float b,float velx, float vely,float mass){
 		super(new Vector2(a,b), new Vector2(velx,vely), mass,15); 
 	}

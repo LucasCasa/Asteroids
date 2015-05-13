@@ -10,7 +10,11 @@ public class PowerUpUI implements Drawable{
 	private PowerUp backend;
 	private Texture texture;
 	
-	
+	/**
+	 * 
+	 * @param back; PowerUp
+	 * @param texture; the texture the powerUp is going to have
+	 */
 	public PowerUpUI(PowerUp back, Texture texture){
 		this.backend = back;
 		this.texture = texture;
