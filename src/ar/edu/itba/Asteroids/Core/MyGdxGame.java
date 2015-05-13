@@ -14,6 +14,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	Asteroid b;
 	WorldManagerUI wmUI;
 	BitmapFont font;
+	BitmapFont standardFont;
 	float time;
 	
 	@Override
@@ -24,6 +25,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		wmUI = new WorldManagerUI(WorldManager.getInstance());
 		img = new Texture("background.png");
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));
+		standardFont = new BitmapFont();
 		MyInputProcessor MYP = new MyInputProcessor();
 		Gdx.input.setInputProcessor(MYP); // el que se encarga del manejo del input
 	}
@@ -35,6 +37,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(img, 0, 0,2048,1536);
+		standardFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),1,600);
 		// font.draw(batch, "Asteroides", 50, 50); queda como ejemplo
 		WorldManager.getInstance().update();
 		wmUI.draw(batch);
