@@ -1,6 +1,11 @@
-package ar.edu.itba.Asteroids.Core;
+package ar.edu.itba.Asteroids.Core.Managers;
 
 import java.util.ArrayList;
+
+import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
+import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -11,16 +16,21 @@ public class WorldManager {
 	SpaceShip first = new SpaceShip(50, 50, 30, 1, 100, 5, 3);
 	SpaceShipUI firstUI = new SpaceShipUI(first,new Texture("capsule.png"));
 	public ArrayList<Asteroid> e;
+	public ArrayList<AsteroidUI> eUI;
 	private WorldManager(){
 		
 		e = new ArrayList<Asteroid>();
+		eUI = new ArrayList<AsteroidUI>();
 		for(int i = 0; i< 5; i++){
 			float width = (float)Math.random() * Gdx.graphics.getWidth();
 			float height = (float)Math.random() * Gdx.graphics.getHeight();
 			float mass = (float)Math.random() * 1 + 1;
-			float velx = (float)Math.random() * 5 ;
-			float vely = (float)Math.random() * 5 ;
-			e.add(new Asteroid(width,height,velx,vely,(int)mass));
+			float velx = (float)Math.random() * 100 + 100;
+			float vely = (float)Math.random() * 100 + 100;
+			Asteroid aux = new Asteroid(width,height,velx,vely,(int)mass);
+			AsteroidUI aux2 = new AsteroidUI(aux);
+			e.add(aux);
+			eUI.add(aux2);
 		}
 	}
 	public static WorldManager getInstance(){

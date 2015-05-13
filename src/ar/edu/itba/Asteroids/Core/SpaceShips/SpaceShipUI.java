@@ -1,4 +1,6 @@
-package ar.edu.itba.Asteroids.Core;
+package ar.edu.itba.Asteroids.Core.SpaceShips;
+
+import ar.edu.itba.Asteroids.Core.Drawable;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +16,8 @@ public class SpaceShipUI implements Drawable{
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(texture,s.getPosX() - s.getRadius(), s.getPosY() - s.getRadius(), s.getRadius()*2, s.getRadius()*2);
+		batch.draw(texture,s.getPosition().x , s.getPosition().y, s.getRadius()*2, s.getRadius()*2);
+		System.out.println(s.getPosition().x + " --- " + s.getCPos().x);
 	}
 
 	

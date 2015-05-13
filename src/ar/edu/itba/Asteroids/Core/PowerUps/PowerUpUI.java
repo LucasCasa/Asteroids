@@ -1,4 +1,6 @@
-package ar.edu.itba.Asteroids.Core;
+package ar.edu.itba.Asteroids.Core.PowerUps;
+
+import ar.edu.itba.Asteroids.Core.Drawable;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

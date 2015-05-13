@@ -1,16 +1,15 @@
-package ar.edu.itba.Asteroids.Core;
+package ar.edu.itba.Asteroids.Core.SpaceShips;
 
+
+import ar.edu.itba.Asteroids.Core.Collisionable;
+import ar.edu.itba.Asteroids.Core.Logical;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 
 
-public class SpaceShip implements Logical {
-	private Vector2 position= new Vector2();
-	private float radius;
-	private int mass;
-	private Vector2 vel = new Vector2(0,0);
+public class SpaceShip extends Collisionable implements Logical {
 	private int maxVel;
 	private Vector2 acel = new Vector2(0,0);
 	private int acelModifier;
@@ -26,16 +25,14 @@ public class SpaceShip implements Logical {
 	 * @param vel ; the max velocity of the SpaceShip
 	 * @param acel ; the acceleration of the SpaceShip when a key is press
 	 */
-	public SpaceShip(float x, float y,float radius, int mass, int vel, int acel,int lives) throws IllegalArgumentException {
+	public SpaceShip(float x, float y,int radius, int mass, int vel, int acel,int lives) throws IllegalArgumentException {
+		super(new Vector2(x,y), new Vector2(0,0),mass, radius);
+		
 		if(radius<=0 || mass<=0 || lives<=0) {
 			throw new IllegalArgumentException();
 		}
-		this.radius=radius;
-		this.mass=mass;
 		this.maxVel=vel;
 		this.acelModifier=acel;
-		this.position.x=x;
-		this.position.y=y;
 		this.lives=lives;
 		this.invincible=false;
 		this.cont=0;
@@ -72,11 +69,11 @@ public class SpaceShip implements Logical {
 	}
 	
 	private void updateVelocity(){
-		if(Math.abs(vel.x) < maxVel || vel.x * acel.x <= 0){
-			vel.x += acel.x;
+		if(Math.abs(getSpeed().x) < maxVel || getSpeed().x * acel.x <= 0){
+			getSpeed().x += acel.x;
 		}	
-		if(Math.abs(vel.y) < maxVel || vel.y * acel.y <= 0){
-			vel.y += acel.y;
+		if(Math.abs(getSpeed().y) < maxVel || getSpeed().y * acel.y <= 0){
+			getSpeed().y += acel.y;
 		}
 	}
 		
@@ -111,24 +108,8 @@ public class SpaceShip implements Logical {
 		return this.invincible;
 	}
 	
-	public float getRadius(){
-		return this.radius;
-	}
-	
-	public float getPosX(){
-		return this.position.x;
-	}
-	
-	public float getPosY(){
-		return this.position.y;
-	}
-	
-	public Vector2 getVel(){
-		return this.vel;
-	}
-	
 	public Vector2 getacel(){
-		return this.vel;
+		return this.acel;
 	}
 	
 	@Override
@@ -137,25 +118,9 @@ public class SpaceShip implements Logical {
 		if(this.invincible == true && time<cont){
 			this.invincible=false;
 		}
-		position.x+= vel.x * Gdx.graphics.getDeltaTime();
-		position.y+= vel.y * Gdx.graphics.getDeltaTime();
+		getCPos().x+= getSpeed().x * Gdx.graphics.getDeltaTime();
+		getCPos().y+= getSpeed().y * Gdx.graphics.getDeltaTime();
 		updateVelocity();
-		if(position.x + radius > Gdx.graphics.getWidth() || position.x - radius < 0){
-			if(position.x -radius < 0){
-				position.x = radius + 1;
-			}else{
-				position.x = Gdx.graphics.getWidth() - radius;
-			}
-			
-			vel.x*=-0.5; // choque inelastico;
-		}
-		if(position.y + radius > Gdx.graphics.getHeight() || position.y - radius < 0){
-			if(position.y -radius < 0){
-				position.y = radius + 1;
-			}else{
-				position.y = Gdx.graphics.getHeight() - radius;
-			}
-			vel.y*=-0.5; // choque inelastico;
-		}
+		checkOutOfScreen();
 	}
 }

@@ -1,5 +1,9 @@
 package ar.edu.itba.Asteroids.Core;
 
+import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
+import ar.edu.itba.Asteroids.Core.Managers.WorldManager;
+import ar.edu.itba.Asteroids.Core.Managers.WorldManagerUI;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,8 +24,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		//a = new Asteroid(50,50,2,2,50);
-		//b = new Asteroid(200,100,5,0,2);
 		wmUI = new WorldManagerUI(WorldManager.getInstance());
 		img = new Texture("background.png");
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));

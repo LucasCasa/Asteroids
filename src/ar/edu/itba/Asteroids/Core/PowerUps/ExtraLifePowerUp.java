@@ -1,4 +1,6 @@
-package ar.edu.itba.Asteroids.Core;
+package ar.edu.itba.Asteroids.Core.PowerUps;
+
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 public class ExtraLifePowerUp extends PowerUp{
 

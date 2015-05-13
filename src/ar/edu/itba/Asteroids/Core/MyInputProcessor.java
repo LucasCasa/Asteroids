@@ -1,5 +1,7 @@
 package ar.edu.itba.Asteroids.Core;
 
+import ar.edu.itba.Asteroids.Core.Managers.WorldManager;
+
 import com.badlogic.gdx.InputProcessor;
 
 public class MyInputProcessor implements InputProcessor {

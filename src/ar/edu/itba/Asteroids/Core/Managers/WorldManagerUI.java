@@ -1,4 +1,7 @@
-package ar.edu.itba.Asteroids.Core;
+package ar.edu.itba.Asteroids.Core.Managers;
+
+import ar.edu.itba.Asteroids.Core.Drawable;
+import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -11,7 +14,7 @@ public class WorldManagerUI implements Drawable{
 	
 	public void draw(SpriteBatch batch){
 		wm.firstUI.draw(batch);
-		for(Asteroid a : wm.e){
+		for(AsteroidUI a : wm.eUI){
 			a.draw(batch);
 		}
 	}
