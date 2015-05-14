@@ -1,6 +1,8 @@
 package ar.edu.itba.Asteroids.Core;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Assets {
 
@@ -8,10 +10,16 @@ public class Assets {
 	public static final Texture ASTEROID = new Texture("aster.png");
 	
 	//Naves
-	public static final Texture[] NAVES = {new Texture("death.png"),new Texture("capsule.png"),new Texture("nose.png"),new Texture("rosca.png"),new Texture("ufo.png")};
+	public static final Texture[] SHIPS = {new Texture("death.png"),new Texture("capsule.png"),new Texture("nose.png"),new Texture("rosca.png"),new Texture("ufo.png")};
 	
 	//PowerUps
-	public static final Texture EXTRAVIDAIMG = new Texture("extravida.png");
-	public static final Texture EXTRAMASAIMG = new Texture("extramasa.png");
-	public static final Texture INVENCIBILIDADIMG = new Texture("invencibilidad.png");
+	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
+	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");
+	public static final Texture INVENCIBILITYIMG = new Texture("invencibilidad.png");
+	
+	//Miscellaneous 
+	public static final Texture HEART = new Texture("heart.png");
+	
+	//Fonts
+	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 }
