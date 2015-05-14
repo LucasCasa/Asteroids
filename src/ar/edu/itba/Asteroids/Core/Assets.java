@@ -22,4 +22,5 @@ public class Assets {
 	
 	//Fonts
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("arcade.fnt"));
+	public static final BitmapFont SMALL_FONT = new BitmapFont(Gdx.files.internal("little.fnt"));
 }

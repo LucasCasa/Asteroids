@@ -7,10 +7,11 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WorldManagerUI implements Drawable{
-
+	HUDManager h;
 	WorldManager wm;
 	public WorldManagerUI(WorldManager w){
 		wm = w;
+		h = new HUD2Player(w.getNaves().get(0), w.getNaves().get(1));
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -20,6 +21,7 @@ public class WorldManagerUI implements Drawable{
 		for(AsteroidUI a : wm.eUI){
 			a.draw(batch);
 		}
+		h.draw(batch);
 	}
 	
 }

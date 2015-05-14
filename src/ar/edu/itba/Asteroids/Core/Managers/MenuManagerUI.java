@@ -8,7 +8,7 @@ import ar.edu.itba.Asteroids.Core.Drawable;
 
 public class MenuManagerUI implements Drawable{
 	MenuManager mm;
-	BitmapFont font=new BitmapFont(Gdx.files.internal("arcade.fnt"));;
+	BitmapFont font=new BitmapFont(Gdx.files.internal("little.fnt"));;
 	public MenuManagerUI(MenuManager menu) {
 		this.mm=menu;
 	}

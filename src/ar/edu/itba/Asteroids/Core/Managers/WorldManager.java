@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class WorldManager {
 	private static WorldManager self;
 	String[] imagenes = {"nose.png","capsule.png","death.png","rosca.png","ufo.png"};
-	int spaceshipAmount = 2;
+	int spaceshipAmount = 3;
 	ArrayList<SpaceShip> naves = new ArrayList<SpaceShip>();
 	List<SpaceShipUI> naveui = new ArrayList<SpaceShipUI>();
 	public ArrayList<Asteroid> e;

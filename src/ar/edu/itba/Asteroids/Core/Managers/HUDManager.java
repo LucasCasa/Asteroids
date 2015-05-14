@@ -6,34 +6,26 @@ import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Drawable;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
-public class HUDManager implements Drawable{
-
-	private static HUDManager instance = null;
+public abstract class HUDManager implements Drawable{
 	
-	public static HUDManager getInstance(){
-		if(instance==null){
-			instance = new HUDManager();
-		}
-		return instance;
-	}
-	
-	private HUDManager(){
+	public HUDManager(){
 		
 	}
 	
-	public void draw(SpriteBatch batch) {
-		drawLives(batch);
-	}
+	public abstract void draw(SpriteBatch batch);
 	
-	public void drawLives(SpriteBatch batch){
-		ArrayList<SpaceShip> ships = WorldManager.getInstance().getNaves();
-		for(int i=0; i<ships.size();i++){
-			Assets.FONT.draw(batch, "Player " + (i+1) + ":" , 250*i, 60);
-			for(int j=0; j<ships.get(i).getLives(); j++){
-				batch.draw(Assets.HEART, 250*i+50*j, 5, 35,35);
-			}
+	public void drawShipPlayer(SpriteBatch batch,Vector2 pos ,int playernum,int lives){
+		Assets.SMALL_FONT.draw(batch, "Player " + playernum + ":" , pos.x, pos.y);
+		for(int j=0; j<lives; j++){
+			batch.draw(Assets.HEART, (float)(pos.x + 50*j),(float)(pos.y - 50), 35,35);
 		}
+	}
+	public void drawAsteroidPlayer(SpriteBatch batch, Vector2 pos, int playernum, float cooldown, int reserve){
+		Assets.SMALL_FONT.draw(batch, "Player " + playernum + ":" , pos.x, pos.y);
+		// dibujo la barrita del cooldown
 	}
 }
