@@ -11,9 +11,11 @@ import com.badlogic.gdx.math.Vector2;
 public class Asteroid extends Collisionable implements Logical{
 	ShapeRenderer shape = new ShapeRenderer();
 	Texture t = new Texture("aster.png");
+	private static final int minimumRadius = 10;
+	private static final int maxRadiusVar = 40;
 	
 	/**
-	 * 
+	 * www
 	 * @param a; position in the x component
 	 * @param b; position in the y component
 	 * @param velx; velocity in the x component
@@ -21,7 +23,7 @@ public class Asteroid extends Collisionable implements Logical{
 	 * @param mass; mass of the asteroid
 	 */
 	public Asteroid(float a, float b,float velx, float vely,float mass){
-		super(new Vector2(a,b), new Vector2(velx,vely), mass,15); 
+		super(new Vector2(a,b), new Vector2(velx,vely), mass,(int)((minimumRadius+maxRadiusVar*Math.random()))); 
 	}
 	
 	public void update(){
@@ -32,6 +34,15 @@ public class Asteroid extends Collisionable implements Logical{
 		if(Collision(o)){
 			newVel(o);
 		}
+	}
+	public boolean outOfScreen(){
+		if(this.getCPos().x + super.getRadius() < 0 || this.getCPos().x - super.getRadius() > Gdx.graphics.getWidth()){
+			return true;
+		}
+		if(this.getCPos().y + super.getRadius() < 0 || this.getCPos().y - super.getRadius() > Gdx.graphics.getHeight()){
+			return true;
+		}
+		return false;
 	}
 }
 

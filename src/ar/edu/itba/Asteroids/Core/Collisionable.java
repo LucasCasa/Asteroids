@@ -19,7 +19,7 @@ public abstract class Collisionable {
 	}
 	public boolean Collision(Collisionable o){
 		float dist = (float)(Math.pow(o.cPosition.x - cPosition.x,2) + Math.pow(o.cPosition.y - cPosition.y, 2));
-		if(dist <= 4 * radius * radius){
+		if(dist <= Math.pow(radius +o.getRadius(),2)){
 			return true;
 		}else{
 			return false;
@@ -37,13 +37,16 @@ public abstract class Collisionable {
 		float newVelY2 = (o.speed.y * (o.mass - mass) + (2 * mass * speed.y)) / (o.mass + mass);
 		speed.x = newVelX;
 		speed.y = newVelY1;
-		cPosition.x+= speed.x * Gdx.graphics.getDeltaTime();
-		cPosition.y+= speed.y* Gdx.graphics.getDeltaTime();
 		o.speed.x = newVelX2;
 		o.speed.y = newVelY2;
-		o.cPosition.x+= o.speed.x* Gdx.graphics.getDeltaTime();
-		o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
+		while(this.Collision(o)){
+			cPosition.x+= speed.x * Gdx.graphics.getDeltaTime();
+			cPosition.y+= speed.y* Gdx.graphics.getDeltaTime();
+			o.cPosition.x+= o.speed.x* Gdx.graphics.getDeltaTime();
+			o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
+		}
 	}
+	
 	public void checkOutOfScreen(){
 		if(cPosition.x + radius > Gdx.graphics.getWidth() || cPosition.x - radius < 0){
 			if(cPosition.x -radius < 0){

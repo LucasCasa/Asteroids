@@ -27,8 +27,8 @@ public class WorldManager {
 	private WorldManager(){
 		
 		for(int i=0; i<spaceshipAmount; i++){
-			float x = 50.0f;
-			float y = 50.0f;
+			float x = 100.0f;
+			float y = 100.0f;
 			SpaceShip aux = new SpaceShip(x+x*i, y, 30, 1, 500, 20, 3);
 			naves.add(aux);
 			naveui.add(new SpaceShipUI(aux, new Texture(imagenes[(int)(Math.random()*5)])));
@@ -39,7 +39,7 @@ public class WorldManager {
 		
 		e = new ArrayList<Asteroid>();
 		eUI = new ArrayList<AsteroidUI>();
-		for(int i = 0; i< 20; i++){
+		/*for(int i = 0; i< 20; i++){
 			float width = (float)Math.random() * Gdx.graphics.getWidth();
 			float height = (float)Math.random() * Gdx.graphics.getHeight();
 			float mass = (float)Math.random() * 1 + 1;
@@ -51,7 +51,7 @@ public class WorldManager {
 			AsteroidUI aux2 = new AsteroidUI(aux);
 			e.add(aux);
 			eUI.add(aux2);
-		}
+		}*/
 	}
 	public static WorldManager getInstance(){
 		if(self == null){
@@ -75,10 +75,19 @@ public class WorldManager {
 		
 		for(int i = 0; i<e.size();i++){
 			Asteroid aux = e.get(i);
+			if(first.Collision(e.get(i))){
+				first.newVel(e.get(i));
+				first.damage(1);
+			}
 			for(int j = i+1; j < e.size();j++){
 				aux.collision(e.get(j));
 			}
+			if(e.get(i).outOfScreen()){
+				e.remove(i);
+			}
 		}
+		
+		System.out.println(e.size());
 		
 		/*Aca habria que manejar que tiempo paso desde que se lanzo
 		el ultimo asteroide para saber si no debe lanzarlo denuevo*/
