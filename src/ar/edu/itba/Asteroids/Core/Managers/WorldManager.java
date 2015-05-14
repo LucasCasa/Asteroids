@@ -88,6 +88,11 @@ public class WorldManager {
 			thrown = null;
 		}
 	}
+
+	public ArrayList<SpaceShip> getNaves(){
+		return naves;
+	}
+	
 	public void keyDown(int keyCode) {	
 		switch (keyCode) {
 		case Keys.DOWN:
@@ -115,27 +120,35 @@ public class WorldManager {
 			first.acelRight(true);
 			break;
 		case Keys.NUMPAD_1:
+		case Keys.NUM_1:
 			thrown = AsteroidThrower.getInstance().throwBottomLeft(naves.get(1).getCPos());
 			break;
 		case Keys.NUMPAD_2:
+		case Keys.NUM_2:
 			thrown = AsteroidThrower.getInstance().throwBottomMiddle(naves.get(1).getCPos());
 			break;
 		case Keys.NUMPAD_3:
+		case Keys.NUM_3:
 			thrown = AsteroidThrower.getInstance().throwBottomRight(naves.get(1).getCPos());
 			break;
 		case Keys.NUMPAD_6:
+		case Keys.NUM_6:
 			thrown = AsteroidThrower.getInstance().throwRight(naves.get(1).getCPos());
 			break;
 		case Keys.NUMPAD_9:
+		case Keys.NUM_9:
 			thrown = AsteroidThrower.getInstance().throwUpperRight(naves.get(1).getCPos());
 			break;
 		case Keys.NUMPAD_8:
+		case Keys.NUM_8:
 			thrown = AsteroidThrower.getInstance().throwUpperMiddle(naves.get(1).getCPos());
 			break;
 		case Keys.NUMPAD_7:
+		case Keys.NUM_7:
 			thrown = AsteroidThrower.getInstance().throwUpperLeft(naves.get(1).getCPos());
 			break;
 		case Keys.NUMPAD_4:
+		case Keys.NUM_4:
 			thrown = AsteroidThrower.getInstance().throwLeft(naves.get(1).getCPos());
 			break;
 		}
