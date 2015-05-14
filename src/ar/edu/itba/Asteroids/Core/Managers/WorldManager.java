@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
+import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidThrower;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
@@ -20,6 +21,7 @@ public class WorldManager {
 	List<SpaceShipUI> naveui = new ArrayList<SpaceShipUI>();
 	public ArrayList<Asteroid> e;
 	public ArrayList<AsteroidUI> eUI;
+	Asteroid thrown;
 	SpaceShip first;
 	SpaceShip second;
 	private WorldManager(){
@@ -77,8 +79,16 @@ public class WorldManager {
 				aux.collision(e.get(j));
 			}
 		}
+		
+		/*Aca habria que manejar que tiempo paso desde que se lanzo
+		el ultimo asteroide para saber si no debe lanzarlo denuevo*/
+		if(thrown != null){ //esto hay que cambiarloo
+			e.add(thrown);
+			eUI.add(new AsteroidUI(thrown));
+			thrown = null;
+		}
 	}
-	public void keyDown(int keyCode) {
+	public void keyDown(int keyCode) {	
 		switch (keyCode) {
 		case Keys.DOWN:
 			second.acelDown(true);
@@ -103,6 +113,30 @@ public class WorldManager {
 			break;
 		case Keys.D:
 			first.acelRight(true);
+			break;
+		case Keys.NUMPAD_1:
+			thrown = AsteroidThrower.getInstance().throwBottomLeft(naves.get(1).getCPos());
+			break;
+		case Keys.NUMPAD_2:
+			thrown = AsteroidThrower.getInstance().throwBottomMiddle(naves.get(1).getCPos());
+			break;
+		case Keys.NUMPAD_3:
+			thrown = AsteroidThrower.getInstance().throwBottomRight(naves.get(1).getCPos());
+			break;
+		case Keys.NUMPAD_6:
+			thrown = AsteroidThrower.getInstance().throwRight(naves.get(1).getCPos());
+			break;
+		case Keys.NUMPAD_9:
+			thrown = AsteroidThrower.getInstance().throwUpperRight(naves.get(1).getCPos());
+			break;
+		case Keys.NUMPAD_8:
+			thrown = AsteroidThrower.getInstance().throwUpperMiddle(naves.get(1).getCPos());
+			break;
+		case Keys.NUMPAD_7:
+			thrown = AsteroidThrower.getInstance().throwUpperLeft(naves.get(1).getCPos());
+			break;
+		case Keys.NUMPAD_4:
+			thrown = AsteroidThrower.getInstance().throwLeft(naves.get(1).getCPos());
 			break;
 		}
 	}
