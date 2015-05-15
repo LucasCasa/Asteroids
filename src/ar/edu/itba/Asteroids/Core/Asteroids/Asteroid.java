@@ -4,16 +4,12 @@ import ar.edu.itba.Asteroids.Core.Collisionable;
 import ar.edu.itba.Asteroids.Core.Logical;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class Asteroid extends Collisionable implements Logical{
-	private static final int minimumRadius = 10;
-	private static final int maxRadiusVar = 40;
 	
 	/**
-	 * www
+	 * 
 	 * @param a; position in the x component
 	 * @param b; position in the y component
 	 * @param velx; velocity in the x component

@@ -2,7 +2,6 @@ package ar.edu.itba.Asteroids.Core.Asteroids;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.TimeUtils;
 
 
 public class AsteroidThrower {

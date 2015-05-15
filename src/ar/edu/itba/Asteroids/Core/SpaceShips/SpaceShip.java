@@ -38,7 +38,11 @@ public class SpaceShip extends Collisionable implements Logical {
 		this.cont=0;
 	}
 
-
+	/**
+	 *  Define si tiene que acelerar positivamente en el eje Y
+	 * 
+	 * @param b true si tiene que acelerar positiviamente 
+	 */
 	public void acelUp(boolean b){
 		if(b){
 			acel.y+= acelModifier;
@@ -46,6 +50,11 @@ public class SpaceShip extends Collisionable implements Logical {
 			acel.y-= acelModifier;
 		}
 	}
+	/**
+	 * define si tiene que acelerar negativamente en el eje Y
+	 * 
+	 * @param b true si acelera negativamente
+	 */
 	public void acelDown(boolean b){
 		if(!b){
 			acel.y+= acelModifier;
@@ -53,6 +62,11 @@ public class SpaceShip extends Collisionable implements Logical {
 			acel.y-= acelModifier;
 		}
 	}
+	/**
+	 * define si tiene que acelerar negativamente en el eje X
+	 * 
+	 * @param b true si acelera negativamente
+	 */
 	public void acelLeft(boolean b){
 		if(b){
 			acel.x-= acelModifier;
@@ -60,6 +74,11 @@ public class SpaceShip extends Collisionable implements Logical {
 			acel.x+= acelModifier;
 		}
 	}
+	/**
+	 * define si tiene que acelerar positivamente en el eje X
+	 * 
+	 * @param b true si acelera positivamente
+	 */
 	public void acelRight(boolean b){
 		if(!b){
 			acel.x-= acelModifier;
@@ -85,7 +104,7 @@ public class SpaceShip extends Collisionable implements Logical {
 
 	/**
 	 * Increases the amount of lives that the SpaceShip is going to have
-	 * @param amount
+	 * @param amount the amount to increase
 	 */
 	public void addLives(int amount){
 		this.lives+=amount;
@@ -111,6 +130,15 @@ public class SpaceShip extends Collisionable implements Logical {
 	public Vector2 getacel(){
 		return this.acel;
 	}
+	/**
+	 * check whether the two object collide with each other.
+	 * if the other object is a ship then it bounces.
+	 * if the other object is an asteroid then it takes one life.
+	 * 
+	 * @param o the other object
+	 * @return true if collision, false if not
+	 * 
+	 */
 	public boolean shipCollision(Collisionable o){
 		boolean b = collision(o); 
 		if(b){
@@ -122,6 +150,9 @@ public class SpaceShip extends Collisionable implements Logical {
 		}
 		return b;
 	}
+	/**
+	 * do all the logic that the ship has to do in every cycle.
+	 */
 	@Override
 	public void update() {
 		cont+=Gdx.graphics.getDeltaTime();

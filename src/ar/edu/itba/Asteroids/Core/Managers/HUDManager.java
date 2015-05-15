@@ -1,7 +1,5 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
-import java.util.ArrayList;
-
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Drawable;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;

@@ -1,5 +1,4 @@
-import static org.junit.Assert.*;
-
+package ar.edu.itba.Asteroids.Core.Tests;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,16 +15,27 @@ public class CollisionTest {
 		a = new Asteroid(0, 0, 5, 5, 1,15);
 	}
 	@Test
+	/**
+	 * Se fija que los asteroides no colisiones si no tienen
+	 * que.
+	 */
 	public void NoCollisionTest() {
 		Asteroid b = new Asteroid(500,500,0,0,1,15);
 		Assert.assertFalse(b.asteroidCollision(a));
 	}
 	@Test
+	/**
+	 * Se fija si los asteroides colisionan correctamente
+	 */
 	public void YesCollisionTest(){
 		Asteroid b = new Asteroid(15,15,0,0,1,15);
 		Assert.assertTrue(b.asteroidCollision(a));
 	}
 	@Test
+	/**
+	 * Se fija si los asteroides pueden sacarle vida a la nave en
+	 * el caso en que tengan que hacerlo
+	 */
 	public void AsteroidTakeLifeTest(){
 		SpaceShip b = new SpaceShip(15, 15, 15, 1, 0, 0, 3);
 		b.shipCollision(a);
@@ -33,6 +43,9 @@ public class CollisionTest {
 		
 	}
 	@Test
+	/**
+	 * Se fija que los asteroides no saquen vida cuando no colisionan
+	 */
 	public void AsteroidDontTakeLife(){
 		SpaceShip b = new SpaceShip(150, 150, 15, 1, 0, 0, 3);
 		b.shipCollision(a);
