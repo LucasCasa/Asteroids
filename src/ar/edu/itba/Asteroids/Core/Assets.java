@@ -19,6 +19,7 @@ public class Assets {
 	
 	//Miscellaneous 
 	public static final Texture HEART = new Texture("heart.png");
+	public static final Texture COOLDOWN = new Texture("cooldown.png");
 	
 	//Fonts
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("arcade.fnt"));

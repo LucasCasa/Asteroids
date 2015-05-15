@@ -1,7 +1,8 @@
-package ar.edu.itba.Asteroids.Core.Managers;
+package ar.edu.itba.Asteroids.Core.HUDs;
 
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Drawable;
+import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.Gdx;
@@ -24,7 +25,8 @@ public abstract class HUDManager implements Drawable{
 	
 	public void drawAsteroidPlayer(SpriteBatch batch, Vector2 pos, int playernum, float cooldown, int reserve){
 		Assets.SMALL_FONT.draw(batch, "Player " + playernum + ":" , pos.x, pos.y);
-		// dibujo la barrita del cooldown
+		batch.draw(Assets.COOLDOWN,pos.x,pos.y - 40,(int)(Assets.COOLDOWN.getWidth() * cooldown),15,(int)(Assets.COOLDOWN.getWidth() * cooldown),Assets.COOLDOWN.getHeight());
+		Assets.SMALL_FONT.draw(batch, "x " + reserve, pos.x + Assets.COOLDOWN.getWidth() + 5, pos.y - 28);
 	}
 	public void drawSector1(SpriteBatch batch, SpaceShip s){
 		drawShipPlayer(batch, new Vector2(0,Gdx.graphics.getHeight() - 15), 1,s.getLives());
@@ -35,14 +37,13 @@ public abstract class HUDManager implements Drawable{
 	public void drawSector3(SpriteBatch batch, SpaceShip s){
 		drawShipPlayer(batch, new Vector2(Gdx.graphics.getWidth() - 120,50), 3,s.getLives());
 	}
-	/* Falta el humanAsteroid que va a tener todo el control de los asteroides.
-	 * public void drawSector1(HumanAsteroid  a){
-		
+	public void drawSector1(SpriteBatch batch, AsteroidPlayer  a){
+	    drawAsteroidPlayer(batch, new Vector2(0,Gdx.graphics.getHeight() - 15), 1, a.getTimePercentage(), a.getReserve());	
 	}
-	public void drawSector2(HumanAsteroid a){
-		
+	public void drawSector2(SpriteBatch batch, AsteroidPlayer a){
+		drawAsteroidPlayer(batch, new Vector2(Gdx.graphics.getWidth() - 120,Gdx.graphics.getHeight() - 15), 2, a.getTimePercentage(), a.getReserve());
 	}
-	public void drawSector3(HumanAsteroid a){
-		
-	}*/
+	public void drawSector3(SpriteBatch batch, AsteroidPlayer a){
+		drawAsteroidPlayer(batch, new Vector2(Gdx.graphics.getWidth() - 120,50), 3, a.getTimePercentage(), a.getReserve());
+	}
 }

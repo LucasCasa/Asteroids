@@ -2,6 +2,9 @@ package ar.edu.itba.Asteroids.Core.Managers;
 
 import ar.edu.itba.Asteroids.Core.Drawable;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
+import ar.edu.itba.Asteroids.Core.HUDs.HUD3Player;
+import ar.edu.itba.Asteroids.Core.HUDs.HUD3Players2vs1;
+import ar.edu.itba.Asteroids.Core.HUDs.HUDManager;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,7 +14,7 @@ public class WorldManagerUI implements Drawable{
 	WorldManager wm;
 	public WorldManagerUI(WorldManager w){
 		wm = w;
-		h = new HUD3Player(w.getNaves().get(0), w.getNaves().get(1),w.getNaves().get(2));
+		h = new HUD3Players2vs1(wm.getNaves().get(0),wm.getNaves().get(1),wm.getAsteroidPlayer());
 	}
 	
 	public void draw(SpriteBatch batch){

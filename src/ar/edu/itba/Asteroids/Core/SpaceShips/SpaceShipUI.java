@@ -22,7 +22,6 @@ public class SpaceShipUI implements Drawable{
 	@Override
 	public void draw(SpriteBatch batch) {
 		batch.draw(texture,s.getPosition().x , s.getPosition().y, s.getRadius()*2, s.getRadius()*2);
-		System.out.println(s.getPosition().x + " --- " + s.getCPos().x);
 	}
 
 	
