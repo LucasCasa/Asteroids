@@ -6,10 +6,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class HUDManagerOnePlayer extends HUDManager{
+public class HUD1Player extends HUDManager{
 	private SpaceShip player;
 	
-	public HUDManagerOnePlayer(SpaceShip p){
+	public HUD1Player(SpaceShip p){
 		player = p;
 	}
 	

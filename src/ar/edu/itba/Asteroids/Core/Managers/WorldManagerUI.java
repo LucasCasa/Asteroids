@@ -11,7 +11,7 @@ public class WorldManagerUI implements Drawable{
 	WorldManager wm;
 	public WorldManagerUI(WorldManager w){
 		wm = w;
-		h = new HUD2Player(w.getNaves().get(0), w.getNaves().get(1));
+		h = new HUD3Player(w.getNaves().get(0), w.getNaves().get(1),w.getNaves().get(2));
 	}
 	
 	public void draw(SpriteBatch batch){
