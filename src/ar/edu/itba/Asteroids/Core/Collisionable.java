@@ -17,7 +17,7 @@ public abstract class Collisionable {
 		this.radius = radius;
 		Position = new Vector2(cPos.x - radius, cPos.y - radius);
 	}
-	public boolean Collision(Collisionable o){
+	public boolean collision(Collisionable o){
 		float dist = (float)(Math.pow(o.cPosition.x - cPosition.x,2) + Math.pow(o.cPosition.y - cPosition.y, 2));
 		if(dist <= Math.pow(radius +o.getRadius(),2)){
 			return true;
@@ -39,12 +39,12 @@ public abstract class Collisionable {
 		speed.y = newVelY1;
 		o.speed.x = newVelX2;
 		o.speed.y = newVelY2;
-		while(this.Collision(o)){
+		/*while(this.collision(o)){
 			cPosition.x+= speed.x * Gdx.graphics.getDeltaTime();
 			cPosition.y+= speed.y* Gdx.graphics.getDeltaTime();
 			o.cPosition.x+= o.speed.x* Gdx.graphics.getDeltaTime();
 			o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
-		}
+		}*/
 	}
 	
 	public void checkOutOfScreen(){

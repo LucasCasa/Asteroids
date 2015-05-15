@@ -65,9 +65,7 @@ public class WorldManager {
 			s.update();
 		}
 		
-		if(first.Collision(second)){
-			first.newVel(second);
-		}
+		first.shipCollision(second);
 		
 		for( Asteroid a: e){
 			a.update();
@@ -75,10 +73,7 @@ public class WorldManager {
 		
 		for(int i = 0; i<e.size();i++){
 			Asteroid aux = e.get(i);
-			if(first.Collision(e.get(i))){
-				first.newVel(e.get(i));
-				first.damage(1);
-			}
+			first.shipCollision(e.get(i));
 			for(int j = i+1; j < e.size();j++){
 				aux.collision(e.get(j));
 			}

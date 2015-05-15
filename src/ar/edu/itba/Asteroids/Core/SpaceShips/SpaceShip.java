@@ -3,6 +3,7 @@ package ar.edu.itba.Asteroids.Core.SpaceShips;
 
 import ar.edu.itba.Asteroids.Core.Collisionable;
 import ar.edu.itba.Asteroids.Core.Logical;
+import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -110,7 +111,17 @@ public class SpaceShip extends Collisionable implements Logical {
 	public Vector2 getacel(){
 		return this.acel;
 	}
-
+	public boolean shipCollision(Collisionable o){
+		boolean b = collision(o); 
+		if(b){
+			if( o instanceof Asteroid){
+				this.damage(1);
+			}else{
+				newVel(o);
+			}
+		}
+		return b;
+	}
 	@Override
 	public void update() {
 		cont+=Gdx.graphics.getDeltaTime();
