@@ -1,6 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Asteroids;
 
 import ar.edu.itba.Asteroids.Core.Timer;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.Input.Keys;
@@ -103,6 +104,7 @@ public class AsteroidPlayer {
 			reserve++;
 			break;
 		}
+		GameManager.getInstance().getWorld().addAsteroid(thrown, new AsteroidUI(thrown));
 		return thrown;
 	}
 }

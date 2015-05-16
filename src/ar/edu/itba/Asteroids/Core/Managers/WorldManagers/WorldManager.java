@@ -143,6 +143,11 @@ public abstract class WorldManager {
 		}	
 	}
 
+	public void addAsteroid(Asteroid thrown, AsteroidUI asteroidUI) {
+		asteroids.add(new Connector<Asteroid,AsteroidUI>(thrown,asteroidUI));
+		
+	}
+
 
 }
 

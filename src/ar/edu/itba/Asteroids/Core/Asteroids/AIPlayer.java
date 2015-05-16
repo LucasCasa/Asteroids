@@ -1,6 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Asteroids;
 
 import ar.edu.itba.Asteroids.Core.Timer;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.Input.Keys;
@@ -18,8 +19,11 @@ public class AIPlayer extends AsteroidPlayer{
 	 * a valid key
 	 */
 	public Asteroid calculateThrow(SpaceShip t){
-		int KeyCode = (int)(Math.random()*8);
+		int KeyCode = keys[(int)(Math.random()*8)];
 		return keyPressed(KeyCode,t);
+	}
+	public AIPlayer(){
+		elapsedTime = new Timer();
 	}
 	
 	//esto es super preliminar, nisiquiera se si andara bien hasta que se pueda probar (lo de los 5 min fue algo totalmente arbitrario)
@@ -33,7 +37,9 @@ public class AIPlayer extends AsteroidPlayer{
 			AsteroidThrower.getInstance().setVelFactor((float)Math.pow(elapsedTime.getTime(),0.125));//the throwing velocity updates exponentially
 		}
 
-		
+		if(getReserve() >= 1){
+			calculateThrow(GameManager.getInstance().getWorld().getSpaceShips().get(0));
+		}
 		super.update();
 	}
 	

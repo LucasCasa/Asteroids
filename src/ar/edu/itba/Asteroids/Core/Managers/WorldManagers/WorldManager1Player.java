@@ -5,21 +5,25 @@ import java.util.Collection;
 import java.util.List;
 
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 public class WorldManager1Player extends WorldManager{
-	boolean gameOver = false;
+	private boolean gameOver = false;
+	private AIPlayer AI;
 	public WorldManager1Player(Connector<SpaceShip,SpaceShipUI> a) {
 		super();
 		first = a.getBack();
 		firstUI = a.getFront();
+		AI = new AIPlayer();
 	}
 	
 	public void update(){
 		super.update();
 		first.update();
+		AI.update();
 		//IA.update();
 		if(!(first.getLives() <= 0)){
 			timer.update();	
