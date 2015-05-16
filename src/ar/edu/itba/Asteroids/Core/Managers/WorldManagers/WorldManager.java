@@ -1,9 +1,9 @@
-package ar.edu.itba.Asteroids.Core.Managers;
+package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.itba.Asteroids.Core.Assets;
+import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
@@ -11,15 +11,13 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
 
 //deje las naves como un array list no importa que halla solo una para que se chequee muchos mas facil. 
 public abstract class WorldManager {
 	private int spaceshipAmount;
 	ArrayList<SpaceShip> ships = new ArrayList<SpaceShip>(); //cambie el nombre de el array naves a ships para que este todo en ingles
 	List<SpaceShipUI> shipsui = new ArrayList<SpaceShipUI>();
-	public ArrayList<Asteroid> e;
-	public ArrayList<AsteroidUI> eUI;
+	public ArrayList<Connector<Asteroid,AsteroidUI>> asteroids;
 	Asteroid thrown;
 	AsteroidPlayer third;
 	SpaceShip first;
@@ -31,16 +29,8 @@ public abstract class WorldManager {
 	 * @param textures; textures of the spaceships. the first one is of the first player, second one of the second player
 	 * and third one of the third player, depending on the amount of spaceShips that there is
 	 */
-	public WorldManager(int spaceshipAmount,List<Texture> textures){
-		this.spaceshipAmount = spaceshipAmount;
-		for(int i=0; i<spaceshipAmount; i++){
-			SpaceShip aux = new SpaceShip(7 /* ver */, 8/* ver */, 30, 1, 500, 20, 3); 
-			ships.add(aux);
-			shipsui.add(new SpaceShipUI(aux,textures.get(i)));
-			
-		}
-		e = new ArrayList<Asteroid>();
-		eUI = new ArrayList<AsteroidUI>();
+	public WorldManager(){
+		 asteroids = new ArrayList<Connector<Asteroid,AsteroidUI>>();
 	}
 
 	public void update(){
@@ -56,20 +46,20 @@ public abstract class WorldManager {
 			}
 		}
 		
-		for( Asteroid a: e){
-			a.update();
+		for( Connector a: asteroids){
+			a.getBack().update();
 		}
 		
-		for(int i = 0; i<e.size();i++){
-			Asteroid aux = e.get(i);
-			for(int j = i+1; j < e.size();j++){
-				aux.collision(e.get(j));
+		for(int i = 0; i<asteroids.size();i++){
+			Asteroid aux = asteroids.get(i).getBack();
+			for(int j = i+1; j < asteroids.size();j++){
+				aux.collision(asteroids.get(i).getBack());
 			}
 			if(aux.outOfScreen()){
-				e.remove(i);
+				asteroids.remove(i);
 			}
 			if(first.shipCollision(aux)){
-				e.remove(i);
+				asteroids.remove(i);
 			}
 		}
 	}
@@ -79,7 +69,11 @@ public abstract class WorldManager {
 	}
 	
 	public ArrayList<AsteroidUI> getAsteroidsUI() {
-		return eUI;
+		ArrayList<AsteroidUI> au = new ArrayList<AsteroidUI>();
+		for(int i = 0; i<asteroids.size();i++){
+			au.add(asteroids.get(i).getFront());
+		}
+		return au;
 	}
 	
 	public List<SpaceShipUI> getShipsUI() {
@@ -121,8 +115,7 @@ public abstract class WorldManager {
 		default:
 			Asteroid d;
 			if((d = third.keyPressed(keyCode,ships.get(0))) != null){
-				e.add(d);
-				eUI.add(new AsteroidUI(d));
+				asteroids.add(new Connector<Asteroid,AsteroidUI>(d,new AsteroidUI(d)));
 			}
 		}
 	}

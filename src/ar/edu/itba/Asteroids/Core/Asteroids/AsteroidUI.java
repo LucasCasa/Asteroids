@@ -1,10 +1,11 @@
 package ar.edu.itba.Asteroids.Core.Asteroids;
 
 import ar.edu.itba.Asteroids.Core.Assets;
+import ar.edu.itba.Asteroids.Core.Drawable;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class AsteroidUI {
+public class AsteroidUI implements Drawable {
 	private Asteroid back;
 	
 	/**

@@ -1,6 +1,8 @@
 package ar.edu.itba.Asteroids.Core;
 
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
+import ar.edu.itba.Asteroids.Core.Managers.GameManagerUI;
 import ar.edu.itba.Asteroids.Core.Managers.MenuManager;
 import ar.edu.itba.Asteroids.Core.Managers.MenuManagerUI;
 
@@ -24,7 +26,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		mmUI = new MenuManagerUI(MenuManager.getInstance());
 		img = new Texture("background.png");
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 		standardFont = new BitmapFont();
@@ -39,10 +40,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(img, 0, 0,2048,1536);
-		standardFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),1,600);
+		standardFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),1,50);
 		// font.draw(batch, "Asteroides", 50, 50); queda como ejemplo
-		MenuManager.getInstance().update();
-		mmUI.draw(batch);
+		GameManager.getInstance().update();
+		GameManagerUI.getInstance().draw(batch);
 		batch.end();
 
 	}

@@ -8,12 +8,18 @@ import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Drawable;
 
 public class MenuManagerUI implements Drawable{
+	private static MenuManagerUI self = null;
 	MenuManager mm;
-	BitmapFont font=new BitmapFont(Gdx.files.internal("little.fnt"));;
-	public MenuManagerUI(MenuManager menu) {
-		this.mm=menu;
+	public MenuManagerUI() {
+		mm = MenuManager.getInstance();
 	}
 	
+	public static MenuManagerUI getInstance(){
+		if(self == null){
+			self = new MenuManagerUI();
+		}
+		return self;
+	}
 	@Override
 	public void draw(SpriteBatch batch) {
 		drawMenu(batch);
@@ -41,8 +47,8 @@ public class MenuManagerUI implements Drawable{
 			break;
 		case GameMode: 
 			Assets.FONT.draw(batch, "Game Mode", 300,500);
-			font.draw(batch, "1 - 2 SpaceShips, Asteroids controlled by AI", 50, 300);
-			font.draw(batch, "2 - 1 SpaceShip, Asteroids controlled by another player", 50, 200);
+			Assets.SMALL_FONT.draw(batch, "1 - 2 SpaceShips, Asteroids controlled by AI", 50, 300);
+			Assets.SMALL_FONT.draw(batch, "2 - 1 SpaceShip, Asteroids controlled by another player", 50, 200);
 			break;
 		case ChooseSpaceShip:
 			Assets.FONT.draw(batch, "Choose SpaceShip", 50, 500);

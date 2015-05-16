@@ -1,4 +1,4 @@
-package ar.edu.itba.Asteroids.Core.HUDs;
+package ar.edu.itba.Asteroids.Core.Managers.HUDs;
 
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 

@@ -1,4 +1,4 @@
-package ar.edu.itba.Asteroids.Core.Managers;
+package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 
 public class WorldManager3Players2vs1 extends WorldManager {
 	public WorldManager3Players2vs1(int spaceshipAmount,List<Texture> textures) {
-		super(3,textures);
+		super();
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package ar.edu.itba.Asteroids.Core.Managers;
+package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 public class WorldManager2PlayersVs extends WorldManager{
 	
 	public WorldManager2PlayersVs(int spaceshipAmount,List<Texture> textures) {
-		super(2,textures); //manda dos porque son dos spaceShips uno para el 1 y uno para el dos aunque se turnen en jugar. cada jugador
+		super(); //manda dos porque son dos spaceShips uno para el 1 y uno para el dos aunque se turnen en jugar. cada jugador
 						//deberia poder elegir la nave que le toca lo mismo para 3 que es 2 contra 1
 	}
 	
