@@ -29,6 +29,12 @@ public class AsteroidPlayer {
 			}
 		}
 	}
+	protected void setCooldown(float cooldown){
+		this.cooldown = cooldown;
+	}
+	protected void setMaxAsteroids(int max){
+		this.maxAsteroids = max;
+	}
 	/**
 	 * 
 	 * @return la relacion entre el tiempo que paso y el tiempo que tiene

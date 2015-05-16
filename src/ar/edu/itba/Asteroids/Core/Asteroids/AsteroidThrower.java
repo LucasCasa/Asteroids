@@ -6,8 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class AsteroidThrower {
 	private static AsteroidThrower self;
-	/*private float ThrownTime = 0;
-	private float delta = 20000;*/
+	private float velFactor = 1;
 	
 	private AsteroidThrower(){
 		
@@ -28,22 +27,22 @@ public class AsteroidThrower {
 	 * @return a new asteroid aiming to the spaceship
 	 */
 	private Asteroid throwAsteroid(float x1, float y1, float x2, float y2){
-		/*if(TimeUtils.millis() < ThrownTime + delta){
-			return null;
-		}
-		ThrownTime = TimeUtils.millis();*/
-	
+
 		float ady = x2 - x1;
 		float op = y2 - y1;
 		float hip = Vector2.dst(x1,y1,x2,y2);
 		float cos_alfa = ady/hip;
 		float sin_alfa = op/hip;
-		float vel = 200;
+		float vel = 200*velFactor;
 		
 		float mass = (float)Math.random() * 1 + 1;
 		float velx = vel*cos_alfa;
 		float vely = vel*sin_alfa;
 		return new Asteroid(x1, y1, velx, vely, mass,15);
+	}
+	
+	public void setVelFactor(float factor){
+		this.velFactor = factor;
 	}
 	
 	public Asteroid throwBottomRight(Vector2 pos){
