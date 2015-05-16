@@ -1,8 +1,8 @@
 package ar.edu.itba.Asteroids.Core;
 
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
-import ar.edu.itba.Asteroids.Core.Managers.WorldManager;
-import ar.edu.itba.Asteroids.Core.Managers.WorldManagerUI;
+import ar.edu.itba.Asteroids.Core.Managers.MenuManager;
+import ar.edu.itba.Asteroids.Core.Managers.MenuManagerUI;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -16,7 +16,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	Texture img;
 	Asteroid a;
 	Asteroid b;
-	WorldManagerUI wmUI;
+	MenuManagerUI mmUI;
 	BitmapFont font;
 	BitmapFont standardFont;
 	float time;
@@ -24,7 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		wmUI = new WorldManagerUI(WorldManager.getInstance());
+		mmUI = new MenuManagerUI(MenuManager.getInstance());
 		img = new Texture("background.png");
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 		standardFont = new BitmapFont();
@@ -41,8 +41,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(img, 0, 0,2048,1536);
 		standardFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),1,600);
 		// font.draw(batch, "Asteroides", 50, 50); queda como ejemplo
-		WorldManager.getInstance().update();
-		wmUI.draw(batch);
+		MenuManager.getInstance().update();
+		mmUI.draw(batch);
 		batch.end();
 
 	}

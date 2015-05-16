@@ -1,6 +1,6 @@
 package ar.edu.itba.Asteroids.Core;
 
-import ar.edu.itba.Asteroids.Core.Managers.WorldManager;
+import ar.edu.itba.Asteroids.Core.Managers.MenuManager;
 
 import com.badlogic.gdx.InputProcessor;
 
@@ -11,13 +11,13 @@ public class MyInputProcessor implements InputProcessor {
 	}
 	@Override
 	public boolean keyDown (int keyCode) {
-		WorldManager.getInstance().keyDown(keyCode);// esto despues tiene que llamar a gameManager
+		MenuManager.getInstance().keyDown(keyCode);// esto despues tiene que llamar a gameManager
 		return false;
 	}
 
 	@Override
 	public boolean keyUp (int keyCode) {
-		WorldManager.getInstance().keyUp(keyCode); // esto tambien
+		MenuManager.getInstance().keyUp(keyCode); // esto tambien
 		return false;
 	}
 
