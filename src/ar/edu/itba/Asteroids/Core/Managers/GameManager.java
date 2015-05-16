@@ -1,5 +1,6 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,10 @@ public class GameManager {
 	private static GameManager self = null;
 	private WorldManager world;
 	private boolean isMenu = true;
+	private Map<Integer,Connector<SpaceShip,SpaceShipUI>> s;
+	
 	private GameManager(){
-		
+		s = new HashMap<Integer,Connector<SpaceShip,SpaceShipUI>>();
 	}
 	public static GameManager getInstance(){
 		if(self == null){
@@ -22,20 +25,16 @@ public class GameManager {
 		}
 		return self;
 	}
-	
-	public void generateGame(GameMode mode, Map<Integer, SpaceShip> s) {
-		this.isMenu=false;
-	}
-	
-	public void newGame(GameMode gm,List<Connector<SpaceShip,SpaceShipUI>> a){
+	public void newGame(GameMode gm){
 		switch(gm){
 		case OnePlayer:
-			world = new WorldManager1Player(a.get(0));
+			world = new WorldManager1Player(s.get(1));
 			break;
 		case TwoPlayersA:
 			//world = new WorldManager2Player(spaceshipAmount, textures);
 			break;
 		}
+		isMenu = false;
 	}
 	public void update(){
 		if(isMenu){
@@ -65,5 +64,7 @@ public class GameManager {
 	public float getTime(){
 		return world.getTime();
 	}
-		
+	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s){
+		this.s.put(player, s);
+	}
 }

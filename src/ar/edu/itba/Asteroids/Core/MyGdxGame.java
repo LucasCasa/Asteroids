@@ -42,8 +42,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		SpaceShipUI auxUI = new SpaceShipUI(aux, Assets.SHIPS[0]);
 		List<Connector<SpaceShip,SpaceShipUI>> a = new ArrayList<Connector<SpaceShip,SpaceShipUI>>();
 		a.add(new Connector(aux,auxUI));
-		GameManager.getInstance().newGame(GameMode.OnePlayer, a);
-		GameManagerUI.getInstance().newGame(GameMode.OnePlayer);
 	}
 
 	@Override

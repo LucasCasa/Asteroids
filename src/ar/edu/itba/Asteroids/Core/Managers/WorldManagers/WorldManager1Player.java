@@ -10,7 +10,7 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 public class WorldManager1Player extends WorldManager{
-	
+	boolean gameOver = false;
 	public WorldManager1Player(Connector<SpaceShip,SpaceShipUI> a) {
 		super();
 		first = a.getBack();
@@ -23,6 +23,7 @@ public class WorldManager1Player extends WorldManager{
 		//IA.update();
 		if(!(first.getLives() <= 0)){
 			timer.update();	
+			gameOver = true;
 		}
 	}
 	@Override

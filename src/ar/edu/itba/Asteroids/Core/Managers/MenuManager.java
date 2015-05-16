@@ -7,6 +7,7 @@ import java.util.Map;
 
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipCreator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -185,21 +186,18 @@ public class MenuManager {
 		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
 			this.selected.remove(i);
 			this.selected.add(i, true);
-			AddShip(numberOfShipsSelected);
+			GameManager.getInstance().addSpaceShip(1, SpaceShipCreator.create(i, 1));
 			this.numberOfShipsSelected++;
 			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
 				GenerateGame(this.mode);
 		}
 	}
 
-	private void AddShip(int player) {
-		//agrega el ship
-	}
-
 
 	private void GenerateGame(GameMode mode) {
 		
-		//GameManager.getInstance().newGame(mode,a);
+		GameManager.getInstance().newGame(mode);
+		GameManagerUI.getInstance().newGame(mode);
 	}
 
 	private void Help() {
