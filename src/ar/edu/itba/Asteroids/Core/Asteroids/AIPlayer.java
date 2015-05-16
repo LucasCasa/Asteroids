@@ -31,8 +31,8 @@ public class AIPlayer extends AsteroidPlayer{
 		elapsedTime.update();
 		
 		//the throwing velocity and the rate of fire keep increasing till it completes the first 5 minutes of game
-		if(elapsedTime.getTime() < 300){
-			super.setCooldown((float)(3.2 - elapsedTime.getTime()/100));
+		if(elapsedTime.getTime() < 120){
+			super.setCooldown((float)(1.5 - elapsedTime.getTime()/100));
 			
 			AsteroidThrower.getInstance().setVelFactor((float)Math.pow(elapsedTime.getTime(),0.125));//the throwing velocity updates exponentially
 		}
