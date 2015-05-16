@@ -1,6 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -27,7 +28,20 @@ public class MenuManagerUI implements Drawable{
 	}
 	
 	private void printSpaceShips(SpriteBatch batch){
+		for(int i = 0;i<Assets.SHIPS.length; i++){
+			printSpaceShip(batch,Assets.SHIPS[i],i+1,(i / 3) * (Gdx.graphics.getWidth() / 2) + 25,(Gdx.graphics.getHeight()/ 4) * (i % 3) + 25,100,20,2,3);
+			// despues hay que hacer vectores con las velocidades de las naves
+		}
 		
+	}
+	
+	private void printSpaceShip(SpriteBatch batch, Texture t,int key,int x, int y, int speed, int acel, int mass, int lives){
+		batch.draw(t,x + 35,y,80,80);
+		Assets.SMALL_FONT.draw(batch,"(" + key +")",x,y + 50);
+		Assets.SMALL_FONT.draw(batch,"Speed: " + speed, x + 120,y + 80);
+		Assets.SMALL_FONT.draw(batch,"Aceleration: " + acel, x + 120, y +60);
+		Assets.SMALL_FONT.draw(batch,"Mass: " + mass, x + 120, y +40);
+		Assets.SMALL_FONT.draw(batch,"Lives: " + lives, x + 120, y +20);
 	}
 	
 	private void drawMenu(SpriteBatch batch){
