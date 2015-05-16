@@ -1,6 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
 import java.util.List;
+import java.util.Map;
 
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager;
@@ -21,6 +22,11 @@ public class GameManager {
 		}
 		return self;
 	}
+	
+	public void generateGame(GameMode mode, Map<Integer, SpaceShip> s) {
+		this.isMenu=false;
+	}
+	
 	public void newGame(GameMode gm,List<Connector<SpaceShip,SpaceShipUI>> a){
 		switch(gm){
 		case OnePlayer:
@@ -59,4 +65,5 @@ public class GameManager {
 	public float getTime(){
 		return world.getTime();
 	}
+		
 }

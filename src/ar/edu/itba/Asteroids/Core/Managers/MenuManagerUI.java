@@ -28,11 +28,11 @@ public class MenuManagerUI implements Drawable{
 	
 	private void printSpaceShips(SpriteBatch batch){
 		for(int i = 0;i<Assets.SHIPS.length; i++){
-			if(!mm.spaceShipSelected(i))
+			if(!mm.spaceShipSelected(i)){
 				printSpaceShip(batch,Assets.SHIPS[i],i+1,(i / 3) * (Gdx.graphics.getWidth() / 2) + 25,(Gdx.graphics.getHeight()/ 4) * (i % 3) + 25,100,20,2,3);
-			// despues hay que hacer vectores con las velocidades de las naves
+				// despues hay que hacer vectores con las velocidades de las naves			
+			}
 		}
-		
 	}
 	
 	private void printSpaceShip(SpriteBatch batch, Texture t,int key,int x, int y, int speed, int acel, int mass, int lives){
@@ -71,6 +71,8 @@ public class MenuManagerUI implements Drawable{
 			break;
 		case ChooseSpaceShip:
 			Assets.FONT.draw(batch, "Choose SpaceShip", Gdx.graphics.getHeight()/16, 500);
+			if(mm.getPlayers()>mm.getSpaceShipsSelected())
+				Assets.SMALL_FONT.draw(batch, "Player " + (mm.getSpaceShipsSelected()+1) + " choose SpaceShip", Gdx.graphics.getHeight()*10/16, 400);
 			Assets.SMALL_FONT.draw(batch, "Ships Selected=" + mm.getSpaceShipsSelected(), Gdx.graphics.getHeight()*10/16, 300);
 			Assets.SMALL_FONT.draw(batch, "Number of Players=" + mm.getPlayers(), Gdx.graphics.getHeight()*10/16, 320);
 			printSpaceShips(batch);
