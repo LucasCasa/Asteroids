@@ -11,7 +11,7 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 public class GameManager {
 	private static GameManager self = null;
 	private WorldManager world;
-	private boolean isMenu = false;
+	private boolean isMenu = true;
 	private GameManager(){
 		
 	}

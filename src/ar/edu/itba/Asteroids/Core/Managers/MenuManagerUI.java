@@ -2,7 +2,6 @@ package ar.edu.itba.Asteroids.Core.Managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import ar.edu.itba.Asteroids.Core.Assets;
@@ -29,7 +28,8 @@ public class MenuManagerUI implements Drawable{
 	
 	private void printSpaceShips(SpriteBatch batch){
 		for(int i = 0;i<Assets.SHIPS.length; i++){
-			printSpaceShip(batch,Assets.SHIPS[i],i+1,(i / 3) * (Gdx.graphics.getWidth() / 2) + 25,(Gdx.graphics.getHeight()/ 4) * (i % 3) + 25,100,20,2,3);
+			if(!mm.spaceShipSelected(i))
+				printSpaceShip(batch,Assets.SHIPS[i],i+1,(i / 3) * (Gdx.graphics.getWidth() / 2) + 25,(Gdx.graphics.getHeight()/ 4) * (i % 3) + 25,100,20,2,3);
 			// despues hay que hacer vectores con las velocidades de las naves
 		}
 		
@@ -48,25 +48,33 @@ public class MenuManagerUI implements Drawable{
 		Menu state= mm.getState();
 		switch(state){
 		case Main:
-			Assets.FONT.draw(batch, "Asteroids", 300, 500);
-			Assets.FONT.draw(batch, "1- New Game", 100, 300);
-			Assets.FONT.draw(batch, "2- Help", 100, 250);
-			Assets.FONT.draw(batch, "3- Exit", 100, 200);
+			Assets.FONT.draw(batch, "Asteroids", Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()*3/4);
+			Assets.FONT.draw(batch, "1- New Game", Gdx.graphics.getWidth()/8, 300);
+			Assets.FONT.draw(batch, "2- Help", Gdx.graphics.getWidth()/8, 250);
+			Assets.FONT.draw(batch, "3- Exit", Gdx.graphics.getWidth()/8, 200);
 			break;
 		case NumberOfPlayers:
-			Assets.FONT.draw(batch, "Number of Players in the Game ", 50, 500);
-			Assets.FONT.draw(batch, "1- 1 Players", 100,300);
-			Assets.FONT.draw(batch, "2- 2 Players", 100,250);
-			Assets.FONT.draw(batch, "3- 3 Players", 100,200);
+			Assets.FONT.draw(batch, "Number of Players in the Game ", Gdx.graphics.getWidth()/16, Gdx.graphics.getHeight()*3/4);
+			Assets.FONT.draw(batch, "1- 1 Players", Gdx.graphics.getWidth()/8,300);
+			Assets.FONT.draw(batch, "2- 2 Players", Gdx.graphics.getWidth()/8,250);
+			Assets.FONT.draw(batch, "3- 3 Players", Gdx.graphics.getWidth()/8,200);
 			break;
-		case GameMode: 
-			Assets.FONT.draw(batch, "Game Mode", 300,500);
-			Assets.SMALL_FONT.draw(batch, "1 - 2 SpaceShips, Asteroids controlled by AI", 50, 300);
-			Assets.SMALL_FONT.draw(batch, "2 - 1 SpaceShip, Asteroids controlled by another player", 50, 200);
+		case GameMode2Players: 
+			Assets.FONT.draw(batch, "Game Mode",  Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()*3/4);
+			Assets.SMALL_FONT.draw(batch, "1 - 2 SpaceShips, Asteroids controlled by AI", Gdx.graphics.getWidth()/16, 300);
+			Assets.SMALL_FONT.draw(batch, "2 - 1 SpaceShip, Asteroids controlled by another player", Gdx.graphics.getWidth()/16, 200);
+			break;
+		case GameMode3Players:
+			Assets.FONT.draw(batch, "Game Mode",  Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()*3/4);
+			Assets.SMALL_FONT.draw(batch,"1 - 3 spaceShips, Asteroids controlled by AI", Gdx.graphics.getWidth()/16,300);
+			Assets.SMALL_FONT.draw(batch, "2 - 2 SpaceShips, Asteroids controlled by the third player", Gdx.graphics.getWidth()/16,200);
 			break;
 		case ChooseSpaceShip:
-			Assets.FONT.draw(batch, "Choose SpaceShip", 50, 500);
+			Assets.FONT.draw(batch, "Choose SpaceShip", Gdx.graphics.getHeight()/16, 500);
+			Assets.SMALL_FONT.draw(batch, "Ships Selected=" + mm.getSpaceShipsSelected(), Gdx.graphics.getHeight()*10/16, 300);
+			Assets.SMALL_FONT.draw(batch, "Number of Players=" + mm.getPlayers(), Gdx.graphics.getHeight()*10/16, 320);
 			printSpaceShips(batch);
+			break;
 		}
 	}
 }
