@@ -2,15 +2,16 @@ package ar.edu.itba.Asteroids.Core.Managers;
 
 import java.util.List;
 
+import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager1Player;
-import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager2Player;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 public class GameManager {
 	private static GameManager self = null;
 	private WorldManager world;
-	private boolean isMenu = true;
+	private boolean isMenu = false;
 	private GameManager(){
 		
 	}
@@ -20,7 +21,7 @@ public class GameManager {
 		}
 		return self;
 	}
-	public void newGame(GameMode gm,List<SpaceShip> a){
+	public void newGame(GameMode gm,List<Connector<SpaceShip,SpaceShipUI>> a){
 		switch(gm){
 		case OnePlayer:
 			world = new WorldManager1Player(a.get(0));
@@ -37,10 +38,25 @@ public class GameManager {
 			world.update();
 		}
 	}
+	public void keyDown(int keyCode){
+		if(isMenu){
+			MenuManager.getInstance().keyDown(keyCode);
+		}else{
+			world.keyDown(keyCode);
+		}
+	}
+	public void keyUp(int keyCode){
+		if(!isMenu){
+			world.keyUp(keyCode);
+		}
+	}
 	public WorldManager getWorld(){
 		return world; 
 	}
 	public boolean isInMenu(){
 		return isMenu;
+	}
+	public float getTime(){
+		return world.getTime();
 	}
 }

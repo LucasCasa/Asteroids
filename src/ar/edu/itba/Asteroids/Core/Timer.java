@@ -1,5 +1,7 @@
 package ar.edu.itba.Asteroids.Core;
 
+import java.math.BigDecimal;
+
 import com.badlogic.gdx.Gdx;
 
 public class Timer {
@@ -17,6 +19,12 @@ public class Timer {
 		time = 0;
 	}
 	public float getTime(){
-		return time;
+		return round(time,2);
+	}
+
+	public static float round(float d, int decimalPlace) {
+		BigDecimal bd = new BigDecimal(Float.toString(d));
+		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+		return bd.floatValue();
 	}
 }

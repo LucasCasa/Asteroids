@@ -1,5 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Managers.HUDs;
 
+import ar.edu.itba.Asteroids.Core.Assets;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.Gdx;
@@ -14,7 +16,8 @@ public class HUD1Player extends HUDManager{
 	}
 	
 	public void draw(SpriteBatch batch){
-		drawShipPlayer(batch, new Vector2(0,Gdx.graphics.getWidth() - 50), 1, player.getLives());
+		drawSector1(batch, player);
+		Assets.SMALL_FONT.draw(batch,"Tiempo:"+ GameManager.getInstance().getTime() ,0, 15);
 	}
 
 }

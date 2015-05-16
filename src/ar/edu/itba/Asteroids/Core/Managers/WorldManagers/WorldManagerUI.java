@@ -15,8 +15,9 @@ public abstract class WorldManagerUI implements Drawable{
 	WorldManager wm;
 	List<AsteroidUI> aUI;
 	
-	public WorldManagerUI(WorldManager w){
+	public WorldManagerUI(WorldManager w, HUDManager h){
 		wm = w;
+		this.h = h;
 		aUI = new ArrayList<AsteroidUI>();
 	}
 	

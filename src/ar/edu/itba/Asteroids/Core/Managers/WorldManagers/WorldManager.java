@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
-import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
@@ -14,15 +14,10 @@ import com.badlogic.gdx.Input.Keys;
 
 //deje las naves como un array list no importa que halla solo una para que se chequee muchos mas facil. 
 public abstract class WorldManager {
-	private int spaceshipAmount;
-	ArrayList<SpaceShip> ships = new ArrayList<SpaceShip>(); //cambie el nombre de el array naves a ships para que este todo en ingles
-	List<SpaceShipUI> shipsui = new ArrayList<SpaceShipUI>();
 	public ArrayList<Connector<Asteroid,AsteroidUI>> asteroids;
-	Asteroid thrown;
-	AsteroidPlayer third;
-	SpaceShip first;
-	SpaceShip second;
-	
+	protected SpaceShip first;
+	protected SpaceShipUI firstUI;
+	protected Timer timer;
 	/**
 	 * 
 	 * @param spaceshipAmount; amount of spaceShips in the game
@@ -31,10 +26,11 @@ public abstract class WorldManager {
 	 */
 	public WorldManager(){
 		 asteroids = new ArrayList<Connector<Asteroid,AsteroidUI>>();
+		 timer = new Timer();
 	}
 
 	public void update(){
-		
+		/*
 		for(SpaceShip s: ships){
 			s.update();
 		}
@@ -45,7 +41,7 @@ public abstract class WorldManager {
 				aux.collision(ships.get(j));
 			}
 		}
-		
+		*/
 		for( Connector a: asteroids){
 			a.getBack().update();
 		}
@@ -64,9 +60,7 @@ public abstract class WorldManager {
 		}
 	}
 
-	public ArrayList<SpaceShip> getSpaceShips(){
-		return ships;
-	}
+	
 	
 	public ArrayList<AsteroidUI> getAsteroidsUI() {
 		ArrayList<AsteroidUI> au = new ArrayList<AsteroidUI>();
@@ -75,20 +69,21 @@ public abstract class WorldManager {
 		}
 		return au;
 	}
-	
-	public List<SpaceShipUI> getShipsUI() {
-		return shipsui;
+	public float getTime(){
+		return timer.getTime();
 	}
+	public abstract List<SpaceShipUI> getShipsUI();
+	public abstract List<SpaceShip> getSpaceShips();
 	
 	/**
 	 * 
 	 * @return null if there is no asteroid player in that mode (there is an AI Asteroid player) or returns the player which is controlling the asteroids
-	 */
+	 
 	public abstract AsteroidPlayer getAsteroidPlayer();
-	
+	*/
 	public void keyDown(int keyCode) {	
 		switch (keyCode) {
-		case Keys.DOWN:
+/*		case Keys.DOWN:
 			second.acelDown(true);
 			break;
 		case Keys.UP:
@@ -99,7 +94,7 @@ public abstract class WorldManager {
 			break;
 		case Keys.RIGHT:
 			second.acelRight(true);
-			break;
+			break; */
 		case Keys.W:
 			first.acelUp(true);
 			break;
@@ -112,16 +107,16 @@ public abstract class WorldManager {
 		case Keys.D:
 			first.acelRight(true);
 			break;
-		default:
+	/*	default:
 			Asteroid d;
 			if((d = third.keyPressed(keyCode,ships.get(0))) != null){
 				asteroids.add(new Connector<Asteroid,AsteroidUI>(d,new AsteroidUI(d)));
-			}
+			}*/
 		}
 	}
 	public void keyUp(int keyCode) {
 		switch (keyCode) {
-		case Keys.DOWN:
+/*		case Keys.DOWN:
 			second.acelDown(false);
 			break;
 		case Keys.UP:
@@ -132,7 +127,7 @@ public abstract class WorldManager {
 			break;
 		case Keys.RIGHT:
 			second.acelRight(false);
-			break;
+			break; */
 		case Keys.W:
 			first.acelUp(false);
 			break;
@@ -149,7 +144,5 @@ public abstract class WorldManager {
 	}
 
 
-
-
-
 }
+

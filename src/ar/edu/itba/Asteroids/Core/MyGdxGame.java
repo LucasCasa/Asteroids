@@ -1,10 +1,17 @@
 package ar.edu.itba.Asteroids.Core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.Managers.GameManagerUI;
-import ar.edu.itba.Asteroids.Core.Managers.MenuManager;
+import ar.edu.itba.Asteroids.Core.Managers.GameMode;
 import ar.edu.itba.Asteroids.Core.Managers.MenuManagerUI;
+import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD1Player;
+import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUDManager;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -31,6 +38,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		standardFont = new BitmapFont();
 		MyInputProcessor MYP = new MyInputProcessor();
 		Gdx.input.setInputProcessor(MYP); // el que se encarga del manejo del input
+		SpaceShip aux = new SpaceShip(200, 200, 20, 25, 100, 100, 3);
+		SpaceShipUI auxUI = new SpaceShipUI(aux, Assets.SHIPS[0]);
+		List<Connector<SpaceShip,SpaceShipUI>> a = new ArrayList<Connector<SpaceShip,SpaceShipUI>>();
+		a.add(new Connector(aux,auxUI));
+		GameManager.getInstance().newGame(GameMode.OnePlayer, a);
+		GameManagerUI.getInstance().newGame(GameMode.OnePlayer);
 	}
 
 	@Override
