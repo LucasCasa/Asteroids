@@ -25,7 +25,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param y; initial position, in the y component
 	 * @param radius; radius of the SpaceShip
 	 * @param mass; mass of the spaceShip
-	 * @param vel; initial velocity of the spaceShip
+	 * @param vel; maximum velocity of the spaceShip
 	 * @param acel; initial acceleration of the spaceShip
 	 * @param lives; initial amount of lives that the spaceShip has
 	 */
