@@ -15,13 +15,14 @@ public class MenuManager {
 	private static MenuManager self;
 	private Menu state=Menu.Main;
 	private GameMode mode;
-	private Map<Integer,SpaceShip> s = new HashMap<Integer,SpaceShip>();
+	//private Map<Integer,SpaceShip> s = new HashMap<Integer,SpaceShip>();
 	private List<Boolean> selected = new ArrayList<Boolean>();
 	private int numberOfShipsSelected = 0;
 	private int numberofShips = 0;
 
 	private MenuManager(){
-		resetSelected();
+		for(int i=0;i<Assets.SHIPS.length;i++)
+			selected.add(false);
 	}
 
 
@@ -81,6 +82,7 @@ public class MenuManager {
 				this.state=Menu.GameMode3Players;
 			}else
 				this.state=Menu.NumberOfPlayers;
+			break;
 		default:
 			break;
 		}
@@ -105,7 +107,7 @@ public class MenuManager {
 			this.mode=GameMode.ThreePlayersA;
 			break;
 		case ChooseSpaceShip:
-			shipSelected(1);
+			shipSelected(0);
 			break;
 		}
 	}
@@ -128,7 +130,7 @@ public class MenuManager {
 			this.mode=GameMode.ThreePlayersB;
 			break;
 		case ChooseSpaceShip:
-			shipSelected(2);
+			shipSelected(1);
 			break;
 		}			
 	}
@@ -143,7 +145,7 @@ public class MenuManager {
 			this.numberofShips=3;
 			break;
 		case ChooseSpaceShip:
-			shipSelected(3);
+			shipSelected(2);
 			break;	
 		default:break;
 		}
@@ -152,7 +154,8 @@ public class MenuManager {
 	private void Pressed4() {
 		switch(state){
 		case ChooseSpaceShip:
-			shipSelected(4);
+			shipSelected(3);
+			break;
 		default:break;
 		}
 	}
@@ -160,7 +163,8 @@ public class MenuManager {
 	private void Pressed5(){
 		switch(state){
 		case ChooseSpaceShip:
-			shipSelected(5);
+			shipSelected(4);
+			break;
 		default:break;
 		}
 	}
@@ -169,15 +173,18 @@ public class MenuManager {
 	 * resets the selected Ships so that the user can choose all of them
 	 */
 	private void resetSelected() {
-		for(int i=0;i<Assets.SHIPS.length;i++)
-			this.selected.add(i, false);
+		for(int i=0;i<Assets.SHIPS.length;i++){
+			this.selected.remove(i);
+			this.selected.add(i,false);			
+		}
 		this.numberOfShipsSelected=0;
 	}
 
-	//lo que hace este metodo es dado el ship i lo saca de los posibles spaceShips a elegir 
+	//lo que hace este metodo es dado el ship i lo saca de los posibles spaceShips a elegir si no fue seleccionado todavia
 	private void shipSelected(int i) {
-		if(this.numberOfShipsSelected<this.numberofShips){
-			this.selected.add(i-1, true);
+		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
+			this.selected.remove(i);
+			this.selected.add(i, true);
 			AddShip(numberOfShipsSelected);
 			this.numberOfShipsSelected++;
 			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
@@ -191,7 +198,8 @@ public class MenuManager {
 
 
 	private void GenerateGame(GameMode mode) {
-		GameManager.getInstance().generateGame(mode,s);
+		
+		//GameManager.getInstance().newGame(mode,a);
 	}
 
 	private void Help() {
