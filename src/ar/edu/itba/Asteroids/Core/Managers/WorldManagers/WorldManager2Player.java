@@ -10,8 +10,6 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 import com.badlogic.gdx.Input.Keys;
 
 public class WorldManager2Player extends WorldManager{
-	private SpaceShip second;
-	private SpaceShipUI secondUI;
 	private AIPlayer AI;
 	
 	public WorldManager2Player(List<Connector<SpaceShip,SpaceShipUI>> s) {

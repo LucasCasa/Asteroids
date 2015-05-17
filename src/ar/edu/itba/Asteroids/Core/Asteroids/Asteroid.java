@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Asteroid extends Collisionable implements Logical{
 	
 	private static final float minRadius = 15.0f;
-	private static final float radiusOffset = 20.0f;
+	private static final float radiusOffset = 10.0f;
 	
 	
 	/**
