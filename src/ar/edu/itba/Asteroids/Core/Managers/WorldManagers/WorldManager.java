@@ -49,11 +49,7 @@ public abstract class WorldManager {
 		for(int i = 0; i<asteroids.size();i++){
 			Asteroid aux = asteroids.get(i).getBack();
 			for(int j = i+1; j < asteroids.size();j++){
-<<<<<<< Updated upstream
-				aux.asteroidCollision(asteroids.get(i).getBack());
-=======
 				aux.asteroidCollision(asteroids.get(j).getBack());
->>>>>>> Stashed changes
 			}
 			if(aux.outOfScreen()){
 				asteroids.remove(i);

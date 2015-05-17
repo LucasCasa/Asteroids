@@ -24,7 +24,6 @@ public class WorldManager1Player extends WorldManager{
 		super.update();
 		first.update();
 		AI.update();
-		//IA.update();
 		if(!(first.getLives() <= 0)){
 			timer.update();	
 			gameOver = true;
