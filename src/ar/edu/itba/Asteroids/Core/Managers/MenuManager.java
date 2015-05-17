@@ -20,7 +20,6 @@ public class MenuManager {
 	private List<Boolean> selected = new ArrayList<Boolean>();
 	private int numberOfShipsSelected = 0;
 	private int numberofShips = 0;
-	private int playerSelecting = 1;
 
 	private MenuManager(){
 		for(int i=0;i<Assets.SHIPS.length;i++)
@@ -180,7 +179,6 @@ public class MenuManager {
 			this.selected.add(i,false);			
 		}
 		this.numberOfShipsSelected=0;
-		this.playerSelecting = 1;
 	}
 
 	//lo que hace este metodo es dado el ship i lo saca de los posibles spaceShips a elegir si no fue seleccionado todavia
@@ -188,8 +186,7 @@ public class MenuManager {
 		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
 			this.selected.remove(i);
 			this.selected.add(i, true);
-			GameManager.getInstance().addSpaceShip(playerSelecting, SpaceShipCreator.create(i, playerSelecting));
-			playerSelecting++;
+			GameManager.getInstance().addSpaceShip(1, SpaceShipCreator.create(i, 1));
 			this.numberOfShipsSelected++;
 			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
 				GenerateGame(this.mode);
