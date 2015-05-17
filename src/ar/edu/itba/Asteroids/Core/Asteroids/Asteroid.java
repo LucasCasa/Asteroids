@@ -8,6 +8,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Asteroid extends Collisionable implements Logical{
 	
+	private static final float minRadius = 15.0f;
+	private static final float radiusOffset = 20.0f;
+	
+	
 	/**
 	 * 
 	 * @param a; position in the x component
@@ -16,8 +20,8 @@ public class Asteroid extends Collisionable implements Logical{
 	 * @param vely; velocity in the y component
 	 * @param mass; mass of the asteroid
 	 */
-	public Asteroid(float a, float b,float velx, float vely,float mass,float radius){
-		super(new Vector2(a,b), new Vector2(velx,vely), mass,(int)radius); 
+	public Asteroid(float a, float b,float velx, float vely,float mass){
+		super(new Vector2(a,b), new Vector2(velx,vely), mass, (int)(minRadius + radiusOffset * Math.random())); 
 	}
 	
 	public void update(){

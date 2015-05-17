@@ -38,10 +38,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		standardFont = new BitmapFont();
 		MyInputProcessor MYP = new MyInputProcessor();
 		Gdx.input.setInputProcessor(MYP); // el que se encarga del manejo del input
-		SpaceShip aux = new SpaceShip(200, 200, 20, 25, 100, 100, 3);
-		SpaceShipUI auxUI = new SpaceShipUI(aux, Assets.SHIPS[0]);
-		List<Connector<SpaceShip,SpaceShipUI>> a = new ArrayList<Connector<SpaceShip,SpaceShipUI>>();
-		a.add(new Connector(aux,auxUI));
 	}
 
 	@Override

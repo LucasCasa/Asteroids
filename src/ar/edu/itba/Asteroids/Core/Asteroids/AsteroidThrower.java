@@ -38,7 +38,7 @@ public class AsteroidThrower {
 		float mass = (float)Math.random() * 1 + 1;
 		float velx = vel*cos_alfa;
 		float vely = vel*sin_alfa;
-		return new Asteroid(x1, y1, velx, vely, mass,15);
+		return new Asteroid(x1, y1, velx, vely, mass);
 	}
 	
 	public void setVelFactor(float factor){
