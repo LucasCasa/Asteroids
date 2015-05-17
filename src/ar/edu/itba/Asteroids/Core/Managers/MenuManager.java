@@ -186,8 +186,8 @@ public class MenuManager {
 		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
 			this.selected.remove(i);
 			this.selected.add(i, true);
-			GameManager.getInstance().addSpaceShip(1, SpaceShipCreator.create(i, 1));
 			this.numberOfShipsSelected++;
+			GameManager.getInstance().addSpaceShip(numberOfShipsSelected, SpaceShipCreator.create(i, numberOfShipsSelected));
 			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
 				GenerateGame(this.mode);
 		}
