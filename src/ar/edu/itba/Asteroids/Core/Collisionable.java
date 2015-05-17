@@ -37,14 +37,14 @@ public abstract class Collisionable {
 		float newVelY2 = (o.speed.y * (o.mass - mass) + (2 * mass * speed.y)) / (o.mass + mass);
 		speed.x = newVelX;
 		speed.y = newVelY1;
+		System.out.println(o.getSpeed());
 		o.speed.x = newVelX2;
 		o.speed.y = newVelY2;
-		/*while(this.collision(o)){
-			cPosition.x+= speed.x * Gdx.graphics.getDeltaTime();
-			cPosition.y+= speed.y* Gdx.graphics.getDeltaTime();
-			o.cPosition.x+= o.speed.x* Gdx.graphics.getDeltaTime();
-			o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
-		}*/
+		cPosition.x+= speed.x * Gdx.graphics.getDeltaTime();
+		cPosition.y+= speed.y* Gdx.graphics.getDeltaTime();
+		o.cPosition.x+= o.speed.x* Gdx.graphics.getDeltaTime();
+		o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
+		
 	}
 	
 	public void checkOutOfScreen(){
