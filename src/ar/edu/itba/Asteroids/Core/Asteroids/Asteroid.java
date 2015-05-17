@@ -31,6 +31,7 @@ public class Asteroid extends Collisionable implements Logical{
 	public boolean asteroidCollision(Asteroid o){
 		boolean b =collision(o); 
 		if(b){
+			setCollision(b);
 			newVel(o);
 		}
 		return b; 
@@ -44,5 +45,6 @@ public class Asteroid extends Collisionable implements Logical{
 		}
 		return false;
 	}
+
 }
 

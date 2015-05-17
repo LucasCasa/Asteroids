@@ -12,6 +12,13 @@ public class Assets {
 	//Naves
 	public static final Texture[] SHIPS = {new Texture("death.png"),new Texture("capsule.png"),new Texture("nose.png"),new Texture("rosca.png"),new Texture("ufo.png")};
 	
+	//Valores de las naves
+	public static final int[] SHIPS_RADIUS = {25,20,10,30,20};
+	public static final int[] SHIPS_MASS = {5,3,1,2,3};
+	public static final int[] SHIPS_MAX_VEL = {300,325,500,400,350};
+	public static final int[] SHIPS_ACCEL = {15,20,20,20,20};
+	public static final int[] SHIPS_LIVES = {6,5,3,4,5};
+	
 	//PowerUps
 	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
 	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");

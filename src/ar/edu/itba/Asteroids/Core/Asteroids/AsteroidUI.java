@@ -18,5 +18,9 @@ public class AsteroidUI implements Drawable {
 	
 	public void draw(SpriteBatch batch){
 		batch.draw(Assets.ASTEROID, back.getPosition().x, back.getPosition().y,back.getRadius() *2, back.getRadius() *2);
+		if(back.getCollision()){
+			batch.draw(Assets.EXPLOSION,back.getCollisionPoint().x - 10, back.getCollisionPoint().y -10 , 20,20);
+			back.setCollision(false);
+		}
 	}
 }

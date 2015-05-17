@@ -9,6 +9,8 @@ public abstract class Collisionable {
 	private Vector2 speed;
 	private int radius;
 	private float mass;
+	private Vector2 collisionPoint;
+	private boolean collision = false;
 	
 	public Collisionable(Vector2 cPos,Vector2 speed,float mass,int radius){
 		cPosition = cPos;
@@ -16,6 +18,8 @@ public abstract class Collisionable {
 		this.mass = mass;
 		this.radius = radius;
 		Position = new Vector2(cPos.x - radius, cPos.y - radius);
+		collisionPoint = new Vector2();
+		
 	}
 	public boolean collision(Collisionable o){
 		float dist = (float)(Math.pow(o.cPosition.x - cPosition.x,2) + Math.pow(o.cPosition.y - cPosition.y, 2));
@@ -26,10 +30,8 @@ public abstract class Collisionable {
 		}
 	}
 	public void newVel(Collisionable o){
-		/*
-		float collisionPointX = ((cPosition.x * o.radius) + (o.cPosition.x * radius)) / (radius + o.radius);		 
-		float collisionPointY = ((cPosition.y * o.radius) + (o.cPosition.y * radius)) / (radius + o.radius);
-		*/
+		collisionPoint.x = ((cPosition.x * o.radius) + (o.cPosition.x * radius)) / (radius + o.radius);		 
+		collisionPoint.y = ((cPosition.y * o.radius) + (o.cPosition.y * radius)) / (radius + o.radius);
 		
 		float newVelX =  (speed.x * (mass - o.mass) + (2 * o.mass * o.speed.x)) / (mass + o.mass);
 		float newVelY1 = (speed.y * (mass - o.mass) + (2 * o.mass * o.speed.y)) / (mass + o.mass);
@@ -37,7 +39,6 @@ public abstract class Collisionable {
 		float newVelY2 = (o.speed.y * (o.mass - mass) + (2 * mass * speed.y)) / (o.mass + mass);
 		speed.x = newVelX;
 		speed.y = newVelY1;
-		System.out.println(o.getSpeed());
 		o.speed.x = newVelX2;
 		o.speed.y = newVelY2;
 		cPosition.x+= speed.x * Gdx.graphics.getDeltaTime();
@@ -79,5 +80,14 @@ public abstract class Collisionable {
 	}
 	public int getRadius() {
 		return radius;
+	}
+	public Vector2 getCollisionPoint(){
+		return collisionPoint;
+	}
+	public boolean getCollision(){
+		return collision;
+	}
+	public void setCollision(boolean b){
+		collision = b;
 	}
 }

@@ -142,8 +142,10 @@ public class SpaceShip extends Collisionable implements Logical {
 	public boolean shipCollision(Collisionable o){
 		boolean b = collision(o); 
 		if(b){
+			setCollision(b);
 			if( o instanceof Asteroid){
 				this.damage(1);
+				newVel(o);
 			}else{
 				newVel(o);
 			}

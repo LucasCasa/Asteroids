@@ -29,7 +29,11 @@ public class MenuManagerUI implements Drawable{
 	private void printSpaceShips(SpriteBatch batch){
 		for(int i = 0;i<Assets.SHIPS.length; i++){
 			if(!mm.spaceShipSelected(i)){
-				printSpaceShip(batch,Assets.SHIPS[i],i+1,(i / 3) * (Gdx.graphics.getWidth() / 2) + 25,(Gdx.graphics.getHeight()/ 4) * (i % 3) + 25,100,20,2,3);
+				int sp = Assets.SHIPS_MAX_VEL[i];
+				int accel = Assets.SHIPS_ACCEL[i];
+				int mass = Assets.SHIPS_MASS[i];
+				int lives = Assets.SHIPS_LIVES[i];
+				printSpaceShip(batch,Assets.SHIPS[i],i+1,(i / 3) * (Gdx.graphics.getWidth() / 2) + 25,(Gdx.graphics.getHeight()/ 4) * (i % 3) + 25,sp,accel,mass,lives);
 				// despues hay que hacer vectores con las velocidades de las naves			
 			}
 		}
