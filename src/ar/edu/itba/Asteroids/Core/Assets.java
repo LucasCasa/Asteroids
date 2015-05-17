@@ -28,7 +28,8 @@ public class Assets {
 	public static final Texture HEART = new Texture("heart.png");
 	public static final Texture COOLDOWN = new Texture("cooldown.png");
 	public static final Texture EXPLOSION = new Texture("explosion.png");
-	
+	public static final Texture[] PROPULSORS = {new Texture("propulsorUp.png"),new Texture("propulsorDown.png"),
+												new Texture("propulsorLeft.png"), new Texture("propulsorRight.png")};
 	//Fonts
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 	public static final BitmapFont SMALL_FONT = new BitmapFont(Gdx.files.internal("little.fnt"));

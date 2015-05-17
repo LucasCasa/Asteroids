@@ -28,6 +28,19 @@ public class SpaceShipUI implements Drawable{
 			batch.draw(Assets.EXPLOSION, s.getCollisionPoint().x - explosionSize / 2,s.getCollisionPoint().y - explosionSize / 2,explosionSize,explosionSize);
 			s.setCollision(false);
 		}
+		if(s.getAccelerating()[0]){
+			batch.draw(Assets.PROPULSORS[0], s.getCPos().x -Assets.PROPULSORS[0].getWidth() / 2, s.getPosition().y - Assets.PROPULSORS[0].getHeight());
+		}
+		if(s.getAccelerating()[1]){
+			batch.draw(Assets.PROPULSORS[1], s.getCPos().x - Assets.PROPULSORS[1].getWidth() / 2, s.getPosition().y + s.getRadius() * 2);
+		}
+		if(s.getAccelerating()[2]){
+			batch.draw(Assets.PROPULSORS[2],s.getPosition().x + 2*s.getRadius(), s.getCPos().y - Assets.PROPULSORS[2].getHeight() / 2);
+		}
+		
+		if(s.getAccelerating()[3]){
+			batch.draw(Assets.PROPULSORS[3],s.getPosition().x - Assets.PROPULSORS[3].getWidth(), s.getCPos().y - Assets.PROPULSORS[3].getHeight() / 2);
+		}
 	}
 
 	
