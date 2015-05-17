@@ -73,7 +73,9 @@ public class AsteroidPlayer {
 		ArrayList<Vector2> targets = new ArrayList<Vector2>();
 		
 		for(SpaceShip target : t){
-			targets.add(target.getCPos());
+			if(target.isActive()){
+				targets.add(target.getCPos());
+			}
 		}
 		switch(keyCode){
 		case Keys.NUMPAD_1:

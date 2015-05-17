@@ -19,7 +19,8 @@ public class SpaceShip extends Collisionable implements Logical {
 	private float time; //time of invincibility
 	private float cont;
 	private boolean accelerating[] = {false,false,false,false};
-
+	private boolean active = true;
+	
 	/**
 	 * 
 	 * @param x; initial position, in the x component
@@ -76,19 +77,21 @@ public class SpaceShip extends Collisionable implements Logical {
 		}
 		return b;
 	}
-	
+
 	/**
 	 *  Define si tiene que acelerar positivamente en el eje Y
 	 * 
 	 * @param b true si tiene que acelerar positiviamente 
 	 */
 	public void acelUp(boolean b){
-		if(b){
-			acel.y+= acelModifier;
-			accelerating[0] = true;
-		}else{
-			acel.y-= acelModifier;
-			accelerating[0] = false;
+		if(b != accelerating[0]){
+			if(b){
+				acel.y+= acelModifier;
+				accelerating[0] = true;
+			}else{
+				acel.y-= acelModifier;
+				accelerating[0] = false;
+			}
 		}
 	}
 	/**
@@ -97,12 +100,14 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param b true si acelera negativamente
 	 */
 	public void acelDown(boolean b){
-		if(!b){
-			acel.y+= acelModifier;
-			accelerating[1] = false;
-		}else{
-			accelerating[1] = true;
-			acel.y-= acelModifier;
+		if(b != accelerating[1]){
+			if(!b){
+				acel.y+= acelModifier;
+				accelerating[1] = false;
+			}else{
+				accelerating[1] = true;
+				acel.y-= acelModifier;
+			}
 		}
 	}
 	/**
@@ -111,12 +116,14 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param b true si acelera negativamente
 	 */
 	public void acelLeft(boolean b){
-		if(b){
-			accelerating[2] = true;
-			acel.x-= acelModifier;
-		}else{
-			accelerating[2] = false;
-			acel.x+= acelModifier;
+		if(b != accelerating[2]){
+			if(b){
+				accelerating[2] = true;
+				acel.x-= acelModifier;
+			}else{
+				accelerating[2] = false;
+				acel.x+= acelModifier;
+			}
 		}
 	}
 	/**
@@ -125,12 +132,14 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param b true si acelera positivamente
 	 */
 	public void acelRight(boolean b){
-		if(!b){
-			accelerating[3] = false;
-			acel.x-= acelModifier;
-		}else{
-			accelerating[3] = true;
-			acel.x+= acelModifier;
+		if(b != accelerating[3]){
+			if(!b){
+				accelerating[3] = false;
+				acel.x-= acelModifier;
+			}else{
+				accelerating[3] = true;
+				acel.x+= acelModifier;
+			}
 		}
 	}
 
@@ -181,5 +190,12 @@ public class SpaceShip extends Collisionable implements Logical {
 	
 	public boolean[] getAccelerating(){
 		return accelerating;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean b){
+		active = b;
 	}
 }

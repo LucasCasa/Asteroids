@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
+import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
@@ -11,11 +12,11 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 
 public class WorldManager3Player extends WorldManager2Player{
-	private AIPlayer AI;
 	
 	public WorldManager3Player(List<Connector<SpaceShip,SpaceShipUI>> s) {
 		super(s);
 		super.getAll().put(s.get(2).getBack(), s.get(2).getFront());
+		asteroidP = new AIPlayer();
 	}
 	
 	public void keyDown(int keyCode){

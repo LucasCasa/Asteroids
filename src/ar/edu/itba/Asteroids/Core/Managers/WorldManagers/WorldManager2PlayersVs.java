@@ -2,20 +2,47 @@ package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.List;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 
+import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
+import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 public class WorldManager2PlayersVs extends WorldManager{
+	private int activeSpaceShip = 0;
 	
-	public WorldManager2PlayersVs(int spaceshipAmount,List<Texture> textures) {
-		super(); //manda dos porque son dos spaceShips uno para el 1 y uno para el dos aunque se turnen en jugar. cada jugador
-						//deberia poder elegir la nave que le toca lo mismo para 3 que es 2 contra 1
+	public WorldManager2PlayersVs(List<Connector<SpaceShip,SpaceShipUI>> s) {
+		super();
+		s.get(1).getBack().setActive(false);
+		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
+		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
+		asteroidP = new AsteroidPlayer();
 	}
 	
-	@Override
-	public AsteroidPlayer getAsteroidPlayer() {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(){
+		super.update();
+		if(getSpaceShips().get(0).getLives()<= 0){
+			getSpaceShips().get(0).setActive(false);
+			getSpaceShips().get(1).setActive(true);
+			activeSpaceShip = 1;
+		}
+	}
+	
+	public void keyDown(int keyCode){
+		switch(keyCode){
+		case Keys.W:
+		case Keys.A:
+		case Keys.S:
+		case Keys.D:
+			super.keyDown(keyCode,activeSpaceShip);
+			break;
+		default:
+			asteroidP.keyPressed(keyCode, super.getSpaceShips());
+		}
+	}
+	public void keyUp(int keyCode){
+		super.keyUp(keyCode,activeSpaceShip);
 	}
 }

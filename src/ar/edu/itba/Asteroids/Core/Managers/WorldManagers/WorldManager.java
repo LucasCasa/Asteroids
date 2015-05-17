@@ -10,6 +10,7 @@ import ar.edu.itba.Asteroids.Core.ArrayMap;
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
+import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.Input.Keys;
 public abstract class WorldManager {
 	public ArrayList<Connector<Asteroid,AsteroidUI>> asteroids;
 	protected SpaceShip first;
+	protected AsteroidPlayer asteroidP;
 	protected SpaceShipUI firstUI;
 	protected Timer timer;
 	protected boolean gameOver;
@@ -38,15 +40,21 @@ public abstract class WorldManager {
 
 	public void update(){
 		for(SpaceShip s: ships.getKeys()){
+			if(s.isActive()){
 			s.update();
+			}
 		}
 		//this for checks if the spaceships are collisioning
 		for(int i=0; i<ships.size();i++){
 			SpaceShip aux = ships.getKeyAt(i); //you can always do this because you always have at least one spaceship
 			for(int j=i+1; j<this.ships.size();j++){
-				aux.shipCollision(ships.getKeyAt(j));
+				if(aux.isActive() && ships.getKeyAt(j).isActive()){
+					aux.shipCollision(ships.getKeyAt(j));
+				}
 			}
 		}
+		
+		asteroidP.update();
 		
 		for( Connector a: asteroids){
 			a.getBack().update();
@@ -61,7 +69,7 @@ public abstract class WorldManager {
 				asteroids.remove(i);
 			}
 			for(SpaceShip s : ships.getKeys())
-			if(s.shipCollision(aux)){
+			if(s.isActive() && s.shipCollision(aux)){
 				asteroids.remove(i);
 			}
 		}
@@ -98,65 +106,10 @@ public abstract class WorldManager {
 	public abstract AsteroidPlayer getAsteroidPlayer();
 	*/
 	public void keyDown(int keyCode) {	
-		switch (keyCode) {
-/*		case Keys.DOWN:
-			second.acelDown(true);
-			break;
-		case Keys.UP:
-			second.acelUp(true);
-			break;
-		case Keys.LEFT:
-			second.acelLeft(true);
-			break;
-		case Keys.RIGHT:
-			second.acelRight(true);
-			break; */
-		case Keys.W:
-			ships.getKeyAt(0).acelUp(true);
-			break;
-		case Keys.S:
-			ships.getKeyAt(0).acelDown(true);
-			break;
-		case Keys.A:
-			ships.getKeyAt(0).acelLeft(true);
-			break;
-		case Keys.D:
-			ships.getKeyAt(0).acelRight(true);
-			break;
-	/*	default:
-			Asteroid d;
-			if((d = third.keyPressed(keyCode,ships.get(0))) != null){
-				asteroids.add(new Connector<Asteroid,AsteroidUI>(d,new AsteroidUI(d)));
-			}*/
-		}
+		keyDown(keyCode, 0);
 	}
 	public void keyUp(int keyCode) {
-		switch (keyCode) {
-/*		case Keys.DOWN:
-			second.acelDown(false);
-			break;
-		case Keys.UP:
-			second.acelUp(false);
-			break;
-		case Keys.LEFT:
-			second.acelLeft(false);
-			break;
-		case Keys.RIGHT:
-			second.acelRight(false);
-			break; */
-		case Keys.W:
-			ships.getKeyAt(0).acelUp(false);
-			break;
-		case Keys.S:
-			ships.getKeyAt(0).acelDown(false);
-			break;
-		case Keys.A:
-			ships.getKeyAt(0).acelLeft(false);
-			break;
-		case Keys.D:
-			ships.getKeyAt(0).acelRight(false);
-			break;
-		}	
+		keyUp(keyCode,0);
 	}
 
 	public void addAsteroid(Asteroid thrown, AsteroidUI asteroidUI) {
@@ -165,6 +118,47 @@ public abstract class WorldManager {
 	}
 	public boolean gameOver(){
 		return gameOver;
+	}
+
+	public void keyDown(int keyCode, int activeSpaceShip) {
+		switch (keyCode) {
+		case Keys.W:
+			ships.getKeyAt(activeSpaceShip).acelUp(true);
+			break;
+		case Keys.S:
+			ships.getKeyAt(activeSpaceShip).acelDown(true);
+			break;
+		case Keys.A:
+			ships.getKeyAt(activeSpaceShip).acelLeft(true);
+			break;
+		case Keys.D:
+			ships.getKeyAt(activeSpaceShip).acelRight(true);
+			break;
+		}
+		
+	}
+
+	public void keyUp(int keyCode, int activeSpaceShip) {
+		switch (keyCode) {
+		case Keys.W:
+			ships.getKeyAt(activeSpaceShip).acelUp(false);
+			break;
+		case Keys.S:
+			ships.getKeyAt(activeSpaceShip).acelDown(false);
+			break;
+		case Keys.A:
+			ships.getKeyAt(activeSpaceShip).acelLeft(false);
+			break;
+		case Keys.D:
+			ships.getKeyAt(activeSpaceShip).acelRight(false);
+			System.out.println("D");
+			break;
+		}	
+		
+	}
+
+	public AsteroidPlayer getAsteroidPlayer() {
+		return asteroidP;
 	}
 
 

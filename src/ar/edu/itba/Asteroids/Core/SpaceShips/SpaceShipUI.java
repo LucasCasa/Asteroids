@@ -23,6 +23,7 @@ public class SpaceShipUI implements Drawable{
 
 	@Override
 	public void draw(SpriteBatch batch) {
+		if(s.isActive()){
 		batch.draw(texture,s.getPosition().x , s.getPosition().y, s.getRadius()*2, s.getRadius()*2);
 		if(s.getCollision()){
 			batch.draw(Assets.EXPLOSION, s.getCollisionPoint().x - explosionSize / 2,s.getCollisionPoint().y - explosionSize / 2,explosionSize,explosionSize);
@@ -40,6 +41,7 @@ public class SpaceShipUI implements Drawable{
 		
 		if(s.getAccelerating()[3]){
 			batch.draw(Assets.PROPULSORS[3],s.getPosition().x - Assets.PROPULSORS[3].getWidth(), s.getCPos().y - Assets.PROPULSORS[3].getHeight() / 2);
+		}
 		}
 	}
 
