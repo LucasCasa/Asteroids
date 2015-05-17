@@ -11,10 +11,11 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 public class WorldManager1Player extends WorldManager{
-	private boolean gameOver = false;
 	private AIPlayer AI;
+	
 	public WorldManager1Player(Connector<SpaceShip,SpaceShipUI> a) {
 		super();
+		getAll().put(a.getBack(), a.getFront());
 		first = a.getBack();
 		firstUI = a.getFront();
 		AI = new AIPlayer();
@@ -22,24 +23,10 @@ public class WorldManager1Player extends WorldManager{
 	
 	public void update(){
 		super.update();
-		first.update();
 		AI.update();
-		if(!(first.getLives() <= 0)){
+		if(!(super.getSpaceShips().get(0).getLives() <= 0)){
 			timer.update();	
 			gameOver = true;
 		}
-	}
-	@Override
-	public List<SpaceShipUI> getShipsUI() {
-		List<SpaceShipUI> aux = new ArrayList<SpaceShipUI>();
-		aux.add(firstUI);
-		return aux;
-	}
-	@Override
-	public List<SpaceShip> getSpaceShips() {
-		List<SpaceShip> aux = new ArrayList<SpaceShip>();
-		aux.add(first);
-		return aux;
-
 	}
 }

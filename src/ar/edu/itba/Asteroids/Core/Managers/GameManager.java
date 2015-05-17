@@ -1,5 +1,6 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager1Player;
+import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager2Player;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
@@ -31,7 +33,7 @@ public class GameManager {
 			world = new WorldManager1Player(s.get(1));
 			break;
 		case TwoPlayersA:
-			//world = new WorldManager2Player(spaceshipAmount, textures);
+			world = new WorldManager2Player(new ArrayList(s.values()));
 			break;
 		}
 		isMenu = false;
@@ -41,7 +43,11 @@ public class GameManager {
 			MenuManager.getInstance().update();
 		}else{
 			world.update();
+			if(world.gameOver()){
+				//Que carajo hacemos aca???
+			}
 		}
+		
 	}
 	public void keyDown(int keyCode){
 		if(isMenu){

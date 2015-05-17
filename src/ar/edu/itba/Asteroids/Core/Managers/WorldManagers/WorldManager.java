@@ -1,8 +1,12 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
+import ar.edu.itba.Asteroids.Core.ArrayMap;
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
@@ -18,6 +22,8 @@ public abstract class WorldManager {
 	protected SpaceShip first;
 	protected SpaceShipUI firstUI;
 	protected Timer timer;
+	protected boolean gameOver;
+	private ArrayMap<SpaceShip,SpaceShipUI> ships;
 	/**
 	 * 
 	 * @param spaceshipAmount; amount of spaceShips in the game
@@ -26,22 +32,22 @@ public abstract class WorldManager {
 	 */
 	public WorldManager(){
 		 asteroids = new ArrayList<Connector<Asteroid,AsteroidUI>>();
+		 ships = new ArrayMap<SpaceShip,SpaceShipUI>();
 		 timer = new Timer();
 	}
 
 	public void update(){
-		/*
-		for(SpaceShip s: ships){
+		for(SpaceShip s: ships.getKeys()){
 			s.update();
 		}
 		//this for checks if the spaceships are collisioning
-		for(int i=0; i<this.spaceshipAmount;i++){
-			SpaceShip aux = ships.get(i); //you can always do this because you always have at least one spaceship
-			for(int j=i+1; j<this.spaceshipAmount;j++){
-				aux.collision(ships.get(j));
+		for(int i=0; i<ships.size();i++){
+			SpaceShip aux = ships.getKeyAt(i); //you can always do this because you always have at least one spaceship
+			for(int j=i+1; j<this.ships.size();j++){
+				aux.shipCollision(ships.getKeyAt(j));
 			}
 		}
-		*/
+		
 		for( Connector a: asteroids){
 			a.getBack().update();
 		}
@@ -54,7 +60,8 @@ public abstract class WorldManager {
 			if(aux.outOfScreen()){
 				asteroids.remove(i);
 			}
-			if(first.shipCollision(aux)){
+			for(SpaceShip s : ships.getKeys())
+			if(s.shipCollision(aux)){
 				asteroids.remove(i);
 			}
 		}
@@ -72,8 +79,17 @@ public abstract class WorldManager {
 	public float getTime(){
 		return timer.getTime();
 	}
-	public abstract List<SpaceShipUI> getShipsUI();
-	public abstract List<SpaceShip> getSpaceShips();
+	
+	public ArrayList<SpaceShipUI> getShipsUI(){
+		return ships.getValues(); 
+	}
+	public ArrayList<SpaceShip> getSpaceShips(){
+		return ships.getKeys();
+	}
+	
+	public ArrayMap<SpaceShip, SpaceShipUI> getAll(){
+		return ships;
+	}
 	
 	/**
 	 * 
@@ -96,16 +112,16 @@ public abstract class WorldManager {
 			second.acelRight(true);
 			break; */
 		case Keys.W:
-			first.acelUp(true);
+			ships.getKeyAt(0).acelUp(true);
 			break;
 		case Keys.S:
-			first.acelDown(true);
+			ships.getKeyAt(0).acelDown(true);
 			break;
 		case Keys.A:
-			first.acelLeft(true);
+			ships.getKeyAt(0).acelLeft(true);
 			break;
 		case Keys.D:
-			first.acelRight(true);
+			ships.getKeyAt(0).acelRight(true);
 			break;
 	/*	default:
 			Asteroid d;
@@ -129,16 +145,16 @@ public abstract class WorldManager {
 			second.acelRight(false);
 			break; */
 		case Keys.W:
-			first.acelUp(false);
+			ships.getKeyAt(0).acelUp(false);
 			break;
 		case Keys.S:
-			first.acelDown(false);
+			ships.getKeyAt(0).acelDown(false);
 			break;
 		case Keys.A:
-			first.acelLeft(false);
+			ships.getKeyAt(0).acelLeft(false);
 			break;
 		case Keys.D:
-			first.acelRight(false);
+			ships.getKeyAt(0).acelRight(false);
 			break;
 		}	
 	}
@@ -146,6 +162,9 @@ public abstract class WorldManager {
 	public void addAsteroid(Asteroid thrown, AsteroidUI asteroidUI) {
 		asteroids.add(new Connector<Asteroid,AsteroidUI>(thrown,asteroidUI));
 		
+	}
+	public boolean gameOver(){
+		return gameOver;
 	}
 
 

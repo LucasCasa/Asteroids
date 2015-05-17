@@ -2,6 +2,7 @@ package ar.edu.itba.Asteroids.Core.Managers;
 
 import ar.edu.itba.Asteroids.Core.Drawable;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD1Player;
+import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD2Player;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager1PlayerUI;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManagerUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
@@ -24,8 +25,12 @@ public class GameManagerUI implements Drawable{
 		switch(gm){
 		case OnePlayer:
 			SpaceShip aux = GameManager.getInstance().getWorld().getSpaceShips().get(0);
-			worldUI = new WorldManager1PlayerUI(GameManager.getInstance().getWorld(),new HUD1Player(aux));
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(),new HUD1Player(aux));
 			break;
+		case TwoPlayersA:
+			SpaceShip aux1 = GameManager.getInstance().getWorld().getSpaceShips().get(0);
+			SpaceShip aux2 = GameManager.getInstance().getWorld().getSpaceShips().get(1);
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD2Player(aux1, aux2));
 		}
 	}
 	

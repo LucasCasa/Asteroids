@@ -10,7 +10,7 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public abstract class WorldManagerUI implements Drawable{
+public class WorldManagerUI implements Drawable{
 	HUDManager h;
 	WorldManager wm;
 	List<AsteroidUI> aUI;
