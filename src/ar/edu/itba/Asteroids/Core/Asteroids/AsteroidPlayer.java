@@ -1,10 +1,13 @@
 package ar.edu.itba.Asteroids.Core.Asteroids;
 
+import java.util.ArrayList;
+
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Vector2;
 
 public class AsteroidPlayer {
 
@@ -61,50 +64,59 @@ public class AsteroidPlayer {
 	 * @return un nuevo asteroide si se puede, null si no se puede crear o no se presiono
 	 * una tecla valida
 	 */
-	public Asteroid keyPressed(int keyCode,SpaceShip t) {
+	public ArrayList<Asteroid> keyPressed(int keyCode,ArrayList<SpaceShip> t) {
 		if(reserve <= 0){
 			return null;
 		}
 		reserve--;
-		Asteroid thrown = null;
+		ArrayList<Asteroid> thrown = new ArrayList<Asteroid>();
+		ArrayList<Vector2> targets = new ArrayList<Vector2>();
+		
+		for(SpaceShip target : t){
+			targets.add(target.getCPos());
+		}
 		switch(keyCode){
 		case Keys.NUMPAD_1:
 		case Keys.NUM_1:
-			thrown = AsteroidThrower.getInstance().throwBottomLeft(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwBottomLeft(targets);
 			break;
 		case Keys.NUMPAD_2:
 		case Keys.NUM_2:
-			thrown = AsteroidThrower.getInstance().throwBottomMiddle(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwBottomMiddle(targets);
 			break;
 		case Keys.NUMPAD_3:
 		case Keys.NUM_3:
-			thrown = AsteroidThrower.getInstance().throwBottomRight(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwBottomRight(targets);
 			break;
 		case Keys.NUMPAD_6:
 		case Keys.NUM_6:
-			thrown = AsteroidThrower.getInstance().throwRight(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwRight(targets);
 			break;
 		case Keys.NUMPAD_9:
 		case Keys.NUM_9:
-			thrown = AsteroidThrower.getInstance().throwUpperRight(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwUpperRight(targets);
 			break;
 		case Keys.NUMPAD_8:
 		case Keys.NUM_8:
-			thrown = AsteroidThrower.getInstance().throwUpperMiddle(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwUpperMiddle(targets);
 			break;
 		case Keys.NUMPAD_7:
 		case Keys.NUM_7:
-			thrown = AsteroidThrower.getInstance().throwUpperLeft(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwUpperLeft(targets);
 			break;
 		case Keys.NUMPAD_4:
 		case Keys.NUM_4:
-			thrown = AsteroidThrower.getInstance().throwLeft(t.getCPos());
+			thrown = AsteroidThrower.getInstance().throwLeft(targets);
 			break;
 		default:
 			reserve++;
 			break;
 		}
-		GameManager.getInstance().getWorld().addAsteroid(thrown, new AsteroidUI(thrown));
+		if(thrown.size() > 0){
+			for(Asteroid a : thrown){
+				GameManager.getInstance().getWorld().addAsteroid(a, new AsteroidUI(a));
+			}
+		}
 		return thrown;
 	}
 }

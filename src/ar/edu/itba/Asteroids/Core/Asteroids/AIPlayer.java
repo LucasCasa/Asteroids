@@ -1,5 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Asteroids;
 
+import java.util.ArrayList;
+
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
@@ -18,7 +20,7 @@ public class AIPlayer extends AsteroidPlayer{
 	 * @return a new asteroid if it can, null if it cannot be created or didn't pressed
 	 * a valid key
 	 */
-	public Asteroid calculateThrow(SpaceShip t){
+	public ArrayList<Asteroid> calculateThrow(ArrayList<SpaceShip> t){
 		int KeyCode = keys[(int)(Math.random()*8)];
 		return keyPressed(KeyCode,t);
 	}
@@ -38,7 +40,7 @@ public class AIPlayer extends AsteroidPlayer{
 		}
 
 		if(getReserve() >= 1){
-			calculateThrow(GameManager.getInstance().getWorld().getSpaceShips().get(0));
+			calculateThrow(GameManager.getInstance().getWorld().getSpaceShips());
 		}
 		super.update();
 	}

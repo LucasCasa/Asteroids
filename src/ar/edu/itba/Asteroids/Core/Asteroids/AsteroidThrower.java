@@ -1,5 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Asteroids;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
@@ -45,103 +47,124 @@ public class AsteroidThrower {
 		this.velFactor = factor;
 	}
 	
-	public Asteroid throwBottomRight(Vector2 pos){
+	public ArrayList<Asteroid> throwBottomRight(ArrayList<Vector2> pos){
 		float x;
 		float y;
-		
-		if (Math.random() > 0.5){
-			x = (float) (Gdx.graphics.getWidth() -  Math.random()*(Gdx.graphics.getWidth()/4));
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
+			if (Math.random() > 0.5){
+				x = (float) (Gdx.graphics.getWidth() -  Math.random()*(Gdx.graphics.getWidth()/4));
+				y = 0;
+			}else{
+				x = Gdx.graphics.getWidth();
+				y = (float) (Math.random()*(Gdx.graphics.getHeight()/4));;
+			}	
+
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
+		}
+		return aster;
+
+
+	}
+
+	public ArrayList<Asteroid> throwBottomMiddle(ArrayList<Vector2> pos){
+		float x;
+		float y;
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
+			x = (float) (Gdx.graphics.getWidth()/4 + Math.random()*(Gdx.graphics.getWidth()/2));
 			y = 0;
-		}else{
-			x = Gdx.graphics.getWidth();
-			y = (float) (Math.random()*(Gdx.graphics.getHeight()/4));;
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
+		return aster;
 	}
-	
-	public Asteroid throwBottomMiddle(Vector2 pos){
+	public ArrayList<Asteroid> throwBottomLeft(ArrayList<Vector2> pos){
 		float x;
 		float y;
-
-		x = (float) (Gdx.graphics.getWidth()/4 + Math.random()*(Gdx.graphics.getWidth()/2));
-		y = 0;
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
-	}
-	
-	public Asteroid throwBottomLeft(Vector2 pos){
-		float x;
-		float y;
-		
-		if (Math.random() > 0.5){
-			x = (float) (Math.random()*(Gdx.graphics.getWidth()/4));
-			y = 0;
-		}else{
-			x = 0;
-			y = (float) (Math.random()*(Gdx.graphics.getHeight()/4));;
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
+			if (Math.random() > 0.5){
+				x = (float) (Math.random()*(Gdx.graphics.getWidth()/4));
+				y = 0;
+			}else{
+				x = 0;
+				y = (float) (Math.random()*(Gdx.graphics.getHeight()/4));;
+			}
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
+		return aster;
 	}
-	
-	public Asteroid throwUpperRight(Vector2 pos){
+
+	public ArrayList<Asteroid> throwUpperRight(ArrayList<Vector2> pos){
 		float x;
 		float y;
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
+			if (Math.random() > 0.5){
+				x = (float) (Gdx.graphics.getWidth() -  Math.random()*(Gdx.graphics.getWidth()/4));
+				y = Gdx.graphics.getHeight();
+			}else{
+				x = Gdx.graphics.getWidth();
+				y = (float) (Gdx.graphics.getHeight() - Math.random()*(Gdx.graphics.getHeight()/4));
+			}
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
+		}
+		return aster;
+	}
 
-		if (Math.random() > 0.5){
-			x = (float) (Gdx.graphics.getWidth() -  Math.random()*(Gdx.graphics.getWidth()/4));
+	public ArrayList<Asteroid> throwUpperMiddle(ArrayList<Vector2> pos){
+		float x;
+		float y;
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
+			x = (float) (Gdx.graphics.getWidth()/4 + Math.random()*(Gdx.graphics.getWidth()/2));
 			y = Gdx.graphics.getHeight();
-		}else{
-			x = Gdx.graphics.getWidth();
-			y = (float) (Gdx.graphics.getHeight() - Math.random()*(Gdx.graphics.getHeight()/4));
-		}
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
-	}
-	
-	public Asteroid throwUpperMiddle(Vector2 pos){
-		float x;
-		float y;
 
-		x = (float) (Gdx.graphics.getWidth()/4 + Math.random()*(Gdx.graphics.getWidth()/2));
-		y = Gdx.graphics.getHeight();
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
+		}
+		return aster;
 	}
-	
-	public Asteroid throwUpperLeft(Vector2 pos){
+
+	public ArrayList<Asteroid> throwUpperLeft(ArrayList<Vector2> pos){
 		float x;
 		float y;
-		
-		if (Math.random() > 0.5){
-			x = (float) (Math.random()*(Gdx.graphics.getWidth()/4));
-			y = Gdx.graphics.getHeight();
-		}else{
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
+			if (Math.random() > 0.5){
+				x = (float) (Math.random()*(Gdx.graphics.getWidth()/4));
+				y = Gdx.graphics.getHeight();
+			}else{
+				x = 0;
+				y = (float) (Gdx.graphics.getHeight() - Math.random()*(Gdx.graphics.getHeight()/4));
+			}
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
+		}
+		return aster;
+	}
+
+	public ArrayList<Asteroid> throwLeft(ArrayList<Vector2> pos){
+		float x;
+		float y;
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
 			x = 0;
-			y = (float) (Gdx.graphics.getHeight() - Math.random()*(Gdx.graphics.getHeight()/4));
+			y = (float) (Gdx.graphics.getHeight()/4 + Math.random()*(Gdx.graphics.getHeight()/2));
+
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
+		return aster;
 	}
-	
-	public Asteroid throwLeft(Vector2 pos){
+
+	public ArrayList<Asteroid> throwRight(ArrayList<Vector2> pos){
 		float x;
 		float y;
-
-		x = 0;
-		y = (float) (Gdx.graphics.getHeight()/4 + Math.random()*(Gdx.graphics.getHeight()/2));
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
-	}
-	
-	public Asteroid throwRight(Vector2 pos){
-		float x;
-		float y;
-
-		x = Gdx.graphics.getWidth();
-		y = (float) (Gdx.graphics.getHeight()/4 + Math.random()*(Gdx.graphics.getHeight()/2));
-		
-		return throwAsteroid(x, y, pos.x, pos.y);
+		ArrayList<Asteroid> aster = new ArrayList<>();
+		for(Vector2 ShipPos : pos){
+			x = Gdx.graphics.getWidth();
+			y = (float) (Gdx.graphics.getHeight()/4 + Math.random()*(Gdx.graphics.getHeight()/2));
+			
+			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
+		}
+		return aster;
 	}	
 }
