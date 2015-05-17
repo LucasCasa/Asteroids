@@ -40,6 +40,7 @@ public class WorldManager2PlayersVs extends WorldManager{
 			break;
 		default:
 			asteroidP.keyPressed(keyCode, super.getSpaceShips());
+			break;
 		}
 	}
 	public void keyUp(int keyCode){

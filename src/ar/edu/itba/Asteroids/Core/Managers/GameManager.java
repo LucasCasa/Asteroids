@@ -11,6 +11,7 @@ import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager1Player;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager2Player;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager2PlayersVs;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager3Player;
+import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager3Players2vs1;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
@@ -42,6 +43,9 @@ public class GameManager {
 			break;
 		case ThreePlayersA:
 			world = new WorldManager3Player(new ArrayList(s.values()));
+			break;
+		case ThreePlayersB:
+			world = new WorldManager3Players2vs1(new ArrayList(s.values()));
 		}
 		isMenu = false;
 	}

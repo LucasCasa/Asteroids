@@ -32,7 +32,12 @@ public abstract class Collisionable {
 	public void newVel(Collisionable o){
 		collisionPoint.x = ((cPosition.x * o.radius) + (o.cPosition.x * radius)) / (radius + o.radius);		 
 		collisionPoint.y = ((cPosition.y * o.radius) + (o.cPosition.y * radius)) / (radius + o.radius);
-		
+		float xDist = getCPos().x - o.getCPos().x;
+		float yDist = getCPos().y - o.getCPos().y;
+		float xVel = o.speed.x - speed.x;
+		float yVel = o.speed.y - speed.y;
+		float dotProduct = xDist*xVel + yDist*yVel;
+		if(dotProduct > 0){ // si los objetos se estan alejando no colisiona !!! 
 		float newVelX =  (speed.x * (mass - o.mass) + (2 * o.mass * o.speed.x)) / (mass + o.mass);
 		float newVelY1 = (speed.y * (mass - o.mass) + (2 * o.mass * o.speed.y)) / (mass + o.mass);
 		float newVelX2 =  (o.speed.x * (o.mass - mass) + (2 * mass * speed.x)) / (o.mass + mass);
@@ -45,7 +50,7 @@ public abstract class Collisionable {
 		cPosition.y+= speed.y* Gdx.graphics.getDeltaTime();
 		o.cPosition.x+= o.speed.x* Gdx.graphics.getDeltaTime();
 		o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
-		
+		}
 	}
 	
 	public void checkOutOfScreen(){

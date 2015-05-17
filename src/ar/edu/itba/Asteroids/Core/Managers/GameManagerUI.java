@@ -6,6 +6,7 @@ import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD1Player;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD2Player;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD2PlayersVs;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD3Player;
+import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD3Players2vs1;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManagerUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
@@ -48,6 +49,12 @@ public class GameManagerUI implements Drawable{
 			aux2 = GameManager.getInstance().getWorld().getSpaceShips().get(1);
 			aux3 = GameManager.getInstance().getWorld().getSpaceShips().get(2);
 			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD3Player(aux1, aux2,aux3));
+			break;
+		case ThreePlayersB:
+			aux1 = GameManager.getInstance().getWorld().getSpaceShips().get(0);
+			aux2 = GameManager.getInstance().getWorld().getSpaceShips().get(1);
+			AsteroidPlayer b = GameManager.getInstance().getWorld().getAsteroidPlayer();
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD3Players2vs1(aux1, aux2, b));
 			break;
 		}
 	}
