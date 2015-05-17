@@ -10,19 +10,17 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 import com.badlogic.gdx.Input.Keys;
 
 public class WorldManager2Player extends WorldManager{
-	private AIPlayer AI;
 	
 	public WorldManager2Player(List<Connector<SpaceShip,SpaceShipUI>> s) {
 		super();
 		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
 		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
-		AI = new AIPlayer();
+		asteroidP = new AIPlayer();
 	}
 
 
 	public void update(){
 		super.update();
-		AI.update();
 		
 	}
 	
