@@ -165,6 +165,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	public void addLives(int amount){
 		this.lives+=amount;
 	}
+	
 
 	/**
 	 * Sets the time for which the SpaceShip is going to be invincible

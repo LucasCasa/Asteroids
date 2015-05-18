@@ -192,18 +192,19 @@ public abstract class WorldManager {
 	}
 	
 	public void updatePowerUpCollision(){
-		Iterator<Connector<PowerUp, PowerUpUI>> iter = powerUps.iterator();
 		Connector<PowerUp, PowerUpUI> con;
-		while(iter.hasNext()){
-			con = iter.next();
+		for(int i=0;i<powerUps.size();i++){
+			con = powerUps.get(i);
+			
 			for(Connector<Asteroid, AsteroidUI> a: asteroids){
 				if(con.getBack().collision(a.getBack()))
-					iter.remove();
+					powerUps.remove(con);
+					
 			}
 			for(SpaceShip s: ships.getKeys()){
-				if(con.getBack().collision(s)){
+				if(con.getBack().collision(s) && powerUps.contains(con)){
 					con.getBack().effect(s);
-					iter.remove();
+					powerUps.remove(con);
 				}
 			}
 		}
