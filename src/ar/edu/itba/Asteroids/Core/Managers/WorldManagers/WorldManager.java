@@ -1,10 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.Iterator;
 
 import ar.edu.itba.Asteroids.Core.ArrayMap;
 import ar.edu.itba.Asteroids.Core.Connector;
@@ -12,19 +9,24 @@ import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
+import ar.edu.itba.Asteroids.Core.PowerUps.PowerUp;
+import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpCreator;
+import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.Input.Keys;
 
-//deje las naves como un array list no importa que halla solo una para que se chequee muchos mas facil. 
 public abstract class WorldManager {
 	public ArrayList<Connector<Asteroid,AsteroidUI>> asteroids;
+	private ArrayList<Connector<PowerUp, PowerUpUI>> powerUps;
 	protected SpaceShip first;
 	protected AsteroidPlayer asteroidP;
 	protected SpaceShipUI firstUI;
 	protected Timer timer;
 	protected boolean gameOver;
+	private Timer powerUpTimer;
+	private final float powerUpCooldown = 5.0f;
 	private ArrayMap<SpaceShip,SpaceShipUI> ships;
 	/**
 	 * 
@@ -36,43 +38,19 @@ public abstract class WorldManager {
 		 asteroids = new ArrayList<Connector<Asteroid,AsteroidUI>>();
 		 ships = new ArrayMap<SpaceShip,SpaceShipUI>();
 		 timer = new Timer();
+		 powerUpTimer = new Timer();
+		 powerUps = new ArrayList<Connector<PowerUp, PowerUpUI>>();
 	}
 
 	public void update(){
-		for(SpaceShip s: ships.getKeys()){
-			if(s.isActive()){
-			s.update();
-			}
-		}
-		//this for checks if the spaceships are collisioning
-		for(int i=0; i<ships.size();i++){
-			SpaceShip aux = ships.getKeyAt(i); //you can always do this because you always have at least one spaceship
-			for(int j=i+1; j<this.ships.size();j++){
-				if(aux.isActive() && ships.getKeyAt(j).isActive()){
-					aux.shipCollision(ships.getKeyAt(j));
-				}
-			}
-		}
-		
+		updatePowerUps();
+		updateSpaceships();
 		asteroidP.update();
-		
-		for( Connector a: asteroids){
+		for( Connector<Asteroid,AsteroidUI> a: asteroids){
 			a.getBack().update();
 		}
-		
-		for(int i = 0; i<asteroids.size();i++){
-			Asteroid aux = asteroids.get(i).getBack();
-			for(int j = i+1; j < asteroids.size();j++){
-				aux.asteroidCollision(asteroids.get(j).getBack());
-			}
-			if(aux.outOfScreen()){
-				asteroids.remove(i);
-			}
-			for(SpaceShip s : ships.getKeys())
-			if(s.isActive() && s.shipCollision(aux)){
-				asteroids.remove(i);
-			}
-		}
+		updateAsteroidCollision();
+		updatePowerUpCollision();
 	}
 
 	
@@ -84,13 +62,21 @@ public abstract class WorldManager {
 		}
 		return au;
 	}
+	public ArrayList<PowerUpUI> getPowerUpUI(){
+		ArrayList<PowerUpUI> pui = new ArrayList<PowerUpUI>();
+		for(int i = 0; i<powerUps.size();i++){
+			pui.add(powerUps.get(i).getFront());
+		}
+		return pui;
+	}
+	public ArrayList<SpaceShipUI> getShipsUI(){
+		return ships.getValues(); 
+	}
 	public float getTime(){
 		return timer.getTime();
 	}
 	
-	public ArrayList<SpaceShipUI> getShipsUI(){
-		return ships.getValues(); 
-	}
+
 	public ArrayList<SpaceShip> getSpaceShips(){
 		return ships.getKeys();
 	}
@@ -151,7 +137,6 @@ public abstract class WorldManager {
 			break;
 		case Keys.D:
 			ships.getKeyAt(activeSpaceShip).acelRight(false);
-			System.out.println("D");
 			break;
 		}	
 		
@@ -161,6 +146,66 @@ public abstract class WorldManager {
 		return asteroidP;
 	}
 
-
+	public void updateSpaceships(){
+		for(SpaceShip s: ships.getKeys()){
+			if(s.isActive()){
+			s.update();
+			}
+		}
+		//this for checks if the spaceships are collisioning
+		for(int i=0; i<ships.size();i++){
+			SpaceShip aux = ships.getKeyAt(i); //you can always do this because you always have at least one spaceship
+			for(int j=i+1; j<this.ships.size();j++){
+				if(aux.isActive() && ships.getKeyAt(j).isActive()){
+					aux.shipCollision(ships.getKeyAt(j));
+				}
+			}
+		}
+	}
+	
+	public void updateAsteroidCollision(){
+		for(int i = 0; i<asteroids.size();i++){
+			Asteroid aux = asteroids.get(i).getBack();
+			for(int j = i+1; j < asteroids.size();j++){
+				aux.asteroidCollision(asteroids.get(j).getBack());
+			}
+			if(aux.outOfScreen()){
+				asteroids.remove(i);
+			}
+			for(SpaceShip s : ships.getKeys())
+			if(s.isActive() && s.shipCollision(aux)){
+				asteroids.remove(i);
+			}
+		}
+	}
+	
+	public void updatePowerUps(){
+		powerUpTimer.update();
+		if(powerUpTimer.getTime() > powerUpCooldown){
+			powerUps.add(PowerUpCreator.create());
+			powerUpTimer.reset();
+		}
+		for(Connector<PowerUp, PowerUpUI> p: powerUps){
+			p.getBack().update();
+		}
+	}
+	
+	public void updatePowerUpCollision(){
+		Iterator<Connector<PowerUp, PowerUpUI>> iter = powerUps.iterator();
+		Connector<PowerUp, PowerUpUI> con;
+		while(iter.hasNext()){
+			con = iter.next();
+			for(Connector<Asteroid, AsteroidUI> a: asteroids){
+				if(con.getBack().collision(a.getBack()))
+					iter.remove();
+			}
+			for(SpaceShip s: ships.getKeys()){
+				if(con.getBack().collision(s)){
+					con.getBack().effect(s);
+					iter.remove();
+				}
+			}
+		}
+	}
 }
 

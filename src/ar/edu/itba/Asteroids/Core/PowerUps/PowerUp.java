@@ -1,13 +1,14 @@
 package ar.edu.itba.Asteroids.Core.PowerUps;
 
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
+import ar.edu.itba.Asteroids.Core.Collisionable;
+import ar.edu.itba.Asteroids.Core.Logical;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class PowerUp{
+public abstract class PowerUp extends Collisionable implements Logical{
 
-	private Vector2 pos;
-	private float radius;
+	private static final int radius = 20;
 
 	/**
 	 * 
@@ -15,19 +16,13 @@ public abstract class PowerUp{
 	 * @param y; position in the y component
 	 * @param radius; radius of the powerup
 	 */
-	public PowerUp(float x, float y, float radius){
-		pos = new Vector2(x,y);
-		this.radius = radius;
+	public PowerUp(Vector2 pos){
+		super(pos, new Vector2(0,0), 0, radius);
+	}
+	
+	public void update(){
 	}
 	
 	public abstract void effect(SpaceShip s);
-	
-	public Vector2 getPos() {
-		return pos;
-	}
-
-	public float getRadius() {
-		return radius;
-	}
 
 }

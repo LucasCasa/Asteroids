@@ -6,7 +6,7 @@ import ar.edu.itba.Asteroids.Core.Connector;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-public class SpaceShipCreator {
+public final class SpaceShipCreator {
 	
 	private static final float offset = 50; //Starting position distance from edge of screen
 	

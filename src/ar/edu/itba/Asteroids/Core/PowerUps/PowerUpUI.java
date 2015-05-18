@@ -22,6 +22,6 @@ public class PowerUpUI implements Drawable{
 	
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(texture, backend.getPos().x, backend.getPos().y, backend.getRadius()*2, backend.getRadius()*2);
+		batch.draw(texture, backend.getPosition().x, backend.getPosition().y, backend.getRadius()*2, backend.getRadius()*2);
 	}
 }
