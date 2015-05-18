@@ -3,7 +3,6 @@ package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 import java.util.List;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
 
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
