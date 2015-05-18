@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
@@ -22,8 +23,12 @@ public class WorldManager1Player extends WorldManager{
 	
 	public void update(){
 		super.update();
-		if(!(super.getSpaceShips().get(0).getLives() <= 0)){
-			timer.update();	
+		timer.update();	
+		score = timer.getTime(); //provisional
+        if (score > Assets.getHighScore() && !gameOver()) {
+            Assets.setHighScore(score);
+        }
+		if(super.getSpaceShips().get(0).getLives() <= 0){
 			gameOver = true;
 		}
 	}

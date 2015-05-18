@@ -24,6 +24,7 @@ public abstract class WorldManager {
 	protected AsteroidPlayer asteroidP;
 	protected SpaceShipUI firstUI;
 	protected Timer timer;
+	protected float score;
 	protected boolean gameOver;
 	private Timer powerUpTimer;
 	private final float powerUpCooldown = 5.0f;

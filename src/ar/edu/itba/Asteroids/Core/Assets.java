@@ -1,6 +1,7 @@
 package ar.edu.itba.Asteroids.Core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
@@ -33,4 +34,14 @@ public class Assets {
 	//Fonts
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 	public static final BitmapFont SMALL_FONT = new BitmapFont(Gdx.files.internal("little.fnt"));
+	
+	//HighScore
+	private static Preferences prefs = Gdx.app.getPreferences("Asteroids"); 
+	public static void setHighScore(float val) {
+	    prefs.putFloat("highScore", val);
+	    prefs.flush();
+	}
+	public static float getHighScore() {
+	    return prefs.getFloat("highScore");
+	}	
 }

@@ -24,8 +24,8 @@ public class AsteroidThrower {
 	 * This method calculates the velocity and the mass of the new asteroid
 	 * @param x1, the x-component of the asteroid being thrown
 	 * @param y1, the y-component of the asteroid being thrown
-	 * @param x1, the x-component of the spaceship
-	 * @param y1, the y-component of the spaceship
+	 * @param x2, the x-component of the spaceship
+	 * @param y2, the y-component of the spaceship
 	 * @return a new asteroid aiming to the spaceship
 	 */
 	private Asteroid throwAsteroid(float x1, float y1, float x2, float y2){

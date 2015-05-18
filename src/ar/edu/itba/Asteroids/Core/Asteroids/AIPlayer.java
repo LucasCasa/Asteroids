@@ -28,11 +28,11 @@ public class AIPlayer extends AsteroidPlayer{
 		elapsedTime = new Timer();
 	}
 	
-	//esto es super preliminar, nisiquiera se si andara bien hasta que se pueda probar (lo de los 5 min fue algo totalmente arbitrario)
+	
 	public void update(){
 		elapsedTime.update();
 		
-		//the throwing velocity and the rate of fire keep increasing till it completes the first 5 minutes of game
+		//the throwing velocity and the rate of fire keep increasing till it completes the first 2 minutes of game
 		if(elapsedTime.getTime() < 120){
 			super.setCooldown((float)(1.5 - elapsedTime.getTime()/100));
 			

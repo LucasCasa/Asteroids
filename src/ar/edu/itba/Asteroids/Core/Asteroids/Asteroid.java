@@ -20,8 +20,8 @@ public class Asteroid extends Collisionable implements Logical{
 	 * @param vely; velocity in the y component
 	 * @param mass; mass of the asteroid
 	 */
-	public Asteroid(float a, float b,float velx, float vely,float mass){
-		super(new Vector2(a,b), new Vector2(velx,vely), mass, (int)(minRadius + radiusOffset * Math.random())); 
+	public Asteroid(float a, float b,float velx, float vely, float mass){
+		super(new Vector2(a,b), new Vector2(velx,vely), mass, (int)(minRadius + radiusOffset * (mass - 1))); 
 	}
 	
 	public void update(){

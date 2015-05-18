@@ -50,13 +50,10 @@ public class GameManager {
 		isMenu = false;
 	}
 	public void update(){
-		if(isMenu){
+		if(isMenu || world.gameOver()){
 			MenuManager.getInstance().update();
 		}else{
-			world.update();
-			if(world.gameOver()){
-				//Que carajo hacemos aca???
-			}
+			world.update();				
 		}
 		
 	}
