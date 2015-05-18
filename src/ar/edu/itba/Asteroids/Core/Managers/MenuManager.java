@@ -1,12 +1,9 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ar.edu.itba.Asteroids.Core.Assets;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipCreator;
 
 import com.badlogic.gdx.Gdx;
@@ -16,14 +13,12 @@ public class MenuManager {
 	private static MenuManager self;
 	private Menu state=Menu.Main;
 	private GameMode mode;
-	//private Map<Integer,SpaceShip> s = new HashMap<Integer,SpaceShip>();
-	private List<Boolean> selected = new ArrayList<Boolean>();
+	private boolean[] selected = {false, false, false, false, false};
 	private int numberOfShipsSelected = 0;
 	private int numberofShips = 0;
 
 	private MenuManager(){
-		for(int i=0;i<Assets.SHIPS.length;i++)
-			selected.add(false);
+		this.resetSelected();
 	}
 
 
@@ -175,8 +170,7 @@ public class MenuManager {
 	 */
 	private void resetSelected() {
 		for(int i=0;i<Assets.SHIPS.length;i++){
-			this.selected.remove(i);
-			this.selected.add(i,false);			
+			selected[i]=false;		
 		}
 		this.numberOfShipsSelected=0;
 	}
@@ -184,8 +178,7 @@ public class MenuManager {
 	//lo que hace este metodo es dado el ship i lo saca de los posibles spaceShips a elegir si no fue seleccionado todavia
 	private void shipSelected(int i) {
 		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
-			this.selected.remove(i);
-			this.selected.add(i, true);
+			selected[i]=true;
 			this.numberOfShipsSelected++;
 			GameManager.getInstance().addSpaceShip(numberOfShipsSelected, SpaceShipCreator.create(i, numberOfShipsSelected));
 			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
@@ -234,7 +227,7 @@ public class MenuManager {
 	 * @return if the spaceShip s has been seleted or not by the user
 	 */
 	public boolean spaceShipSelected(int s) {
-		return this.selected.get(s);
+		return selected[s];
 	}
 	
 	public void update() {	

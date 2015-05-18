@@ -24,5 +24,9 @@ public abstract class PowerUp extends Collisionable implements Logical{
 	}
 	
 	public abstract void effect(SpaceShip s);
+	
+	public static int getPowerUpRadius(){
+		return radius;
+	}
 
 }

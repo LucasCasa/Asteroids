@@ -1,7 +1,6 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import ar.edu.itba.Asteroids.Core.ArrayMap;
 import ar.edu.itba.Asteroids.Core.Connector;
@@ -27,7 +26,7 @@ public abstract class WorldManager {
 	protected float score;
 	protected boolean gameOver;
 	private Timer powerUpTimer;
-	private final float powerUpCooldown = 5.0f;
+	private final float powerUpCooldown = 5f;
 	private ArrayMap<SpaceShip,SpaceShipUI> ships;
 	/**
 	 * 

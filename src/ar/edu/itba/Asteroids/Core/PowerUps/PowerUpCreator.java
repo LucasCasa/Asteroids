@@ -43,7 +43,7 @@ public final class PowerUpCreator {
 	 * @return Vector with the random x and y positions
 	 */
 	private static Vector2 randomPosition(){
-		return new Vector2((float)(Gdx.graphics.getWidth() * Math.random()),(float)( Gdx.graphics.getHeight() * Math.random()));
+		return new Vector2((float)(((Gdx.graphics.getWidth() - 2*PowerUp.getPowerUpRadius())) * Math.random())+PowerUp.getPowerUpRadius(),(float)( (Gdx.graphics.getHeight()-2*PowerUp.getPowerUpRadius()) * Math.random())+PowerUp.getPowerUpRadius());
 	}
 	
 	/**
