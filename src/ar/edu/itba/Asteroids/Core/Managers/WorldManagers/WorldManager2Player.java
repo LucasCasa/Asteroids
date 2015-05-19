@@ -1,8 +1,10 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
@@ -11,8 +13,8 @@ import com.badlogic.gdx.Input.Keys;
 
 public class WorldManager2Player extends WorldManager{
 	
-	public WorldManager2Player(List<Connector<SpaceShip,SpaceShipUI>> s) {
-		super();
+	public WorldManager2Player(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
+		super(players);
 		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
 		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
 		asteroidP = new AIPlayer();
@@ -20,7 +22,12 @@ public class WorldManager2Player extends WorldManager{
 
 
 	public void update(){
-		super.update();
+		if(super.getPlayer(0).shipHasLost() || super.getPlayer(1).shipHasLost()){
+			gameOver = true;
+		}
+		if(!gameOver){
+			super.update();
+		}
 		
 	}
 	
@@ -62,6 +69,14 @@ public class WorldManager2Player extends WorldManager{
 			super.keyUp(keyCode);
 			break;
 		}
+	}
+	public Player getWinner(){
+		for(int i = 0; i<2;i++){
+			if(!super.getPlayer(i).shipHasLost()){
+				return getPlayer(i);
+			}
+		}
+		return null;
 	}
 
 }

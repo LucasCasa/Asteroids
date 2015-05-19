@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Player;
+import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager1Player;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager2Player;
@@ -20,7 +22,7 @@ public class GameManager {
 	private WorldManager world;
 	private boolean isMenu = true;
 	private Map<Integer,Connector<SpaceShip,SpaceShipUI>> s;
-	
+	private ArrayList<Player> players = new ArrayList<Player>();
 	private GameManager(){
 		s = new HashMap<Integer,Connector<SpaceShip,SpaceShipUI>>();
 	}
@@ -33,24 +35,24 @@ public class GameManager {
 	public void newGame(GameMode gm){
 		switch(gm){
 		case OnePlayer:
-			world = new WorldManager1Player(s.get(1));
+			world = new WorldManager1Player(s.get(1),players);
 			break;
 		case TwoPlayersA:
-			world = new WorldManager2Player(new ArrayList(s.values()));
+			world = new WorldManager2Player(new ArrayList(s.values()),players);
 			break;
 		case TwoPlayersB:
-			world = new WorldManager2PlayersVs(new ArrayList(s.values()));
+			world = new WorldManager2PlayersVs(new ArrayList(s.values()),players);
 			break;
 		case ThreePlayersA:
-			world = new WorldManager3Player(new ArrayList(s.values()));
+			world = new WorldManager3Player(new ArrayList(s.values()),players);
 			break;
 		case ThreePlayersB:
-			world = new WorldManager3Players2vs1(new ArrayList(s.values()));
+			world = new WorldManager3Players2vs1(new ArrayList(s.values()),players);
 		}
 		isMenu = false;
 	}
 	public void update(){
-		if(isMenu || world.gameOver()){
+		if(isMenu || world.getGameOver()){
 			MenuManager.getInstance().update();
 		}else{
 			world.update();				
@@ -78,7 +80,15 @@ public class GameManager {
 	public float getTime(){
 		return world.getTime();
 	}
-	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s){
+	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s, boolean createAsteroidPlayer, String name){
 		this.s.put(player, s);
+		if(createAsteroidPlayer){
+			players.add(new Player(name, new AsteroidPlayer(), s.getBack(), player));
+		}else{
+			players.add(new Player(name, s.getBack(), player));
+		}
+	}
+	public Player getPlayer(int i) {
+		return players.get(i);
 	}
 }

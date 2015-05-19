@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ar.edu.itba.Asteroids.Core.ArrayMap;
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
@@ -28,18 +29,20 @@ public abstract class WorldManager {
 	private Timer powerUpTimer;
 	private final float powerUpCooldown = 5f;
 	private ArrayMap<SpaceShip,SpaceShipUI> ships;
+	private ArrayList<Player> players;
 	/**
 	 * 
 	 * @param spaceshipAmount; amount of spaceShips in the game
 	 * @param textures; textures of the spaceships. the first one is of the first player, second one of the second player
 	 * and third one of the third player, depending on the amount of spaceShips that there is
 	 */
-	public WorldManager(){
+	public WorldManager(ArrayList<Player> players){
 		 asteroids = new ArrayList<Connector<Asteroid,AsteroidUI>>();
 		 ships = new ArrayMap<SpaceShip,SpaceShipUI>();
 		 timer = new Timer();
 		 powerUpTimer = new Timer();
 		 powerUps = new ArrayList<Connector<PowerUp, PowerUpUI>>();
+		 this.players = players;
 	}
 
 	public void update(){
@@ -102,7 +105,7 @@ public abstract class WorldManager {
 		asteroids.add(new Connector<Asteroid,AsteroidUI>(thrown,asteroidUI));
 		
 	}
-	public boolean gameOver(){
+	public boolean getGameOver(){
 		return gameOver;
 	}
 
@@ -143,21 +146,34 @@ public abstract class WorldManager {
 	}
 
 	public AsteroidPlayer getAsteroidPlayer() {
-		return asteroidP;
+		for(Player p: players){
+			if(!p.isSpaceShipPlayer()){
+				return p.getAsteroidPlayer();
+			}
+		}
+		return null;
 	}
 
 	public void updateSpaceships(){
-		for(SpaceShip s: ships.getKeys()){
-			if(s.isActive()){
-			s.update();
-			}
+		for(Player p: players){
+			p.update();
 		}
 		//this for checks if the spaceships are collisioning
-		for(int i=0; i<ships.size();i++){
+		/*for(int i=0; i<ships.size();i++){
 			SpaceShip aux = ships.getKeyAt(i); //you can always do this because you always have at least one spaceship
 			for(int j=i+1; j<this.ships.size();j++){
 				if(aux.isActive() && ships.getKeyAt(j).isActive()){
 					aux.shipCollision(ships.getKeyAt(j));
+				}
+			}
+		}*/
+		for(int i = 0; i<players.size();i++){
+			if(players.get(i).isSpaceShipPlayer()){
+				SpaceShip aux = players.get(i).getSpaceShip();
+				for(int j = i+1;j<players.size();j++){
+					if(players.get(j).isSpaceShipPlayer()){
+						aux.shipCollision(players.get(j).getSpaceShip());
+					}
 				}
 			}
 		}
@@ -172,9 +188,10 @@ public abstract class WorldManager {
 			if(aux.outOfScreen()){
 				asteroids.remove(i);
 			}
-			for(SpaceShip s : ships.getKeys())
-			if(s.isActive() && s.shipCollision(aux)){
-				asteroids.remove(i);
+			for(Player p : players){
+				if(p.isSpaceShipPlayer() && p.getSpaceShip().shipCollision(aux)){
+					asteroids.remove(i);
+				}
 			}
 		}
 	}
@@ -194,19 +211,26 @@ public abstract class WorldManager {
 		Connector<PowerUp, PowerUpUI> con;
 		for(int i=0;i<powerUps.size();i++){
 			con = powerUps.get(i);
-			
+
 			for(Connector<Asteroid, AsteroidUI> a: asteroids){
 				if(con.getBack().collision(a.getBack()))
 					powerUps.remove(con);
-					
+
 			}
-			for(SpaceShip s: ships.getKeys()){
-				if(con.getBack().collision(s) && powerUps.contains(con)){
-					con.getBack().effect(s);
-					powerUps.remove(con);
+			
+			for(Player p: players){
+				if(p.isSpaceShipPlayer()){
+					if(con.getBack().collision(p.getSpaceShip()) && powerUps.contains(con)){
+						con.getBack().effect(p.getSpaceShip());
+						powerUps.remove(con);
+					}
 				}
 			}
 		}
 	}
+	public Player getPlayer(int index){
+		return players.get(index);
+	}
+	public abstract Player getWinner();
 }
 

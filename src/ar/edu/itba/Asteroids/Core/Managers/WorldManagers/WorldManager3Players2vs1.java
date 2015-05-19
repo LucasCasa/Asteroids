@@ -1,17 +1,21 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import com.badlogic.gdx.Input.Keys;
 
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 public class WorldManager3Players2vs1 extends WorldManager {
-	public WorldManager3Players2vs1(List<Connector<SpaceShip,SpaceShipUI>> s) {
-		super();
+	public WorldManager3Players2vs1(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
+		super(players);
 		s.get(2).getBack().setActive(false);
 		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
 		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
@@ -64,5 +68,11 @@ public class WorldManager3Players2vs1 extends WorldManager {
 			super.keyUp(keyCode);
 			break;
 		}
+	}
+
+
+	@Override
+	public Player getWinner() {
+		throw new NotImplementedException();
 	}
 }

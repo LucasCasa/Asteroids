@@ -1,6 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
 import ar.edu.itba.Asteroids.Core.Drawable;
+import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD1Player;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD2Player;
@@ -25,36 +26,36 @@ public class GameManagerUI implements Drawable{
 		return self;
 	}
 	public void newGame(GameMode gm){
-		SpaceShip aux1;
-		SpaceShip aux2;
-		SpaceShip aux3;
+		Player p1;
+		Player p2;
+		Player p3;
 		
 		switch(gm){
 		case OnePlayer:
-			aux1 = GameManager.getInstance().getWorld().getSpaceShips().get(0);
-			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(),new HUD1Player(aux1));
+			p1 = GameManager.getInstance().getPlayer(0);
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(),new HUD1Player(p1));
 			break;
 		case TwoPlayersA:
-			aux1 = GameManager.getInstance().getWorld().getSpaceShips().get(0);
-			aux2 = GameManager.getInstance().getWorld().getSpaceShips().get(1);
-			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD2Player(aux1, aux2));
+			p1 = GameManager.getInstance().getPlayer(0);
+			p2 = GameManager.getInstance().getPlayer(1);
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD2Player(p1,p2));
 			break;
 		case TwoPlayersB:
-			aux1 = GameManager.getInstance().getWorld().getSpaceShips().get(0);
-			AsteroidPlayer a = GameManager.getInstance().getWorld().getAsteroidPlayer();
-			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD2PlayersVs(aux1,a));
+			p1 = GameManager.getInstance().getPlayer(0);
+			p2 = GameManager.getInstance().getPlayer(1);
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD2PlayersVs(p1,p2));
 			break;
 		case ThreePlayersA:
-			aux1 = GameManager.getInstance().getWorld().getSpaceShips().get(0);
-			aux2 = GameManager.getInstance().getWorld().getSpaceShips().get(1);
-			aux3 = GameManager.getInstance().getWorld().getSpaceShips().get(2);
-			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD3Player(aux1, aux2,aux3));
+			p1 = GameManager.getInstance().getPlayer(0);
+			p2 = GameManager.getInstance().getPlayer(1);
+			p3 = GameManager.getInstance().getPlayer(2);
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD3Player(p1, p2,p3));
 			break;
 		case ThreePlayersB:
-			aux1 = GameManager.getInstance().getWorld().getSpaceShips().get(0);
-			aux2 = GameManager.getInstance().getWorld().getSpaceShips().get(1);
-			AsteroidPlayer b = GameManager.getInstance().getWorld().getAsteroidPlayer();
-			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD3Players2vs1(aux1, aux2, b));
+			p1 = GameManager.getInstance().getPlayer(0);
+			p2 = GameManager.getInstance().getPlayer(1);
+			p3 = GameManager.getInstance().getPlayer(2);
+			worldUI = new WorldManagerUI(GameManager.getInstance().getWorld(), new HUD3Players2vs1(p1, p2, p3));
 			break;
 		}
 	}

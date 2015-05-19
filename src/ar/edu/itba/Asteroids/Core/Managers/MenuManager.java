@@ -180,7 +180,11 @@ public class MenuManager {
 		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
 			selected[i]=true;
 			this.numberOfShipsSelected++;
-			GameManager.getInstance().addSpaceShip(numberOfShipsSelected, SpaceShipCreator.create(i, numberOfShipsSelected));
+			boolean createAsteroidPlayer = false;
+			if(mode == GameMode.ThreePlayersB || mode == GameMode.TwoPlayersB){
+				createAsteroidPlayer = true;
+			}
+			GameManager.getInstance().addSpaceShip(numberOfShipsSelected, SpaceShipCreator.create(i, numberOfShipsSelected),createAsteroidPlayer,"hola");
 			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
 				GenerateGame(this.mode);
 		}

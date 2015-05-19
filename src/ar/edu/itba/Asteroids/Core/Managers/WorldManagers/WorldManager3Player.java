@@ -1,8 +1,11 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
@@ -11,8 +14,8 @@ import com.badlogic.gdx.Input.Keys;
 
 public class WorldManager3Player extends WorldManager2Player{
 	
-	public WorldManager3Player(List<Connector<SpaceShip,SpaceShipUI>> s) {
-		super(s);
+	public WorldManager3Player(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
+		super(s,players);
 		super.getAll().put(s.get(2).getBack(), s.get(2).getFront());
 		asteroidP = new AIPlayer();
 	}
@@ -56,5 +59,7 @@ public class WorldManager3Player extends WorldManager2Player{
 			break;
 		}
 	}
-	
+	public Player getWinner(){
+		throw new NotImplementedException();
+	}
 }

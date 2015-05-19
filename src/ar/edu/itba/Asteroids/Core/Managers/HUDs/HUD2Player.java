@@ -1,14 +1,14 @@
 package ar.edu.itba.Asteroids.Core.Managers.HUDs;
 
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
+import ar.edu.itba.Asteroids.Core.Player;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HUD2Player extends HUDManager{
-	private SpaceShip player1;
-	private SpaceShip player2;
+	private Player player1;
+	private Player player2;
 	
-	public HUD2Player(SpaceShip p1, SpaceShip p2){
+	public HUD2Player(Player p1, Player p2){
 		player1 = p1;
 		player2 = p2;
 	}
