@@ -32,10 +32,14 @@ public class Player implements Logical {
 	 * @param s; the SpaceShip the player is going to use in his turn
 	 * @param playerNumber
 	 */
-	public Player(String name, AsteroidPlayer ap,SpaceShip s, int playerNumber){
+	public Player(String name, AsteroidPlayer ap,SpaceShip s, int playerNumber, boolean startsAsteroid){
 		this(name,playerNumber);
 		asteroidP = ap;
 		spaceShip = s;
+		if(startsAsteroid){
+			asteroidActive = true;
+			shipActive = false;
+		}
 		
 		
 	}
@@ -84,6 +88,11 @@ public class Player implements Logical {
 	public void changeState(){
 		shipActive = !shipActive;
 		asteroidActive = !asteroidActive;
+		if(shipActive){
+			spaceShip.reset();
+		}else{
+			spaceShip.setActive(false);
+		}
 	}
 	private void updateSpaceShip(){
 		if(shipActive){
@@ -92,9 +101,6 @@ public class Player implements Logical {
 				this.score += timer.getTime();
 				timer.reset();
 				spaceShip.setActive(false);
-				if(asteroidP != null){
-					asteroidActive = true;
-				}
 			}else{
 				spaceShip.update();
 			}
@@ -104,5 +110,15 @@ public class Player implements Logical {
 	}
 	private void updateAsteroidPlayer(){
 		asteroidP.update();
+	}
+	public float getScore() {
+		return score;
+	}
+	public float getTime() {
+		return timer.getTime();
+	}
+	public void reset() {
+		spaceShip.reset();
+		
 	}
 }

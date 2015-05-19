@@ -15,11 +15,13 @@ public class SpaceShip extends Collisionable implements Logical {
 	private Vector2 acel = new Vector2(0,0);
 	private int acelModifier;
 	private int lives;
+	private int startingLives;
 	private boolean invincible;
 	private float time; //time of invincibility
 	private float cont;
 	private boolean accelerating[] = {false,false,false,false};
 	private boolean active = true;
+	private Vector2 initialPos;
 	
 	/**
 	 * 
@@ -33,9 +35,11 @@ public class SpaceShip extends Collisionable implements Logical {
 	 */
 	public SpaceShip(float x, float y,int radius, int mass, int vel, int acel,int lives){
 		super(new Vector2(x,y), new Vector2(0,0),mass, radius);
+		initialPos = new Vector2(x,y);
 		this.maxVel=vel;
 		this.acelModifier=acel;
 		this.lives=lives;
+		startingLives = lives;
 		this.invincible=false;
 		this.cont=0;
 	}
@@ -198,5 +202,22 @@ public class SpaceShip extends Collisionable implements Logical {
 	}
 	public void setActive(boolean b){
 		active = b;
+	}
+
+	public void reset() {
+		lives = startingLives;
+		getCPos().set(initialPos.x,initialPos.y);
+		getSpeed().set(0, 0);
+		accelerating[0] = false;
+		accelerating[1] = false;
+		accelerating[2] = false;
+		accelerating[3] = false;
+	
+		acel.x = 0;
+		acel.y = 0;
+		invincible = false;
+		active = true;
+		
+		
 	}
 }

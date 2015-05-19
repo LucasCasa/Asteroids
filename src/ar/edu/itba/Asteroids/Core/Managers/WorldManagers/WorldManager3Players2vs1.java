@@ -14,15 +14,40 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 public class WorldManager3Players2vs1 extends WorldManager {
+	private int asteroidPlayerNumber = 3;
+	private boolean changePlayers = true;
 	public WorldManager3Players2vs1(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
 		super(players);
 		s.get(2).getBack().setActive(false);
 		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
 		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
 		super.getAll().put(s.get(2).getBack(), s.get(2).getFront());
-		asteroidP = new AsteroidPlayer();
 	}
 	
+	public void update(){
+		super.update();
+		changePlayers = true;
+		for(int i = 0; i<players.size();i++){
+				changePlayers = changePlayers && (players.get(i).shipHasLost() || players.get(i).isAsteroidPlayer());
+			}
+		if(changePlayers && asteroidPlayerNumber == 1){
+			gameOver = true;
+		}
+		if(changePlayers){
+			for(int i = 0; i<players.size(); i++){
+				if( i == asteroidPlayerNumber -1){
+					getPlayer(i).changeState();
+				}else if( i == asteroidPlayerNumber - 2){
+					getPlayer(i).changeState();
+				} else {
+					getPlayer(i).reset();
+				}
+			
+			}
+			asteroidPlayerNumber--;
+		}
+		
+	}
 
 	public void keyDown(int keyCode){
 		switch (keyCode) {
@@ -44,8 +69,24 @@ public class WorldManager3Players2vs1 extends WorldManager {
 		case Keys.RIGHT:
 			getSpaceShips().get(1).acelRight(true);
 			break;
+		case Keys.K:
+			getSpaceShips().get(2).acelDown(true);
+			break;
+		case Keys.I:
+			getSpaceShips().get(2).acelUp(true);
+			break;
+		case Keys.J:
+			getSpaceShips().get(2).acelLeft(true);
+			break;
+		case Keys.L:
+			getSpaceShips().get(2).acelRight(true);
+			break;
 		default:
-			asteroidP.keyPressed(keyCode, super.getSpaceShips());
+			for(Player p :players){
+				if(p.isAsteroidPlayer()){
+					p.getAsteroidPlayer().keyPressed(keyCode, super.getSpaceShips());
+				}
+			}
 			break;
 		}
 	}
@@ -64,6 +105,18 @@ public class WorldManager3Players2vs1 extends WorldManager {
 		case Keys.RIGHT:
 			getSpaceShips().get(1).acelRight(false);
 			break;
+		case Keys.K:
+			getSpaceShips().get(2).acelDown(false);
+			break;
+		case Keys.I:
+			getSpaceShips().get(2).acelUp(false);
+			break;
+		case Keys.J:
+			getSpaceShips().get(2).acelLeft(false);
+			break;
+		case Keys.L:
+			getSpaceShips().get(2).acelRight(false);
+			break;
 		default:
 			super.keyUp(keyCode);
 			break;
@@ -73,6 +126,12 @@ public class WorldManager3Players2vs1 extends WorldManager {
 
 	@Override
 	public Player getWinner() {
-		throw new NotImplementedException();
+		Player winner = players.get(0);
+		for(int i =1; i<players.size();i++){
+			if(players.get(i).getScore() > winner.getScore()){
+				winner = players.get(i);
+			}
+		}
+		return winner;
 	}
 }

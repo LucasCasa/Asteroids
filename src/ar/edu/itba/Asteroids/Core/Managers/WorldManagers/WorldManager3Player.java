@@ -17,7 +17,6 @@ public class WorldManager3Player extends WorldManager2Player{
 	public WorldManager3Player(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
 		super(s,players);
 		super.getAll().put(s.get(2).getBack(), s.get(2).getFront());
-		asteroidP = new AIPlayer();
 	}
 	
 	public void keyDown(int keyCode){
@@ -58,8 +57,5 @@ public class WorldManager3Player extends WorldManager2Player{
 			super.keyUp(keyCode);
 			break;
 		}
-	}
-	public Player getWinner(){
-		throw new NotImplementedException();
 	}
 }

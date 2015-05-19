@@ -21,7 +21,6 @@ public class WorldManager2PlayersVs extends WorldManager{
 		s.get(1).getBack().setActive(false);
 		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
 		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
-		asteroidP = new AsteroidPlayer();
 	}
 	
 	public void update(){
@@ -30,6 +29,13 @@ public class WorldManager2PlayersVs extends WorldManager{
 			getSpaceShips().get(0).setActive(false);
 			getSpaceShips().get(1).setActive(true);
 			activeSpaceShip = 1;
+		}
+		if(getPlayer(0).shipHasLost()){
+			getPlayer(0).changeState();
+			getPlayer(1).changeState();
+		}
+		if(getPlayer(1).isSpaceShipPlayer() && getPlayer(1).shipHasLost()){
+			gameOver = true;
 		}
 	}
 	
@@ -42,7 +48,11 @@ public class WorldManager2PlayersVs extends WorldManager{
 			super.keyDown(keyCode,activeSpaceShip);
 			break;
 		default:
-			asteroidP.keyPressed(keyCode, super.getSpaceShips());
+			for(Player p :players){
+				if(p.isAsteroidPlayer()){
+					p.getAsteroidPlayer().keyPressed(keyCode, super.getSpaceShips());
+				}
+			}
 			break;
 		}
 	}
@@ -52,6 +62,10 @@ public class WorldManager2PlayersVs extends WorldManager{
 
 	@Override
 	public Player getWinner() {
-		throw new NotImplementedException();
+		if(getPlayer(0).getScore() > getPlayer(1).getScore()){
+			return getPlayer(0);
+		}else{
+			return getPlayer(1);
+		}
 	}
 }

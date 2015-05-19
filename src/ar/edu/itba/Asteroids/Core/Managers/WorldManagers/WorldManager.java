@@ -21,7 +21,6 @@ public abstract class WorldManager {
 	public ArrayList<Connector<Asteroid,AsteroidUI>> asteroids;
 	private ArrayList<Connector<PowerUp, PowerUpUI>> powerUps;
 	protected SpaceShip first;
-	protected AsteroidPlayer asteroidP;
 	protected SpaceShipUI firstUI;
 	protected Timer timer;
 	protected float score;
@@ -29,7 +28,7 @@ public abstract class WorldManager {
 	private Timer powerUpTimer;
 	private final float powerUpCooldown = 5f;
 	private ArrayMap<SpaceShip,SpaceShipUI> ships;
-	private ArrayList<Player> players;
+	protected ArrayList<Player> players;
 	/**
 	 * 
 	 * @param spaceshipAmount; amount of spaceShips in the game
@@ -48,7 +47,6 @@ public abstract class WorldManager {
 	public void update(){
 		updatePowerUps();
 		updateSpaceships();
-		asteroidP.update();
 		for( Connector<Asteroid,AsteroidUI> a: asteroids){
 			a.getBack().update();
 		}
@@ -108,7 +106,7 @@ public abstract class WorldManager {
 	public boolean getGameOver(){
 		return gameOver;
 	}
-
+	// CHECKEAR ESTO CON EL TEMA DE LOS PLAYERS
 	public void keyDown(int keyCode, int activeSpaceShip) {
 		switch (keyCode) {
 		case Keys.W:
@@ -168,10 +166,10 @@ public abstract class WorldManager {
 			}
 		}*/
 		for(int i = 0; i<players.size();i++){
-			if(players.get(i).isSpaceShipPlayer()){
+			if(players.get(i).isSpaceShipPlayer() && !players.get(i).shipHasLost()){
 				SpaceShip aux = players.get(i).getSpaceShip();
 				for(int j = i+1;j<players.size();j++){
-					if(players.get(j).isSpaceShipPlayer()){
+					if(players.get(j).isSpaceShipPlayer() && !players.get(j).shipHasLost()){
 						aux.shipCollision(players.get(j).getSpaceShip());
 					}
 				}
@@ -189,7 +187,7 @@ public abstract class WorldManager {
 				asteroids.remove(i);
 			}
 			for(Player p : players){
-				if(p.isSpaceShipPlayer() && p.getSpaceShip().shipCollision(aux)){
+				if(p.isSpaceShipPlayer() && !p.shipHasLost() && p.getSpaceShip().shipCollision(aux)){
 					asteroids.remove(i);
 				}
 			}

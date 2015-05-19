@@ -12,18 +12,21 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 import com.badlogic.gdx.Input.Keys;
 
 public class WorldManager2Player extends WorldManager{
-	
+	private AIPlayer AI;
 	public WorldManager2Player(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
 		super(players);
 		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
 		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
-		asteroidP = new AIPlayer();
+		AI = new AIPlayer();
 	}
 
 
 	public void update(){
-		if(super.getPlayer(0).shipHasLost() || super.getPlayer(1).shipHasLost()){
-			gameOver = true;
+		AI.update();
+		for(int i = 0; i<players.size() && gameOver == false;i++){
+			if(players.get(i).shipHasLost()){
+				gameOver = true;
+			}
 		}
 		if(!gameOver){
 			super.update();

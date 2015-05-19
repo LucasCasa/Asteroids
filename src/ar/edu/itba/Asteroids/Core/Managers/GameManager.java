@@ -80,10 +80,10 @@ public class GameManager {
 	public float getTime(){
 		return world.getTime();
 	}
-	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s, boolean createAsteroidPlayer, String name){
+	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s, boolean createAsteroidPlayer,boolean statsAsteroid, String name){
 		this.s.put(player, s);
 		if(createAsteroidPlayer){
-			players.add(new Player(name, new AsteroidPlayer(), s.getBack(), player));
+			players.add(new Player(name, new AsteroidPlayer(), s.getBack(), player,statsAsteroid));
 		}else{
 			players.add(new Player(name, s.getBack(), player));
 		}
