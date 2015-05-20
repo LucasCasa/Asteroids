@@ -13,14 +13,12 @@ public class MenuManager {
 	private static MenuManager self;
 	private Menu state=Menu.Main;
 	private GameMode mode;
+	private List<String> playerNames=new ArrayList<String>();
+	private String name;
 	private boolean[] selected = {false, false, false, false, false};
 	private int numberOfShipsSelected = 0;
 	private int numberofShips = 0;
-
-	private MenuManager(){
-		this.resetSelected();
-	}
-
+	private int numberofNamesSaved = 0;
 
 	public static MenuManager getInstance(){
 		if(self == null){
@@ -34,33 +32,44 @@ public class MenuManager {
 		switch(keyCode){
 		case Keys.NUM_0:
 		case Keys.NUMPAD_0:
-			Pressed0();
+			pressed0();
 			break;
 		case Keys.NUMPAD_1:
 		case Keys.NUM_1:
-			Pressed1();
+			pressed1();
 			break;
 		case Keys.NUMPAD_2:
 		case Keys.NUM_2:
-			Pressed2();
+			pressed2();
 			break;
 		case Keys.NUMPAD_3:
 		case Keys.NUM_3:
-			Pressed3();
+			pressed3();
 			break;
 		case Keys.NUMPAD_4:
 		case Keys.NUM_4:
-			Pressed4();
+			pressed4();
 			break;
 		case Keys.NUMPAD_5:
 		case Keys.NUM_5:
-			Pressed5();
+			pressed5();
+			break;
+		case Keys.ENTER:
+			pressedEnter();
+			break;
+		default:
 			break;
 		}
 	}
+	
+	public void keyUp(int keyCode){
+		
+	}
 
-	private void Pressed0() {
+	private void pressed0() {
 		switch(state){
+		case Main:
+			Gdx.app.exit(); //the game ends
 		case NumberOfPlayers:
 			this.state=Menu.Main;
 			break;
@@ -70,8 +79,7 @@ public class MenuManager {
 		case GameMode3Players:
 			this.state=Menu.NumberOfPlayers;
 			break;
-		case ChooseSpaceShip:
-			resetSelected();
+		case GetPlayerName:
 			if(mode == GameMode.TwoPlayersA || mode == GameMode.TwoPlayersB){
 				this.state=Menu.GameMode2Players;
 			}else if(mode ==GameMode.ThreePlayersA || mode==GameMode.ThreePlayersB){
@@ -79,36 +87,43 @@ public class MenuManager {
 			}else
 				this.state=Menu.NumberOfPlayers;
 			break;
+		case ChooseSpaceShip:
+			resetSelected();
+			this.state=Menu.GetPlayerName;
 		default:
 			break;
 		}
 	}
 
-	private void Pressed1() {
+	private void pressed1() {
 		switch(state){
 		case Main:
 			this.state=Menu.NumberOfPlayers;
 			break;
 		case NumberOfPlayers:
-			this.state=Menu.ChooseSpaceShip;
+			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.OnePlayer;
 			this.numberofShips=1;
+			setplayerName();
 			break;
 		case GameMode2Players:
-			this.state=Menu.ChooseSpaceShip;
+			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.TwoPlayersA;
+			setplayerName();
 			break;
 		case GameMode3Players:
-			this.state=Menu.ChooseSpaceShip;
+			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.ThreePlayersA;
+			setplayerName();
 			break;
 		case ChooseSpaceShip:
 			shipSelected(0);
 			break;
+		default:break;
 		}
 	}
 
-	private void Pressed2() {
+	private void pressed2() {
 		switch(state){
 		case Main:
 			Help();
@@ -118,23 +133,26 @@ public class MenuManager {
 			this.numberofShips=2;
 			break;
 		case GameMode2Players: 
-			this.state=Menu.ChooseSpaceShip;
+			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.TwoPlayersB;
+			setplayerName();
 			break;
 		case GameMode3Players:
-			this.state=Menu.ChooseSpaceShip;
+			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.ThreePlayersB;
+			setplayerName();
 			break;
 		case ChooseSpaceShip:
 			shipSelected(1);
 			break;
+		default:break;
 		}			
 	}
 
-	private void Pressed3() {
+	private void pressed3() {
 		switch(state){
 		case Main: 
-			Gdx.app.exit(); //the game ends
+			//Aparece el highScore
 			break;
 		case NumberOfPlayers:
 			this.state=Menu.GameMode3Players;
@@ -147,7 +165,7 @@ public class MenuManager {
 		}
 	}
 
-	private void Pressed4() {
+	private void pressed4() {
 		switch(state){
 		case ChooseSpaceShip:
 			shipSelected(3);
@@ -156,13 +174,57 @@ public class MenuManager {
 		}
 	}
 
-	private void Pressed5(){
+	private void pressed5(){
 		switch(state){
 		case ChooseSpaceShip:
 			shipSelected(4);
 			break;
 		default:break;
 		}
+	}
+	
+	private void pressedEnter(){
+		switch(state){
+		case GetPlayerName:
+			if(setplayerName()){
+				this.state=Menu.ChooseSpaceShip; //si ya se pusieron nombre a todos los jugadores enetonces se puede ir a choose spaceship
+			}
+			break;
+		default:break;
+		}
+	}
+
+	/**
+	 * Lo que hace este metodo es setea el nombre del jugador
+	 * @param next; si el usuario puso enter,si el nombre ya esta guardado para el jugador lo que hace es devovler true y se va al proximo jugador
+	 * @return si ya se setearon los nombres de todos los jugadroes
+	 */
+	private boolean setplayerName(){
+		playerNames.add(0, "Guido");
+		playerNames.add(1,"Maggie");
+		playerNames.add(2,"Maggie");
+		numberofNamesSaved++;
+		if(this.numberofShips <= this.numberofNamesSaved)
+			return true;
+		else
+			return false;
+
+	}
+	
+	private String readPlayerNames(int playerNum) {
+		String nombre=null;
+		//lee el nombre
+		return nombre;
+	}
+
+
+	/**
+	 * 
+	 * @param player; the player who is typing their name
+	 * @return the name of the player
+	 */
+	public String getName(int player){
+		return playerNames.get(player);
 	}
 
 	/**
@@ -175,36 +237,40 @@ public class MenuManager {
 		this.numberOfShipsSelected=0;
 	}
 
-	//lo que hace este metodo es dado el ship i lo saca de los posibles spaceShips a elegir si no fue seleccionado todavia
+	/**
+	 * Given the spaceShip i this method removes it from the posible spaceShips to choose if it wasn't already selected.
+	 * If the spaceShip was already selected the method does nothing.
+	 * If the number of spaceShips is equal to the number of spaceShips that have been selected, the game is ready to begin and the game 
+	 * is created
+	 * @param i; the index of the spaceShip in the arry of spaceShips in assets
+	 */
 	private void shipSelected(int i) {
-		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
-			selected[i]=true;
-			this.numberOfShipsSelected++;
+ 		if(this.numberOfShipsSelected<this.numberofShips && !spaceShipSelected(i)){
+ 			selected[i]=true;
+ 			this.numberOfShipsSelected++;
 			boolean startsAsteroid = false;
-			boolean createAsteroidPlayer = false;
-			if(mode == GameMode.ThreePlayersB || mode == GameMode.TwoPlayersB){
-				createAsteroidPlayer = true;
+ 			boolean createAsteroidPlayer = false;
+ 			if(mode == GameMode.ThreePlayersB || mode == GameMode.TwoPlayersB){
+ 				createAsteroidPlayer = true;
 				if((GameMode.ThreePlayersB == mode && numberOfShipsSelected == 3 )||( mode == GameMode.TwoPlayersB && numberOfShipsSelected == 2)){
 					startsAsteroid = true;
 				}
-				
-			}
-			GameManager.getInstance().addSpaceShip(numberOfShipsSelected, SpaceShipCreator.create(i, numberOfShipsSelected),createAsteroidPlayer,startsAsteroid,"hola");
-			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
-				GenerateGame(this.mode);
-		}
+			
+ 			}
+ 			GameManager.getInstance().addSpaceShip(numberOfShipsSelected, SpaceShipCreator.create(i, numberOfShipsSelected),createAsteroidPlayer,startsAsteroid,getName(i));
+ 			if(this.numberOfShipsSelected==this.numberofShips) //si ya se eligieron todas las naves lo que hace es crea el juego
+ 				generateGame(this.mode);
+ 		}
 	}
 
+	/**
+	 * Creats the game by generating a new Game in the gameManager and gameManagerUI
+	 * @param mode; the game mode
+	 */
+	private void generateGame(GameMode mode) {
 
-	private void GenerateGame(GameMode mode) {
-		
 		GameManager.getInstance().newGame(mode);
 		GameManagerUI.getInstance().newGame(mode);
-	}
-
-	private void Help() {
-		//VER
-
 	}
 
 	/**
@@ -238,7 +304,11 @@ public class MenuManager {
 	public boolean spaceShipSelected(int s) {
 		return selected[s];
 	}
-	
+
+	private void Help() {
+		//VER
+
+	}
 	public void update() {	
 	}
 
