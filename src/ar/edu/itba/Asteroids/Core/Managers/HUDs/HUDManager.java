@@ -19,13 +19,13 @@ public abstract class HUDManager implements Drawable{
 	public abstract void draw(SpriteBatch batch);
 	
 	private void drawShipPlayer(SpriteBatch batch,Vector2 pos ,String name,int lives){
-		Assets.SMALL_FONT.draw(batch,name +" :" , pos.x, pos.y);
+		Assets.SMALL_FONT.draw(batch,name +":" , pos.x, pos.y);
 		batch.draw(Assets.HEART, (float)(pos.x),(float)(pos.y - 50), 35,35);
 		Assets.SMALL_FONT.draw(batch, "x " + lives, pos.x + 35 + 5 , pos.y - 25);
 	}
 	
 	private void drawAsteroidPlayer(SpriteBatch batch, Vector2 pos, String name, float cooldown, int reserve){
-		Assets.SMALL_FONT.draw(batch, name + " :", pos.x, pos.y);
+		Assets.SMALL_FONT.draw(batch, name + ":", pos.x, pos.y);
 		batch.draw(Assets.COOLDOWN,pos.x,pos.y - 40,(int)(Assets.COOLDOWN.getWidth() * cooldown),15,(int)(Assets.COOLDOWN.getWidth() * cooldown),Assets.COOLDOWN.getHeight());
 		Assets.SMALL_FONT.draw(batch, "x " + reserve, pos.x + Assets.COOLDOWN.getWidth() + 5, pos.y - 28);
 	}
