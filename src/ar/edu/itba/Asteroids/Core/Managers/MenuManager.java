@@ -1,20 +1,21 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipCreator;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 
 public class MenuManager {
 	private static MenuManager self;
 	private Menu state=Menu.Main;
 	private GameMode mode;
-	private List<String> playerNames=new ArrayList<String>();
-	private String name;
+	private Map<Integer,String> playerNames=new HashMap<Integer,String>();
+	private String name="";
 	private boolean[] selected = {false, false, false, false, false};
 	private int numberOfShipsSelected = 0;
 	private int numberofShips = 0;
@@ -29,43 +30,41 @@ public class MenuManager {
 
 
 	public void keyDown(int keyCode) {
-		switch(keyCode){
-		case Keys.NUM_0:
-		case Keys.NUMPAD_0:
-			pressed0();
-			break;
-		case Keys.NUMPAD_1:
-		case Keys.NUM_1:
-			pressed1();
-			break;
-		case Keys.NUMPAD_2:
-		case Keys.NUM_2:
-			pressed2();
-			break;
-		case Keys.NUMPAD_3:
-		case Keys.NUM_3:
-			pressed3();
-			break;
-		case Keys.NUMPAD_4:
-		case Keys.NUM_4:
-			pressed4();
-			break;
-		case Keys.NUMPAD_5:
-		case Keys.NUM_5:
-			pressed5();
-			break;
-		case Keys.ENTER:
-			pressedEnter();
-			break;
-		default:
-			break;
+		if(state == Menu.GetPlayerName ){
+			if(Generate(keyCode))
+				state=Menu.ChooseSpaceShip;
+		}else{
+			switch(keyCode){
+			case Keys.NUM_0:
+			case Keys.NUMPAD_0:
+				pressed0();
+				break;
+			case Keys.NUMPAD_1:
+			case Keys.NUM_1:
+				pressed1();
+				break;
+			case Keys.NUMPAD_2:
+			case Keys.NUM_2:
+				pressed2();
+				break;
+			case Keys.NUMPAD_3:
+			case Keys.NUM_3:
+				pressed3();
+				break;
+			case Keys.NUMPAD_4:
+			case Keys.NUM_4:
+				pressed4();
+				break;
+			case Keys.NUMPAD_5:
+			case Keys.NUM_5:
+				pressed5();
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	
-	public void keyUp(int keyCode){
-		
-	}
-
 	private void pressed0() {
 		switch(state){
 		case Main:
@@ -90,8 +89,7 @@ public class MenuManager {
 		case ChooseSpaceShip:
 			resetSelected();
 			this.state=Menu.GetPlayerName;
-		default:
-			break;
+		default:break;
 		}
 	}
 
@@ -104,17 +102,14 @@ public class MenuManager {
 			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.OnePlayer;
 			this.numberofShips=1;
-			setplayerName();
 			break;
 		case GameMode2Players:
 			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.TwoPlayersA;
-			setplayerName();
 			break;
 		case GameMode3Players:
 			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.ThreePlayersA;
-			setplayerName();
 			break;
 		case ChooseSpaceShip:
 			shipSelected(0);
@@ -135,12 +130,10 @@ public class MenuManager {
 		case GameMode2Players: 
 			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.TwoPlayersB;
-			setplayerName();
 			break;
 		case GameMode3Players:
 			this.state=Menu.GetPlayerName;
 			this.mode=GameMode.ThreePlayersB;
-			setplayerName();
 			break;
 		case ChooseSpaceShip:
 			shipSelected(1);
@@ -183,15 +176,17 @@ public class MenuManager {
 		}
 	}
 	
-	private void pressedEnter(){
-		switch(state){
-		case GetPlayerName:
-			if(setplayerName()){
-				this.state=Menu.ChooseSpaceShip; //si ya se pusieron nombre a todos los jugadores enetonces se puede ir a choose spaceship
-			}
-			break;
-		default:break;
+	private boolean Generate(int KeyCode){
+		String key = Input.Keys.toString(KeyCode);
+		if(key.length()==1 && name.length()<11)
+			this.name=name.concat(key);
+		else if(KeyCode == Keys.ENTER){
+			 return setplayerName();
+		}else if(KeyCode == Keys.DEL){
+			if(!(name.length()==0))
+				this.name=name.substring(0, name.length()-1);
 		}
+		return false;
 	}
 
 	/**
@@ -200,23 +195,15 @@ public class MenuManager {
 	 * @return si ya se setearon los nombres de todos los jugadroes
 	 */
 	private boolean setplayerName(){
-		playerNames.add(0, "Guido");
-		playerNames.add(1,"Maggie");
-		playerNames.add(2,"Maggie");
+		playerNames.put(numberofNamesSaved, name);
 		numberofNamesSaved++;
+		name="";
 		if(this.numberofShips <= this.numberofNamesSaved)
 			return true;
 		else
 			return false;
 
 	}
-	
-	private String readPlayerNames(int playerNum) {
-		String nombre=null;
-		//lee el nombre
-		return nombre;
-	}
-
 
 	/**
 	 * 
@@ -224,7 +211,14 @@ public class MenuManager {
 	 * @return the name of the player
 	 */
 	public String getName(int player){
+		if(playerNames.get(player) == null){
+			return name;			
+		}
 		return playerNames.get(player);
+	}
+	
+	public int getCompleteName(){
+		return this.numberofNamesSaved;
 	}
 
 	/**

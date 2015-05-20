@@ -49,12 +49,10 @@ public class MenuManagerUI implements Drawable{
 	}
 	
 	private void printPlayersNames(SpriteBatch batch) {
-		Assets.FONT.draw(batch, "Players Names", Gdx.graphics.getWidth()/16, Gdx.graphics.getHeight()*3/4);
-		if(mm.getPlayers()==0)
-			Assets.SMALL_FONT.draw(batch, "Press enter to start writing names",Gdx.graphics.getWidth()/16 , Gdx.graphics.getHeight()*3/4 -50);
-		for(int i=1;i<=mm.getPlayers();i++){
-			Assets.SMALL_FONT.draw(batch, "Player " + i + " write your name then press enter to continue", Gdx.graphics.getWidth()/16, Gdx.graphics.getHeight()*3/4 -100*i);
-			Assets.SMALL_FONT.draw(batch, mm.getName(i-1), Gdx.graphics.getWidth()/16 + 50, Gdx.graphics.getHeight()*3/4 -100*i -50 );
+		Assets.FONT.draw(batch, "Players Names", Gdx.graphics.getWidth()/16, Gdx.graphics.getHeight()*3/4 + 100);
+		for(int i=0;i<mm.getCompleteName()+1;i++){
+			Assets.SMALL_FONT.draw(batch, "Player " + (i+1) + " write your name then press enter to continue", Gdx.graphics.getWidth()/16, Gdx.graphics.getHeight()*3/4 -100*i);
+			Assets.SMALL_FONT.draw(batch, mm.getName(i), Gdx.graphics.getWidth()/16 + 50, Gdx.graphics.getHeight()*3/4 -100*i -50 );
 		}
 	}
 	
@@ -91,8 +89,6 @@ public class MenuManagerUI implements Drawable{
 			Assets.FONT.draw(batch, "Choose SpaceShip", Gdx.graphics.getHeight()/16, 500);
 			if(mm.getPlayers()>mm.getSpaceShipsSelected())
 				Assets.SMALL_FONT.draw(batch, mm.getName(mm.getSpaceShipsSelected()) + " choose SpaceShip", Gdx.graphics.getHeight()*10/16, 400);
-			Assets.SMALL_FONT.draw(batch, "Ships Selected=" + mm.getSpaceShipsSelected(), Gdx.graphics.getHeight()*10/16, 300);
-			Assets.SMALL_FONT.draw(batch, "Number of Players=" + mm.getPlayers(), Gdx.graphics.getHeight()*10/16, 320);
 			printSpaceShips(batch);
 			break;
 		}
