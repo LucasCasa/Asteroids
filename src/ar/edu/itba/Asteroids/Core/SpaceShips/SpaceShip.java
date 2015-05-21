@@ -17,11 +17,11 @@ public class SpaceShip extends Collisionable implements Logical {
 	private int lives;
 	private int startingLives;
 	private boolean invincible;
-	private float time; //time of invincibility
-	private float cont;
 	private boolean accelerating[] = {false,false,false,false};
 	private boolean active = true;
 	private Vector2 initialPos;
+	private Timer inviTimer = new Timer();
+	private float invincibleTotalTime;
 	
 	/**
 	 * 
@@ -41,7 +41,7 @@ public class SpaceShip extends Collisionable implements Logical {
 		this.lives=lives;
 		startingLives = lives;
 		this.invincible=false;
-		this.cont=0;
+
 	}
 
 	/**
@@ -49,16 +49,29 @@ public class SpaceShip extends Collisionable implements Logical {
 	 */
 	@Override
 	public void update() {
-		cont+=Gdx.graphics.getDeltaTime();
-		if(this.invincible == true && time<cont){
-			this.invincible=false;
-		}
 		getCPos().x+= getSpeed().x * Gdx.graphics.getDeltaTime();
 		getCPos().y+= getSpeed().y * Gdx.graphics.getDeltaTime();
 		updateVelocity();
 		checkOutOfScreen();
+		updateInvincibility();
 	}
 	
+	public Timer getInviTimer() {
+		return inviTimer;
+	}
+
+	public float getInvincibleTotalTime() {
+		return invincibleTotalTime;
+	}
+
+	private void updateInvincibility() {
+		if(this.invincible == true){
+			inviTimer.update();
+			if(inviTimer.getTime()>invincibleTotalTime){
+				this.invincible = false;
+			}
+		}
+	}
 	/**
 	 * check whether the two object collide with each other.
 	 * if the other object is a ship then it bounces.
@@ -161,7 +174,10 @@ public class SpaceShip extends Collisionable implements Logical {
 			this.lives-=amount;
 		}
 	}
-
+	
+	public void addMass(float amount){
+		super.setMass(super.getMass() + amount);
+	}
 	/**
 	 * Increases the amount of lives that the SpaceShip is going to have
 	 * @param amount the amount to increase
@@ -177,7 +193,8 @@ public class SpaceShip extends Collisionable implements Logical {
 	 */
 	public void setInvincible(float time){
 		this.invincible=true;
-		this.time=cont+time;	
+		this.inviTimer.reset();
+		this.invincibleTotalTime=time;	
 	}
 
 	public int getLives() {

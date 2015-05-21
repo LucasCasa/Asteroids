@@ -16,10 +16,14 @@ public abstract class HUDManager implements Drawable{
 	
 	public abstract void draw(SpriteBatch batch);
 	
-	private void drawShipPlayer(SpriteBatch batch,Vector2 pos ,String name,int lives){
-		Assets.SMALL_FONT.draw(batch,name +":" , pos.x, pos.y);
+	private void drawShipPlayer(SpriteBatch batch,Vector2 pos ,Player p){
+		Assets.SMALL_FONT.draw(batch,p.getName() +":" , pos.x, pos.y);
 		batch.draw(Assets.HEART, (float)(pos.x),(float)(pos.y - 50), 35,35);
-		Assets.SMALL_FONT.draw(batch, "x " + lives, pos.x + 35 + 5 , pos.y - 25);
+		Assets.SMALL_FONT.draw(batch, "x " + p.getSpaceShip().getLives(), pos.x + 40 , pos.y - 25);
+		if(p.getSpaceShip().getInvincible()){
+			float heightPercent =  p.getSpaceShip().getInviTimer().getTime() / p.getSpaceShip().getInvincibleTotalTime();
+			batch.draw(Assets.INVIICON, (float)(pos.x) + 80,(float)(pos.y - 25), 35, (int)(Assets.INVIICON.getHeight() *(1 - heightPercent)), 0, 0, 35, (int)(Assets.INVIICON.getHeight() *(1 - heightPercent)), false, true);
+		}
 	}
 	
 	private void drawAsteroidPlayer(SpriteBatch batch, Vector2 pos, String name, float cooldown, int reserve){
@@ -31,7 +35,7 @@ public abstract class HUDManager implements Drawable{
 		Vector2 pos = new Vector2(0,Assets.VIRTUAL_HEIGHT - 15);
 		if(p.isSpaceShipPlayer()){
 			if(!p.shipHasLost()){
-				drawShipPlayer(batch, pos, p.getName(), p.getSpaceShip().getLives());
+				drawShipPlayer(batch, pos, p);
 			}
 		} else if(p.isAsteroidPlayer()){
 			drawAsteroidPlayer(batch, pos, p.getName(), p.getAsteroidPlayer().getTimePercentage(), p.getAsteroidPlayer().getReserve());
@@ -41,7 +45,7 @@ public abstract class HUDManager implements Drawable{
 		Vector2 pos = new Vector2(Assets.VIRTUAL_WIDTH - 120,Assets.VIRTUAL_HEIGHT - 15);
 		if(p.isSpaceShipPlayer()){
 			if(!p.shipHasLost()){
-				drawShipPlayer(batch, pos, p.getName(), p.getSpaceShip().getLives());
+				drawShipPlayer(batch, pos, p);
 			}
 		} else if(p.isAsteroidPlayer()){
 			drawAsteroidPlayer(batch, pos, p.getName(), p.getAsteroidPlayer().getTimePercentage(), p.getAsteroidPlayer().getReserve());
@@ -51,7 +55,7 @@ public abstract class HUDManager implements Drawable{
 		Vector2 pos = new Vector2(Assets.VIRTUAL_WIDTH - 120,50);
 		if(p.isSpaceShipPlayer()){
 			if(!p.shipHasLost()){
-				drawShipPlayer(batch, pos, p.getName(), p.getSpaceShip().getLives());
+				drawShipPlayer(batch, pos, p);
 			}
 		} else if(p.isAsteroidPlayer()){
 			drawAsteroidPlayer(batch, pos, p.getName(), p.getAsteroidPlayer().getTimePercentage(), p.getAsteroidPlayer().getReserve());

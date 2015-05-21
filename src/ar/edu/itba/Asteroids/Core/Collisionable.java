@@ -74,6 +74,12 @@ public abstract class Collisionable {
 		}
 		
 	}
+	public float getMass(){
+		return mass;
+	}
+	public void setMass(float mass){
+		this.mass = mass;
+	}
 	public Vector2 getCPos(){
 		return cPosition;
 	}
