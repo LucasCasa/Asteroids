@@ -12,12 +12,12 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 800;
 		config.height = 600;
-		config.foregroundFPS = 0;
+		config.foregroundFPS = 60;
 		config.vSyncEnabled = false;
 		config.fullscreen = false;
 		config.resizable = false;
 		config.title = "Asteroids";
-		//config.addIcon("icon128.png", FileType.Internal);
+		config.addIcon("icon128.png", FileType.Internal);
 		config.addIcon("icon32.png", FileType.Internal);
 		config.addIcon("icon16.png", FileType.Internal);
 		new LwjglApplication(new MyGdxGame(), config);
