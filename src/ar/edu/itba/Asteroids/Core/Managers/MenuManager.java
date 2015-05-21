@@ -7,6 +7,7 @@ import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipCreator;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 
@@ -178,7 +179,7 @@ public class MenuManager {
 			//aparece el highscore
 			break;
 		case Settings:
-			changeResolution(0,0); //cambiar esto
+			changeResolution(true); //cambiar esto
 			break;
 		case ChooseSpaceShip:
 			shipSelected(3);
@@ -196,8 +197,18 @@ public class MenuManager {
 		}
 	}
 	
-	private void changeResolution(int height, int width){
+	private void changeResolution(boolean fullscreen){
+		Gdx.graphics.setDisplayMode(0,0,fullscreen); //cambio
 		
+	}
+	private void changeResolution(int height, int width){
+		Gdx.graphics.setDisplayMode(height, width, false);
+		System.out.println(Gdx.graphics.getWidth());
+		System.out.println(Gdx.graphics.getHeight());
+		DisplayMode[] d = Gdx.graphics.getDisplayModes();
+		for(DisplayMode dm: d){
+			System.out.println(dm.width + " " +  dm.height);
+		}
 	}
 
 	private boolean Generate(int KeyCode){
