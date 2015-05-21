@@ -51,10 +51,15 @@ public class GameManager {
 		isMenu = false;
 	}
 	public void update(){
-		if(isMenu || world.getGameOver()){
+		if(isMenu){
 			MenuManager.getInstance().update();
 		}else{
-			world.update();				
+			world.update();	
+			if(world.isOver()){
+				isMenu = true;
+				MenuManager.getInstance().reset();
+				players = new ArrayList<Player>();
+			}
 		}
 		
 	}

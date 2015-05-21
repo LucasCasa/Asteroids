@@ -40,6 +40,11 @@ public class Assets {
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 	public static final BitmapFont SMALL_FONT = new BitmapFont(Gdx.files.internal("little.fnt"));
 	
+	//MEJORADORES DE INTERFAZ
+	public static final int HORIZONTAL_OFFSET = 25;
+	public static final int VERTICAL_OFFSET = 15;
+	public static final int ICON_SIZE = 35;
+	public static final int TEXT_SEPARATOR = 50;
 	//HighScore
 	private static Preferences prefs = Gdx.app.getPreferences("Asteroids"); 
 	public static void setHighScore(float val) {

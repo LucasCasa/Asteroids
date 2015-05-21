@@ -28,7 +28,12 @@ public class MenuManager {
 		}
 		return self;
 	}
-
+	
+	public void reset(){
+		this.resetNames();
+		this.resetSelected();
+		this.state=Menu.Main;
+	}
 
 	public void keyDown(int keyCode) {
 		if(state == Menu.GetPlayerName ){

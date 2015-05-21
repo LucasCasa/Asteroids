@@ -9,6 +9,7 @@ import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUp;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpCreator;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpUI;
@@ -31,6 +32,7 @@ public abstract class WorldManager {
 	protected ArrayList<Player> players;
 	protected boolean impasse;
 	private boolean pause;
+	private boolean gotoMenu;
 	/**
 	 * 
 	 * @param spaceshipAmount; amount of spaceShips in the game
@@ -47,18 +49,20 @@ public abstract class WorldManager {
 	}
 
 	public void update(){
-		if(impasse || pause){
-			if(impasse){
-				powerUps = new ArrayList<Connector<PowerUp, PowerUpUI>>();
+		if(!gameOver){
+			if(impasse || pause){
+				if(impasse){
+					powerUps = new ArrayList<Connector<PowerUp, PowerUpUI>>();
+				}
+			}else{
+				updatePowerUps();
+				updateSpaceships();
+				for( Connector<Asteroid,AsteroidUI> a: asteroids){
+					a.getBack().update();
+				}
+				updateAsteroidCollision();
+				updatePowerUpCollision();
 			}
-		}else{
-		updatePowerUps();
-		updateSpaceships();
-		for( Connector<Asteroid,AsteroidUI> a: asteroids){
-			a.getBack().update();
-		}
-		updateAsteroidCollision();
-		updatePowerUpCollision();
 		}
 	}
 
@@ -123,9 +127,12 @@ public abstract class WorldManager {
 		}else if(pause){
 			if(keyCode == Keys.ENTER){
 				pause = false;
-			}else if(keyCode == Keys.NUM_0 || keyCode == Keys.NUMPAD_0){
+			}else if(keyCode == Keys.ESCAPE){
 				gameOver = true;
+				pause = false;
 			}
+		}else if(gameOver && keyCode == Keys.ESCAPE){
+			gotoMenu = true;
 		}else{
 			switch (keyCode) {
 			case Keys.W:
@@ -178,15 +185,6 @@ public abstract class WorldManager {
 		for(Player p: players){
 			p.update();
 		}
-		//this for checks if the spaceships are collisioning
-		/*for(int i=0; i<ships.size();i++){
-			SpaceShip aux = ships.getKeyAt(i); //you can always do this because you always have at least one spaceship
-			for(int j=i+1; j<this.ships.size();j++){
-				if(aux.isActive() && ships.getKeyAt(j).isActive()){
-					aux.shipCollision(ships.getKeyAt(j));
-				}
-			}
-		}*/
 		for(int i = 0; i<players.size();i++){
 			if(players.get(i).isSpaceShipPlayer() && !players.get(i).shipHasLost()){
 				SpaceShip aux = players.get(i).getSpaceShip();
@@ -264,6 +262,9 @@ public abstract class WorldManager {
 
 	public boolean isPaused() {
 		return pause;
+	}
+	public boolean isOver(){
+		return gotoMenu;
 	}
 }
 

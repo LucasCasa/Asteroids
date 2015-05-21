@@ -27,7 +27,7 @@ public class WorldManagerUI implements Drawable{
 	public void draw(SpriteBatch batch){
 		if ( wm.getGameOver() ) {// esto hay que cambiarlo, por ahora esta asi para probarse
 			String highScore = Assets.getHighScore() + "";
-			String score = wm.score + "";
+			String score = wm.getPlayer(0).getScore() + "";
 
 			Assets.FONT.draw(batch, "Game Over", Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 100);
 			if(wm.players.size()!=1){

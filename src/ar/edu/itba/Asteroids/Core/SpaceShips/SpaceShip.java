@@ -3,6 +3,7 @@ package ar.edu.itba.Asteroids.Core.SpaceShips;
 
 import ar.edu.itba.Asteroids.Core.Collisionable;
 import ar.edu.itba.Asteroids.Core.Logical;
+import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 
 import com.badlogic.gdx.Gdx;
