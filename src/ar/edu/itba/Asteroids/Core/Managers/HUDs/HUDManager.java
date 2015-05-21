@@ -3,8 +3,6 @@ package ar.edu.itba.Asteroids.Core.Managers.HUDs;
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Drawable;
 import ar.edu.itba.Asteroids.Core.Player;
-import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

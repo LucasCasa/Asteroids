@@ -305,8 +305,4 @@ public class MenuManager {
 	}
 	public void update() {	
 	}
-
-
-
-
 }

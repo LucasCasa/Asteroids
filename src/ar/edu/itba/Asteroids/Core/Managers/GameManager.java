@@ -2,7 +2,6 @@ package ar.edu.itba.Asteroids.Core.Managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import ar.edu.itba.Asteroids.Core.Connector;
@@ -38,16 +37,16 @@ public class GameManager {
 			world = new WorldManager1Player(s.get(1),players);
 			break;
 		case TwoPlayersA:
-			world = new WorldManager2Player(new ArrayList(s.values()),players);
+			world = new WorldManager2Player(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
 			break;
 		case TwoPlayersB:
-			world = new WorldManager2PlayersVs(new ArrayList(s.values()),players);
+			world = new WorldManager2PlayersVs(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
 			break;
 		case ThreePlayersA:
-			world = new WorldManager3Player(new ArrayList(s.values()),players);
+			world = new WorldManager3Player(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
 			break;
 		case ThreePlayersB:
-			world = new WorldManager3Players2vs1(new ArrayList(s.values()),players);
+			world = new WorldManager3Players2vs1(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
 		}
 		isMenu = false;
 	}

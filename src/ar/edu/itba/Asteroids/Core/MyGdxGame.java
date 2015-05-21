@@ -1,17 +1,9 @@
 package ar.edu.itba.Asteroids.Core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.Managers.GameManagerUI;
-import ar.edu.itba.Asteroids.Core.Managers.GameMode;
 import ar.edu.itba.Asteroids.Core.Managers.MenuManagerUI;
-import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD1Player;
-import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUDManager;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

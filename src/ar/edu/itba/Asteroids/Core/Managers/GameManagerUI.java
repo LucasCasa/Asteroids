@@ -2,14 +2,12 @@ package ar.edu.itba.Asteroids.Core.Managers;
 
 import ar.edu.itba.Asteroids.Core.Drawable;
 import ar.edu.itba.Asteroids.Core.Player;
-import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD1Player;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD2Player;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD2PlayersVs;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD3Player;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD3Players2vs1;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManagerUI;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

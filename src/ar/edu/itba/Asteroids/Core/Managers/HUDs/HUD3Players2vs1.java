@@ -5,9 +5,9 @@ import ar.edu.itba.Asteroids.Core.Player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HUD3Players2vs1 extends HUDManager {
-	Player player1;
-	Player player2;
-	Player player3;
+	private Player player1;
+	private Player player2;
+	private Player player3;
 	
 	public HUD3Players2vs1(Player p1, Player p2, Player p3) {
 		player1 = p1;
