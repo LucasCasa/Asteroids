@@ -31,6 +31,10 @@ public class GameManager {
 		}
 		return self;
 	}
+	/**
+	 * Define el worldManager a usar dependiendo del tipo de juego.
+	 * @param gm
+	 */
 	public void newGame(GameMode gm){
 		switch(gm){
 		case OnePlayer:
@@ -50,6 +54,9 @@ public class GameManager {
 		}
 		isMenu = false;
 	}
+	/**
+	 * Se encarga de llamar a las demas clases para que se updateen
+	 */
 	public void update(){
 		if(isMenu){
 			MenuManager.getInstance().update();
@@ -84,6 +91,14 @@ public class GameManager {
 	public float getTime(){
 		return world.getTime();
 	}
+	/**
+	 * añade una spaceship para manejar en el juego
+	 * @param player numero de jugador
+	 * @param s la nave y su naveUI
+	 * @param createAsteroidPlayer si tambien maneja asteroide
+	 * @param statsAsteroid si en el primer juego es el que maneja los asteroides
+	 * @param name nombre DUH
+	 */
 	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s, boolean createAsteroidPlayer,boolean statsAsteroid, String name){
 		this.s.put(player, s);
 		if(createAsteroidPlayer){
