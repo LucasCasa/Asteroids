@@ -27,10 +27,11 @@ public class Assets {
 	//PowerUps
 	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
 	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");
-	public static final Texture INVENCIBILITYIMG = new Texture("invencibilidad.png");
+	public static final Texture INVENCIBILITYIMG = new Texture("invi35.png");
 	
 	//Miscellaneous 
 	public static final Texture HEART = new Texture("heart.png");
+	public static final Texture INVIICON = new Texture("invi35invertida.png");
 	public static final Texture COOLDOWN = new Texture("cooldown.png");
 	public static final Texture EXPLOSION = new Texture("explosion.png");
 	public static final Texture[] PROPULSORS = {new Texture("propulsorUp.png"),new Texture("propulsorDown.png"),
