@@ -29,6 +29,8 @@ public abstract class WorldManager {
 	private final float powerUpCooldown = 5f;
 	private ArrayMap<SpaceShip,SpaceShipUI> ships;
 	protected ArrayList<Player> players;
+	protected boolean impasse;
+	private boolean pause;
 	/**
 	 * 
 	 * @param spaceshipAmount; amount of spaceShips in the game
@@ -45,6 +47,11 @@ public abstract class WorldManager {
 	}
 
 	public void update(){
+		if(impasse || pause){
+			if(impasse){
+				powerUps = new ArrayList<Connector<PowerUp, PowerUpUI>>();
+			}
+		}else{
 		updatePowerUps();
 		updateSpaceships();
 		for( Connector<Asteroid,AsteroidUI> a: asteroids){
@@ -52,6 +59,7 @@ public abstract class WorldManager {
 		}
 		updateAsteroidCollision();
 		updatePowerUpCollision();
+		}
 	}
 
 	
@@ -108,21 +116,35 @@ public abstract class WorldManager {
 	}
 	// CHECKEAR ESTO CON EL TEMA DE LOS PLAYERS
 	public void keyDown(int keyCode, int activeSpaceShip) {
-		switch (keyCode) {
-		case Keys.W:
-			ships.getKeyAt(activeSpaceShip).acelUp(true);
-			break;
-		case Keys.S:
-			ships.getKeyAt(activeSpaceShip).acelDown(true);
-			break;
-		case Keys.A:
-			ships.getKeyAt(activeSpaceShip).acelLeft(true);
-			break;
-		case Keys.D:
-			ships.getKeyAt(activeSpaceShip).acelRight(true);
-			break;
+		if(impasse){
+			if(keyCode == Keys.ENTER){
+				impasse = false;
+			}
+		}else if(pause){
+			if(keyCode == Keys.ENTER){
+				pause = false;
+			}else if(keyCode == Keys.NUM_0 || keyCode == Keys.NUMPAD_0){
+				gameOver = true;
+			}
+		}else{
+			switch (keyCode) {
+			case Keys.W:
+				ships.getKeyAt(activeSpaceShip).acelUp(true);
+				break;
+			case Keys.S:
+				ships.getKeyAt(activeSpaceShip).acelDown(true);
+				break;
+			case Keys.A:
+				ships.getKeyAt(activeSpaceShip).acelLeft(true);
+				break;
+			case Keys.D:
+				ships.getKeyAt(activeSpaceShip).acelRight(true);
+				break;
+			case Keys.ESCAPE:
+				pause = true;
+				break;
+			}
 		}
-		
 	}
 
 	public void keyUp(int keyCode, int activeSpaceShip) {
@@ -229,6 +251,19 @@ public abstract class WorldManager {
 	public Player getPlayer(int index){
 		return players.get(index);
 	}
+	public boolean isImpasse(){
+		return impasse;
+	}
+	public void continueGame(){
+		impasse = false;
+	}
+	public int getNumberOfPlayers(){
+		return players.size();
+	}
 	public abstract Player getWinner();
+
+	public boolean isPaused() {
+		return pause;
+	}
 }
 

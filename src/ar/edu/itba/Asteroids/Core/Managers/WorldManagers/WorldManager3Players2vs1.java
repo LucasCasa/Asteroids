@@ -34,6 +34,7 @@ public class WorldManager3Players2vs1 extends WorldManager {
 			gameOver = true;
 		}
 		if(changePlayers){
+			impasse = true;
 			for(int i = 0; i<players.size(); i++){
 				if( i == asteroidPlayerNumber -1){
 					getPlayer(i).changeState();
@@ -50,44 +51,49 @@ public class WorldManager3Players2vs1 extends WorldManager {
 	}
 
 	public void keyDown(int keyCode){
-		switch (keyCode) {
-		case Keys.W:
-		case Keys.A:
-		case Keys.S:
-		case Keys.D:
+		if(isPaused() || isImpasse()){
 			super.keyDown(keyCode);
-			break;
-		case Keys.DOWN:
-			getSpaceShips().get(1).acelDown(true);
-			break;
-		case Keys.UP:
-			getSpaceShips().get(1).acelUp(true);
-			break;
-		case Keys.LEFT:
-			getSpaceShips().get(1).acelLeft(true);
-			break;
-		case Keys.RIGHT:
-			getSpaceShips().get(1).acelRight(true);
-			break;
-		case Keys.K:
-			getSpaceShips().get(2).acelDown(true);
-			break;
-		case Keys.I:
-			getSpaceShips().get(2).acelUp(true);
-			break;
-		case Keys.J:
-			getSpaceShips().get(2).acelLeft(true);
-			break;
-		case Keys.L:
-			getSpaceShips().get(2).acelRight(true);
-			break;
-		default:
-			for(Player p :players){
-				if(p.isAsteroidPlayer()){
-					p.getAsteroidPlayer().keyPressed(keyCode, super.getSpaceShips());
+		}else{
+			switch (keyCode) {
+			case Keys.W:
+			case Keys.A:
+			case Keys.S:
+			case Keys.D:
+			case Keys.ESCAPE:
+				super.keyDown(keyCode);
+				break;
+			case Keys.DOWN:
+				getSpaceShips().get(1).acelDown(true);
+				break;
+			case Keys.UP:
+				getSpaceShips().get(1).acelUp(true);
+				break;
+			case Keys.LEFT:
+				getSpaceShips().get(1).acelLeft(true);
+				break;
+			case Keys.RIGHT:
+				getSpaceShips().get(1).acelRight(true);
+				break;
+			case Keys.K:
+				getSpaceShips().get(2).acelDown(true);
+				break;
+			case Keys.I:
+				getSpaceShips().get(2).acelUp(true);
+				break;
+			case Keys.J:
+				getSpaceShips().get(2).acelLeft(true);
+				break;
+			case Keys.L:
+				getSpaceShips().get(2).acelRight(true);
+				break;
+			default:
+				for(Player p :players){
+					if(p.isAsteroidPlayer()){
+						p.getAsteroidPlayer().keyPressed(keyCode, super.getSpaceShips());
+					}
 				}
+				break;
 			}
-			break;
 		}
 	}
 	

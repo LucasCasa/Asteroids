@@ -16,7 +16,7 @@ public abstract class Collisionable {
 		cPosition = cPos;
 		this.speed = speed;
 		this.mass = mass;
-		this.radius = radius;
+		this.radius = (int)(radius * Assets.screenRelation());
 		Position = new Vector2(cPos.x - radius, cPos.y - radius);
 		collisionPoint = new Vector2();
 		

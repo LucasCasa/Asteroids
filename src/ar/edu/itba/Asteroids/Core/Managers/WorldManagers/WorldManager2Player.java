@@ -23,17 +23,20 @@ public class WorldManager2Player extends WorldManager{
 
 	public void update(){
 		AI.update();
-		for(int i = 0; i<players.size() && gameOver == false;i++){
-			if(players.get(i).shipHasLost()){
-				gameOver = true;
-			}
-		}
+		checkGameOver();
+		
 		if(!gameOver){
 			super.update();
 		}
 		
 	}
-	
+	public void checkGameOver(){
+		for(int i = 0; i<players.size() && gameOver == false;i++){
+			if(players.get(i).shipHasLost()){
+				gameOver = true;
+			}
+		}
+	}
 	public void keyDown(int keyCode){
 		switch (keyCode) {
 		case Keys.DOWN:
@@ -74,7 +77,7 @@ public class WorldManager2Player extends WorldManager{
 		}
 	}
 	public Player getWinner(){
-		for(int i = 0; i<2;i++){
+		for(int i = 0; i<players.size();i++){
 			if(!super.getPlayer(i).shipHasLost()){
 				return getPlayer(i);
 			}
