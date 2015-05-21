@@ -12,7 +12,7 @@ public class CollisionTest {
 	
 	@Before
 	public void init(){
-		a = new Asteroid(0, 0, 0, 0, 1);
+		a = new Asteroid(0, 0, 5, 5, 1);
 	}
 	@Test
 	/**
@@ -20,7 +20,7 @@ public class CollisionTest {
 	 * que.
 	 */
 	public void NoCollisionTest() {
-		Asteroid b = new Asteroid(200,200,0,0,15);
+		Asteroid b = new Asteroid(500,500,0,0,1);
 		Assert.assertFalse(b.asteroidCollision(a));
 	}
 	@Test
@@ -28,7 +28,7 @@ public class CollisionTest {
 	 * Se fija si los asteroides colisionan correctamente
 	 */
 	public void YesCollisionTest(){
-		Asteroid b = new Asteroid(0,0,0,0,15);
+		Asteroid b = new Asteroid(15,15,0,0,1);
 		Assert.assertTrue(b.asteroidCollision(a));
 	}
 	@Test

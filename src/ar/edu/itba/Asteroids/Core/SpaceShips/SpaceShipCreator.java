@@ -56,8 +56,8 @@ public final class SpaceShipCreator {
 	
 	private static Vector2 startPos(int playerNumber){
 		switch(playerNumber){
-		case 1: return new Vector2(offset,Gdx.graphics.getHeight() - offset);
-		case 2: return new Vector2(Gdx.graphics.getWidth() - offset, Gdx.graphics.getHeight() - offset);
+		case 1: return new Vector2(offset,Assets.VIRTUAL_HEIGHT - offset);
+		case 2: return new Vector2(Assets.VIRTUAL_WIDTH - offset, Assets.VIRTUAL_HEIGHT - offset);
 		case 3: return new Vector2(offset, offset);
 		default: return null;
 		}

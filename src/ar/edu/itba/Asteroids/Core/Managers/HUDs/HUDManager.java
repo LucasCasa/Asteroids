@@ -28,7 +28,7 @@ public abstract class HUDManager implements Drawable{
 		Assets.SMALL_FONT.draw(batch, "x " + reserve, pos.x + Assets.COOLDOWN.getWidth() + 5, pos.y - 28);
 	}
 	public void drawSector1(SpriteBatch batch, Player p){
-		Vector2 pos = new Vector2(0,Gdx.graphics.getHeight() - 15);
+		Vector2 pos = new Vector2(0,Assets.VIRTUAL_HEIGHT - 15);
 		if(p.isSpaceShipPlayer()){
 			if(!p.shipHasLost()){
 				drawShipPlayer(batch, pos, p.getName(), p.getSpaceShip().getLives());
@@ -38,7 +38,7 @@ public abstract class HUDManager implements Drawable{
 		}
 	}
 	public void drawSector2(SpriteBatch batch, Player p){
-		Vector2 pos = new Vector2(Gdx.graphics.getWidth() - 120,Gdx.graphics.getHeight() - 15);
+		Vector2 pos = new Vector2(Assets.VIRTUAL_WIDTH - 120,Assets.VIRTUAL_HEIGHT - 15);
 		if(p.isSpaceShipPlayer()){
 			if(!p.shipHasLost()){
 				drawShipPlayer(batch, pos, p.getName(), p.getSpaceShip().getLives());
@@ -48,7 +48,7 @@ public abstract class HUDManager implements Drawable{
 		}
 	}
 	public void drawSector3(SpriteBatch batch, Player p){
-		Vector2 pos = new Vector2(Gdx.graphics.getWidth() - 120,50);
+		Vector2 pos = new Vector2(Assets.VIRTUAL_WIDTH - 120,50);
 		if(p.isSpaceShipPlayer()){
 			if(!p.shipHasLost()){
 				drawShipPlayer(batch, pos, p.getName(), p.getSpaceShip().getLives());

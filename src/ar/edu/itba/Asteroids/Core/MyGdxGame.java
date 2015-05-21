@@ -3,38 +3,53 @@ package ar.edu.itba.Asteroids.Core;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.Managers.GameManagerUI;
-import ar.edu.itba.Asteroids.Core.Managers.MenuManagerUI;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MyGdxGame extends ApplicationAdapter {
 	public SpriteBatch batch;
 	Texture img;
 	Asteroid a;
 	Asteroid b;
-	MenuManagerUI mmUI;
 	BitmapFont font;
 	BitmapFont standardFont;
 	float time;
+	private OrthographicCamera camera;
+	private Viewport viewport;
+	
 	
 	@Override
 	public void create () {
+		
 		batch = new SpriteBatch();
 		img = new Texture("background.png");
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 		standardFont = new BitmapFont();
 		MyInputProcessor MYP = new MyInputProcessor();
+		camera = new OrthographicCamera(Assets.VIRTUAL_WIDTH, Assets.VIRTUAL_HEIGHT);
 		Gdx.input.setInputProcessor(MYP); // el que se encarga del manejo del input
+		camera = new OrthographicCamera();
+	    camera.setToOrtho(false, 800, 600);
+	    viewport = new FitViewport(800, 600, camera);
 	}
 
 	@Override
 	public void render () {
 		time+= Gdx.graphics.getDeltaTime();
+		batch.setTransformMatrix(camera.view);
+		batch.setProjectionMatrix(camera.projection);
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
@@ -45,5 +60,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		GameManagerUI.getInstance().draw(batch);
 		batch.end();
 
+	}
+	
+	@Override
+    public void resize(int width, int height){
+		 viewport.update(width, height,false);
+	        camera.update();
 	}
 }

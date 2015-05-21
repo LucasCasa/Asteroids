@@ -29,16 +29,16 @@ public class WorldManagerUI implements Drawable{
 			String highScore = Assets.getHighScore() + "";
 			String score = wm.score + "";
 
-			Assets.FONT.draw(batch, "Game Over", Gdx.graphics.getWidth()/2 - 120, Gdx.graphics.getHeight()/2 + 100);
+			Assets.FONT.draw(batch, "Game Over", Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 100);
 			if(wm.players.size()!=1){
-				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Gdx.graphics.getWidth()/2 - 120, Gdx.graphics.getHeight()/2 + 60);	        	
+				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 60);	        	
 			}
 			else{
-				Assets.FONT.draw(batch, "High Score:", Gdx.graphics.getWidth()/2 - 200, Gdx.graphics.getHeight()/2 + 10);
-				Assets.FONT.draw(batch, highScore, Gdx.graphics.getWidth()/2 + 80, Gdx.graphics.getHeight()/2 + 10);
+				Assets.FONT.draw(batch, "High Score:", Assets.VIRTUAL_WIDTH/2 - 200, Assets.VIRTUAL_HEIGHT/2 + 10);
+				Assets.FONT.draw(batch, highScore, Assets.VIRTUAL_WIDTH/2 + 80, Assets.VIRTUAL_HEIGHT/2 + 10);
 
-				Assets.FONT.draw(batch, "Scored:", Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight()/2 - 100);
-				Assets.FONT.draw(batch, score, Gdx.graphics.getWidth()/2 + 50, Gdx.graphics.getHeight()/2 - 100);	        	
+				Assets.FONT.draw(batch, "Scored:", Assets.VIRTUAL_WIDTH/2 - 150, Assets.VIRTUAL_HEIGHT/2 - 100);
+				Assets.FONT.draw(batch, score, Assets.VIRTUAL_WIDTH/2 + 50, Assets.VIRTUAL_HEIGHT/2 - 100);	        	
 			}
 
 		}else if(wm.isImpasse()){

@@ -201,14 +201,11 @@ public class MenuManager {
 		Gdx.graphics.setDisplayMode(0,0,fullscreen); //cambio
 		
 	}
-	private void changeResolution(int height, int width){
-		Gdx.graphics.setDisplayMode(height, width, false);
-		System.out.println(Gdx.graphics.getWidth());
-		System.out.println(Gdx.graphics.getHeight());
-		DisplayMode[] d = Gdx.graphics.getDisplayModes();
-		for(DisplayMode dm: d){
-			System.out.println(dm.width + " " +  dm.height);
+	private void changeResolution(int width, int height){
+		for(DisplayMode d: Gdx.graphics.getDisplayModes()){
+			System.out.println(d.width + "x" +d.height);
 		}
+		Gdx.graphics.setDisplayMode(width, height, false);
 	}
 
 	private boolean Generate(int KeyCode){

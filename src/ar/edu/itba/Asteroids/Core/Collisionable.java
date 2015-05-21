@@ -16,7 +16,7 @@ public abstract class Collisionable {
 		cPosition = cPos;
 		this.speed = speed;
 		this.mass = mass;
-		this.radius = (int)(radius * Assets.screenRelation());
+		this.radius = (int)(radius);
 		Position = new Vector2(cPos.x - radius, cPos.y - radius);
 		collisionPoint = new Vector2();
 		
@@ -54,20 +54,20 @@ public abstract class Collisionable {
 	}
 	
 	public void checkOutOfScreen(){
-		if(cPosition.x + radius > Gdx.graphics.getWidth() || cPosition.x - radius < 0){
+		if(cPosition.x + radius > Assets.VIRTUAL_WIDTH || cPosition.x - radius < 0){
 			if(cPosition.x -radius < 0){
 				cPosition.x = radius + 1;
 			}else{
-				cPosition.x = Gdx.graphics.getWidth() - radius;
+				cPosition.x = Assets.VIRTUAL_WIDTH - radius;
 			}
 			
 			speed.x*= -0.5f;
 		}
-		if(cPosition.y + radius > Gdx.graphics.getHeight() || cPosition.y - radius < 0){
+		if(cPosition.y + radius > Assets.VIRTUAL_HEIGHT || cPosition.y - radius < 0){
 			if(cPosition.y -radius < 0){
 				cPosition.y = radius + 1;
 			}else{
-				cPosition.y = Gdx.graphics.getHeight() - radius - 1;
+				cPosition.y = Assets.VIRTUAL_HEIGHT - radius - 1;
 			}
 			
 			speed.y*= -0.5f;
