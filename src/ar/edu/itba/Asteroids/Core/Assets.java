@@ -17,9 +17,11 @@ public class Assets {
 	public static final int[] SHIPS_RADIUS = {25,20,10,30,20};
 	public static final int[] SHIPS_MASS = {5,3,1,2,3};
 	public static final int[] SHIPS_MAX_VEL = {300,325,500,400,350};
-	public static final int[] SHIPS_ACCEL = {15,20,20,20,20};
+	public static final int[] SHIPS_ACCEL = {300,325,1200,400,350};
 	public static final int[] SHIPS_LIVES = {6,5,3,4,5};
-	
+	public static float screenRelation(){
+		return Gdx.graphics.getWidth() / 800;
+	}
 	//PowerUps
 	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
 	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");

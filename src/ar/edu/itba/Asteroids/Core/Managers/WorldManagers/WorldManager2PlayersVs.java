@@ -31,6 +31,7 @@ public class WorldManager2PlayersVs extends WorldManager{
 			activeSpaceShip = 1;
 		}
 		if(getPlayer(0).shipHasLost()){
+			super.impasse = true;
 			getPlayer(0).changeState();
 			getPlayer(1).changeState();
 		}
@@ -40,20 +41,25 @@ public class WorldManager2PlayersVs extends WorldManager{
 	}
 	
 	public void keyDown(int keyCode){
-		switch(keyCode){
-		case Keys.W:
-		case Keys.A:
-		case Keys.S:
-		case Keys.D:
-			super.keyDown(keyCode,activeSpaceShip);
-			break;
-		default:
-			for(Player p :players){
-				if(p.isAsteroidPlayer()){
-					p.getAsteroidPlayer().keyPressed(keyCode, super.getSpaceShips());
+		if(isPaused() || isImpasse()){
+			super.keyDown(keyCode);
+		}else{
+			switch(keyCode){
+			case Keys.W:
+			case Keys.A:
+			case Keys.S:
+			case Keys.D:
+			case Keys.ESCAPE:
+				super.keyDown(keyCode,activeSpaceShip);
+				break;
+			default:
+				for(Player p :players){
+					if(p.isAsteroidPlayer()){
+						p.getAsteroidPlayer().keyPressed(keyCode, super.getSpaceShips());
+					}
 				}
+				break;
 			}
-			break;
 		}
 	}
 	public void keyUp(int keyCode){

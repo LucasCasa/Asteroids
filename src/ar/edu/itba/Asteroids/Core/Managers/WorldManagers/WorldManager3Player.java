@@ -18,7 +18,17 @@ public class WorldManager3Player extends WorldManager2Player{
 		super(s,players);
 		super.getAll().put(s.get(2).getBack(), s.get(2).getFront());
 	}
-	
+	public void checkGameOver(){
+		int aux =0;
+		for(Player p : players){
+			if(p.shipHasLost()){
+				aux++;
+			}
+		}
+		if(aux == 2){
+			gameOver = true;
+		}
+	}
 	public void keyDown(int keyCode){
 		switch (keyCode) {
 		case Keys.K:

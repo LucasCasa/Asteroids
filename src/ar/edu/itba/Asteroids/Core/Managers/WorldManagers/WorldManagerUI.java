@@ -41,7 +41,38 @@ public class WorldManagerUI implements Drawable{
 				Assets.FONT.draw(batch, score, Gdx.graphics.getWidth()/2 + 50, Gdx.graphics.getHeight()/2 - 100);	        	
 			}
 
+		}else if(wm.isImpasse()){
+			Assets.FONT.draw(batch, "Cambio de posiciones", 200, 400);
+			for(int i =0;i<wm.getNumberOfPlayers();i++){
+				String aux = (wm.getPlayer(i).isSpaceShipPlayer())?"Nave":"Asteroides";
+				String aux2 = "";
+				if(wm.getPlayer(i).isAsteroidPlayer()){
+					aux2 = "12346789";
+				}else{
+					if(wm instanceof WorldManager2PlayersVs){ // FEO FEO
+						aux2 = "WASD";
+					}else{
+						switch(i){
+						case 0:
+							aux2 = "WASD";
+							break;
+						case 1:
+							aux2 = "Flechas";
+							break;
+						case 2:
+							aux2 = "IJKL";
+							break;
+
+						}
+					}
+				}
+				Assets.SMALL_FONT.draw(batch, wm.getPlayer(i).getName() + " Maneja " + aux + " Controles: " + aux2, 300, 50*i+ 50);
+			}
+		}else if(wm.isPaused()){
+			Assets.FONT.draw(batch, "Juego Pausado", 200, 400);
+			Assets.SMALL_FONT.draw(batch, "Presione Enter para continuar", 100, 300);
 		}else{
+			
 			for(SpaceShipUI s: wm.getShipsUI()){
 				s.draw(batch);
 			}

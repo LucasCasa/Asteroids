@@ -149,10 +149,10 @@ public class SpaceShip extends Collisionable implements Logical {
 
 	private void updateVelocity(){
 		if(Math.abs(getSpeed().x) < maxVel || getSpeed().x * acel.x <= 0){
-			getSpeed().x += acel.x;
+			getSpeed().x += acel.x * Gdx.graphics.getDeltaTime();
 		}	
 		if(Math.abs(getSpeed().y) < maxVel || getSpeed().y * acel.y <= 0){
-			getSpeed().y += acel.y;
+			getSpeed().y += acel.y  * Gdx.graphics.getDeltaTime();
 		}
 	}
 

@@ -17,7 +17,7 @@ public final class SpaceShipCreator {
 		SpaceShip s;
 		SpaceShipUI sUI;
 		Vector2 pos = startPos(playerNumber);
-		switch(type){
+		/*switch(type){
 		case 0:
 			s = new DeathStarShip(pos.x,pos.y);
 			sUI = new SpaceShipUI(s, Assets.SHIPS[0]);
@@ -42,7 +42,14 @@ public final class SpaceShipCreator {
 			s=null;
 			sUI=null;
 			break;
-		}
+		}*/
+		int radius = Assets.SHIPS_RADIUS[type];
+		int mass = Assets.SHIPS_MASS[type];
+		int accel = Assets.SHIPS_ACCEL[type];
+		int speed = Assets.SHIPS_MAX_VEL[type];
+		int lives = Assets.SHIPS_LIVES[type];
+		s = new SpaceShip(pos.x, pos.y,radius, mass, speed, accel, lives);
+		sUI = new SpaceShipUI(s, Assets.SHIPS[type]);
 		return new Connector<SpaceShip, SpaceShipUI>(s,sUI);
 
 	}
