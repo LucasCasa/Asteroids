@@ -117,9 +117,9 @@ public class MenuManagerUI implements Drawable{
 			break;
 		case ChangeResolution:
 			Assets.FONT.draw(batch,"Change Resolution", Assets.VIRTUAL_WIDTH*3/8,Assets.VIRTUAL_HEIGHT*7/8);
-			Assets.FONT.draw(batch,"1- 800x600", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*5/8);
-			Assets.FONT.draw(batch,"2- 1024x768", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*4/8);
-			Assets.FONT.draw(batch,"3- 1280x1024", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*3/8);
+			Assets.FONT.draw(batch,"1- 16:9", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*5/8);
+			Assets.FONT.draw(batch,"2- 16:10", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*4/8);
+			Assets.FONT.draw(batch,"3- 4:3", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*3/8);
 			Assets.FONT.draw(batch,"4- FullScreen", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*2/8);
 			break;
 		case WideScreen:
