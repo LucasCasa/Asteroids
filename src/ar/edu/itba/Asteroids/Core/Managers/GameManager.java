@@ -61,7 +61,8 @@ public class GameManager {
 		if(isMenu){
 			MenuManager.getInstance().update();
 		}else{
-			world.update();	
+			if(!world.shipDestroyed())//hay que preguntar si termino el juego porque sino el world se sique updatando y agrega infitos jugadores iguales al highscore
+				world.update();	
 			if(world.isOver()){
 				isMenu = true;
 				MenuManager.getInstance().reset();

@@ -5,7 +5,9 @@ import java.util.List;
 
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Drawable;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
+import ar.edu.itba.Asteroids.Core.Managers.HighScoreManager;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUDManager;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
@@ -25,13 +27,13 @@ public class WorldManagerUI implements Drawable{
 	}
 
 	public void draw(SpriteBatch batch){
-		if ( wm.getGameOver() ) {// esto hay que cambiarlo, por ahora esta asi para probarse
-			String highScore = Assets.getHighScore() + "";
-			String score = wm.getPlayer(0).getScore() + "";
+		if ( wm.getGameOver() && wm.players.size() == 1) {
+			String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
+			String score = GameManager.getInstance().getPlayer(0).getScore() + "";
 
 			Assets.FONT.draw(batch, "Game Over", Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 100);
 			if(wm.players.size()!=1){
-				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 60);	        	
+				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 60);
 			}
 			else{
 				Assets.FONT.draw(batch, "High Score:", Assets.VIRTUAL_WIDTH/2 - 200, Assets.VIRTUAL_HEIGHT/2 + 10);

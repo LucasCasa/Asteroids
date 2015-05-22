@@ -1,5 +1,8 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -57,8 +60,23 @@ public class MenuManagerUI implements Drawable{
 	}
 	
 	private void printHighScores(SpriteBatch batch){
-		
+		HighScoreManager.getInstance().loadScores();
+		TreeMap<Float, String> highscores = HighScoreManager.getInstance().getHighScores();
+		Assets.FONT.draw(batch, "Name", Assets.VIRTUAL_WIDTH*2/8, Assets.VIRTUAL_HEIGHT*2/3);
+		Assets.FONT.draw(batch, "Score", Assets.VIRTUAL_WIDTH*4/8,  Assets.VIRTUAL_HEIGHT*2/3);
+				
+		int count = 0;
+		for (Entry<Float, String> each : highscores.entrySet()) {
+			count++;
+			String score = each.getKey().toString();
+			String name = each.getValue();
+
+			Assets.FONT.draw(batch, name,  Assets.VIRTUAL_WIDTH*2/8, Assets.VIRTUAL_HEIGHT*8/13 - count*30);
+			Assets.FONT.draw(batch, score, Assets.VIRTUAL_WIDTH*4/8, Assets.VIRTUAL_HEIGHT*8/13 - count*30);
+			if(count == 10) break;
+		}
 	}
+	
 	
 	private void drawMenu(SpriteBatch batch){
 		Menu state= mm.getState();

@@ -266,5 +266,8 @@ public abstract class WorldManager {
 	public boolean isOver(){
 		return gotoMenu;
 	}
+	public boolean shipDestroyed(){
+		return gameOver;
+	}
 }
 
