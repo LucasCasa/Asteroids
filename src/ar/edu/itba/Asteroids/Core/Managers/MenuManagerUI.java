@@ -1,5 +1,6 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
+import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -114,7 +115,7 @@ public class MenuManagerUI implements Drawable{
 		case Help:
 			Assets.FONT.draw(batch,"Help", Assets.VIRTUAL_WIDTH*3/8,Assets.VIRTUAL_HEIGHT*7/8);
 			break;
-		case Settings:
+		case ChangeResolution:
 			Assets.FONT.draw(batch,"Change Resolution", Assets.VIRTUAL_WIDTH*3/8,Assets.VIRTUAL_HEIGHT*7/8);
 			Assets.FONT.draw(batch,"1- 800x600", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*5/8);
 			Assets.FONT.draw(batch,"2- 1024x768", Assets.VIRTUAL_WIDTH/8,Assets.VIRTUAL_HEIGHT*4/8);

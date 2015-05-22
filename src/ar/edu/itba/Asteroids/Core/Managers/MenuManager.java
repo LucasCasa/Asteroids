@@ -7,7 +7,6 @@ import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipCreator;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 
@@ -144,8 +143,7 @@ private void pressedEscape() {
 	private void pressed2() {
 		switch(state){
 		case Main:
-			this.state=Menu.Settings;
-			Settings();
+			this.state=Menu.ChangeResolution;
 			break;
 		case ChangeResolution:
 			this.state=Menu.MacScreen;
