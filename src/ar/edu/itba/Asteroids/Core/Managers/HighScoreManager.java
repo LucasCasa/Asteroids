@@ -1,8 +1,17 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.TreeMap;
+
+import org.parse4j.Parse;
+import org.parse4j.ParseException;
+import org.parse4j.ParseObject;
 
 import ar.edu.itba.Asteroids.Core.Player;
 
@@ -15,6 +24,7 @@ public class HighScoreManager implements Serializable{
 	
 	private HighScoreManager(){
 		highscores = new TreeMap<Float, String>(new ScoreComparator());
+
 	}
 	
 	public static HighScoreManager getInstance(){
@@ -30,6 +40,12 @@ public class HighScoreManager implements Serializable{
 	
 	public void add(Player player){
 		highscores.put(player.getScore(), player.getName());
+		Parse.initialize("IRqu530fZMPOFpV2QxtWzCfUBouOKbuYivIDHGbc", "tQU5oYuTNi9Eh3dkG0GOBUZIAMvcRe4OvHypZT4n");
+	    ParseObject gameScore = new ParseObject("HighScores");
+	    gameScore.put("score",player.getScore());
+	    gameScore.put("playerName", player.getName());
+		gameScore.saveInBackground();
+
 	}
 	
 	public TreeMap<Float, String> getHighScores(){
