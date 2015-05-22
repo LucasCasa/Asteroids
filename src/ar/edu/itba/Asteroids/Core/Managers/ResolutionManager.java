@@ -1,6 +1,8 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.TreeSet;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
@@ -32,13 +34,17 @@ public class ResolutionManager {
 		return self;
 	}
 	private ArrayList<DisplayMode> generateScreenRes(DisplayMode[] dm,float w, float h) {
-		ArrayList<DisplayMode> array = new ArrayList<DisplayMode>();
+		TreeSet<DisplayMode> tree = new TreeSet<DisplayMode>(new Comparator<DisplayMode>() {
+			public int compare( DisplayMode a, DisplayMode b){
+			 return  a.width * a.height - b.width * b.height;
+			}
+		}); 
 		for(DisplayMode disp: dm){
 			System.out.println(disp.width + ":" + disp.height );
 			if((float)disp.width / (float)disp.height == w / h)
-				array.add(disp);
+				tree.add(disp);
 		}
-		return array;
+		return new ArrayList<DisplayMode>(tree);
 	}
 	public ArrayList<DisplayMode> getWideScreenRes(){
 		return wideScreen;
