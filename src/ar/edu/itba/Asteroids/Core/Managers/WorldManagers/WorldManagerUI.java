@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.Asteroids.Core.Assets;
+import ar.edu.itba.Asteroids.Core.Constants;
 import ar.edu.itba.Asteroids.Core.Drawable;
-import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.Managers.HighScoreManager;
 import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUDManager;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WorldManagerUI implements Drawable{
@@ -31,16 +31,16 @@ public class WorldManagerUI implements Drawable{
 			String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
 			String score = GameManager.getInstance().getPlayer(0).getScore() + "";
 
-			Assets.FONT.draw(batch, "Game Over", Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 100);
+			Assets.FONT.draw(batch, "Game Over", Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 100);
 			if(wm.players.size()!=1){
-				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Assets.VIRTUAL_WIDTH/2 - 120, Assets.VIRTUAL_HEIGHT/2 + 60);
+				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 60);
 			}
 			else{
-				Assets.FONT.draw(batch, "High Score:", Assets.VIRTUAL_WIDTH/2 - 200, Assets.VIRTUAL_HEIGHT/2 + 10);
-				Assets.FONT.draw(batch, highScore, Assets.VIRTUAL_WIDTH/2 + 80, Assets.VIRTUAL_HEIGHT/2 + 10);
+				Assets.FONT.draw(batch, "High Score:", Constants.VIRTUAL_WIDTH/2 - 200, Constants.VIRTUAL_HEIGHT/2 + 10);
+				Assets.FONT.draw(batch, highScore, Constants.VIRTUAL_WIDTH/2 + 80, Constants.VIRTUAL_HEIGHT/2 + 10);
 
-				Assets.FONT.draw(batch, "Scored:", Assets.VIRTUAL_WIDTH/2 - 150, Assets.VIRTUAL_HEIGHT/2 - 100);
-				Assets.FONT.draw(batch, score, Assets.VIRTUAL_WIDTH/2 + 50, Assets.VIRTUAL_HEIGHT/2 - 100);	        	
+				Assets.FONT.draw(batch, "Scored:", Constants.VIRTUAL_WIDTH/2 - 150, Constants.VIRTUAL_HEIGHT/2 - 100);
+				Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH/2 + 50, Constants.VIRTUAL_HEIGHT/2 - 100);	        	
 			}
 
 		}else if(wm.isImpasse()){

@@ -1,7 +1,7 @@
 package ar.edu.itba.Asteroids.Core.Asteroids;
 
-import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Collisionable;
+import ar.edu.itba.Asteroids.Core.Constants;
 import ar.edu.itba.Asteroids.Core.Logical;
 
 import com.badlogic.gdx.Gdx;
@@ -38,10 +38,10 @@ public class Asteroid extends Collisionable implements Logical{
 		return b; 
 	}
 	public boolean outOfScreen(){
-		if(this.getCPos().x + super.getRadius() < 0 || this.getCPos().x - super.getRadius() > Assets.VIRTUAL_WIDTH){
+		if(this.getCPos().x + super.getRadius() < 0 || this.getCPos().x - super.getRadius() > Constants.VIRTUAL_WIDTH){
 			return true;
 		}
-		if(this.getCPos().y + super.getRadius() < 0 || this.getCPos().y - super.getRadius() > Assets.VIRTUAL_HEIGHT){
+		if(this.getCPos().y + super.getRadius() < 0 || this.getCPos().y - super.getRadius() > Constants.VIRTUAL_HEIGHT){
 			return true;
 		}
 		return false;

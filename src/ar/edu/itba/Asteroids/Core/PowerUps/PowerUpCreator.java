@@ -1,10 +1,10 @@
 package ar.edu.itba.Asteroids.Core.PowerUps;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
-
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Connector;
+import ar.edu.itba.Asteroids.Core.Constants;
+
+import com.badlogic.gdx.math.Vector2;
 
 public final class PowerUpCreator {
 	
@@ -43,7 +43,7 @@ public final class PowerUpCreator {
 	 * @return Vector with the random x and y positions
 	 */
 	private static Vector2 randomPosition(){
-		return new Vector2((float)(((Assets.VIRTUAL_WIDTH - 2*PowerUp.getPowerUpRadius())) * Math.random())+PowerUp.getPowerUpRadius(),(float)( (Assets.VIRTUAL_HEIGHT-2*PowerUp.getPowerUpRadius()) * Math.random())+PowerUp.getPowerUpRadius());
+		return new Vector2((float)(((Constants.VIRTUAL_WIDTH - 2*PowerUp.getPowerUpRadius())) * Math.random())+PowerUp.getPowerUpRadius(),(float)( (Constants.VIRTUAL_HEIGHT-2*PowerUp.getPowerUpRadius()) * Math.random())+PowerUp.getPowerUpRadius());
 	}
 	
 	/**

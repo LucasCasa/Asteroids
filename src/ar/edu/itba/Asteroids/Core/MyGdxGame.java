@@ -34,7 +34,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		font = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 		standardFont = new BitmapFont();
 		MyInputProcessor MYP = new MyInputProcessor();
-		camera = new OrthographicCamera(Assets.VIRTUAL_WIDTH, Assets.VIRTUAL_HEIGHT);
+		camera = new OrthographicCamera(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT);
 		Gdx.input.setInputProcessor(MYP); // el que se encarga del manejo del input
 		camera = new OrthographicCamera();
 	    camera.setToOrtho(false, 800, 600);

@@ -2,9 +2,8 @@ package ar.edu.itba.Asteroids.Core.Asteroids;
 
 import java.util.ArrayList;
 
-import ar.edu.itba.Asteroids.Core.Assets;
+import ar.edu.itba.Asteroids.Core.Constants;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 
@@ -55,11 +54,11 @@ public class AsteroidThrower {
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
 			if (Math.random() > 0.5){
-				x = (float) (Assets.VIRTUAL_WIDTH -  Math.random()*(Assets.VIRTUAL_WIDTH/4));
+				x = (float) (Constants.VIRTUAL_WIDTH -  Math.random()*(Constants.VIRTUAL_WIDTH/4));
 				y = 0;
 			}else{
-				x = Assets.VIRTUAL_WIDTH;
-				y = (float) (Math.random()*(Assets.VIRTUAL_HEIGHT/4));;
+				x = Constants.VIRTUAL_WIDTH;
+				y = (float) (Math.random()*(Constants.VIRTUAL_HEIGHT/4));;
 			}	
 
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
@@ -74,7 +73,7 @@ public class AsteroidThrower {
 		float y;
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
-			x = (float) (Assets.VIRTUAL_WIDTH/4 + Math.random()*(Assets.VIRTUAL_WIDTH/2));
+			x = (float) (Constants.VIRTUAL_WIDTH/4 + Math.random()*(Constants.VIRTUAL_WIDTH/2));
 			y = 0;
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
@@ -86,11 +85,11 @@ public class AsteroidThrower {
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
 			if (Math.random() > 0.5){
-				x = (float) (Math.random()*(Assets.VIRTUAL_WIDTH/4));
+				x = (float) (Math.random()*(Constants.VIRTUAL_WIDTH/4));
 				y = 0;
 			}else{
 				x = 0;
-				y = (float) (Math.random()*(Assets.VIRTUAL_HEIGHT/4));;
+				y = (float) (Math.random()*(Constants.VIRTUAL_HEIGHT/4));;
 			}
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
@@ -103,11 +102,11 @@ public class AsteroidThrower {
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
 			if (Math.random() > 0.5){
-				x = (float) (Assets.VIRTUAL_WIDTH -  Math.random()*(Assets.VIRTUAL_WIDTH/4));
-				y = Assets.VIRTUAL_HEIGHT;
+				x = (float) (Constants.VIRTUAL_WIDTH -  Math.random()*(Constants.VIRTUAL_WIDTH/4));
+				y = Constants.VIRTUAL_HEIGHT;
 			}else{
-				x = Assets.VIRTUAL_WIDTH;
-				y = (float) (Assets.VIRTUAL_HEIGHT - Math.random()*(Assets.VIRTUAL_HEIGHT/4));
+				x = Constants.VIRTUAL_WIDTH;
+				y = (float) (Constants.VIRTUAL_HEIGHT - Math.random()*(Constants.VIRTUAL_HEIGHT/4));
 			}
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
@@ -119,8 +118,8 @@ public class AsteroidThrower {
 		float y;
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
-			x = (float) (Assets.VIRTUAL_WIDTH/4 + Math.random()*(Assets.VIRTUAL_WIDTH/2));
-			y = Assets.VIRTUAL_HEIGHT;
+			x = (float) (Constants.VIRTUAL_WIDTH/4 + Math.random()*(Constants.VIRTUAL_WIDTH/2));
+			y = Constants.VIRTUAL_HEIGHT;
 
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
@@ -133,11 +132,11 @@ public class AsteroidThrower {
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
 			if (Math.random() > 0.5){
-				x = (float) (Math.random()*(Assets.VIRTUAL_WIDTH/4));
-				y = Assets.VIRTUAL_HEIGHT;
+				x = (float) (Math.random()*(Constants.VIRTUAL_WIDTH/4));
+				y = Constants.VIRTUAL_HEIGHT;
 			}else{
 				x = 0;
-				y = (float) (Assets.VIRTUAL_HEIGHT - Math.random()*(Assets.VIRTUAL_HEIGHT/4));
+				y = (float) (Constants.VIRTUAL_HEIGHT - Math.random()*(Constants.VIRTUAL_HEIGHT/4));
 			}
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
@@ -150,7 +149,7 @@ public class AsteroidThrower {
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
 			x = 0;
-			y = (float) (Assets.VIRTUAL_HEIGHT/4 + Math.random()*(Assets.VIRTUAL_HEIGHT/2));
+			y = (float) (Constants.VIRTUAL_HEIGHT/4 + Math.random()*(Constants.VIRTUAL_HEIGHT/2));
 
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}
@@ -162,8 +161,8 @@ public class AsteroidThrower {
 		float y;
 		ArrayList<Asteroid> aster = new ArrayList<>();
 		for(Vector2 ShipPos : pos){
-			x = Assets.VIRTUAL_WIDTH;
-			y = (float) (Assets.VIRTUAL_HEIGHT/4 + Math.random()*(Assets.VIRTUAL_HEIGHT/2));
+			x = Constants.VIRTUAL_WIDTH;
+			y = (float) (Constants.VIRTUAL_HEIGHT/4 + Math.random()*(Constants.VIRTUAL_HEIGHT/2));
 			
 			aster.add(throwAsteroid(x, y, ShipPos.x, ShipPos.y));
 		}

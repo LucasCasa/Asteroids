@@ -54,20 +54,20 @@ public abstract class Collisionable {
 	}
 	
 	public void checkOutOfScreen(){
-		if(cPosition.x + radius > Assets.VIRTUAL_WIDTH || cPosition.x - radius < 0){
+		if(cPosition.x + radius > Constants.VIRTUAL_WIDTH || cPosition.x - radius < 0){
 			if(cPosition.x -radius < 0){
 				cPosition.x = radius + 1;
 			}else{
-				cPosition.x = Assets.VIRTUAL_WIDTH - radius;
+				cPosition.x = Constants.VIRTUAL_WIDTH - radius;
 			}
 			
 			speed.x*= -0.5f;
 		}
-		if(cPosition.y + radius > Assets.VIRTUAL_HEIGHT || cPosition.y - radius < 0){
+		if(cPosition.y + radius > Constants.VIRTUAL_HEIGHT || cPosition.y - radius < 0){
 			if(cPosition.y -radius < 0){
 				cPosition.y = radius + 1;
 			}else{
-				cPosition.y = Assets.VIRTUAL_HEIGHT - radius - 1;
+				cPosition.y = Constants.VIRTUAL_HEIGHT - radius - 1;
 			}
 			
 			speed.y*= -0.5f;
