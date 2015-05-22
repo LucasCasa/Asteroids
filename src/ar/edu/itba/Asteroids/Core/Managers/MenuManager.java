@@ -36,14 +36,21 @@ public class MenuManager {
 	}
 
 	public void keyDown(int keyCode) {
-		if(state == Menu.GetPlayerName ){
+		if(state == Menu.GetPlayerName){
 			if(keyCode == Keys.ESCAPE){ //if the user wants to go back to another in the menu
 				pressedEscape();
 				resetNames();
 			}
 			if(Generate(keyCode))
 				state=Menu.ChooseSpaceShip;
-		}else{
+		}else if(state == Menu.NormalScreen && keyCode!=Keys.ESCAPE){
+			ResolutionManager.getInstance().changeNormalResolution(keyCode - 8, false);			
+		}else if(state == Menu.WideScreen && keyCode!=Keys.ESCAPE){
+			ResolutionManager.getInstance().changeWideResolution(keyCode - 8, false);			
+		}else if(state == Menu.MacScreen && keyCode!=Keys.ESCAPE){
+			ResolutionManager.getInstance().changeMacResolution(keyCode - 8, false);
+		}
+		else{
 			switch(keyCode){
 			case Keys.ESCAPE:
 				pressedEscape();
@@ -69,15 +76,20 @@ public class MenuManager {
 		}
 	}
 
-	private void pressedEscape() {
+private void pressedEscape() {
 		switch(state){
 		case Main:
 			Gdx.app.exit(); //the game ends
 		case HighScore:
-		case Settings:
+		case ChangeResolution:
 		case Help:
 		case NumberOfPlayers:
 			this.state=Menu.Main;
+			break;
+		case WideScreen:
+		case NormalScreen:
+		case MacScreen:
+			this.state=Menu.ChangeResolution;
 			break;
 		case GameMode2Players:
 			this.state=Menu.NumberOfPlayers;
@@ -106,8 +118,8 @@ public class MenuManager {
 		case Main:
 			this.state=Menu.NumberOfPlayers;
 			break;
-		case Settings:
-			changeResolution(800,600);
+		case ChangeResolution:
+			this.state=Menu.WideScreen;
 			break;
 		case NumberOfPlayers:
 			this.state=Menu.GetPlayerName;
@@ -135,8 +147,8 @@ public class MenuManager {
 			this.state=Menu.Settings;
 			Settings();
 			break;
-		case Settings:
-			changeResolution(1024,768);
+		case ChangeResolution:
+			this.state=Menu.MacScreen;
 			break;
 		case NumberOfPlayers:
 			this.state=Menu.GameMode2Players;
@@ -163,8 +175,8 @@ public class MenuManager {
 			this.state=Menu.Help;
 			Help();
 			break;
-		case Settings:
-			changeResolution(1280,1024);
+		case ChangeResolution:
+			this.state=Menu.NormalScreen;
 			break;
 		case NumberOfPlayers:
 			this.state=Menu.GameMode3Players;
@@ -183,8 +195,7 @@ public class MenuManager {
 			this.state=Menu.HighScore;
 			//aparece el highscore
 			break;
-		case Settings:
-			changeResolution(true); //cambiar esto
+		case ChangeResolution:
 			break;
 		case ChooseSpaceShip:
 			shipSelected(3);
@@ -200,17 +211,6 @@ public class MenuManager {
 			break;
 		default:break;
 		}
-	}
-	
-	private void changeResolution(boolean fullscreen){
-		Gdx.graphics.setDisplayMode(0,0,fullscreen); //cambio
-		
-	}
-	private void changeResolution(int width, int height){
-		for(DisplayMode d: Gdx.graphics.getDisplayModes()){
-			System.out.println(d.width + "x" +d.height);
-		}
-		Gdx.graphics.setDisplayMode(width, height, false);
 	}
 
 	private boolean Generate(int KeyCode){
@@ -345,11 +345,7 @@ public class MenuManager {
 		//VER
 
 	}
-
-	private void Settings(){
-
-	}
-
+	
 	public void update() {	
 
 	}
