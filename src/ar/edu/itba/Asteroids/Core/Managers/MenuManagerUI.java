@@ -1,5 +1,6 @@
 package ar.edu.itba.Asteroids.Core.Managers;
 
+import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -7,6 +8,7 @@ import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Constants;
 import ar.edu.itba.Asteroids.Core.Drawable;
 
+import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -77,6 +79,29 @@ public class MenuManagerUI implements Drawable{
 		}
 	}
 	
+	private void printOptionsNormalScreen(SpriteBatch batch){
+		ArrayList<DisplayMode> displays = ResolutionManager.getInstance().getNormalScreenRes();
+		for(int i=0;i<displays.size();i++){
+			Assets.FONT.draw(batch, (i+1) + "- " + displays.get(i).width + ":" + displays.get(i).height,Constants.VIRTUAL_WIDTH*2/8,Constants.VIRTUAL_HEIGHT*(12-2*i)/16);
+		}
+	}
+	
+	private void printOptionsWideScreen(SpriteBatch batch){
+		ArrayList<DisplayMode> displays = ResolutionManager.getInstance().getWideScreenRes();
+		for(int i=0;i<displays.size();i++){
+			Assets.FONT.draw(batch, (i+1) + "- " + displays.get(i).width + ":" + displays.get(i).height,Constants.VIRTUAL_WIDTH*2/8,Constants.VIRTUAL_HEIGHT*(12-2*i)/16);
+		}
+	}
+	
+	private void printOptionsMacScreen(SpriteBatch batch){
+		ArrayList<DisplayMode> displays = ResolutionManager.getInstance().getMacScreenRes();
+		for(int i=0;i<displays.size();i++){
+			Assets.FONT.draw(batch, (i+1) + "- " + displays.get(i).width + ":" + displays.get(i).height,Constants.VIRTUAL_WIDTH*2/8,Constants.VIRTUAL_HEIGHT*(12-2*i)/16);
+		}
+	}
+	
+	
+	
 	
 	private void drawMenu(SpriteBatch batch){
 		Menu state= mm.getState();
@@ -92,11 +117,24 @@ public class MenuManagerUI implements Drawable{
 		case Help:
 			Assets.FONT.draw(batch,"Help", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
 			break;
-		case Settings:
+		case ChangeResolution:
 			Assets.FONT.draw(batch,"Change Resolution", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
-			Assets.FONT.draw(batch,"1- 800x600", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*5/8);
-			Assets.FONT.draw(batch,"2- 1024x768", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*4/8);
-			Assets.FONT.draw(batch,"3- 1280x1024", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*3/8);
+			Assets.FONT.draw(batch,"1- 16:9", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*5/8);
+			Assets.FONT.draw(batch,"2- 16:10", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*4/8);
+			Assets.FONT.draw(batch,"3- 4:3", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*3/8);
+			Assets.FONT.draw(batch,"4- FullScreen", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*2/8);
+			break;
+		case WideScreen:
+			Assets.FONT.draw(batch,"16:9", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
+			printOptionsWideScreen(batch);
+			break;
+		case NormalScreen:
+			Assets.FONT.draw(batch,"4:3", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
+			printOptionsNormalScreen(batch);
+			break;
+		case MacScreen:
+			Assets.FONT.draw(batch,"16:10", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
+			printOptionsMacScreen(batch);
 			break;
 		case HighScore:
 			Assets.FONT.draw(batch, "Recent HighScores",Constants.VIRTUAL_WIDTH*1/16,Constants.VIRTUAL_HEIGHT*7/8);
