@@ -15,7 +15,7 @@ public class HUD1Player extends HUDManager{
 	
 	public void draw(SpriteBatch batch){
 		drawSector1(batch, player);
-		Assets.SMALL_FONT.draw(batch,"Tiempo:"+ player.getTime() ,0, 15);
+		Assets.SMALL_FONT.draw(batch,"Tiempo:"+ player.getStringScore() ,0, 15);
 	}
 
 }

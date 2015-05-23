@@ -13,19 +13,18 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 public class WorldManager2PlayersVs extends WorldManager{
 	private int activeSpaceShip = 0;
 	
-	public WorldManager2PlayersVs(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
+	public WorldManager2PlayersVs(ArrayList<Player> players) {
 		super(players);
-		s.get(1).getBack().setActive(false);
-		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
-		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
+		
 	}
 	
 	public void update(){
 		super.update();
-		if(getSpaceShips().get(0).getLives()<= 0){
-			getSpaceShips().get(0).setActive(false);
-			getSpaceShips().get(1).setActive(true);
+		if(players.get(0).shipHasLost()){
+			players.get(0).changeState();
+			players.get(1).changeState();
 			activeSpaceShip = 1;
+			impasse = true;
 		}
 		if(getPlayer(0).shipHasLost()){
 			super.impasse = true;

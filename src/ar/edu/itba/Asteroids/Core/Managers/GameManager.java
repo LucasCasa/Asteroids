@@ -38,19 +38,19 @@ public class GameManager {
 	public void newGame(GameMode gm){
 		switch(gm){
 		case OnePlayer:
-			world = new WorldManager1Player(s.get(1),players);
+			world = new WorldManager1Player(players);
 			break;
 		case TwoPlayersA:
-			world = new WorldManager2Player(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
+			world = new WorldManager2Player(players);
 			break;
 		case TwoPlayersB:
-			world = new WorldManager2PlayersVs(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
+			world = new WorldManager2PlayersVs(players);
 			break;
 		case ThreePlayersA:
-			world = new WorldManager3Player(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
+			world = new WorldManager3Player(players);
 			break;
 		case ThreePlayersB:
-			world = new WorldManager3Players2vs1(new ArrayList<Connector<SpaceShip, SpaceShipUI>>(s.values()),players);
+			world = new WorldManager3Players2vs1(players);
 		}
 		isMenu = false;
 	}
@@ -61,8 +61,9 @@ public class GameManager {
 		if(isMenu){
 			MenuManager.getInstance().update();
 		}else{
-			if(!world.shipDestroyed())//hay que preguntar si termino el juego porque sino el world se sique updatando y agrega infitos jugadores iguales al highscore
+			if(!world.gameEnded()){//hay que preguntar si termino el juego porque sino el world se sique updatando y agrega infitos jugadores iguales al highscore
 				world.update();	
+			}
 			if(world.isOver()){
 				isMenu = true;
 				MenuManager.getInstance().reset();
@@ -108,7 +109,22 @@ public class GameManager {
 			players.add(new Player(name, s.getBack(), player));
 		}
 	}
+	/**
+	 * returns the player in the desire position
+	 * @param i
+	 * @return the player if exists, null if outOfBounds
+	 */
 	public Player getPlayer(int i) {
-		return players.get(i);
+		if(i<players.size()){
+			return players.get(i);
+		}
+		return null;
+	}
+	public ArrayList<SpaceShipUI> getShipsUI(){
+		ArrayList<SpaceShipUI> ships = new ArrayList<SpaceShipUI>();
+		for(Connector<SpaceShip,SpaceShipUI> aux : s.values()){
+			ships.add(aux.getFront());
+		}
+		return ships;
 	}
 }

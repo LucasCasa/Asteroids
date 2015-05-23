@@ -1,6 +1,8 @@
 package ar.edu.itba.Asteroids.Core.Managers.HUDs;
 
+import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Player;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -19,7 +21,10 @@ public class HUD3Players2vs1 extends HUDManager {
 		drawSector1(batch, player1);
 		drawSector2(batch, player2);
 		drawSector3(batch, player3);
-
+		Assets.SMALL_FONT.draw(batch,"Tiempo:"+ GameManager.getInstance().getTime() ,0, 15);
+		Assets.SMALL_FONT.draw(batch, "Score "+ player1.getName() + ":" + player1.getStringScore(), 0, 30);
+		Assets.SMALL_FONT.draw(batch, "Score "+ player2.getName() + ":" + player2.getStringScore(), 0, 45);
+		Assets.SMALL_FONT.draw(batch, "Score "+ player3.getName() + ":" + player3.getStringScore(), 0, 60);
 	}
 
 }

@@ -19,8 +19,8 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 import com.badlogic.gdx.Input.Keys;
 
 public abstract class WorldManager {
-	public ArrayList<Connector<Asteroid,AsteroidUI>> asteroids;
-	private ArrayList<Connector<PowerUp, PowerUpUI>> powerUps;
+	public ArrayMap<Asteroid,AsteroidUI> asteroids;
+	private ArrayMap<PowerUp, PowerUpUI> powerUps;
 	protected SpaceShip first;
 	protected SpaceShipUI firstUI;
 	protected Timer timer;
@@ -28,7 +28,7 @@ public abstract class WorldManager {
 	protected boolean gameOver;
 	private Timer powerUpTimer;
 	private final float powerUpCooldown = 5f;
-	private ArrayMap<SpaceShip,SpaceShipUI> ships;
+	// private ArrayMap<SpaceShip,SpaceShipUI> ships;
 	protected ArrayList<Player> players;
 	protected boolean impasse;
 	private boolean pause;
@@ -40,11 +40,10 @@ public abstract class WorldManager {
 	 * and third one of the third player, depending on the amount of spaceShips that there is
 	 */
 	public WorldManager(ArrayList<Player> players){
-		 asteroids = new ArrayList<Connector<Asteroid,AsteroidUI>>();
-		 ships = new ArrayMap<SpaceShip,SpaceShipUI>();
+		 asteroids = new ArrayMap<Asteroid,AsteroidUI>();
 		 timer = new Timer();
 		 powerUpTimer = new Timer();
-		 powerUps = new ArrayList<Connector<PowerUp, PowerUpUI>>();
+		 powerUps = new ArrayMap<PowerUp, PowerUpUI>();
 		 this.players = players;
 	}
 
@@ -52,13 +51,13 @@ public abstract class WorldManager {
 		if(!gameOver){
 			if(impasse || pause){
 				if(impasse){
-					powerUps = new ArrayList<Connector<PowerUp, PowerUpUI>>();
+					powerUps = new ArrayMap<PowerUp, PowerUpUI>();
 				}
 			}else{
 				updatePowerUps();
 				updateSpaceships();
-				for( Connector<Asteroid,AsteroidUI> a: asteroids){
-					a.getBack().update();
+				for( Asteroid a: asteroids.getKeys()){
+					a.update();
 				}
 				updateAsteroidCollision();
 				updatePowerUpCollision();
@@ -69,11 +68,7 @@ public abstract class WorldManager {
 	
 	
 	public ArrayList<AsteroidUI> getAsteroidsUI() {
-		ArrayList<AsteroidUI> au = new ArrayList<AsteroidUI>();
-		for(int i = 0; i<asteroids.size();i++){
-			au.add(asteroids.get(i).getFront());
-		}
-		return au;
+		return asteroids.getValues();
 	}
 	public ArrayList<PowerUpUI> getPowerUpUI(){
 		ArrayList<PowerUpUI> pui = new ArrayList<PowerUpUI>();
@@ -82,21 +77,27 @@ public abstract class WorldManager {
 		}
 		return pui;
 	}
-	public ArrayList<SpaceShipUI> getShipsUI(){
+	/*public ArrayList<SpaceShipUI> getShipsUI(){
 		return ships.getValues(); 
-	}
+	}*/
 	public float getTime(){
 		return timer.getTime();
 	}
 	
 
 	public ArrayList<SpaceShip> getSpaceShips(){
-		return ships.getKeys();
+		ArrayList<SpaceShip> aux = new ArrayList<SpaceShip>();
+		for(Player p: players){
+			if(p.isSpaceShipPlayer()){
+				aux.add(p.getSpaceShip());
+			}
+		}
+		return aux;
 	}
 	
-	public ArrayMap<SpaceShip, SpaceShipUI> getAll(){
+	/*public ArrayMap<SpaceShip, SpaceShipUI> getAll(){
 		return ships;
-	}
+	}*/
 	
 	/**
 	 * 
@@ -112,11 +113,8 @@ public abstract class WorldManager {
 	}
 
 	public void addAsteroid(Asteroid thrown, AsteroidUI asteroidUI) {
-		asteroids.add(new Connector<Asteroid,AsteroidUI>(thrown,asteroidUI));
+		asteroids.put(thrown, asteroidUI);
 		
-	}
-	public boolean getGameOver(){
-		return gameOver;
 	}
 	// CHECKEAR ESTO CON EL TEMA DE LOS PLAYERS
 	public void keyDown(int keyCode, int activeSpaceShip) {
@@ -136,16 +134,16 @@ public abstract class WorldManager {
 		}else{
 			switch (keyCode) {
 			case Keys.W:
-				ships.getKeyAt(activeSpaceShip).acelUp(true);
+				players.get(activeSpaceShip).getSpaceShip().acelUp(true);
 				break;
 			case Keys.S:
-				ships.getKeyAt(activeSpaceShip).acelDown(true);
+				players.get(activeSpaceShip).getSpaceShip().acelDown(true);
 				break;
 			case Keys.A:
-				ships.getKeyAt(activeSpaceShip).acelLeft(true);
+				players.get(activeSpaceShip).getSpaceShip().acelLeft(true);
 				break;
 			case Keys.D:
-				ships.getKeyAt(activeSpaceShip).acelRight(true);
+				players.get(activeSpaceShip).getSpaceShip().acelRight(true);
 				break;
 			case Keys.ESCAPE:
 				pause = true;
@@ -157,16 +155,16 @@ public abstract class WorldManager {
 	public void keyUp(int keyCode, int activeSpaceShip) {
 		switch (keyCode) {
 		case Keys.W:
-			ships.getKeyAt(activeSpaceShip).acelUp(false);
+			players.get(activeSpaceShip).getSpaceShip().acelUp(false);
 			break;
 		case Keys.S:
-			ships.getKeyAt(activeSpaceShip).acelDown(false);
+			players.get(activeSpaceShip).getSpaceShip().acelDown(false);
 			break;
 		case Keys.A:
-			ships.getKeyAt(activeSpaceShip).acelLeft(false);
+			players.get(activeSpaceShip).getSpaceShip().acelLeft(false);
 			break;
 		case Keys.D:
-			ships.getKeyAt(activeSpaceShip).acelRight(false);
+			players.get(activeSpaceShip).getSpaceShip().acelRight(false);
 			break;
 		}	
 		
@@ -220,26 +218,26 @@ public abstract class WorldManager {
 			powerUps.add(PowerUpCreator.create());
 			powerUpTimer.reset();
 		}
-		for(Connector<PowerUp, PowerUpUI> p: powerUps){
-			p.getBack().update();
+		for(PowerUp p: powerUps.getKeys()){
+			p.update();
 		}
 	}
 	
 	public void updatePowerUpCollision(){
-		Connector<PowerUp, PowerUpUI> con;
+		PowerUp con;
 		for(int i=0;i<powerUps.size();i++){
-			con = powerUps.get(i);
+			con = powerUps.getKeyAt(i);
 
-			for(Connector<Asteroid, AsteroidUI> a: asteroids){
-				if(con.getBack().collision(a.getBack()))
+			for(Asteroid a: asteroids.getKeys()){
+				if(con.collision(a));
 					powerUps.remove(con);
 
 			}
 			
 			for(Player p: players){
 				if(p.isSpaceShipPlayer()){
-					if(con.getBack().collision(p.getSpaceShip()) && powerUps.contains(con)){
-						con.getBack().effect(p.getSpaceShip());
+					if(con.collision(p.getSpaceShip()) && powerUps.contains(con)){
+						con.effect(p.getSpaceShip());
 						powerUps.remove(con);
 					}
 				}
@@ -266,7 +264,7 @@ public abstract class WorldManager {
 	public boolean isOver(){
 		return gotoMenu;
 	}
-	public boolean shipDestroyed(){
+	public boolean gameEnded(){
 		return gameOver;
 	}
 }

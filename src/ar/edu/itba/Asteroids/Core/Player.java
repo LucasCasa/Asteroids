@@ -8,7 +8,7 @@ public class Player implements Logical {
 	private SpaceShip spaceShip;
 	private AsteroidPlayer asteroidP;
 	private int playerNumber;
-	//private float score = 0f; directamente usa getScore que devuelve el tiempo
+	private float score = 0f;
 	private Timer timer;
 	private boolean shipActive = true; // hay que ver como se da cuenta que es ap;
 	private boolean asteroidActive = false; 
@@ -39,6 +39,7 @@ public class Player implements Logical {
 		if(startsAsteroid){
 			asteroidActive = true;
 			shipActive = false;
+			spaceShip.setActive(false);
 		}
 		
 		
@@ -95,7 +96,8 @@ public class Player implements Logical {
 		}
 	}
 	private void updateSpaceShip(){
-		if(shipActive){
+		if(shipActive && spaceShip.isActive()){
+			score += timer.getDeltaTime();
 			timer.update();
 			if(spaceShip.getLives()<=0){
 				timer.reset();
@@ -111,7 +113,19 @@ public class Player implements Logical {
 		asteroidP.update();
 	}
 	public float getScore() {
-		return getTime();
+		return score;
+	}
+	public String getStringScore(){
+		String score = String.valueOf(this.score);
+		String aux[] = score.split("\\.");
+		if(aux.length > 1){
+		if(aux[1].length() > 2){
+			aux[1] = aux[1].substring(0, 2);
+		}
+		return aux[0] + "."+ aux[1];
+		}else{
+			return score;
+		}
 	}
 	public float getTime() {
 		return timer.getTime();

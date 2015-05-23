@@ -14,13 +14,10 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 public class WorldManager1Player extends WorldManager{
 	private AIPlayer AI;
 	int i = 0;
-	public WorldManager1Player(Connector<SpaceShip,SpaceShipUI> a,ArrayList<Player> players) {
+	public WorldManager1Player(ArrayList<Player> players) {
 		super(players);
 		HighScoreManager.getInstance().loadScores();
 		AI = new AIPlayer();
-		getAll().put(a.getBack(), a.getFront());
-		first = a.getBack();
-		firstUI = a.getFront();
 	}
 	
 	public void update(){

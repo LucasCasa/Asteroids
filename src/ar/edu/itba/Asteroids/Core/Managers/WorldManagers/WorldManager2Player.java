@@ -13,10 +13,8 @@ import com.badlogic.gdx.Input.Keys;
 
 public class WorldManager2Player extends WorldManager{
 	private AIPlayer AI;
-	public WorldManager2Player(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
+	public WorldManager2Player(ArrayList<Player> players) {
 		super(players);
-		super.getAll().put(s.get(0).getBack(), s.get(0).getFront());
-		super.getAll().put(s.get(1).getBack(), s.get(1).getFront());
 		AI = new AIPlayer();
 	}
 
@@ -31,7 +29,7 @@ public class WorldManager2Player extends WorldManager{
 		
 	}
 	public void checkGameOver(){
-		for(int i = 0; i<players.size() && gameOver == false;i++){
+		for(int i = 0; i<players.size() && gameOver == false ;i++){
 			if(players.get(i).shipHasLost()){
 				gameOver = true;
 			}

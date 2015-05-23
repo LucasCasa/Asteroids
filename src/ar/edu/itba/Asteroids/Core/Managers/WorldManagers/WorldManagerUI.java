@@ -19,30 +19,30 @@ public class WorldManagerUI implements Drawable{
 	HUDManager h;
 	WorldManager wm;
 	List<AsteroidUI> aUI;
-
-	public WorldManagerUI(WorldManager w, HUDManager h){
+	List<SpaceShipUI> shipsUI;
+	public WorldManagerUI(WorldManager w,ArrayList<SpaceShipUI> ships, HUDManager h){
 		wm = w;
 		this.h = h;
 		aUI = new ArrayList<AsteroidUI>();
+		shipsUI = ships;
 	}
 
 	public void draw(SpriteBatch batch){
-		if ( wm.getGameOver() && wm.players.size() == 1) {
-			String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
-			String score = GameManager.getInstance().getPlayer(0).getScore() + "";
-
+		if ( wm.gameEnded()) {
 			Assets.FONT.draw(batch, "Game Over", Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 100);
-			if(wm.players.size()!=1){
-				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 60);
-			}
-			else{
+			if(wm.players.size() == 1){
+				String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
+				String score = GameManager.getInstance().getPlayer(0).getScore() + "";
+
 				Assets.FONT.draw(batch, "High Score:", Constants.VIRTUAL_WIDTH/2 - 200, Constants.VIRTUAL_HEIGHT/2 + 10);
 				Assets.FONT.draw(batch, highScore, Constants.VIRTUAL_WIDTH/2 + 80, Constants.VIRTUAL_HEIGHT/2 + 10);
 
 				Assets.FONT.draw(batch, "Scored:", Constants.VIRTUAL_WIDTH/2 - 150, Constants.VIRTUAL_HEIGHT/2 - 100);
-				Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH/2 + 50, Constants.VIRTUAL_HEIGHT/2 - 100);	        	
-			}
+				Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH/2 + 50, Constants.VIRTUAL_HEIGHT/2 - 100);
 
+			}else{
+				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 60);
+			}
 		}else if(wm.isImpasse()){
 			Assets.FONT.draw(batch, "Cambio de posiciones", 200, 400);
 			for(int i =0;i<wm.getNumberOfPlayers();i++){
@@ -74,8 +74,8 @@ public class WorldManagerUI implements Drawable{
 			Assets.FONT.draw(batch, "Juego Pausado", 200, 400);
 			Assets.SMALL_FONT.draw(batch, "Presione Enter para continuar", 100, 300);
 		}else{
-			
-			for(SpaceShipUI s: wm.getShipsUI()){
+
+			for(SpaceShipUI s: shipsUI){
 				s.draw(batch);
 			}
 			for(AsteroidUI a : wm.getAsteroidsUI()){

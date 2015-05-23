@@ -12,9 +12,9 @@ import com.badlogic.gdx.Input.Keys;
 
 public class WorldManager3Player extends WorldManager2Player{
 	
-	public WorldManager3Player(List<Connector<SpaceShip,SpaceShipUI>> s,ArrayList<Player> players) {
-		super(s,players);
-		super.getAll().put(s.get(2).getBack(), s.get(2).getFront());
+	public WorldManager3Player(ArrayList<Player> players) {
+		super(players);
+	
 	}
 	public void checkGameOver(){
 		int aux =0;
@@ -30,16 +30,16 @@ public class WorldManager3Player extends WorldManager2Player{
 	public void keyDown(int keyCode){
 		switch (keyCode) {
 		case Keys.K:
-			getSpaceShips().get(2).acelDown(true);
+			players.get(2).getSpaceShip().acelDown(true);
 			break;
 		case Keys.I:
-			getSpaceShips().get(2).acelUp(true);
+			players.get(2).getSpaceShip().acelUp(true);
 			break;
 		case Keys.J:
-			getSpaceShips().get(2).acelLeft(true);
+			players.get(2).getSpaceShip().acelLeft(true);
 			break;
 		case Keys.L:
-			getSpaceShips().get(2).acelRight(true);
+			players.get(2).getSpaceShip().acelRight(true);
 			break;
 		default:
 			super.keyDown(keyCode);
