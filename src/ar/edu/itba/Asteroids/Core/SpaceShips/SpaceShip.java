@@ -8,7 +8,11 @@ import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-
+ /**
+  * the SpaceShip class. it handles all the logic of the spaceShip
+  * @author ME
+  *
+  */
 
 
 public class SpaceShip extends Collisionable implements Logical {
@@ -64,7 +68,9 @@ public class SpaceShip extends Collisionable implements Logical {
 	public float getInvincibleTotalTime() {
 		return invincibleTotalTime;
 	}
-
+	/**
+	 * updates the invisibility timer and check whether the invisibility time is over or not.
+	 */
 	private void updateInvincibility() {
 		if(this.invincible == true){
 			inviTimer.update();
@@ -160,7 +166,9 @@ public class SpaceShip extends Collisionable implements Logical {
 			}
 		}
 	}
-
+	/**
+	 * updates the velocity checking if it can
+	 */
 	private void updateVelocity(){
 		if(Math.abs(getSpeed().x) < maxVel || getSpeed().x * acel.x <= 0){
 			getSpeed().x += acel.x * Gdx.graphics.getDeltaTime();
@@ -210,7 +218,10 @@ public class SpaceShip extends Collisionable implements Logical {
 		return this.acel;
 	}
 
-	
+	/**
+	 * 
+	 * @return an array of boolean telling if it is accelerating in any direction
+	 */
 	public boolean[] getAccelerating(){
 		return accelerating;
 	}
@@ -221,7 +232,9 @@ public class SpaceShip extends Collisionable implements Logical {
 	public void setActive(boolean b){
 		active = b;
 	}
-
+	/**
+	 * resets all the values of the class
+	 */
 	public void reset() {
 		lives = startingLives;
 		getCPos().set(initialPos.x,initialPos.y);

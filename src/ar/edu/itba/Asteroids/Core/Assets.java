@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-
+/**
+ * a Static class that has all the textures
+ * @author ME
+ *
+ */
 public class Assets {
 
 	//Asteroides

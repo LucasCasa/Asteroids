@@ -15,7 +15,11 @@ import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager3Player;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager3Players2vs1;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
-
+/**
+ * The core of the game. it calls other object based on the state of the game
+ * @author ME
+ *
+ */
 public class GameManager {
 	private static GameManager self = null;
 	private WorldManager world;

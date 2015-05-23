@@ -10,7 +10,9 @@ public class Timer {
 	public Timer(){
 		time = 0;
 	}
-	
+	/**
+	 * Updates the time of the timer, this needs to be called every cicle of the program
+	 */
 	public void update(){
 		time+= Gdx.graphics.getDeltaTime();
 	}
@@ -19,6 +21,10 @@ public class Timer {
 		time = 0;
 		last = 0;
 	}
+	/**
+	 * 
+	 * @return the time rounded by 2 decimals
+	 */
 	public float getTime(){
 		return round(time,2); 
 	}
@@ -28,6 +34,9 @@ public class Timer {
 		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
 		return bd.floatValue();
 	}
+	/**
+	 * gets the time since the last time this method was called.
+	 */
 	public float getDeltaTime(){
 		float aux =  getTime() - last;
 		last = getTime();

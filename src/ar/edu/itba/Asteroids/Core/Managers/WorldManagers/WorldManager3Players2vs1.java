@@ -9,7 +9,11 @@ import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
-
+/**
+ * the world Manager in a 3 players match, where one controlls the asteroids
+ * @author ME
+ *
+ */
 public class WorldManager3Players2vs1 extends WorldManager {
 	private int asteroidPlayerNumber = 3;
 	private boolean changePlayers = true;

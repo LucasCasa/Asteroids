@@ -15,6 +15,11 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * This class is in charge of printing(or calling other objects that print) while playing.
+ * @author ME
+ *
+ */
 public class WorldManagerUI implements Drawable{
 	HUDManager h;
 	WorldManager wm;
@@ -29,50 +34,11 @@ public class WorldManagerUI implements Drawable{
 
 	public void draw(SpriteBatch batch){
 		if ( wm.gameEnded()) {
-			Assets.FONT.draw(batch, "Game Over", Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 100);
-			if(wm.players.size() == 1){
-				String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
-				String score = GameManager.getInstance().getPlayer(0).getScore() + "";
-
-				Assets.FONT.draw(batch, "High Score:", Constants.VIRTUAL_WIDTH/2 - 200, Constants.VIRTUAL_HEIGHT/2 + 10);
-				Assets.FONT.draw(batch, highScore, Constants.VIRTUAL_WIDTH/2 + 80, Constants.VIRTUAL_HEIGHT/2 + 10);
-
-				Assets.FONT.draw(batch, "Scored:", Constants.VIRTUAL_WIDTH/2 - 150, Constants.VIRTUAL_HEIGHT/2 - 100);
-				Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH/2 + 50, Constants.VIRTUAL_HEIGHT/2 - 100);
-
-			}else{
-				Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 60);
-			}
+			drawEndScreen(batch);
 		}else if(wm.isImpasse()){
-			Assets.FONT.draw(batch, "Cambio de posiciones", 200, 400);
-			for(int i =0;i<wm.getNumberOfPlayers();i++){
-				String aux = (wm.getPlayer(i).isSpaceShipPlayer())?"Nave":"Asteroides";
-				String aux2 = "";
-				if(wm.getPlayer(i).isAsteroidPlayer()){
-					aux2 = "12346789";
-				}else{
-					if(wm instanceof WorldManager2PlayersVs){ // FEO FEO
-						aux2 = "WASD";
-					}else{
-						switch(i){
-						case 0:
-							aux2 = "WASD";
-							break;
-						case 1:
-							aux2 = "Flechas";
-							break;
-						case 2:
-							aux2 = "IJKL";
-							break;
-
-						}
-					}
-				}
-				Assets.SMALL_FONT.draw(batch, wm.getPlayer(i).getName() + " Maneja " + aux + " Controles: " + aux2, 300, 50*i+ 50);
-			}
+			drawImpasseScreen(batch);
 		}else if(wm.isPaused()){
-			Assets.FONT.draw(batch, "Juego Pausado", 200, 400);
-			Assets.SMALL_FONT.draw(batch, "Presione Enter para continuar", 100, 300);
+			drawPauseScreen(batch);
 		}else{
 
 			for(SpaceShipUI s: shipsUI){
@@ -85,6 +51,67 @@ public class WorldManagerUI implements Drawable{
 				p.draw(batch);
 			}
 			h.draw(batch);
+		}
+	}
+	/**
+	 * this is the screen at the end of the game, it tells who is the winner in case there are more than 1 player or the score
+	 * and the highscore if there is only one player
+	 * @param batch
+	 */
+	private void drawEndScreen(SpriteBatch batch){
+		Assets.FONT.draw(batch, "Game Over", Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 100);
+		if(wm.players.size() == 1){
+			String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
+			String score = GameManager.getInstance().getPlayer(0).getScore() + "";
+
+			Assets.FONT.draw(batch, "High Score:", Constants.VIRTUAL_WIDTH/2 - 200, Constants.VIRTUAL_HEIGHT/2 + 10);
+			Assets.FONT.draw(batch, highScore, Constants.VIRTUAL_WIDTH/2 + 80, Constants.VIRTUAL_HEIGHT/2 + 10);
+
+			Assets.FONT.draw(batch, "Scored:", Constants.VIRTUAL_WIDTH/2 - 150, Constants.VIRTUAL_HEIGHT/2 - 100);
+			Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH/2 + 50, Constants.VIRTUAL_HEIGHT/2 - 100);
+
+		}else{
+			Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 60);
+		}
+	}
+	/**
+	 * this is the screen when the game is pressed
+	 * @param batch
+	 */
+	private void drawPauseScreen(SpriteBatch batch){
+		Assets.FONT.draw(batch, "Juego Pausado", 200, 400);
+		Assets.SMALL_FONT.draw(batch, "Presione Enter para continuar", 100, 300);
+	}
+	/**
+	 * this screen is draw when in a Vs game the players have to change roles.
+	 * @param batch
+	 */
+	private void drawImpasseScreen(SpriteBatch batch){
+		Assets.FONT.draw(batch, "Cambio de posiciones", 200, 400);
+		for(int i =0;i<wm.getNumberOfPlayers();i++){
+			String aux = (wm.getPlayer(i).isSpaceShipPlayer())?"Nave":"Asteroides";
+			String aux2 = "";
+			if(wm.getPlayer(i).isAsteroidPlayer()){
+				aux2 = "12346789";
+			}else{
+				if(wm instanceof WorldManager2PlayersVs){ // FEO FEO
+					aux2 = "WASD";
+				}else{
+					switch(i){
+					case 0:
+						aux2 = "WASD";
+						break;
+					case 1:
+						aux2 = "Flechas";
+						break;
+					case 2:
+						aux2 = "IJKL";
+						break;
+
+					}
+				}
+			}
+			Assets.SMALL_FONT.draw(batch, wm.getPlayer(i).getName() + " Maneja " + aux + " Controles: " + aux2, 300, 50*i+ 50);
 		}
 	}
 

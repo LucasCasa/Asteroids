@@ -13,7 +13,11 @@ import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManagerUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+/**
+ * the Core UI of the game, it calls other object based of the state of the game
+ * @author ME
+ *
+ */
 public class GameManagerUI implements Drawable{
 	private static GameManagerUI self = null;
 	private WorldManagerUI worldUI;
@@ -26,6 +30,10 @@ public class GameManagerUI implements Drawable{
 		}
 		return self;
 	}
+	/**
+	 * it creates a new WorldManagerUI based of the gameMode
+	 * @param gm the gameMode to play
+	 */
 	public void newGame(GameMode gm){
 		Player p1 = GameManager.getInstance().getPlayer(0);
 		Player p2 = GameManager.getInstance().getPlayer(1);
@@ -49,7 +57,9 @@ public class GameManagerUI implements Drawable{
 			break;
 		}
 	}
-	
+	/**
+	 * calls the MenuManagerUI or WorldManagerUI depending on the state of the game
+	 */
 	public void draw(SpriteBatch batch){
 		if(GameManager.getInstance().isInMenu()){
 			MenuManagerUI.getInstance().draw(batch);

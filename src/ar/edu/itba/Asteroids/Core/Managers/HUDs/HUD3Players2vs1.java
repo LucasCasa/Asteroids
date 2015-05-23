@@ -5,7 +5,11 @@ import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+/**
+ * this is the HUD for the 3 player mod where one controlls the asteroids.
+ * @author ME
+ *
+ */
 public class HUD3Players2vs1 extends HUDManager {
 	private Player player1;
 	private Player player2;
@@ -17,6 +21,9 @@ public class HUD3Players2vs1 extends HUDManager {
 		player3 = p3;
 	}
 	@Override
+	/**
+	 * it draws all the informacion of the 3 players plus the score they have
+	 */
 	public void draw(SpriteBatch batch) {
 		drawSector1(batch, player1);
 		drawSector2(batch, player2);

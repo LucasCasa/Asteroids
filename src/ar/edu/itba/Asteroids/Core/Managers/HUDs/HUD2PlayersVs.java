@@ -4,7 +4,11 @@ import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Player;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+/**
+ * the HUD Manager whene the game is a one vs one(one controlls the space ship. the other the asteroids)
+ * @author ME
+ *
+ */
 public class HUD2PlayersVs extends HUDManager{
 	Player player1;
 	Player player2;

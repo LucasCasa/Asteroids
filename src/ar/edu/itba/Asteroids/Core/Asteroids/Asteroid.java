@@ -6,7 +6,11 @@ import ar.edu.itba.Asteroids.Core.Logical;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-
+/**
+ * the Asteroid Class, handles the movement of the asteroid.
+ * @author ME
+ *
+ */
 public class Asteroid extends Collisionable implements Logical{
 	
 	private static final float minRadius = 15.0f;

@@ -1,15 +1,15 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import ar.edu.itba.Asteroids.Core.Player;
 
 import com.badlogic.gdx.Input.Keys;
-
-import ar.edu.itba.Asteroids.Core.Connector;
-import ar.edu.itba.Asteroids.Core.Player;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
-
+/**
+ * the worldManager in a 1vs1 match
+ * @author Lucas
+ *
+ */
 public class WorldManager2PlayersVs extends WorldManager{
 	private int activeSpaceShip = 0;
 	
@@ -17,7 +17,9 @@ public class WorldManager2PlayersVs extends WorldManager{
 		super(players);
 		
 	}
-	
+	/**
+	 * updates the game and chech if the game is over or if the players have to change positions
+	 */
 	public void update(){
 		super.update();
 		if(players.get(0).shipHasLost()){

@@ -2,7 +2,11 @@ package ar.edu.itba.Asteroids.Core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-
+/**
+ * Abstract class. superclass of all the object that collide in the game
+ * @author ME
+ *
+ */
 public abstract class Collisionable {
 	private Vector2 cPosition;
 	private Vector2 Position;
@@ -21,6 +25,10 @@ public abstract class Collisionable {
 		collisionPoint = new Vector2();
 		
 	}
+	/**
+	 * Checks if there is a collision between this and the other
+	 * @return true if collision
+	 */
 	public boolean collision(Collisionable o){
 		float dist = (float)(Math.pow(o.cPosition.x - cPosition.x,2) + Math.pow(o.cPosition.y - cPosition.y, 2));
 		if(dist <= Math.pow(radius +o.getRadius(),2)){
@@ -29,6 +37,10 @@ public abstract class Collisionable {
 			return false;
 		}
 	}
+	/**
+	 * set the new velocity of this and the other object after a collision
+	 * @param o the other object that collide
+	 */
 	public void newVel(Collisionable o){
 		collisionPoint.x = ((cPosition.x * o.radius) + (o.cPosition.x * radius)) / (radius + o.radius);		 
 		collisionPoint.y = ((cPosition.y * o.radius) + (o.cPosition.y * radius)) / (radius + o.radius);
@@ -52,7 +64,9 @@ public abstract class Collisionable {
 		o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
 		}
 	}
-	
+	/**
+	 * checks if the object is going out of screen
+	 */
 	public void checkOutOfScreen(){
 		if(cPosition.x + radius > Constants.VIRTUAL_WIDTH || cPosition.x - radius < 0){
 			if(cPosition.x -radius < 0){

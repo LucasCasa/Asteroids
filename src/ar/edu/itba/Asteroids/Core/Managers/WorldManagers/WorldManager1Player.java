@@ -10,7 +10,11 @@ import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
 import ar.edu.itba.Asteroids.Core.Managers.HighScoreManager;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
-
+/**
+ * the world manager when in single player
+ * @author ME
+ *
+ */
 public class WorldManager1Player extends WorldManager{
 	private AIPlayer AI;
 	int i = 0;

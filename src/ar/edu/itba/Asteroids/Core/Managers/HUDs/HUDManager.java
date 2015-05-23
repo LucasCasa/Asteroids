@@ -8,6 +8,11 @@ import ar.edu.itba.Asteroids.Core.Player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * the base class for all the HUDManagers
+ * @author ME
+ *
+ */
 public abstract class HUDManager implements Drawable{
 	private final int HORIZONTAL_OFFSET = 120;
 	public HUDManager(){

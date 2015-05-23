@@ -1,7 +1,14 @@
 package ar.edu.itba.Asteroids.Core;
 
 import java.util.ArrayList;
-
+/**
+ * This class consist of two arrayList that are related. one is for the logical and the other is for the drawble
+ * part.
+ * @author ME
+ *
+ * @param <K> the logical part
+ * @param <V> the drawable part
+ */
 public class ArrayMap<K extends Logical,V extends Drawable> {
 	ArrayList<K> keys;
 	ArrayList<V> values;
@@ -15,20 +22,40 @@ public class ArrayMap<K extends Logical,V extends Drawable> {
 		keys.add(key);
 		values.add(value);
 	}
+	/**
+	 *  it adds the K in the connector to the Keys and the V to the values
+	 * @param o the object to add
+	 */
 	public void add(Connector<K,V> o){
 		keys.add(o.getBack());
 		values.add(o.getFront());
 	}
+	/**
+	 * gets all the logical part of the Map
+	 * @return and arrayList with all the logical objects
+	 */
 	public ArrayList<K> getKeys(){
 		return keys;
 	}
+	/**
+	 * gets all the drawable part of the Map
+	 * @return and arrayList with all the drawable objects
+	 */
 	public ArrayList<V> getValues(){
 		return values;
 	}
+	/**
+	 * removes from the keys and the values at the specified index
+	 * @param i
+	 */
 	public void remove(int i){
 		keys.remove(i);
 		values.remove(i);
 	}
+	/**
+	 * removes from both arrayList based on the key
+	 * @param key key to be removed
+	 */
 	public void remove(K key){
 		int aux = keys.indexOf(key);
 		if(aux >= 0){

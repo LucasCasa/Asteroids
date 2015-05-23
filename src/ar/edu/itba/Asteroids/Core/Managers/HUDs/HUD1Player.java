@@ -5,7 +5,11 @@ import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+/**
+ * the singlePlayer HUD
+ * @author ME
+ *
+ */
 public class HUD1Player extends HUDManager{
 	private Player player;
 	

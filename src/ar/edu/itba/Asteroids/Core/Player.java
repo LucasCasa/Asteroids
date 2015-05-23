@@ -2,7 +2,11 @@ package ar.edu.itba.Asteroids.Core;
 
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
-
+/**
+ * This class has the information of the player and its spaceship and asteroidPlayer(in Vs)
+ * @author ME
+ *
+ */
 public class Player implements Logical {
 	private String name;
 	private SpaceShip spaceShip;
@@ -52,12 +56,12 @@ public class Player implements Logical {
 	}
 	/**
 	 * 
-	 * @return name of the player
+	 * @return name of the player DUH
 	 */
 	public String getName(){
 		return name;
 	}
-	/* esto podria tambien fijarse si asteroidP es null y tirar error */
+
 	public boolean isSpaceShipPlayer(){
 		return shipActive;
 	}
@@ -86,6 +90,9 @@ public class Player implements Logical {
 			updateSpaceShip();
 		}
 	}
+	/**
+	 * this method neeeds to be call when a player changes what is he controlling
+	 */
 	public void changeState(){
 		shipActive = !shipActive;
 		asteroidActive = !asteroidActive;
@@ -105,8 +112,6 @@ public class Player implements Logical {
 			}else{
 				spaceShip.update();
 			}
-		}else if(asteroidP != null){
-			updateAsteroidPlayer();
 		}
 	}
 	private void updateAsteroidPlayer(){
@@ -115,6 +120,11 @@ public class Player implements Logical {
 	public float getScore() {
 		return score;
 	}
+	
+	/**
+	 * Returs the score rounded by 2 decimals and in a String
+	 * @return the Score
+	 */
 	public String getStringScore(){
 		String score = String.valueOf(this.score);
 		String aux[] = score.split("\\.");
@@ -130,6 +140,9 @@ public class Player implements Logical {
 	public float getTime() {
 		return timer.getTime();
 	}
+	/**
+	 * it reset al the spaceShip logic ( called when playing 2vs1 and a spaceship plays 2 times)
+	 */
 	public void reset() {
 		spaceShip.reset();
 		
