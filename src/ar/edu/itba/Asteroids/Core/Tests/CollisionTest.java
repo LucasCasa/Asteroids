@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
+import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpCreator;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 
@@ -51,6 +52,10 @@ public class CollisionTest {
 		b.shipCollision(a);
 		Assert.assertEquals(3, b.getLives());
 		
+	}
+	@Test
+	public void EliminatePowerUp(){
+		PowerUpCreator.create();
 	}
 /*	Falta implementar que si el asteroide se va de la pantalla desparece
  * 	@Test

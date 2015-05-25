@@ -31,7 +31,7 @@ public abstract class Collisionable {
 	 */
 	public boolean collision(Collisionable o){
 		float dist = (float)(Math.pow(o.cPosition.x - cPosition.x,2) + Math.pow(o.cPosition.y - cPosition.y, 2));
-		if(dist <= Math.pow(radius +o.getRadius(),2)){
+		if(dist <= Math.pow(radius + o.getRadius(),2)){
 			return true;
 		}else{
 			return false;

@@ -34,13 +34,13 @@ public class AsteroidThrower {
 		float ady = x2 - x1;
 		float op = y2 - y1;
 		float hip = Vector2.dst(x1,y1,x2,y2);
-		float cos_alfa = ady/hip;
-		float sin_alfa = op/hip;
+		float cosAlfa = ady/hip;
+		float sinAlfa = op/hip;
 		float vel = 200*velFactor;
 		
 		float mass = (float)Math.random() * 1 + 1;
-		float velx = vel*cos_alfa;
-		float vely = vel*sin_alfa;
+		float velx = vel*cosAlfa;
+		float vely = vel*sinAlfa;
 		return new Asteroid(x1, y1, velx, vely, mass);
 	}
 	

@@ -64,47 +64,75 @@ public abstract class WorldManager {
 			}
 		}
 	}
-
-	
-	
-	public ArrayList<AsteroidUI> getAsteroidsUI() {
-		return asteroids.getValues();
-	}
-	public ArrayList<PowerUpUI> getPowerUpUI(){
-		ArrayList<PowerUpUI> pui = new ArrayList<PowerUpUI>();
-		for(int i = 0; i<powerUps.size();i++){
-			pui.add(powerUps.get(i).getFront());
-		}
-		return pui;
-	}
-	/*public ArrayList<SpaceShipUI> getShipsUI(){
-		return ships.getValues(); 
-	}*/
-	public float getTime(){
-		return timer.getTime();
-	}
-	
-
-	public ArrayList<SpaceShip> getSpaceShips(){
-		ArrayList<SpaceShip> aux = new ArrayList<SpaceShip>();
-		for(Player p: players){
-			if(p.isSpaceShipPlayer()){
-				aux.add(p.getSpaceShip());
+	public void updateAsteroidCollision(){
+		for(int i = 0; i<asteroids.size();i++){
+			Asteroid aux = asteroids.get(i).getBack();
+			for(int j = i+1; j < asteroids.size();j++){
+				aux.asteroidCollision(asteroids.get(j).getBack());
+			}
+			if(aux.outOfScreen()){
+				asteroids.remove(i);
+			}
+			for(Player p : players){
+				if(p.isSpaceShipPlayer() && !p.shipHasLost() && p.getSpaceShip().shipCollision(aux)){
+					asteroids.remove(i);
+				}
 			}
 		}
-		return aux;
 	}
 	
-	/*public ArrayMap<SpaceShip, SpaceShipUI> getAll(){
-		return ships;
-	}*/
+	public void updatePowerUps(){
+		powerUpTimer.update();
+		if(powerUpTimer.getTime() > powerUpCooldown){
+			powerUps.add(PowerUpCreator.create());
+			powerUpTimer.reset();
+		}
+		for(PowerUp p: powerUps.getKeys()){
+			p.update();
+		}
+	}
 	
+	public void updatePowerUpCollision(){
+		PowerUp con;
+		for(int i=0;i<powerUps.size();i++){
+			con = powerUps.getKeyAt(i);
+
+			for(Asteroid a: asteroids.getKeys()){
+				if(con.collision(a)){
+					powerUps.remove(con);
+				}
+			}
+			
+			for(Player p: players){
+				if(p.isSpaceShipPlayer()){
+					if(con.collision(p.getSpaceShip()) && powerUps.contains(con)){
+						con.effect(p.getSpaceShip());
+						powerUps.remove(con);
+					}
+				}
+			}
+		}
+	}
+	public void updateSpaceships(){
+		for(Player p: players){
+			p.update();
+		}
+		for(int i = 0; i<players.size();i++){
+			if(players.get(i).isSpaceShipPlayer() && !players.get(i).shipHasLost()){
+				SpaceShip aux = players.get(i).getSpaceShip();
+				for(int j = i+1;j<players.size();j++){
+					if(players.get(j).isSpaceShipPlayer() && !players.get(j).shipHasLost()){
+						aux.shipCollision(players.get(j).getSpaceShip());
+					}
+				}
+			}
+		}
+	}
 	/**
 	 * 
 	 * @return null if there is no asteroid player in that mode (there is an AI Asteroid player) or returns the player which is controlling the asteroids
-	 
-	public abstract AsteroidPlayer getAsteroidPlayer();
 	*/
+
 	public void keyDown(int keyCode) {	
 		keyDown(keyCode, 0);
 	}
@@ -169,7 +197,15 @@ public abstract class WorldManager {
 		}	
 		
 	}
-
+	public ArrayList<SpaceShip> getSpaceShips(){
+		ArrayList<SpaceShip> aux = new ArrayList<SpaceShip>();
+		for(Player p: players){
+			if(p.isSpaceShipPlayer()){
+				aux.add(p.getSpaceShip());
+			}
+		}
+		return aux;
+	}
 	public AsteroidPlayer getAsteroidPlayer() {
 		for(Player p: players){
 			if(!p.isSpaceShipPlayer()){
@@ -178,71 +214,14 @@ public abstract class WorldManager {
 		}
 		return null;
 	}
-
-	public void updateSpaceships(){
-		for(Player p: players){
-			p.update();
-		}
-		for(int i = 0; i<players.size();i++){
-			if(players.get(i).isSpaceShipPlayer() && !players.get(i).shipHasLost()){
-				SpaceShip aux = players.get(i).getSpaceShip();
-				for(int j = i+1;j<players.size();j++){
-					if(players.get(j).isSpaceShipPlayer() && !players.get(j).shipHasLost()){
-						aux.shipCollision(players.get(j).getSpaceShip());
-					}
-				}
-			}
-		}
+	public ArrayList<AsteroidUI> getAsteroidsUI() {
+		return asteroids.getValues();
 	}
-	
-	public void updateAsteroidCollision(){
-		for(int i = 0; i<asteroids.size();i++){
-			Asteroid aux = asteroids.get(i).getBack();
-			for(int j = i+1; j < asteroids.size();j++){
-				aux.asteroidCollision(asteroids.get(j).getBack());
-			}
-			if(aux.outOfScreen()){
-				asteroids.remove(i);
-			}
-			for(Player p : players){
-				if(p.isSpaceShipPlayer() && !p.shipHasLost() && p.getSpaceShip().shipCollision(aux)){
-					asteroids.remove(i);
-				}
-			}
-		}
+	public ArrayList<PowerUpUI> getPowerUpUI(){
+		return powerUps.getValues();
 	}
-	
-	public void updatePowerUps(){
-		powerUpTimer.update();
-		if(powerUpTimer.getTime() > powerUpCooldown){
-			powerUps.add(PowerUpCreator.create());
-			powerUpTimer.reset();
-		}
-		for(PowerUp p: powerUps.getKeys()){
-			p.update();
-		}
-	}
-	
-	public void updatePowerUpCollision(){
-		PowerUp con;
-		for(int i=0;i<powerUps.size();i++){
-			con = powerUps.getKeyAt(i);
-
-			for(Asteroid a: asteroids.getKeys()){
-				if(con.collision(a));
-					powerUps.remove(con);
-
-			}
-			
-			for(Player p: players){
-				if(p.isSpaceShipPlayer()){
-					if(con.collision(p.getSpaceShip()) && powerUps.contains(con)){
-						con.effect(p.getSpaceShip());
-						powerUps.remove(con);
-					}
-				}
-			}
-		}
+	public float getTime(){
+		return timer.getTime();
 	}
 	public Player getPlayer(int index){
 		return players.get(index);
