@@ -28,6 +28,11 @@ public final class SpaceShipCreator {
 
 	}
 	
+	/**
+	 * @param playerNumber the player's number
+	 * 
+	 * @return Returns a vector with the x and y starting position for the respective player.
+	 */
 	private static Vector2 startPos(int playerNumber){
 		switch(playerNumber){
 		case 1: return new Vector2(offset,Constants.VIRTUAL_HEIGHT - offset);

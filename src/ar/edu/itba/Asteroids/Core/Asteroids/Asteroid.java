@@ -15,6 +15,7 @@ public class Asteroid extends Collisionable implements Logical{
 	
 	private static final float minRadius = 15.0f;
 	private static final float radiusOffset = 10.0f;
+	public static final int damageToShips = 1;
 	
 	
 	/**

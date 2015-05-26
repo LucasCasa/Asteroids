@@ -3,13 +3,11 @@ package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 import java.util.ArrayList;
 
 import ar.edu.itba.Asteroids.Core.ArrayMap;
-import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
-import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUp;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpCreator;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpUI;
@@ -128,10 +126,6 @@ public abstract class WorldManager {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @return null if there is no asteroid player in that mode (there is an AI Asteroid player) or returns the player which is controlling the asteroids
-	*/
 
 	public void keyDown(int keyCode) {	
 		keyDown(keyCode, 0);

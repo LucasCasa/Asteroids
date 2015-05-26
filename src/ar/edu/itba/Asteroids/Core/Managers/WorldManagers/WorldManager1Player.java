@@ -3,13 +3,10 @@ package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.ArrayList;
 
-import ar.edu.itba.Asteroids.Core.Assets;
-import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
 import ar.edu.itba.Asteroids.Core.Managers.HighScoreManager;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
+
 /**
  * the world manager when in single player
  * @author ME

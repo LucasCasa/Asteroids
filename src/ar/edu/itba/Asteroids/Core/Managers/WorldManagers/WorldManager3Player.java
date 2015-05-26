@@ -1,12 +1,8 @@
 package ar.edu.itba.Asteroids.Core.Managers.WorldManagers;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Player;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.Input.Keys;
 /**

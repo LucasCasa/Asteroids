@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.TreeMap;
 
 import org.parse4j.Parse;
-import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 
 import ar.edu.itba.Asteroids.Core.Player;
@@ -94,6 +93,7 @@ public class HighScoreManager implements Serializable{
 	
 	
 	private class ScoreComparator implements Comparator<Float>, Serializable{
+
 		public int compare(Float o1, Float o2) {
 			int diff = (int)(o2.floatValue() - o1.floatValue());
 			if (diff == 0) {

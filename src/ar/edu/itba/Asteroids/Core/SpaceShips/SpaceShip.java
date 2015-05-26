@@ -80,9 +80,9 @@ public class SpaceShip extends Collisionable implements Logical {
 		}
 	}
 	/**
-	 * check whether the two object collide with each other.
+	 * check if the two object collide with each other.
 	 * if the other object is a ship then it bounces.
-	 * if the other object is an asteroid then it takes one life.
+	 * if the other object is an asteroid then it is damaged.
 	 * 
 	 * @param o the other object
 	 * @return true if collision, false if not
@@ -93,7 +93,7 @@ public class SpaceShip extends Collisionable implements Logical {
 		if(b){
 			setCollision(b);
 			if( o instanceof Asteroid){
-				this.damage(1);
+				this.damage(Asteroid.damageToShips);
 				newVel(o);
 			}else{
 				newVel(o);
@@ -103,9 +103,9 @@ public class SpaceShip extends Collisionable implements Logical {
 	}
 
 	/**
-	 *  Define si tiene que acelerar positivamente en el eje Y
+	 *  Defines if there should be positive acceleration in the Y axis
 	 * 
-	 * @param b true si tiene que acelerar positiviamente 
+	 * @param b true if there is positive acceleration in the Y axis.
 	 */
 	public void acelUp(boolean b){
 		if(b != accelerating[0]){
@@ -119,9 +119,9 @@ public class SpaceShip extends Collisionable implements Logical {
 		}
 	}
 	/**
-	 * define si tiene que acelerar negativamente en el eje Y
+	 * Defines if there should be negative acceleration in the Y axis
 	 * 
-	 * @param b true si acelera negativamente
+	 * @param b true if there is negative acceleration in the Y axis.
 	 */
 	public void acelDown(boolean b){
 		if(b != accelerating[1]){
@@ -135,9 +135,9 @@ public class SpaceShip extends Collisionable implements Logical {
 		}
 	}
 	/**
-	 * define si tiene que acelerar negativamente en el eje X
+	 * Defines if there should be negative acceleration in the X axis
 	 * 
-	 * @param b true si acelera negativamente
+	 * @param b true if there is negative acceleration in the X axis.
 	 */
 	public void acelLeft(boolean b){
 		if(b != accelerating[2]){
@@ -151,9 +151,9 @@ public class SpaceShip extends Collisionable implements Logical {
 		}
 	}
 	/**
-	 * define si tiene que acelerar positivamente en el eje X
+	 * Defines if there should be positive acceleration in the X axis
 	 * 
-	 * @param b true si acelera positivamente
+	 * @param b true if there is positive acceleration in the X axis.
 	 */
 	public void acelRight(boolean b){
 		if(b != accelerating[3]){

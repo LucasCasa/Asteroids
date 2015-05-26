@@ -29,7 +29,7 @@ public class CollisionTest {
 	 * Se fija si los asteroides colisionan correctamente
 	 */
 	public void YesCollisionTest(){
-		Asteroid b = new Asteroid(15,15,0,0,1);
+		Asteroid b = new Asteroid(0,0,0,0,1);
 		Assert.assertTrue(b.asteroidCollision(a));
 	}
 	@Test
@@ -38,7 +38,7 @@ public class CollisionTest {
 	 * el caso en que tengan que hacerlo
 	 */
 	public void AsteroidTakeLifeTest(){
-		SpaceShip b = new SpaceShip(15, 15, 15, 1, 0, 0, 3);
+		SpaceShip b = new SpaceShip(0, 0, 15, 1, 0, 0, 3);
 		b.shipCollision(a);
 		Assert.assertEquals(2, b.getLives());
 		
@@ -53,10 +53,12 @@ public class CollisionTest {
 		Assert.assertEquals(3, b.getLives());
 		
 	}
+/*	No entiendo que debería hacer este test 
 	@Test
 	public void EliminatePowerUp(){
 		PowerUpCreator.create();
 	}
+*/
 /*	Falta implementar que si el asteroide se va de la pantalla desparece
  * 	@Test
 	public void AsteroidOutOfScreen(){
