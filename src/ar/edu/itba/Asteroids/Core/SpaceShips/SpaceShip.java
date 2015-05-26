@@ -81,8 +81,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	}
 	/**
 	 * check if the two object collide with each other.
-	 * if the other object is a ship then it bounces.
-	 * if the other object is an asteroid then it is damaged.
+	 * this method is called when the o is not an Asteroid.
 	 * 
 	 * @param o the other object
 	 * @return true if collision, false if not
@@ -92,16 +91,26 @@ public class SpaceShip extends Collisionable implements Logical {
 		boolean b = collision(o); 
 		if(b){
 			setCollision(b);
-			if( o instanceof Asteroid){
-				this.damage(Asteroid.damageToShips);
 				newVel(o);
-			}else{
-				newVel(o);
-			}
 		}
 		return b;
 	}
+	/**
+	 * check if the two object collide with each other.
+	 * if collision then the ship takes damage
+	 * @param o thr Asteroid
+	 * @return true if collision, false if not
+	 */
+	public boolean shipCollision(Asteroid o){
+		boolean b = collision(o);
+		if(b){
+			setCollision(b);
+			this.damage(Asteroid.damageToShips);
+			newVel(o);
+		}
+		return b;
 
+	}
 	/**
 	 *  Defines if there should be positive acceleration in the Y axis
 	 * 

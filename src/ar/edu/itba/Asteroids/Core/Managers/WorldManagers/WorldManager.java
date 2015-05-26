@@ -19,14 +19,11 @@ import com.badlogic.gdx.Input.Keys;
 public abstract class WorldManager {
 	public ArrayMap<Asteroid,AsteroidUI> asteroids;
 	private ArrayMap<PowerUp, PowerUpUI> powerUps;
-	protected SpaceShip first;
-	protected SpaceShipUI firstUI;
 	protected Timer timer;
 	protected float score;
 	protected boolean gameOver;
 	private Timer powerUpTimer;
 	private final float powerUpCooldown = 5f;
-	// private ArrayMap<SpaceShip,SpaceShipUI> ships;
 	protected ArrayList<Player> players;
 	protected boolean impasse;
 	private boolean pause;
@@ -138,7 +135,7 @@ public abstract class WorldManager {
 		asteroids.put(thrown, asteroidUI);
 		
 	}
-	// CHECKEAR ESTO CON EL TEMA DE LOS PLAYERS
+
 	public void keyDown(int keyCode, int activeSpaceShip) {
 		if(impasse){
 			if(keyCode == Keys.ENTER){
@@ -200,6 +197,11 @@ public abstract class WorldManager {
 		}
 		return aux;
 	}
+	/**
+	 * 
+	 * @return null if there is no asteroid player in that mode (there is an AI Asteroid player)
+	 *  or returns the player which is controlling the asteroids
+	*/
 	public AsteroidPlayer getAsteroidPlayer() {
 		for(Player p: players){
 			if(!p.isSpaceShipPlayer()){

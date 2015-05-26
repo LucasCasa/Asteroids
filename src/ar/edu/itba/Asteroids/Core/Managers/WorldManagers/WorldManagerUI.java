@@ -94,7 +94,7 @@ public class WorldManagerUI implements Drawable{
 			if(wm.getPlayer(i).isAsteroidPlayer()){
 				aux2 = "12346789";
 			}else{
-				if(wm instanceof WorldManager2PlayersVs){ // FEO FEO
+				if(wm.getAsteroidPlayer()!= null && wm.getNumberOfPlayers() == 2){
 					aux2 = "WASD";
 				}else{
 					switch(i){

@@ -84,7 +84,7 @@ public class Player implements Logical {
 
 	@Override
 	public void update() {
-		if(spaceShip == null){
+		if(!shipActive){
 			updateAsteroidPlayer();
 		}else{
 			updateSpaceShip();
