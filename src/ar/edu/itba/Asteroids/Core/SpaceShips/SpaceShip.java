@@ -249,6 +249,10 @@ public class SpaceShip extends Collisionable implements Logical {
 	public Vector2 getacel(){
 		return this.acel;
 	}
+	
+	public int getOriginalAcel(){
+		return this.originalAcel;
+	}
 
 	/**
 	 * 

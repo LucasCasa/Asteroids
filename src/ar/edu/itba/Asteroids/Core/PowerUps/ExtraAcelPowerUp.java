@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 public class ExtraAcelPowerUp extends PowerUp{
 
 	private static float extraAcelTime = 10;
-	private static int addedAcel = 1000; 
+	private static int acelModifier = 2; 
 	
 	public ExtraAcelPowerUp(Vector2 pos) {
 		super(pos);
@@ -15,7 +15,7 @@ public class ExtraAcelPowerUp extends PowerUp{
 
 	@Override
 	public void effect(SpaceShip s) {
-		s.extraAcel(addedAcel, extraAcelTime);
+		s.extraAcel(acelModifier*s.getOriginalAcel(), extraAcelTime);
 	}
 
 }
