@@ -28,4 +28,7 @@ public class AsteroidUI implements Drawable {
 			back.setCollision(false);
 		}
 	}
+	public boolean isDestroyed(){
+		return back.isDestroyed();
+	}
 }

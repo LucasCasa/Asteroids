@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Managers.GameManager;
+import ar.edu.itba.Asteroids.Core.Managers.GameManagerUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 
 import com.badlogic.gdx.Input.Keys;
@@ -114,7 +115,8 @@ public class AsteroidPlayer {
 		}
 		if(thrown.size() > 0){
 			for(Asteroid a : thrown){
-				GameManager.getInstance().getWorld().addAsteroid(a, new AsteroidUI(a));
+				GameManager.getInstance().getWorld().addAsteroid(a);
+				GameManagerUI.getInstance().getWorldUI().addAsteroidUI(new AsteroidUI(a));
 			}
 		}
 		return thrown;

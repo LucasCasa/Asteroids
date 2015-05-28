@@ -43,8 +43,12 @@ public class WorldManagerUI implements Drawable{
 			for(SpaceShipUI s: shipsUI){
 				s.draw(batch);
 			}
-			for(AsteroidUI a : wm.getAsteroidsUI()){
-				a.draw(batch);
+			for(int i = 0; i<aUI.size() ; i++){
+				if(aUI.get(i).isDestroyed()){
+					aUI.remove(i);
+				}else{
+					aUI.get(i).draw(batch);
+				}
 			}
 			for(PowerUpUI p: wm.getPowerUpUI()){
 				p.draw(batch);
@@ -114,5 +118,7 @@ public class WorldManagerUI implements Drawable{
 			Assets.SMALL_FONT.draw(batch, wm.getPlayer(i).getName() + " Maneja " + aux + " Controles: " + aux2, 300, 50*i+ 50);
 		}
 	}
-
+	public void addAsteroidUI(AsteroidUI a){
+		aUI.add(a);
+	}
 }

@@ -67,4 +67,7 @@ public class GameManagerUI implements Drawable{
 			worldUI.draw(batch);
 		}
 	}
+	public WorldManagerUI getWorldUI() {
+		return worldUI;
+	}
 }

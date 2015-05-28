@@ -16,7 +16,7 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import com.badlogic.gdx.Input.Keys;
 
 public abstract class WorldManager {
-	public ArrayMap<Asteroid,AsteroidUI> asteroids;
+	public ArrayList<Asteroid> asteroids;
 	private ArrayMap<PowerUp, PowerUpUI> powerUps;
 	protected Timer timer;
 	protected float score;
@@ -34,7 +34,7 @@ public abstract class WorldManager {
 	 * and third one of the third player, depending on the amount of spaceShips that there is
 	 */
 	public WorldManager(ArrayList<Player> players){
-		 asteroids = new ArrayMap<Asteroid,AsteroidUI>();
+		 asteroids = new ArrayList<Asteroid>();
 		 timer = new Timer();
 		 powerUpTimer = new Timer();
 		 powerUps = new ArrayMap<PowerUp, PowerUpUI>();
@@ -50,7 +50,7 @@ public abstract class WorldManager {
 			}else{
 				updatePowerUps();
 				updateSpaceships();
-				for( Asteroid a: asteroids.getKeys()){
+				for( Asteroid a: asteroids){
 					a.update();
 				}
 				updateAsteroidCollision();
@@ -60,15 +60,17 @@ public abstract class WorldManager {
 	}
 	public void updateAsteroidCollision(){
 		for(int i = 0; i<asteroids.size();i++){
-			Asteroid aux = asteroids.get(i).getBack();
+			Asteroid aux = asteroids.get(i);
 			for(int j = i+1; j < asteroids.size();j++){
-				aux.asteroidCollision(asteroids.get(j).getBack());
+				aux.asteroidCollision(asteroids.get(j));
 			}
 			if(aux.outOfScreen()){
+				asteroids.get(i).setDestroyed(true);
 				asteroids.remove(i);
 			}
 			for(Player p : players){
 				if(p.isSpaceShipPlayer() && !p.shipHasLost() && p.getSpaceShip().shipCollision(aux)){
+					asteroids.get(i).setDestroyed(true);
 					asteroids.remove(i);
 				}
 			}
@@ -91,7 +93,7 @@ public abstract class WorldManager {
 		for(int i=0;i<powerUps.size();i++){
 			con = powerUps.getKeyAt(i);
 
-			for(Asteroid a: asteroids.getKeys()){
+			for(Asteroid a: asteroids){
 				if(con.collision(a)){
 					powerUps.remove(con);
 				}
@@ -130,8 +132,8 @@ public abstract class WorldManager {
 		keyUp(keyCode,0);
 	}
 
-	public void addAsteroid(Asteroid thrown, AsteroidUI asteroidUI) {
-		asteroids.put(thrown, asteroidUI);
+	public void addAsteroid(Asteroid thrown) {
+		asteroids.add(thrown);
 		
 	}
 
@@ -208,9 +210,6 @@ public abstract class WorldManager {
 			}
 		}
 		return null;
-	}
-	public ArrayList<AsteroidUI> getAsteroidsUI() {
-		return asteroids.getValues();
 	}
 	public ArrayList<PowerUpUI> getPowerUpUI(){
 		return powerUps.getValues();
