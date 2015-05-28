@@ -20,12 +20,21 @@ public class SpaceShip extends Collisionable implements Logical {
 	private int acelModifier;
 	private int lives;
 	private int startingLives;
+	private boolean extraAcel;
 	private boolean invincible;
-	private boolean accelerating[] = {false,false,false,false};
+	//private boolean accelerating[] = {false,false,false,false};
 	private boolean active = true;
 	private Vector2 initialPos;
 	private Timer inviTimer = new Timer();
+	private Timer extraAcelTimer = new Timer();
 	private float invincibleTotalTime;
+	private float extraAcelTotalTime;
+	private int originalAcel;
+	
+	private boolean acelup = false;
+	private boolean aceldown = false;
+	private boolean acelright = false;
+	private boolean acelleft = false;
 	
 	/**
 	 * 
@@ -42,6 +51,7 @@ public class SpaceShip extends Collisionable implements Logical {
 		initialPos = new Vector2(x,y);
 		this.maxVel=vel;
 		this.acelModifier=acel;
+		this.originalAcel=acel;
 		this.lives=lives;
 		startingLives = lives;
 		this.invincible=false;
@@ -58,10 +68,40 @@ public class SpaceShip extends Collisionable implements Logical {
 		updateVelocity();
 		checkOutOfScreen();
 		updateInvincibility();
+		updateExtraAcel();
+		updateAcel();
 	}
 	
 	public Timer getInviTimer() {
 		return inviTimer;
+	}
+	
+	public void updateAcel(){
+		if(acelup == true){
+			if(aceldown == true)
+				acel.y = 0;
+			else
+				acel.y = acelModifier;
+		}
+		else{
+			if(aceldown == true)
+				acel.y = -acelModifier;
+			else
+				acel.y = 0;
+		}
+		
+		if(acelright == true){
+			if(acelleft == true)
+				acel.x = 0;
+			else
+				acel.x = acelModifier;
+		}
+		else{
+			if(acelleft == true)
+				acel.x = -acelModifier;
+			else
+				acel.x = 0;
+		}
 	}
 
 	public float getInvincibleTotalTime() {
@@ -75,6 +115,15 @@ public class SpaceShip extends Collisionable implements Logical {
 			inviTimer.update();
 			if(inviTimer.getTime()>invincibleTotalTime){
 				this.invincible = false;
+			}
+		}
+	}
+	private void updateExtraAcel(){
+		if(this.extraAcel == true){
+			extraAcelTimer.update();
+			if(extraAcelTimer.getTime()>extraAcelTotalTime){
+				this.extraAcel = false;
+				this.acelModifier = this.originalAcel;
 			}
 		}
 	}
@@ -108,23 +157,15 @@ public class SpaceShip extends Collisionable implements Logical {
 			newVel(o);
 		}
 		return b;
-
 	}
+	
 	/**
 	 *  Defines if there should be positive acceleration in the Y axis
 	 * 
 	 * @param b true if there is positive acceleration in the Y axis.
 	 */
 	public void acelUp(boolean b){
-		if(b != accelerating[0]){
-			if(b){
-				acel.y+= acelModifier;
-				accelerating[0] = true;
-			}else{
-				acel.y-= acelModifier;
-				accelerating[0] = false;
-			}
-		}
+		acelup = b;
 	}
 	/**
 	 * Defines if there should be negative acceleration in the Y axis
@@ -132,15 +173,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param b true if there is negative acceleration in the Y axis.
 	 */
 	public void acelDown(boolean b){
-		if(b != accelerating[1]){
-			if(!b){
-				acel.y+= acelModifier;
-				accelerating[1] = false;
-			}else{
-				accelerating[1] = true;
-				acel.y-= acelModifier;
-			}
-		}
+		aceldown = b;
 	}
 	/**
 	 * Defines if there should be negative acceleration in the X axis
@@ -148,15 +181,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param b true if there is negative acceleration in the X axis.
 	 */
 	public void acelLeft(boolean b){
-		if(b != accelerating[2]){
-			if(b){
-				accelerating[2] = true;
-				acel.x-= acelModifier;
-			}else{
-				accelerating[2] = false;
-				acel.x+= acelModifier;
-			}
-		}
+		acelleft = b;
 	}
 	/**
 	 * Defines if there should be positive acceleration in the X axis
@@ -164,15 +189,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param b true if there is positive acceleration in the X axis.
 	 */
 	public void acelRight(boolean b){
-		if(b != accelerating[3]){
-			if(!b){
-				accelerating[3] = false;
-				acel.x-= acelModifier;
-			}else{
-				accelerating[3] = true;
-				acel.x+= acelModifier;
-			}
-		}
+		acelright = b;
 	}
 	/**
 	 * updates the velocity checking if it can
@@ -190,6 +207,13 @@ public class SpaceShip extends Collisionable implements Logical {
 		if(!this.invincible){
 			this.lives-=amount;
 		}
+	}
+	
+	public void extraAcel(int amount, float time){
+		this.extraAcel = true;
+		this.extraAcelTimer.reset();
+		this.extraAcelTotalTime = time;
+		this.acelModifier = amount;
 	}
 	
 	public void addMass(float amount){
@@ -230,8 +254,12 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * 
 	 * @return an array of boolean telling if it is accelerating in any direction
 	 */
-	public boolean[] getAccelerating(){
-		return accelerating;
+	//public boolean[] getAccelerating(){
+	//	return accelerating;
+	//}
+	
+	public Vector2 getAcel(){
+		return acel;
 	}
 
 	public boolean isActive() {
@@ -247,10 +275,10 @@ public class SpaceShip extends Collisionable implements Logical {
 		lives = startingLives;
 		getCPos().set(initialPos.x,initialPos.y);
 		getSpeed().set(0, 0);
-		accelerating[0] = false;
-		accelerating[1] = false;
-		accelerating[2] = false;
-		accelerating[3] = false;
+		//accelerating[0] = false;
+		//accelerating[1] = false;
+		//accelerating[2] = false;
+		//accelerating[3] = false;
 	
 		acel.x = 0;
 		acel.y = 0;

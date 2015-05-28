@@ -22,6 +22,7 @@ public class Assets {
 	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
 	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");
 	public static final Texture INVENCIBILITYIMG = new Texture("invi35.png");
+	public static final Texture EXTRAACELIMG = new Texture("acel.png");
 	
 	//Miscellaneous 
 	public static final Texture HEART = new Texture("heart.png");

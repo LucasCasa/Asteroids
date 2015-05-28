@@ -40,7 +40,6 @@ public class ResolutionManager {
 			}
 		}); 
 		for(DisplayMode disp: dm){
-			System.out.println(disp.width + ":" + disp.height );
 			if((float)disp.width / (float)disp.height == w / h)
 				tree.add(disp);
 		}

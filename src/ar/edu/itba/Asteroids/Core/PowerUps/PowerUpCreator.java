@@ -20,7 +20,7 @@ public final class PowerUpCreator {
 		PowerUp p;
 		PowerUpUI pUI;
 		Vector2 pos = randomPosition();
-		int r = generateRandInt(0, 3);
+		int r = generateRandInt(0, 4);
 		switch(r){
 			case 0: p = new ExtraLifePowerUp(pos);
 					pUI = new PowerUpUI(p, Assets.EXTRALIVESIMG);
@@ -30,6 +30,9 @@ public final class PowerUpCreator {
 					break;
 			case 2: p = new InvincibilityPowerUp(pos);
 					pUI = new PowerUpUI(p, Assets.INVENCIBILITYIMG);
+					break;
+			case 3:	p = new ExtraAcelPowerUp(pos);
+					pUI = new PowerUpUI(p, Assets.EXTRAACELIMG);
 					break;
 			default:p = null;
 					pUI = null;
