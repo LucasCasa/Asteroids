@@ -22,7 +22,7 @@ public abstract class WorldManager {
 	protected float score;
 	protected boolean gameOver;
 	private Timer powerUpTimer;
-	private final float powerUpCooldown = 0.2f;
+	private final float powerUpCooldown = 5f;
 	protected ArrayList<Player> players;
 	protected boolean impasse;
 	private boolean pause;
