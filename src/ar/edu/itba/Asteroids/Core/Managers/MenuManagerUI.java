@@ -128,7 +128,7 @@ public class MenuManagerUI implements Drawable{
 		MenuTypes state= mm.getState();
 		switch(state){
 		case Main:
-			Assets.FONT.draw(batch, "Asteroids", Constants.VIRTUAL_WIDTH*3/8, Constants.VIRTUAL_HEIGHT*7/8);
+			Assets.TITLE_FONT.draw(batch, "Asteroids", Constants.VIRTUAL_WIDTH*2/8, Constants.VIRTUAL_HEIGHT*7/8);
 			Assets.FONT.draw(batch, "1- New Game", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*5/8);
 			Assets.FONT.draw(batch, "2- Settings", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*4/8);
 			Assets.FONT.draw(batch, "3- Help", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*3/8);
