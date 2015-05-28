@@ -7,7 +7,6 @@ import ar.edu.itba.Asteroids.Core.Player;
 import com.badlogic.gdx.Input.Keys;
 /**
  * the world Manager when the game is a 3 players all spaceship Mayhem
- * @author ME
  *
  */
 public class WorldManager3Player extends WorldManager2Player{

@@ -12,12 +12,12 @@ import com.badlogic.gdx.Input.Keys;
 
 public class MenuManager {
 	private static MenuManager self;
-	private Menu state=Menu.Main;
-	private GameMode mode;
+	private MenuTypes state=MenuTypes.Main;
+	private GameModeTypes mode;
 	private Map<Integer,String> playerNames=new HashMap<Integer,String>();
 	private String name="";
 	private boolean[] selected = {false, false, false, false, false};
-	private int numberOfShipsSelected = 0;
+	private int numberOfShipsSelected = 0; 
 	private int numberofShips = 0;
 	private int numberofNamesSaved = 0;
 
@@ -28,25 +28,28 @@ public class MenuManager {
 		return self;
 	}
 	
+	/**
+	 * Resents the menu to the original state which is the Main
+	 */
 	public void reset(){
 		this.resetNames();
 		this.resetSelected();
-		this.state=Menu.Main;
+		this.state=MenuTypes.Main;
 	}
 
 	public void keyDown(int keyCode) {
-		if(state == Menu.GetPlayerName){
+		if(state == MenuTypes.GetPlayerName){
 			if(keyCode == Keys.ESCAPE){ //if the user wants to go back to another in the menu
 				pressedEscape();
 				resetNames();
 			}
-			if(Generate(keyCode))
-				state=Menu.ChooseSpaceShip;
-		}else if(state == Menu.NormalScreen && keyCode!=Keys.ESCAPE){
+			if(Generate(keyCode)){
+				state=MenuTypes.ChooseSpaceShip;}
+		}else if(state == MenuTypes.NormalScreen && keyCode!=Keys.ESCAPE){
 			ResolutionManager.getInstance().changeNormalResolution(keyCode - 8, false);			
-		}else if(state == Menu.WideScreen && keyCode!=Keys.ESCAPE){
+		}else if(state == MenuTypes.WideScreen && keyCode!=Keys.ESCAPE){
 			ResolutionManager.getInstance().changeWideResolution(keyCode - 8, false);			
-		}else if(state == Menu.MacScreen && keyCode!=Keys.ESCAPE){
+		}else if(state == MenuTypes.MacScreen && keyCode!=Keys.ESCAPE){
 			ResolutionManager.getInstance().changeMacResolution(keyCode - 8, false);
 		}
 		else{
@@ -75,7 +78,11 @@ public class MenuManager {
 		}
 	}
 
-private void pressedEscape() {
+	/**
+	 * Pressing escape at any given time in the menu will mean a "back". so what this method does is that if the escape is pressed
+	 * then depending on the state of the menu the player is in, it goes back to the previous state
+	 */
+	private void pressedEscape() {
 		switch(state){
 		case Main:
 			Gdx.app.exit(); //the game ends
@@ -83,55 +90,56 @@ private void pressedEscape() {
 		case ChangeResolution:
 		case Help:
 		case NumberOfPlayers:
-			this.state=Menu.Main;
+			this.state=MenuTypes.Main;
 			break;
 		case WideScreen:
 		case NormalScreen:
 		case MacScreen:
-			this.state=Menu.ChangeResolution;
+			this.state=MenuTypes.ChangeResolution;
 			break;
 		case GameMode2Players:
-			this.state=Menu.NumberOfPlayers;
+			this.state=MenuTypes.NumberOfPlayers;
 			break;
 		case GameMode3Players:
-			this.state=Menu.NumberOfPlayers;
+			this.state=MenuTypes.NumberOfPlayers;
 			break;
 		case GetPlayerName:
-			if(mode == GameMode.TwoPlayersA || mode == GameMode.TwoPlayersB){
-				this.state=Menu.GameMode2Players;
-			}else if(mode ==GameMode.ThreePlayersA || mode==GameMode.ThreePlayersB){
-				this.state=Menu.GameMode3Players;
+			if(mode == GameModeTypes.TwoPlayersA || mode == GameModeTypes.TwoPlayersB){
+				this.state=MenuTypes.GameMode2Players;
+			}else if(mode ==GameModeTypes.ThreePlayersA || mode==GameModeTypes.ThreePlayersB){
+				this.state=MenuTypes.GameMode3Players;
 			}else
-				this.state=Menu.NumberOfPlayers;
+				this.state=MenuTypes.NumberOfPlayers;
 			break;
 		case ChooseSpaceShip:
 			resetSelected();
 			resetNames();
-			this.state=Menu.GetPlayerName;
+			this.state=MenuTypes.GetPlayerName;
 		default:break;
 		}
 	}
 
+
 	private void pressed1() {
 		switch(state){
 		case Main:
-			this.state=Menu.NumberOfPlayers;
+			this.state=MenuTypes.NumberOfPlayers;
 			break;
 		case ChangeResolution:
-			this.state=Menu.WideScreen;
+			this.state=MenuTypes.WideScreen;
 			break;
 		case NumberOfPlayers:
-			this.state=Menu.GetPlayerName;
-			this.mode=GameMode.OnePlayer;
+			this.state=MenuTypes.GetPlayerName;
+			this.mode=GameModeTypes.OnePlayer;
 			this.numberofShips=1;
 			break;
 		case GameMode2Players:
-			this.state=Menu.GetPlayerName;
-			this.mode=GameMode.TwoPlayersA;
+			this.state=MenuTypes.GetPlayerName;
+			this.mode=GameModeTypes.TwoPlayersA;
 			break;
 		case GameMode3Players:
-			this.state=Menu.GetPlayerName;
-			this.mode=GameMode.ThreePlayersA;
+			this.state=MenuTypes.GetPlayerName;
+			this.mode=GameModeTypes.ThreePlayersA;
 			break;
 		case ChooseSpaceShip:
 			shipSelected(0);
@@ -143,22 +151,22 @@ private void pressedEscape() {
 	private void pressed2() {
 		switch(state){
 		case Main:
-			this.state=Menu.ChangeResolution;
+			this.state=MenuTypes.ChangeResolution;
 			break;
 		case ChangeResolution:
-			this.state=Menu.MacScreen;
+			this.state=MenuTypes.MacScreen;
 			break;
 		case NumberOfPlayers:
-			this.state=Menu.GameMode2Players;
+			this.state=MenuTypes.GameMode2Players;
 			this.numberofShips=2;
 			break;
 		case GameMode2Players: 
-			this.state=Menu.GetPlayerName;
-			this.mode=GameMode.TwoPlayersB;
+			this.state=MenuTypes.GetPlayerName;
+			this.mode=GameModeTypes.TwoPlayersB;
 			break;
 		case GameMode3Players:
-			this.state=Menu.GetPlayerName;
-			this.mode=GameMode.ThreePlayersB;
+			this.state=MenuTypes.GetPlayerName;
+			this.mode=GameModeTypes.ThreePlayersB;
 			break;
 		case ChooseSpaceShip:
 			shipSelected(1);
@@ -170,14 +178,14 @@ private void pressedEscape() {
 	private void pressed3() {
 		switch(state){
 		case Main: 
-			this.state=Menu.Help;
+			this.state=MenuTypes.Help;
 			Help();
 			break;
 		case ChangeResolution:
-			this.state=Menu.NormalScreen;
+			this.state=MenuTypes.NormalScreen;
 			break;
 		case NumberOfPlayers:
-			this.state=Menu.GameMode3Players;
+			this.state=MenuTypes.GameMode3Players;
 			this.numberofShips=3;
 			break;
 		case ChooseSpaceShip:
@@ -190,8 +198,7 @@ private void pressedEscape() {
 	private void pressed4() {
 		switch(state){
 		case Main:
-			this.state=Menu.HighScore;
-			//aparece el highscore
+			this.state=MenuTypes.HighScore;
 			break;
 		case ChangeResolution:
 			break;
@@ -240,7 +247,6 @@ private void pressedEscape() {
 	}
 
 	/**
-	 * 
 	 * @param player; the player who is typing their name
 	 * @return the name of the player
 	 */
@@ -258,6 +264,9 @@ private void pressedEscape() {
 		return this.numberofNamesSaved;
 	}
 
+	/**
+	 * This method resets all the names that have been saved
+	 */
 	private void resetNames(){
 		for(int i=0;i<this.numberofNamesSaved;i++)
 			this.playerNames.put(i, null);
@@ -265,6 +274,9 @@ private void pressedEscape() {
 		this.name="";
 	}
 
+	/**
+	 * This method resets all the spaceShips that have been selected
+	 */
 	private void resetSelected() {
 		for(int i=0;i<Assets.SHIPS.length;i++){
 			selected[i]=false;		
@@ -285,9 +297,9 @@ private void pressedEscape() {
 			this.numberOfShipsSelected++;
 			boolean startsAsteroid = false;
 			boolean createAsteroidPlayer = false;
-			if(mode == GameMode.ThreePlayersB || mode == GameMode.TwoPlayersB){
+			if(mode == GameModeTypes.ThreePlayersB || mode == GameModeTypes.TwoPlayersB){
 				createAsteroidPlayer = true;
-				if((GameMode.ThreePlayersB == mode && numberOfShipsSelected == 3 )||( mode == GameMode.TwoPlayersB && numberOfShipsSelected == 2)){
+				if((GameModeTypes.ThreePlayersB == mode && numberOfShipsSelected == 3 )||( mode == GameModeTypes.TwoPlayersB && numberOfShipsSelected == 2)){
 					startsAsteroid = true;
 				}
 
@@ -302,7 +314,7 @@ private void pressedEscape() {
 	 * Creats the game by generating a new Game in the gameManager and gameManagerUI
 	 * @param mode; the game mode
 	 */
-	private void generateGame(GameMode mode) {
+	private void generateGame(GameModeTypes mode) {
 
 		GameManager.getInstance().newGame(mode);
 		GameManagerUI.getInstance().newGame(mode);
@@ -311,7 +323,7 @@ private void pressedEscape() {
 	/**
 	 * @return the state the menu is in
 	 */
-	public Menu getState(){
+	public MenuTypes getState(){
 		return this.state;
 	}
 

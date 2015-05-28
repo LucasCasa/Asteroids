@@ -9,7 +9,6 @@ import ar.edu.itba.Asteroids.Core.Managers.HighScoreManager;
 
 /**
  * the world manager when in single player
- * @author ME
  *
  */
 public class WorldManager1Player extends WorldManager{

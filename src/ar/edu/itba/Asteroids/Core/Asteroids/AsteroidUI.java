@@ -6,7 +6,6 @@ import ar.edu.itba.Asteroids.Core.Drawable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * the drawable part of the Asteroid Class
- * @author Lucas
  *
  */
 public class AsteroidUI implements Drawable {

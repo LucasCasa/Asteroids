@@ -4,7 +4,6 @@ import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 /**
  * This class has the information of the player and its spaceship and asteroidPlayer(in Vs)
- * @author ME
  *
  */
 public class Player implements Logical {
@@ -56,7 +55,7 @@ public class Player implements Logical {
 	}
 	/**
 	 * 
-	 * @return name of the player DUH
+	 * @return name of the player
 	 */
 	public String getName(){
 		return name;
@@ -91,7 +90,7 @@ public class Player implements Logical {
 		}
 	}
 	/**
-	 * this method neeeds to be call when a player changes what is he controlling
+	 * this method neeeds to be called when a player changes what it is controlling
 	 */
 	public void changeState(){
 		shipActive = !shipActive;
@@ -141,7 +140,7 @@ public class Player implements Logical {
 		return timer.getTime();
 	}
 	/**
-	 * it reset al the spaceShip logic ( called when playing 2vs1 and a spaceship plays 2 times)
+	 * it resets al the spaceShips logic ( called when playing 2vs1 and a spaceship plays 2 times)
 	 */
 	public void reset() {
 		spaceShip.reset();

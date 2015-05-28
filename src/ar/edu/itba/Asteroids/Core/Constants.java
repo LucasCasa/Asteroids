@@ -2,7 +2,6 @@ package ar.edu.itba.Asteroids.Core;
 
 /**
  * a Class with all the Logical constants
- * @author Lucas
  *
  */
 public class Constants {

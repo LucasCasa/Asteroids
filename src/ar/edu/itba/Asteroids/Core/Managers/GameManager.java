@@ -17,7 +17,6 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 /**
  * The core of the game. it calls other object based on the state of the game
- * @author ME
  *
  */
 public class GameManager {
@@ -35,11 +34,12 @@ public class GameManager {
 		}
 		return self;
 	}
+	
 	/**
-	 * Define el worldManager a usar dependiendo del tipo de juego.
-	 * @param gm
+	 * Defines which worldManger to use depending on the gameType
+	 * @param gm; the game mode
 	 */
-	public void newGame(GameMode gm){
+	public void newGame(GameModeTypes gm){
 		switch(gm){
 		case OnePlayer:
 			world = new WorldManager1Player(players);
@@ -58,8 +58,9 @@ public class GameManager {
 		}
 		isMenu = false;
 	}
+	
 	/**
-	 * Se encarga de llamar a las demas clases para que se updateen
+	 * This method calls the other classes so that they are updated
 	 */
 	public void update(){
 		if(isMenu){
@@ -97,13 +98,14 @@ public class GameManager {
 	public float getTime(){
 		return world.getTime();
 	}
+	
 	/**
-	 * añade una spaceship para manejar en el juego
-	 * @param player numero de jugador
-	 * @param s la nave y su naveUI
-	 * @param createAsteroidPlayer si tambien maneja asteroide
-	 * @param statsAsteroid si en el primer juego es el que maneja los asteroides
-	 * @param name nombre DUH
+	 * Adds a spaceShip to manage the game
+	 * @param player; the player number
+	 * @param s; the spaceShip and the spaceShipUI
+	 * @param createAsteroidPlayer; true if it also manages the asteroids
+	 * @param statsAsteroid; if it starts managing asteroids in the first instance of the game
+	 * @param name; the name of the player
 	 */
 	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s, boolean createAsteroidPlayer,boolean statsAsteroid, String name){
 		this.s.put(player, s);
@@ -114,7 +116,7 @@ public class GameManager {
 		}
 	}
 	/**
-	 * returns the player in the desire position
+	 * returns the player in the desired position
 	 * @param i
 	 * @return the player if exists, null if outOfBounds
 	 */

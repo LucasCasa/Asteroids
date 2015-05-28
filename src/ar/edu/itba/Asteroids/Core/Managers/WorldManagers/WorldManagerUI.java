@@ -16,8 +16,7 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * This class is in charge of printing(or calling other objects that print) while playing.
- * @author ME
+ * This class is in charge of printing (or calling other objects that print) while playing.
  *
  */
 public class WorldManagerUI implements Drawable{
@@ -74,8 +73,9 @@ public class WorldManagerUI implements Drawable{
 			Assets.FONT.draw(batch,"Ganador :" + wm.getWinner().getName(),Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 60);
 		}
 	}
+	
 	/**
-	 * this is the screen when the game is pressed
+	 * this is the screen when the game is paused
 	 * @param batch
 	 */
 	private void drawPauseScreen(SpriteBatch batch){
@@ -83,7 +83,7 @@ public class WorldManagerUI implements Drawable{
 		Assets.SMALL_FONT.draw(batch, "Presione Enter para continuar", 100, 300);
 	}
 	/**
-	 * this screen is draw when in a Vs game the players have to change roles.
+	 * this screen is drawn when in a Vs game the players have to change roles.
 	 * @param batch
 	 */
 	private void drawImpasseScreen(SpriteBatch batch){

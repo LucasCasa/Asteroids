@@ -5,7 +5,6 @@ import ar.edu.itba.Asteroids.Core.Player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Manage the HUD when the game is 3 players all of them controlling spaceShips
- * @author ME
  *
  */
 public class HUD3Player extends HUDManager{

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 /**
  * Abstract class. superclass of all the object that collide in the game
- * @author ME
  *
  */
 public abstract class Collisionable {
@@ -38,8 +37,8 @@ public abstract class Collisionable {
 		}
 	}
 	/**
-	 * set the new velocity of this and the other object after a collision
-	 * @param o the other object that collide
+	 * sets the new velocity of this and the other object after a collision
+	 * @param o; the other object that collide
 	 */
 	public void newVel(Collisionable o){
 		collisionPoint.x = ((cPosition.x * o.radius) + (o.cPosition.x * radius)) / (radius + o.radius);		 

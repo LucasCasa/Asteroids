@@ -12,7 +12,6 @@ import ar.edu.itba.Asteroids.Core.PowerUps.PowerUp;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpCreator;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
-import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
 import com.badlogic.gdx.Input.Keys;
 

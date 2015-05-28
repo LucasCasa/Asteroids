@@ -10,7 +10,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
  /**
   * the SpaceShip class. it handles all the logic of the spaceShip
-  * @author ME
   *
   */
 
@@ -50,7 +49,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	}
 
 	/**
-	 * do all the logic that the ship has to do in every cycle.
+	 * does all the logic that the ship has to do in every cycle.
 	 */
 	@Override
 	public void update() {
@@ -69,7 +68,7 @@ public class SpaceShip extends Collisionable implements Logical {
 		return invincibleTotalTime;
 	}
 	/**
-	 * updates the invisibility timer and check whether the invisibility time is over or not.
+	 * updates the invisibility timer and checks whether the invisibility time is over or not.
 	 */
 	private void updateInvincibility() {
 		if(this.invincible == true){
@@ -80,11 +79,11 @@ public class SpaceShip extends Collisionable implements Logical {
 		}
 	}
 	/**
-	 * check if the two object collide with each other.
-	 * this method is called when the o is not an Asteroid.
+	 * checks if the two object collide with each other.
+	 * this method is called when the "o" is not an Asteroid.
 	 * 
 	 * @param o the other object
-	 * @return true if collision, false if not
+	 * @return true if there is collision, false if not
 	 * 
 	 */
 	public boolean shipCollision(Collisionable o){
@@ -96,8 +95,8 @@ public class SpaceShip extends Collisionable implements Logical {
 		return b;
 	}
 	/**
-	 * check if the two object collide with each other.
-	 * if collision then the ship takes damage
+	 * checks if the two objects collide with each other.
+	 * if there is a collision then the spaceship is damaged.
 	 * @param o thr Asteroid
 	 * @return true if collision, false if not
 	 */

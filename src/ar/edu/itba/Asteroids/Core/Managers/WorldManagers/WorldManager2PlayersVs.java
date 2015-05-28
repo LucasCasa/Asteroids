@@ -7,7 +7,6 @@ import ar.edu.itba.Asteroids.Core.Player;
 import com.badlogic.gdx.Input.Keys;
 /**
  * the worldManager in a 1vs1 match
- * @author Lucas
  *
  */
 public class WorldManager2PlayersVs extends WorldManager{
@@ -18,7 +17,7 @@ public class WorldManager2PlayersVs extends WorldManager{
 		
 	}
 	/**
-	 * updates the game and chech if the game is over or if the players have to change positions
+	 * updates the game and checks if the game is over or if the players have to change positions
 	 */
 	public void update(){
 		super.update();

@@ -6,8 +6,7 @@ import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
- * this is the HUD for the 3 player mod where one controlls the asteroids.
- * @author ME
+ * this is the HUD for the 3 players mode where one controls the asteroids.
  *
  */
 public class HUD3Players2vs1 extends HUDManager {

@@ -7,7 +7,6 @@ import com.badlogic.gdx.Input.Keys;
 import ar.edu.itba.Asteroids.Core.Player;
 /**
  * the world Manager in a 3 players match, where one controlls the asteroids
- * @author ME
  *
  */
 public class WorldManager3Players2vs1 extends WorldManager {

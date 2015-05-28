@@ -34,7 +34,7 @@ public class GameManagerUI implements Drawable{
 	 * it creates a new WorldManagerUI based of the gameMode
 	 * @param gm the gameMode to play
 	 */
-	public void newGame(GameMode gm){
+	public void newGame(GameModeTypes gm){
 		Player p1 = GameManager.getInstance().getPlayer(0);
 		Player p2 = GameManager.getInstance().getPlayer(1);
 		Player p3 = GameManager.getInstance().getPlayer(2);

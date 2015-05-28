@@ -12,6 +12,11 @@ import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * This class manages how the user interfase of the menu
+ *
+ */
+
 public class MenuManagerUI implements Drawable{
 	private static MenuManagerUI self = null;
 	MenuManager mm;
@@ -31,6 +36,11 @@ public class MenuManagerUI implements Drawable{
 			
 	}
 	
+	/**
+	 * The method prints the spaceShips in the screen so that the players can choose which spaceShip they are going to use
+	 * It only prints the spaceShips thate have not been selected
+	 * @param batch
+	 */
 	private void printSpaceShips(SpriteBatch batch){
 		for(int i = 0;i<Assets.SHIPS.length; i++){
 			if(!mm.spaceShipSelected(i)){
@@ -100,11 +110,12 @@ public class MenuManagerUI implements Drawable{
 		}
 	}
 	
-	
-	
-	
+	/**
+	 * This method draws the menu, depending on the state of the menu you are in, it is going to print different options.
+	 * @param batch
+	 */
 	private void drawMenu(SpriteBatch batch){
-		Menu state= mm.getState();
+		MenuTypes state= mm.getState();
 		switch(state){
 		case Main:
 			Assets.FONT.draw(batch, "Asteroids", Constants.VIRTUAL_WIDTH*3/8, Constants.VIRTUAL_HEIGHT*7/8);

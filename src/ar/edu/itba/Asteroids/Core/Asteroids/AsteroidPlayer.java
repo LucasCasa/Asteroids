@@ -20,9 +20,8 @@ public class AsteroidPlayer {
 		timer = new Timer();
 	}
 	/**
-	 * Se fija si se puede incrementar la cantidad de asteroides,
-	 * si se puede updatea el timer, y si ya se cumplio el tiempo
-	 * añade uno a la reserva
+	 * This method validates if you can increse the amount of asteroids
+	 * if you can, then it updates the timer and if the time has already passed it ads another one to the reserve
 	 */
 	public void update(){
 		if(reserve < maxAsteroids){
@@ -41,9 +40,8 @@ public class AsteroidPlayer {
 	}
 	/**
 	 * 
-	 * @return la relacion entre el tiempo que paso y el tiempo que tiene
-	 * que pasar hasta que se cree un asteroide.
-	 * Si ya paso mas que el tiempo necesario devuelve 1
+	 * @return the relationship between the time that has already passed and the time that has to pass until a new asteroid is created
+	 * If more time has passed than necesary it returns 1
 	 */
 	public float getTimePercentage(){
 		if(timer.getTime() > cooldown){
@@ -57,12 +55,12 @@ public class AsteroidPlayer {
 		return reserve;
 	}
 	/**
-	 * Se encarga de crear el Asteroide
+	 * This method creats the asteroid 
 	 * 
-	 * @param keyCode la tecla que se presiono
-	 * @param t la nave objetivo
-	 * @return un nuevo asteroide si se puede, null si no se puede crear o no se presiono
-	 * una tecla valida
+	 * @param keyCode; the key that has been pressed
+	 * @param t; the spaceShip that it is going to try and destroy
+	 * @return a new asteroid if you can, null if it can't be created,because there are no asteroids in reserve or if you pressed a key that is not a correct one
+	 * 
 	 */
 	public ArrayList<Asteroid> keyPressed(int keyCode,ArrayList<SpaceShip> t) {
 		if(reserve <= 0){

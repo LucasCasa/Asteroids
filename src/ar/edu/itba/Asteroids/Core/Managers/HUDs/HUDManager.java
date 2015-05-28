@@ -20,12 +20,12 @@ public abstract class HUDManager implements Drawable{
 	}
 	
 	public abstract void draw(SpriteBatch batch);
+	
 	/**
-	 * este meotodo se encarga de dibujar el nombre y vidas de la nave del jugador que se le pasa en una
-	 * determinada posicion.
-	 * @param batch HOLA MAGGIE
-	 * @param pos la posicion de la pantalla en la cual dibuja
-	 * @param p el jugador del que se saca la informacion
+	 * this method is responsible for drawing the names and lives of the player's ship that is being passed in a certain position .
+	 * @param batch
+	 * @param pos the position of the screen in which you draw
+	 * @param p the player from which the information is pulled
 	 */
 	private void drawShipPlayer(SpriteBatch batch,Vector2 pos ,Player p){
 		Assets.SMALL_FONT.draw(batch,p.getName() +":" , pos.x, pos.y);
@@ -37,14 +37,12 @@ public abstract class HUDManager implements Drawable{
 		}
 	}
 	/**
-	 * dibuja el nombre la cantidad de asteroides y el tiempo que falta hasta que consiga
-	 * un asteroide del jugador que se le pasa
+	 * draws the name,the amount of asteroids and the time left until you can get a new asteroid in the player that is being passed
 	 * @param batch
-	 * @param pos la posicion donde se imprime
-	 * @param name Nombre del jugador
-	 * @param cooldown relacion entre el tiempo trascurrido y el tiempo que tiene que transcurrir hasta que se 
-	 * agregue un nuevo asteroides
-	 * @param reserve cantidad de asteroides disponibles
+	 * @param pos; the position where it is drawn
+	 * @param name; name of the player
+	 * @param cooldown; the relation between the elapsed time and the time that must pass until a new asteroid is added
+	 * @param reserve; the amount of asteroids available
 	 */
 	private void drawAsteroidPlayer(SpriteBatch batch, Vector2 pos, String name, float cooldown, int reserve){
 		Assets.SMALL_FONT.draw(batch, name + ":", pos.x, pos.y);
@@ -52,7 +50,7 @@ public abstract class HUDManager implements Drawable{
 		Assets.SMALL_FONT.draw(batch, "x " + reserve, pos.x + Assets.COOLDOWN.getWidth() + 5, pos.y - 28);
 	}
 	/**
-	 *  dibuja el player en la posicion 1 ( arriba a la izquierda)
+	 *  draws the player in the first position(top left corner)
 	 * @param batch
 	 * @param p player
 	 */
@@ -67,9 +65,9 @@ public abstract class HUDManager implements Drawable{
 		}
 	}
 	/**
-	 * dibuja el player en la posicion 2 ( arriba a la derecha)
+	 * draws the player in the second positon (top right corner)
 	 * @param batch
-	 * @param p
+	 * @param p;player
 	 */
 	public void drawSector2(SpriteBatch batch, Player p){
 		Vector2 pos = new Vector2(Constants.VIRTUAL_WIDTH - HORIZONTAL_OFFSET,Constants.VIRTUAL_HEIGHT - Constants.VERTICAL_OFFSET);
@@ -82,9 +80,9 @@ public abstract class HUDManager implements Drawable{
 		}
 	}
 	/** 
-	 * dibuja el player en la posicion 3 (abajo a la derecha)
+	 * draws the player in the third positon(bottom right corner)
 	 * @param batch
-	 * @param p
+	 * @param p;player
 	 */
 	public void drawSector3(SpriteBatch batch, Player p){
 		Vector2 pos = new Vector2(Constants.VIRTUAL_WIDTH - HORIZONTAL_OFFSET,3 *Constants.VERTICAL_OFFSET);
