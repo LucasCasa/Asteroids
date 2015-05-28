@@ -207,6 +207,7 @@ public class MenuManager {
 			this.state=MenuTypes.HighScore;
 			break;
 		case ChangeResolution:
+			ResolutionManager.getInstance().fullScreen(true);
 			break;
 		case ChooseSpaceShip:
 			shipSelected(3);

@@ -54,6 +54,10 @@ public class ResolutionManager {
 	public ArrayList<DisplayMode> getMacScreenRes(){
 		return macScreen;
 	}
+
+	public void fullScreen(boolean fullscreen){
+		Gdx.graphics.setDisplayMode(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), fullscreen);
+	}
 	
 	public void changeWideResolution(int keyCode, boolean fullscreen){
 		if(keyCode >= 0 && keyCode < wideScreen.size()){
