@@ -13,6 +13,13 @@ public class Constants {
 		public static final int[] SHIPS_ACCEL = {300,325,1200,400,350};
 		public static final int[] SHIPS_LIVES = {6,5,3,4,5};
 		
+		public static final int MAX_RADIUS = SHIPS_RADIUS[3];
+		public static final int MAX_MASS = SHIPS_MASS[0];
+		public static final int MAX_MAX_VEL = SHIPS_MAX_VEL[2];
+		public static final int MAX_ACCEL = SHIPS_ACCEL[2];
+		public static final int MAX_LIVES = SHIPS_LIVES[0];
+
+		
 		public static final int VIRTUAL_WIDTH = 800;
 		public static final int VIRTUAL_HEIGHT = 600;
 		public static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;

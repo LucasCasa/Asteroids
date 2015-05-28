@@ -20,7 +20,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class MenuManagerUI implements Drawable{
 	private static MenuManagerUI self = null;
 	MenuManager mm;
-	public MenuManagerUI() {
+	private static final int offSet = 270;
+	
+	private MenuManagerUI() {
 		mm = MenuManager.getInstance();
 	}
 	
@@ -49,18 +51,25 @@ public class MenuManagerUI implements Drawable{
 				int mass = Constants.SHIPS_MASS[i];
 				int lives = Constants.SHIPS_LIVES[i];
 				printSpaceShip(batch,Assets.SHIPS[i],i+1,(i / 3) * (Constants.VIRTUAL_WIDTH / 2) + 25,(Constants.VIRTUAL_HEIGHT/ 4) * (i % 3) + 25,sp,accel,mass,lives);
-				// despues hay que hacer vectores con las velocidades de las naves			
 			}
 		}
 	}
 	
-	private void printSpaceShip(SpriteBatch batch, Texture t,int key,int x, int y, int speed, int acel, int mass, int lives){
+	private void drawBar(SpriteBatch batch, float x,float y, float cooldown){
+		batch.draw(Assets.COOLDOWN,x,y,(int)(Assets.COOLDOWN.getWidth() * cooldown),13,(int)(Assets.COOLDOWN.getWidth() * cooldown),Assets.COOLDOWN.getHeight());
+	}
+	
+	private void printSpaceShip(SpriteBatch batch, Texture t,int key,int x, int y, float speed, float acel, float mass, float lives){
 		batch.draw(t,x + 35,y,80,80);
 		Assets.SMALL_FONT.draw(batch,"(" + key +")",x,y + 50);
-		Assets.SMALL_FONT.draw(batch,"Speed: " + speed, x + 120,y + 80);
-		Assets.SMALL_FONT.draw(batch,"Aceleration: " + acel, x + 120, y +60);
-		Assets.SMALL_FONT.draw(batch,"Mass: " + mass, x + 120, y +40);
-		Assets.SMALL_FONT.draw(batch,"Lives: " + lives, x + 120, y +20);
+		Assets.SMALL_FONT.draw(batch,"Speed: ", x + 120,y + 80);
+		drawBar(batch,x+offSet,y+70,speed/Constants.MAX_MAX_VEL);
+		Assets.SMALL_FONT.draw(batch,"Aceleration: ", x + 120, y +60);
+		drawBar(batch,x+offSet, y+50,acel/Constants.MAX_ACCEL);
+		Assets.SMALL_FONT.draw(batch,"Mass: ", x + 120, y +40);
+		drawBar(batch,x+offSet, y+30,mass/Constants.MAX_MASS);
+		Assets.SMALL_FONT.draw(batch,"Lives: ", x + 120, y +20);
+		drawBar(batch,x+offSet,y+10,lives/Constants.MAX_LIVES);
 	}
 	
 	private void printPlayersNames(SpriteBatch batch) {

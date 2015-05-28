@@ -16,11 +16,11 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class HUDManager implements Drawable{
 	private final int HORIZONTAL_OFFSET = 120;
 	public HUDManager(){
-		
+
 	}
-	
+
 	public abstract void draw(SpriteBatch batch);
-	
+
 	/**
 	 * this method is responsible for drawing the names and lives of the player's ship that is being passed in a certain position .
 	 * @param batch
@@ -94,5 +94,5 @@ public abstract class HUDManager implements Drawable{
 			drawAsteroidPlayer(batch, pos, p.getName(), p.getAsteroidPlayer().getTimePercentage(), p.getAsteroidPlayer().getReserve());
 		}
 	}
-	
+
 }

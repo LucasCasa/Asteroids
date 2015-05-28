@@ -20,6 +20,10 @@ public class MenuManager {
 	private int numberOfShipsSelected = 0; 
 	private int numberofShips = 0;
 	private int numberofNamesSaved = 0;
+	
+	private MenuManager(){
+		
+	}
 
 	public static MenuManager getInstance(){
 		if(self == null){
