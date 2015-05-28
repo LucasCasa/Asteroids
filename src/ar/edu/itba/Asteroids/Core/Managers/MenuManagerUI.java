@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * This class manages how the user interfase of the menu
+ * This class manages the user interface of the menu
  *
  */
 
@@ -21,6 +21,7 @@ public class MenuManagerUI implements Drawable{
 	private static MenuManagerUI self = null;
 	MenuManager mm;
 	private static final int offSet = 270;
+	
 	
 	private MenuManagerUI() {
 		mm = MenuManager.getInstance();
@@ -84,7 +85,7 @@ public class MenuManagerUI implements Drawable{
 		HighScoreManager.getInstance().loadScores();
 		TreeMap<Float, String> highscores = HighScoreManager.getInstance().getHighScores();
 		Assets.FONT.draw(batch, "Name", Constants.VIRTUAL_WIDTH*2/8, Constants.VIRTUAL_HEIGHT*2/3);
-		Assets.FONT.draw(batch, "Score", Constants.VIRTUAL_WIDTH*4/8,  Constants.VIRTUAL_HEIGHT*2/3);
+		Assets.FONT.draw(batch, "Score", Constants.VIRTUAL_WIDTH*5/8,  Constants.VIRTUAL_HEIGHT*2/3);
 				
 		int count = 0;
 		for (Entry<Float, String> each : highscores.entrySet()) {
@@ -93,7 +94,7 @@ public class MenuManagerUI implements Drawable{
 			String name = each.getValue();
 
 			Assets.FONT.draw(batch, name,  Constants.VIRTUAL_WIDTH*2/8, Constants.VIRTUAL_HEIGHT*8/13 - count*30);
-			Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH*4/8, Constants.VIRTUAL_HEIGHT*8/13 - count*30);
+			Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH*5/8, Constants.VIRTUAL_HEIGHT*8/13 - count*30);
 			if(count == 10) break;
 		}
 	}
