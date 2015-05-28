@@ -5,5 +5,7 @@ package ar.edu.itba.Asteroids.Core.Managers;
  *
  */
 public enum MenuTypes {
-	Main, NumberOfPlayers, GameMode3Players,GameMode2Players, ChooseSpaceShip,GetPlayerName, Help, ChangeResolution, HighScore,MacScreen,WideScreen,NormalScreen
+	Main, 
+	NumberOfPlayers, GameMode3Players,GameMode2Players, ChooseSpaceShip,GetPlayerName, Help, 
+	ChangeResolution, HighScore,MacScreen,WideScreen,NormalScreen, FullScreen
 }

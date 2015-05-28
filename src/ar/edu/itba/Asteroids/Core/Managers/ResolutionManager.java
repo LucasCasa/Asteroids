@@ -57,7 +57,7 @@ public class ResolutionManager {
 	}
 	
 	public void changeWideResolution(int keyCode, boolean fullscreen){
-		if(keyCode >= 0 && keyCode < normalScreen.size()){
+		if(keyCode >= 0 && keyCode < wideScreen.size()){
 			Gdx.graphics.setDisplayMode(wideScreen.get(keyCode).width, wideScreen.get(keyCode).height, fullscreen);
 		}
 	}
@@ -68,7 +68,7 @@ public class ResolutionManager {
 	}
 
 	public void changeMacResolution(int keyCode, boolean fullscreen) {
-		if(keyCode >= 0 && keyCode < normalScreen.size()){
+		if(keyCode >= 0 && keyCode < macScreen.size()){
 			Gdx.graphics.setDisplayMode(macScreen.get(keyCode).width, macScreen.get(keyCode).height, fullscreen);
 		}
 		

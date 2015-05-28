@@ -55,6 +55,8 @@ public class MenuManager {
 			ResolutionManager.getInstance().changeWideResolution(keyCode - 8, false);			
 		}else if(state == MenuTypes.MacScreen && keyCode!=Keys.ESCAPE){
 			ResolutionManager.getInstance().changeMacResolution(keyCode - 8, false);
+		}else if (state == MenuTypes.FullScreen && keyCode!=Keys.ESCAPE){
+				//ResolutionManager.getInstance().changeMacResolution(keyCode, true);
 		}
 		else{
 			switch(keyCode){
