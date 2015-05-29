@@ -20,9 +20,9 @@ public class WorldManager1Player extends WorldManager{
 		AI = new AIPlayer();
 	}
 	
-	public void update(){
-		super.update();
-		AI.update();
+	public void update(float deltaTime){
+		super.update(deltaTime);
+		AI.update(deltaTime);
 		if(super.getPlayer(0).shipHasLost() ){
 			i++;
 			gameOver = true;

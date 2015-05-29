@@ -16,12 +16,12 @@ public class WorldManager2Player extends WorldManager{
 	}
 
 
-	public void update(){
-		AI.update();
+	public void update(float deltaTime){
+		AI.update(deltaTime);
 		checkGameOver();
 		
 		if(!gameOver){
-			super.update();
+			super.update(deltaTime);
 		}
 		
 	}

@@ -53,7 +53,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(img, 0, 0,2048,1536);
 		standardFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),1,50);
 		// font.draw(batch, "Asteroides", 50, 50); queda como ejemplo
-		GameManager.getInstance().update();
+		GameManager.getInstance().update(Gdx.graphics.getDeltaTime());
 		GameManagerUI.getInstance().draw(batch);
 		batch.end();
 

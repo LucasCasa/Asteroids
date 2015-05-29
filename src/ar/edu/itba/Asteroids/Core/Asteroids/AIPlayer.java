@@ -29,8 +29,8 @@ public class AIPlayer extends AsteroidPlayer{
 	}
 	
 	
-	public void update(){
-		elapsedTime.update();
+	public void update(float deltaTime){
+		elapsedTime.update(deltaTime);
 		
 		//the throwing velocity and the rate of fire keep increasing till it completes the first 2 minutes of game
 		if(elapsedTime.getTime() < 120){
@@ -42,7 +42,7 @@ public class AIPlayer extends AsteroidPlayer{
 		if(getReserve() >= 1){
 			calculateThrow(GameManager.getInstance().getWorld().getSpaceShips());
 		}
-		super.update();
+		super.update(deltaTime);
 	}
 	
 }

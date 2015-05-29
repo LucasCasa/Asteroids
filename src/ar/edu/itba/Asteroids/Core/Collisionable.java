@@ -40,7 +40,7 @@ public abstract class Collisionable {
 	 * sets the new velocity of this and the other object after a collision
 	 * @param o; the other object that collide
 	 */
-	public void newVel(Collisionable o){
+	public void newVel(Collisionable o,float deltaTime){
 		collisionPoint.x = ((cPosition.x * o.radius) + (o.cPosition.x * radius)) / (radius + o.radius);		 
 		collisionPoint.y = ((cPosition.y * o.radius) + (o.cPosition.y * radius)) / (radius + o.radius);
 		float xDist = getCPos().x - o.getCPos().x;
@@ -57,10 +57,10 @@ public abstract class Collisionable {
 		speed.y = newVelY1;
 		o.speed.x = newVelX2;
 		o.speed.y = newVelY2;
-		cPosition.x+= speed.x * Gdx.graphics.getDeltaTime();
-		cPosition.y+= speed.y* Gdx.graphics.getDeltaTime();
-		o.cPosition.x+= o.speed.x* Gdx.graphics.getDeltaTime();
-		o.cPosition.y+= o.speed.y* Gdx.graphics.getDeltaTime();
+		cPosition.x+= speed.x * deltaTime;
+		cPosition.y+= speed.y * deltaTime;
+		o.cPosition.x+= o.speed.x* deltaTime;
+		o.cPosition.y+= o.speed.y* deltaTime;
 		}
 	}
 	/**

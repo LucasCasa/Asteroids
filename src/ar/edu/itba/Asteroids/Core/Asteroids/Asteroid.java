@@ -29,15 +29,15 @@ public class Asteroid extends Collisionable implements Logical{
 		super(new Vector2(a,b), new Vector2(velx,vely), mass, (int)(minRadius + radiusOffset * (mass - 1))); 
 	}
 	
-	public void update(){
-		getCPos().x+= getSpeed().x * Gdx.graphics.getDeltaTime();
-		getCPos().y+= getSpeed().y * Gdx.graphics.getDeltaTime();
+	public void update(float deltaTime){
+		getCPos().x+= getSpeed().x * deltaTime;
+		getCPos().y+= getSpeed().y * deltaTime;
 	}
-	public boolean asteroidCollision(Asteroid o){
+	public boolean asteroidCollision(Asteroid o,float deltaTime){
 		boolean b =collision(o); 
 		if(b){
 			setCollision(b);
-			newVel(o);
+			newVel(o,deltaTime);
 		}
 		return b; 
 	}

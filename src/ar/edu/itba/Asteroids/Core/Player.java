@@ -82,11 +82,11 @@ public class Player implements Logical {
 	}
 
 	@Override
-	public void update() {
+	public void update(float deltaTime) {
 		if(!shipActive){
-			updateAsteroidPlayer();
+			updateAsteroidPlayer(deltaTime);
 		}else{
-			updateSpaceShip();
+			updateSpaceShip(deltaTime);
 		}
 	}
 	/**
@@ -101,20 +101,20 @@ public class Player implements Logical {
 			spaceShip.setActive(false);
 		}
 	}
-	private void updateSpaceShip(){
+	private void updateSpaceShip(float deltaTime){
 		if(shipActive && spaceShip.isActive()){
 			score += timer.getDeltaTime();
-			timer.update();
+			timer.update(deltaTime);
 			if(spaceShip.getLives()<=0){
 				timer.reset();
 				spaceShip.setActive(false);
 			}else{
-				spaceShip.update();
+				spaceShip.update(deltaTime);
 			}
 		}
 	}
-	private void updateAsteroidPlayer(){
-		asteroidP.update();
+	private void updateAsteroidPlayer(float deltaTime){
+		asteroidP.update(deltaTime);
 	}
 	public float getScore() {
 		return score;

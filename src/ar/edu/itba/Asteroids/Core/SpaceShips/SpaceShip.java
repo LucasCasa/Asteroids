@@ -62,13 +62,13 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * does all the logic that the ship has to do in every cycle.
 	 */
 	@Override
-	public void update() {
-		getCPos().x+= getSpeed().x * Gdx.graphics.getDeltaTime();
-		getCPos().y+= getSpeed().y * Gdx.graphics.getDeltaTime();
-		updateVelocity();
+	public void update(float deltaTime) {
+		getCPos().x+= getSpeed().x * deltaTime;
+		getCPos().y+= getSpeed().y * deltaTime;
+		updateVelocity(deltaTime);
 		checkOutOfScreen();
-		updateInvincibility();
-		updateExtraAcel();
+		updateInvincibility(deltaTime);
+		updateExtraAcel(deltaTime);
 		updateAcel();
 	}
 	
@@ -110,17 +110,17 @@ public class SpaceShip extends Collisionable implements Logical {
 	/**
 	 * updates the invisibility timer and checks whether the invisibility time is over or not.
 	 */
-	private void updateInvincibility() {
+	private void updateInvincibility(float deltaTime) {
 		if(this.invincible == true){
-			inviTimer.update();
+			inviTimer.update(deltaTime);
 			if(inviTimer.getTime()>invincibleTotalTime){
 				this.invincible = false;
 			}
 		}
 	}
-	private void updateExtraAcel(){
+	private void updateExtraAcel(float deltaTime){
 		if(this.extraAcel == true){
-			extraAcelTimer.update();
+			extraAcelTimer.update(deltaTime);
 			if(extraAcelTimer.getTime()>extraAcelTotalTime){
 				this.extraAcel = false;
 				this.acelModifier = this.originalAcel;
@@ -132,29 +132,34 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * this method is called when the "o" is not an Asteroid.
 	 * 
 	 * @param o the other object
+	 * @param deltaTime time since last frame
+	 * 
 	 * @return true if there is collision, false if not
 	 * 
 	 */
-	public boolean shipCollision(Collisionable o){
+	public boolean shipCollision(Collisionable o,float deltaTime){
 		boolean b = collision(o); 
 		if(b){
 			setCollision(b);
-				newVel(o);
+				newVel(o,deltaTime);
 		}
 		return b;
 	}
 	/**
 	 * checks if the two objects collide with each other.
 	 * if there is a collision then the spaceship is damaged.
+	 * 
 	 * @param o thr Asteroid
+	 * @param deltaTime time since last frame
+	 * 
 	 * @return true if collision, false if not
 	 */
-	public boolean shipCollision(Asteroid o){
+	public boolean shipCollision(Asteroid o, float deltaTime){
 		boolean b = collision(o);
 		if(b){
 			setCollision(b);
 			this.damage(Asteroid.damageToShips);
-			newVel(o);
+			newVel(o,deltaTime);
 		}
 		return b;
 	}
@@ -194,12 +199,12 @@ public class SpaceShip extends Collisionable implements Logical {
 	/**
 	 * updates the velocity checking if it can
 	 */
-	private void updateVelocity(){
+	private void updateVelocity(float deltaTime){
 		if(Math.abs(getSpeed().x) < maxVel || getSpeed().x * acel.x <= 0){
-			getSpeed().x += acel.x * Gdx.graphics.getDeltaTime();
+			getSpeed().x += acel.x * deltaTime;
 		}	
 		if(Math.abs(getSpeed().y) < maxVel || getSpeed().y * acel.y <= 0){
-			getSpeed().y += acel.y  * Gdx.graphics.getDeltaTime();
+			getSpeed().y += acel.y  * deltaTime;
 		}
 	}
 

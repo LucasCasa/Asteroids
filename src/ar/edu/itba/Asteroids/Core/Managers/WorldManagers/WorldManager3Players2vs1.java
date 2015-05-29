@@ -16,8 +16,8 @@ public class WorldManager3Players2vs1 extends WorldManager {
 		super(players);
 	}
 	
-	public void update(){
-		super.update();
+	public void update(float deltaTime){
+		super.update(deltaTime);
 		changePlayers = true;
 		for(int i = 0; i<players.size();i++){
 				changePlayers = changePlayers && (players.get(i).shipHasLost() || players.get(i).isAsteroidPlayer());

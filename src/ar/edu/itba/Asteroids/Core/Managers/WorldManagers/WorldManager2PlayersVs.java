@@ -19,8 +19,8 @@ public class WorldManager2PlayersVs extends WorldManager{
 	/**
 	 * updates the game and checks if the game is over or if the players have to change positions
 	 */
-	public void update(){
-		super.update();
+	public void update(float deltaTime){
+		super.update(deltaTime);
 		if(players.get(0).shipHasLost()){
 			players.get(0).changeState();
 			players.get(1).changeState();

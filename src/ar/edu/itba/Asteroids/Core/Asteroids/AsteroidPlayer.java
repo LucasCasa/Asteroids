@@ -24,9 +24,9 @@ public class AsteroidPlayer {
 	 * This method validates if you can increse the amount of asteroids
 	 * if you can, then it updates the timer and if the time has already passed it ads another one to the reserve
 	 */
-	public void update(){
+	public void update(float deltaTime){
 		if(reserve < maxAsteroids){
-			timer.update();
+			timer.update(deltaTime);
 			if(timer.getTime() >= cooldown){
 				reserve++;
 				timer.reset();

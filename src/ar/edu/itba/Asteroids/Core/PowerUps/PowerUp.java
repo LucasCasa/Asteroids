@@ -20,7 +20,7 @@ public abstract class PowerUp extends Collisionable implements Logical{
 		super(pos, new Vector2(0,0), 0, radius);
 	}
 	
-	public void update(){
+	public void update(float deltaTime){
 	}
 	
 	public abstract void effect(SpaceShip s);

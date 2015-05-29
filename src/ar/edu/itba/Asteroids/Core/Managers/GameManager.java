@@ -61,13 +61,14 @@ public class GameManager {
 	
 	/**
 	 * This method calls the other classes so that they are updated
+	 * @param deltaTime 
 	 */
-	public void update(){
+	public void update(float deltaTime){
 		if(isMenu){
-			MenuManager.getInstance().update();
+			MenuManager.getInstance().update(deltaTime);
 		}else{
 			if(!world.gameEnded()){//hay que preguntar si termino el juego porque sino el world se sique updatando y agrega infitos jugadores iguales al highscore
-				world.update();	
+				world.update(deltaTime);	
 			}
 			if(world.isOver()){
 				isMenu = true;

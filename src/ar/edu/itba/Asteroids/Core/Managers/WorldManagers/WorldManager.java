@@ -41,35 +41,35 @@ public abstract class WorldManager {
 		 this.players = players;
 	}
 
-	public void update(){
+	public void update(float deltaTime){
 		if(!gameOver){
 			if(impasse || pause){
 				if(impasse){
 					powerUps = new ArrayMap<PowerUp, PowerUpUI>();
 				}
 			}else{
-				updatePowerUps();
-				updateSpaceships();
+				updatePowerUps(deltaTime);
+				updateSpaceships(deltaTime);
 				for( Asteroid a: asteroids){
-					a.update();
+					a.update(deltaTime);
 				}
-				updateAsteroidCollision();
+				updateAsteroidCollision(deltaTime);
 				updatePowerUpCollision();
 			}
 		}
 	}
-	public void updateAsteroidCollision(){
+	public void updateAsteroidCollision(float deltaTime){
 		for(int i = 0; i<asteroids.size();i++){
 			Asteroid aux = asteroids.get(i);
 			for(int j = i+1; j < asteroids.size();j++){
-				aux.asteroidCollision(asteroids.get(j));
+				aux.asteroidCollision(asteroids.get(j),deltaTime);
 			}
 			if(aux.outOfScreen()){
 				asteroids.get(i).setDestroyed(true);
 				asteroids.remove(i);
 			}
 			for(Player p : players){
-				if(p.isSpaceShipPlayer() && !p.shipHasLost() && p.getSpaceShip().shipCollision(aux)){
+				if(p.isSpaceShipPlayer() && !p.shipHasLost() && p.getSpaceShip().shipCollision(aux,deltaTime)){
 					asteroids.get(i).setDestroyed(true);
 					asteroids.remove(i);
 				}
@@ -77,14 +77,14 @@ public abstract class WorldManager {
 		}
 	}
 	
-	public void updatePowerUps(){
-		powerUpTimer.update();
+	public void updatePowerUps(float deltaTime){
+		powerUpTimer.update(deltaTime);
 		if(powerUpTimer.getTime() > powerUpCooldown){
 			powerUps.add(PowerUpCreator.create());
 			powerUpTimer.reset();
 		}
 		for(PowerUp p: powerUps.getKeys()){
-			p.update();
+			p.update(deltaTime);
 		}
 	}
 	
@@ -109,16 +109,16 @@ public abstract class WorldManager {
 			}
 		}
 	}
-	public void updateSpaceships(){
+	public void updateSpaceships(float deltaTime){
 		for(Player p: players){
-			p.update();
+			p.update(deltaTime);
 		}
 		for(int i = 0; i<players.size();i++){
 			if(players.get(i).isSpaceShipPlayer() && !players.get(i).shipHasLost()){
 				SpaceShip aux = players.get(i).getSpaceShip();
 				for(int j = i+1;j<players.size();j++){
 					if(players.get(j).isSpaceShipPlayer() && !players.get(j).shipHasLost()){
-						aux.shipCollision(players.get(j).getSpaceShip());
+						aux.shipCollision(players.get(j).getSpaceShip(),deltaTime);
 					}
 				}
 			}

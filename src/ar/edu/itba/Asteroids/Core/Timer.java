@@ -13,8 +13,8 @@ public class Timer {
 	/**
 	 * Updates the time of the timer, this needs to be called every cicle of the program
 	 */
-	public void update(){
-		time+= Gdx.graphics.getDeltaTime();
+	public void update(float deltaTime){
+		time+= deltaTime;
 	}
 	
 	public void reset(){
