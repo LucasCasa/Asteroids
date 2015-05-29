@@ -56,21 +56,22 @@ public class MenuManagerUI implements Drawable{
 		}
 	}
 	
-	private void drawBar(SpriteBatch batch, float x,float y, float cooldown){
-		batch.draw(Assets.COOLDOWN,x,y,(int)(Assets.COOLDOWN.getWidth() * cooldown),13,(int)(Assets.COOLDOWN.getWidth() * cooldown),Assets.COOLDOWN.getHeight());
+	private void drawBar(SpriteBatch batch, float x,float y, float cooldown){		
+		batch.draw(Assets.BAR_BACK,x,y);
+		batch.draw(Assets.BAR_FRONT,x,y,(int)(Assets.BAR_FRONT.getWidth() * cooldown),Assets.BAR_FRONT.getHeight());
 	}
 	
 	private void printSpaceShip(SpriteBatch batch, Texture t,int key,int x, int y, float speed, float acel, float mass, float lives){
 		batch.draw(t,x + 35,y,80,80);
 		Assets.SMALL_FONT.draw(batch,"(" + key +")",x,y + 50);
 		Assets.SMALL_FONT.draw(batch,"Speed: ", x + 120,y + 80);
-		drawBar(batch,x+offSet,y+70,speed/Constants.MAX_MAX_VEL);
+		drawBar(batch,x+offSet,y+67,speed/Constants.MAX_MAX_VEL);
 		Assets.SMALL_FONT.draw(batch,"Aceleration: ", x + 120, y +60);
-		drawBar(batch,x+offSet, y+50,acel/Constants.MAX_ACCEL);
+		drawBar(batch,x+offSet, y+47,acel/Constants.MAX_ACCEL);
 		Assets.SMALL_FONT.draw(batch,"Mass: ", x + 120, y +40);
-		drawBar(batch,x+offSet, y+30,mass/Constants.MAX_MASS);
+		drawBar(batch,x+offSet, y+27,mass/Constants.MAX_MASS);
 		Assets.SMALL_FONT.draw(batch,"Lives: ", x + 120, y +20);
-		drawBar(batch,x+offSet,y+10,lives/Constants.MAX_LIVES);
+		drawBar(batch,x+offSet,y+7,lives/Constants.MAX_LIVES);
 	}
 	
 	private void printPlayersNames(SpriteBatch batch) {
