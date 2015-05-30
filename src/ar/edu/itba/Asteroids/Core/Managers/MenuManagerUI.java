@@ -138,10 +138,11 @@ public class MenuManagerUI implements Drawable{
 			Assets.FONT.draw(batch, "2- Settings", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*4/8);
 			Assets.FONT.draw(batch, "3- Help", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*3/8);
 			Assets.FONT.draw(batch, "4- Get High Scores", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*2/8);
-			Assets.FONT.draw(batch, "Escape- Exit", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*1/8);
+			Assets.FONT.draw(batch, "Esc- Exit", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*1/8);
 			break;
 		case Help:
 			Assets.FONT.draw(batch,"Help", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*9/10);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			printHelp(batch);
 			break;
 		case ChangeResolution:
@@ -150,21 +151,26 @@ public class MenuManagerUI implements Drawable{
 			Assets.FONT.draw(batch,"2- 16:10", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*4/8);
 			Assets.FONT.draw(batch,"3- 4:3", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*3/8);
 			Assets.FONT.draw(batch,"4- FullScreen", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*2/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			break;
 		case WideScreen:
 			Assets.FONT.draw(batch,"16:9", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			printOptionsWideScreen(batch);
 			break;
 		case NormalScreen:
 			Assets.FONT.draw(batch,"4:3", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			printOptionsNormalScreen(batch);
 			break;
 		case MacScreen:
 			Assets.FONT.draw(batch,"16:10", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			printOptionsMacScreen(batch);
 			break;
 		case HighScore:
 			Assets.FONT.draw(batch, "Recent HighScores",Constants.VIRTUAL_WIDTH*1/16,Constants.VIRTUAL_HEIGHT*7/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			printHighScores(batch);
 			break;
 		case NumberOfPlayers:
@@ -172,25 +178,30 @@ public class MenuManagerUI implements Drawable{
 			Assets.FONT.draw(batch, "1- One Player", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*5/8);
 			Assets.FONT.draw(batch, "2- Two Players", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*4/8);
 			Assets.FONT.draw(batch, "3- Three Players", Constants.VIRTUAL_WIDTH/8,Constants.VIRTUAL_HEIGHT*3/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			break;
 		case GameMode2Players: 
 			Assets.FONT.draw(batch, "Game Mode",  Constants.VIRTUAL_WIDTH/4,Constants.VIRTUAL_HEIGHT*3/4);
 			Assets.SMALL_FONT.draw(batch, "1 - 2 SpaceShips, Asteroids controlled by AI", Constants.VIRTUAL_WIDTH/16, Constants.VIRTUAL_HEIGHT*4/8);
 			Assets.SMALL_FONT.draw(batch, "2 - 1 SpaceShip, Asteroids controlled by another player", Constants.VIRTUAL_WIDTH/16, Constants.VIRTUAL_HEIGHT*3/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			break;
 		case GameMode3Players:
 			Assets.FONT.draw(batch, "Game Mode",  Constants.VIRTUAL_WIDTH/4,Constants.VIRTUAL_HEIGHT*3/4);
 			Assets.SMALL_FONT.draw(batch,"1 - 3 spaceShips, Asteroids controlled by AI", Constants.VIRTUAL_WIDTH/16, Constants.VIRTUAL_HEIGHT*4/8);
 			Assets.SMALL_FONT.draw(batch, "2 - 2 SpaceShips, Asteroids controlled by the third player", Constants.VIRTUAL_WIDTH/16, Constants.VIRTUAL_HEIGHT*3/8);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			break;
 		case GetPlayerName:
 			printPlayersNames(batch);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			break;
 		case ChooseSpaceShip:
 			Assets.FONT.draw(batch, "Choose SpaceShip", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*7/8);
 			if(mm.getPlayers()>mm.getSpaceShipsSelected())
 				Assets.FONT.draw(batch, mm.getName(mm.getSpaceShipsSelected()) + " choose SpaceShip", Constants.VIRTUAL_WIDTH*3/16, Constants.VIRTUAL_HEIGHT*6/8);
 			printSpaceShips(batch);
+			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,20);
 			break;
 		default:break;
 		}
