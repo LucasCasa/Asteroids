@@ -121,6 +121,10 @@ public class MenuManagerUI implements Drawable{
 		}
 	}
 	
+	private void printHelp(SpriteBatch batch){
+		batch.draw(Assets.HELP, 50, 0, 700, 500);
+	}
+	
 	/**
 	 * This method draws the menu, depending on the state of the menu you are in, it is going to print different options.
 	 * @param batch
@@ -137,7 +141,8 @@ public class MenuManagerUI implements Drawable{
 			Assets.FONT.draw(batch, "Escape- Exit", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*1/8);
 			break;
 		case Help:
-			Assets.FONT.draw(batch,"Help", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);
+			Assets.FONT.draw(batch,"Help", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*9/10);
+			printHelp(batch);
 			break;
 		case ChangeResolution:
 			Assets.FONT.draw(batch,"Change Resolution", Constants.VIRTUAL_WIDTH*3/8,Constants.VIRTUAL_HEIGHT*7/8);

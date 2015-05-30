@@ -37,6 +37,10 @@ public class Assets {
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("arcade.fnt"));
 	public static final BitmapFont SMALL_FONT = new BitmapFont(Gdx.files.internal("little.fnt"));
 	public static final BitmapFont TITLE_FONT = new BitmapFont(Gdx.files.internal("title.fnt"));
+	
+	//Help
+	public static final Texture HELP = new Texture("help.png");
+	
 	@Deprecated
 	//HighScore
 	private static Preferences prefs = Gdx.app.getPreferences("Asteroids");
