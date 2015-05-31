@@ -84,14 +84,14 @@ public class WorldManagerUI implements Drawable{
 	 */
 	private void drawPauseScreen(SpriteBatch batch){
 		Assets.FONT.draw(batch, "Juego Pausado", 200, 400);
-		Assets.SMALL_FONT.draw(batch, "Presione Enter para continuar", 100, 300);
+		Assets.SMALL_FONT.draw(batch, "Presione Enter para continuar", 200, 300);
 	}
 	/**
 	 * this screen is drawn when in a Vs game the players have to change roles.
 	 * @param batch
 	 */
 	private void drawImpasseScreen(SpriteBatch batch){
-		Assets.FONT.draw(batch, "Cambio de posiciones", 200, 400);
+		Assets.FONT.draw(batch, "Cambio de posiciones", 170, 500);
 		for(int i =0;i<wm.getNumberOfPlayers();i++){
 			String aux = (wm.getPlayer(i).isSpaceShipPlayer())?"Nave":"Asteroides";
 			String aux2 = "";
@@ -115,7 +115,7 @@ public class WorldManagerUI implements Drawable{
 					}
 				}
 			}
-			Assets.SMALL_FONT.draw(batch, wm.getPlayer(i).getName() + " Maneja " + aux + " Controles: " + aux2, 300, 50*i+ 50);
+			Assets.SMALL_FONT.draw(batch, wm.getPlayer(i).getName() + " Maneja " + aux + ", Controles: " + aux2, 150, 50*i+ 200);
 		}
 	}
 	public void addAsteroidUI(AsteroidUI a){

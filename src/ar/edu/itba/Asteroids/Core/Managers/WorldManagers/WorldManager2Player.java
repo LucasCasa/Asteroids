@@ -17,7 +17,9 @@ public class WorldManager2Player extends WorldManager{
 
 
 	public void update(float deltaTime){
-		AI.update(deltaTime);
+		if(!isPaused() && !impasse){
+			AI.update(deltaTime);
+		}
 		checkGameOver();
 		
 		if(!gameOver){

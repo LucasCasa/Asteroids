@@ -22,7 +22,9 @@ public class WorldManager1Player extends WorldManager{
 	
 	public void update(float deltaTime){
 		super.update(deltaTime);
-		AI.update(deltaTime);
+		if(!isPaused() && !impasse){
+			AI.update(deltaTime);
+		}
 		if(super.getPlayer(0).shipHasLost() ){
 			i++;
 			gameOver = true;
