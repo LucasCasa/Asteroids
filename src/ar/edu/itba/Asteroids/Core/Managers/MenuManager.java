@@ -20,6 +20,7 @@ public class MenuManager {
 	private int numberOfShipsSelected = 0; 
 	private int numberofShips = 0;
 	private int numberofNamesSaved = 0;
+	private boolean fullscreen = false;
 	
 	private MenuManager(){
 		
@@ -207,7 +208,8 @@ public class MenuManager {
 			this.state=MenuTypes.HighScore;
 			break;
 		case ChangeResolution:
-			ResolutionManager.getInstance().fullScreen(true);
+			fullscreen=!fullscreen;
+			ResolutionManager.getInstance().fullScreen(fullscreen);
 			break;
 		case ChooseSpaceShip:
 			shipSelected(3);
