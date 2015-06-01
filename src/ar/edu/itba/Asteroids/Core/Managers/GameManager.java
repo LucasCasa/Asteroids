@@ -111,7 +111,7 @@ public class GameManager {
 	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s, boolean createAsteroidPlayer,boolean statsAsteroid, String name){
 		this.s.put(player, s);
 		if(createAsteroidPlayer){
-			players.add(new Player(name, new AsteroidPlayer(), s.getBack(), player,statsAsteroid));
+			players.add(new Player(name, new AsteroidPlayer(spaceshipPlayersAmount()), s.getBack(), player,statsAsteroid));
 		}else{
 			players.add(new Player(name, s.getBack(), player));
 		}
@@ -133,5 +133,13 @@ public class GameManager {
 			ships.add(aux.getFront());
 		}
 		return ships;
+	}
+	public int spaceshipPlayersAmount(){
+		int total = 0;
+		for(Player p: players){
+			if(!p.isAsteroidPlayer())
+				total++;
+		}
+		return total;
 	}
 }

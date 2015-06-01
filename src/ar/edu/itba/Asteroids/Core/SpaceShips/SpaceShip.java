@@ -6,7 +6,6 @@ import ar.edu.itba.Asteroids.Core.Logical;
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
  /**
   * the SpaceShip class. it handles all the logic of the spaceShip
@@ -258,6 +257,14 @@ public class SpaceShip extends Collisionable implements Logical {
 	public int getOriginalAcel(){
 		return this.originalAcel;
 	}
+	
+	public Timer getExtraAcelTimer() {
+		return extraAcelTimer;
+	}
+
+	public float getExtraAcelTotalTime() {
+		return extraAcelTotalTime;
+	}
 
 	/**
 	 * 
@@ -269,6 +276,10 @@ public class SpaceShip extends Collisionable implements Logical {
 	
 	public Vector2 getAcel(){
 		return acel;
+	}
+	
+	public boolean getExtraAcel(){
+		return extraAcel;
 	}
 
 	public boolean isActive() {

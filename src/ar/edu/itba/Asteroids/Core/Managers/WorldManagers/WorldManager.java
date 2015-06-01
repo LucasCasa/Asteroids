@@ -7,7 +7,6 @@ import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Timer;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
 import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidPlayer;
-import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUp;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpCreator;
 import ar.edu.itba.Asteroids.Core.PowerUps.PowerUpUI;

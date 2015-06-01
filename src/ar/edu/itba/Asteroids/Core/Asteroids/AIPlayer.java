@@ -24,7 +24,8 @@ public class AIPlayer extends AsteroidPlayer{
 		int KeyCode = keys[(int)(Math.random()*8)];
 		return keyPressed(KeyCode,t);
 	}
-	public AIPlayer(){
+	public AIPlayer(int spaceshipAmount){
+		super(spaceshipAmount);
 		elapsedTime = new Timer();
 	}
 	

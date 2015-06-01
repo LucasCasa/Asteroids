@@ -27,6 +27,7 @@ public class Assets {
 	//Miscellaneous 
 	public static final Texture HEART = new Texture("heart.png");
 	public static final Texture INVIICON = new Texture("invi35invertida.png");
+	public static final Texture ACELICON = new Texture("acel35invertida.png");
 	public static final Texture COOLDOWN = new Texture("cooldown.png");
 	public static final Texture BAR_BACK = new Texture("backBar.png");
 	public static final Texture BAR_FRONT = new Texture("frontBar.png");

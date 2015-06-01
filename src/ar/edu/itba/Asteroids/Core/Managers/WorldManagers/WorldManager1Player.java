@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 import ar.edu.itba.Asteroids.Core.Managers.HighScoreManager;
 
 /**
@@ -17,7 +18,7 @@ public class WorldManager1Player extends WorldManager{
 	public WorldManager1Player(ArrayList<Player> players) {
 		super(players);
 		HighScoreManager.getInstance().loadScores();
-		AI = new AIPlayer();
+		AI = new AIPlayer(GameManager.getInstance().spaceshipPlayersAmount());
 	}
 	
 	public void update(float deltaTime){

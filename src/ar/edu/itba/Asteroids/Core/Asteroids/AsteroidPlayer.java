@@ -14,11 +14,14 @@ public class AsteroidPlayer {
 
 	private int reserve;
 	private int maxAsteroids = 2;
-	private float cooldown = 1;
+	private static final float cooldownModifier = 1f;
+	private float baseCooldown;
+	private float cooldown;
 	private Timer timer;
 	
-	public AsteroidPlayer(){
+	public AsteroidPlayer(int spaceshipAmount){
 		timer = new Timer();
+		this.cooldown = baseCooldown + spaceshipAmount * cooldownModifier;
 	}
 	/**
 	 * This method validates if you can increse the amount of asteroids

@@ -4,7 +4,6 @@ import ar.edu.itba.Asteroids.Core.Collisionable;
 import ar.edu.itba.Asteroids.Core.Constants;
 import ar.edu.itba.Asteroids.Core.Logical;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 /**
  * the Asteroid Class, handles the movement of the asteroid.

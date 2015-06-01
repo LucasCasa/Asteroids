@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public abstract class HUDManager implements Drawable{
-	private final int HORIZONTAL_OFFSET = 120;
+	private final int HORIZONTAL_OFFSET = 140;
 	public HUDManager(){
 
 	}
@@ -31,9 +31,14 @@ public abstract class HUDManager implements Drawable{
 		Assets.SMALL_FONT.draw(batch,p.getName() +":" , pos.x, pos.y);
 		batch.draw(Assets.HEART, (float)(pos.x),(float)(pos.y - Constants.TEXT_SEPARATOR), Constants.ICON_SIZE,Constants.ICON_SIZE);
 		Assets.SMALL_FONT.draw(batch, "x " + p.getSpaceShip().getLives(), pos.x + Constants.ICON_SIZE + Constants.HORIZONTAL_OFFSET , pos.y - 25);
+		if(p.getSpaceShip().getExtraAcel()){
+			float heightPercent = p.getSpaceShip().getExtraAcelTimer().getTime() / p.getSpaceShip().getExtraAcelTotalTime();
+			batch.draw(Assets.ACELICON, (float)(pos.x) + 100,(float)(pos.y - 25), Constants.ICON_SIZE, (int)(Assets.ACELICON.getHeight() *(1 - heightPercent)), 0, 0, Constants.ICON_SIZE, (int)(Assets.ACELICON.getHeight() *(1 - heightPercent)), false, true);
+		}
+			
 		if(p.getSpaceShip().getInvincible()){
 			float heightPercent =  p.getSpaceShip().getInviTimer().getTime() / p.getSpaceShip().getInvincibleTotalTime();
-			batch.draw(Assets.INVIICON, (float)(pos.x) + 80,(float)(pos.y - 25), Constants.ICON_SIZE, (int)(Assets.INVIICON.getHeight() *(1 - heightPercent)), 0, 0, Constants.ICON_SIZE, (int)(Assets.INVIICON.getHeight() *(1 - heightPercent)), false, true);
+			batch.draw(Assets.INVIICON, (float)(pos.x) + 75,(float)(pos.y - 25), Constants.ICON_SIZE, (int)(Assets.INVIICON.getHeight() *(1 - heightPercent)), 0, 0, Constants.ICON_SIZE, (int)(Assets.INVIICON.getHeight() *(1 - heightPercent)), false, true);
 		}
 	}
 	/**

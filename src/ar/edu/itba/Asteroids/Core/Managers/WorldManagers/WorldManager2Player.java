@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.AIPlayer;
-
+import ar.edu.itba.Asteroids.Core.Managers.GameManager;
 
 import com.badlogic.gdx.Input.Keys;
 
@@ -12,7 +12,7 @@ public class WorldManager2Player extends WorldManager{
 	private AIPlayer AI;
 	public WorldManager2Player(ArrayList<Player> players) {
 		super(players);
-		AI = new AIPlayer();
+		AI = new AIPlayer(GameManager.getInstance().spaceshipPlayersAmount());
 	}
 
 
