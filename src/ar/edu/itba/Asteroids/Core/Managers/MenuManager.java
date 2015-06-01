@@ -21,6 +21,7 @@ public class MenuManager {
 	private int numberofShips = 0;
 	private int numberofNamesSaved = 0;
 	private boolean fullscreen = false;
+	private final int MAXNAMELENGTH = 7;
 	
 	private MenuManager(){
 		
@@ -229,7 +230,7 @@ public class MenuManager {
 
 	private boolean Generate(int KeyCode){
 		String key = Input.Keys.toString(KeyCode);
-		if(key.length()==1 && name.length()<11)
+		if(key.length()==1 && name.length()<MAXNAMELENGTH)
 			this.name=name.concat(key);
 		else if(KeyCode == Keys.ENTER){
 			return setplayerName();

@@ -1,6 +1,5 @@
 package ar.edu.itba.Asteroids.Core;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 /**
  * Abstract class. superclass of all the object that collide in the game

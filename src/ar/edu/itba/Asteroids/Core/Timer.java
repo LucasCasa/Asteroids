@@ -2,7 +2,6 @@ package ar.edu.itba.Asteroids.Core;
 
 import java.math.BigDecimal;
 
-import com.badlogic.gdx.Gdx;
 
 public class Timer {
 	private float time;
