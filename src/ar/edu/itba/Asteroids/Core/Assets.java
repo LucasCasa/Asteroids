@@ -2,6 +2,8 @@ package ar.edu.itba.Asteroids.Core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.assets.loaders.SoundLoader;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 /**
@@ -18,6 +20,9 @@ public class Assets {
 	public static final Texture[] SHIPS = {new Texture("death.png"),new Texture("capsule.png"),new Texture("nose.png"),new Texture("rosca.png"),new Texture("ufo.png")};
 	
 	
+	//Sounds
+	public static final Sound SOUND_MENU = Gdx.audio.newSound(Gdx.files.internal("MenuMusic.mp3"));
+	public static final Sound SOUND_GAME = Gdx.audio.newSound(Gdx.files.internal("GameMusic.mp3"));
 	//PowerUps
 	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
 	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");
