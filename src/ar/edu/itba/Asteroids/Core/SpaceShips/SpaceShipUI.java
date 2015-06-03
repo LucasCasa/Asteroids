@@ -30,7 +30,7 @@ public class SpaceShipUI implements Drawable{
 		if(s.getCollision()){
 			batch.draw(Assets.EXPLOSION, s.getCollisionPoint().x - explosionSize / 2,s.getCollisionPoint().y - explosionSize / 2,explosionSize,explosionSize);
 			s.setCollision(false);
-			Assets.SOUND_CRASH[RandFunctions.generateRandInt(0, 3)].play(Assets.crashVolume);
+			Assets.SOUND_CRASH[RandFunctions.generateRandInt(0, Assets.SOUND_CRASH.length)].play(Assets.crashVolume);
 		}
 		Vector2 acel = s.getacel();
 		if(acel.y > 0){
