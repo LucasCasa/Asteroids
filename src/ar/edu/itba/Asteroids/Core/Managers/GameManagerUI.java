@@ -76,10 +76,10 @@ public class GameManagerUI implements Drawable{
 	private void changeState(){
 		if(GameManager.getInstance().isInMenu() != lastState){
 			if(GameManager.getInstance().isInMenu()){
-				Assets.SOUND_MENU.loop();
+				Assets.SOUND_MENU.loop(Assets.menuVolume);
 				Assets.SOUND_GAME.stop();
 			}else{
-				Assets.SOUND_GAME.loop();
+				Assets.SOUND_GAME.loop(Assets.gameVolume);
 				Assets.SOUND_MENU.stop();
 			}
 		}

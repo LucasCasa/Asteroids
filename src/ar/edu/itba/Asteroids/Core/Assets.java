@@ -2,7 +2,6 @@ package ar.edu.itba.Asteroids.Core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.assets.loaders.SoundLoader;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -21,19 +20,26 @@ public class Assets {
 	
 	
 	//Sounds
+	public static float menuVolume = 1;
+	public static float gameVolume = 0.00000001f;
+	public static float crashVolume = 1;
 	public static final Sound SOUND_MENU = Gdx.audio.newSound(Gdx.files.internal("MenuMusic.mp3"));
 	public static final Sound SOUND_GAME = Gdx.audio.newSound(Gdx.files.internal("GameMusic.mp3"));
+	public static final Sound[] SOUND_CRASH = {Gdx.audio.newSound(Gdx.files.internal("crash1.mp3")),Gdx.audio.newSound(Gdx.files.internal("crash2.mp3")),Gdx.audio.newSound(Gdx.files.internal("crash3.mp3"))};
+	
 	//PowerUps
 	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
 	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");
-	public static final Texture INVENCIBILITYIMG = new Texture("invi35.png");
+	public static final Texture INVENCIBILITYIMG = new Texture("invencibilidad.png");
 	public static final Texture EXTRAACELIMG = new Texture("acel.png");
 	
-	//Miscellaneous 
+	//HUD Icons
 	public static final Texture HEART = new Texture("heart.png");
 	public static final Texture INVIICON = new Texture("invi35invertida.png");
 	public static final Texture ACELICON = new Texture("acel35invertida.png");
 	public static final Texture COOLDOWN = new Texture("cooldown.png");
+	
+	//Miscellaneous
 	public static final Texture BAR_BACK = new Texture("backBar.png");
 	public static final Texture BAR_FRONT = new Texture("frontBar.png");
 	public static final Texture EXPLOSION = new Texture("explosion.png");

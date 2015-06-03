@@ -3,6 +3,7 @@ package ar.edu.itba.Asteroids.Core.PowerUps;
 import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Connector;
 import ar.edu.itba.Asteroids.Core.Constants;
+import ar.edu.itba.Asteroids.Core.RandFunctions;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -20,7 +21,7 @@ public final class PowerUpCreator {
 		PowerUp p;
 		PowerUpUI pUI;
 		Vector2 pos = randomPosition();
-		int r = generateRandInt(0, 4);
+		int r = RandFunctions.generateRandInt(0, 4);
 		switch(r){
 			case 0: p = new ExtraLifePowerUp(pos);
 					pUI = new PowerUpUI(p, Assets.EXTRALIVESIMG);
@@ -49,16 +50,4 @@ public final class PowerUpCreator {
 		return new Vector2((float)(((Constants.VIRTUAL_WIDTH - 2*PowerUp.getPowerUpRadius())) * Math.random())+PowerUp.getPowerUpRadius(),(float)( (Constants.VIRTUAL_HEIGHT-2*PowerUp.getPowerUpRadius()) * Math.random())+PowerUp.getPowerUpRadius());
 	}
 	
-	/**
-	 * Generates a random int from within the interval provided
-	 * @param min; Minimum value INCLUSIVE
-	 * @param max; Maximum value EXCLUSIVE
-	 * @return Returns the random int
-	 */
-	private static int generateRandInt(int min, int max){
-		int n = max;
-		while(n == max)
-			n = (int) Math.floor(Math.random()*max);
-		return n;
-	}
 }
