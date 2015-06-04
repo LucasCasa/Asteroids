@@ -94,6 +94,8 @@ public class HighScoreManager implements Serializable{
 	
 	private class ScoreComparator implements Comparator<Float>, Serializable{
 
+		private static final long serialVersionUID = 1L;
+
 		public int compare(Float o1, Float o2) {
 			int diff = (int)(o2.floatValue() - o1.floatValue());
 			if (diff == 0) {

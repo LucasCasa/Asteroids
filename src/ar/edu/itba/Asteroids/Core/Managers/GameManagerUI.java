@@ -13,7 +13,6 @@ import ar.edu.itba.Asteroids.Core.Managers.HUDs.HUD3Players2vs1;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManagerUI;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipUI;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * the Core UI of the game, it calls other object based of the state of the game

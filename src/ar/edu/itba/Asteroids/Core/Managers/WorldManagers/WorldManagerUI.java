@@ -64,12 +64,13 @@ public class WorldManagerUI implements Drawable{
 	private void drawEndScreen(SpriteBatch batch){
 		Assets.FONT.draw(batch, "Game Over", Constants.VIRTUAL_WIDTH/2 - 120, Constants.VIRTUAL_HEIGHT/2 + 100);
 		if(wm.players.size() == 1){
-			String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
+			if(HighScoreManager.getInstance().getHighScores().size() > 0){
+				String highScore = HighScoreManager.getInstance().getHighScores().firstKey() + "";
+				Assets.FONT.draw(batch, "High Score:", Constants.VIRTUAL_WIDTH/2 - 200, Constants.VIRTUAL_HEIGHT/2 + 10);
+				Assets.FONT.draw(batch, highScore, Constants.VIRTUAL_WIDTH/2 + 80, Constants.VIRTUAL_HEIGHT/2 + 10);
+			}
+			
 			String score = GameManager.getInstance().getPlayer(0).getScore() + "";
-
-			Assets.FONT.draw(batch, "High Score:", Constants.VIRTUAL_WIDTH/2 - 200, Constants.VIRTUAL_HEIGHT/2 + 10);
-			Assets.FONT.draw(batch, highScore, Constants.VIRTUAL_WIDTH/2 + 80, Constants.VIRTUAL_HEIGHT/2 + 10);
-
 			Assets.FONT.draw(batch, "Scored:", Constants.VIRTUAL_WIDTH/2 - 150, Constants.VIRTUAL_HEIGHT/2 - 100);
 			Assets.FONT.draw(batch, score, Constants.VIRTUAL_WIDTH/2 + 50, Constants.VIRTUAL_HEIGHT/2 - 100);
 

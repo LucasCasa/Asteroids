@@ -1,17 +1,13 @@
 package ar.edu.itba.Asteroids.Core.Tests;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.edu.itba.Asteroids.Core.ArrayMap;
-import ar.edu.itba.Asteroids.Core.Assets;
 import ar.edu.itba.Asteroids.Core.Constants;
 import ar.edu.itba.Asteroids.Core.Player;
 import ar.edu.itba.Asteroids.Core.Asteroids.Asteroid;
-import ar.edu.itba.Asteroids.Core.Asteroids.AsteroidUI;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager;
 import ar.edu.itba.Asteroids.Core.Managers.WorldManagers.WorldManager1Player;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
@@ -73,7 +69,6 @@ public class CollisionTest {
  		ArrayList<Player> p = new ArrayList<Player>();
  		p.add(new Player("Prueba",new SpaceShip(200, 200, 10, 1, 20, 20, 5), 1));
 		WorldManager aux = new WorldManager1Player(p);
-		ArrayList<Asteroid> a = new ArrayList<Asteroid>();
 		Asteroid a1,a2,a3,a4,a5;
 		a1 = new Asteroid(0, 60, -1000, 0, 1); // este se va a ir por la derecha
 		a2 = new Asteroid(Constants.VIRTUAL_WIDTH, 60, 1000, 0, 1); // este se va a ir por la izquierda	
