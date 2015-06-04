@@ -26,6 +26,7 @@ public class AsteroidUI implements Drawable {
 		if(back.getCollision()){
 			batch.draw(Assets.EXPLOSION,back.getCollisionPoint().x - 10, back.getCollisionPoint().y -10 , 20,20);
 			back.setCollision(false);
+			Assets.SOUND_ASTEROID_CRUSH.play();
 		}
 	}
 	public boolean isDestroyed(){

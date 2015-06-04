@@ -20,13 +20,12 @@ public class Assets {
 	
 	
 	//Sounds
-	public static float menuVolume = 1;
-	public static float gameVolume = 0.00000001f;
-	public static float crashVolume = 1;
+	public static float BACKGROUND_VOLUME = 0.2f;
+	public static float CRASH_VOLUME = 1;
 	public static final Sound SOUND_MENU = Gdx.audio.newSound(Gdx.files.internal("MenuMusic.mp3"));
 	public static final Sound SOUND_GAME = Gdx.audio.newSound(Gdx.files.internal("GameMusic.mp3"));
 	public static final Sound[] SOUND_CRASH = {Gdx.audio.newSound(Gdx.files.internal("crash1.mp3")),Gdx.audio.newSound(Gdx.files.internal("crash2.mp3")),Gdx.audio.newSound(Gdx.files.internal("crash3.mp3"))};
-	
+	public static final Sound SOUND_ASTEROID_CRUSH = Gdx.audio.newSound(Gdx.files.internal("crashAsteroids.mp3"));
 	//PowerUps
 	public static final Texture EXTRALIVESIMG = new Texture("extravida.png");
 	public static final Texture EXTRAMASSIMG = new Texture("extramasa.png");
