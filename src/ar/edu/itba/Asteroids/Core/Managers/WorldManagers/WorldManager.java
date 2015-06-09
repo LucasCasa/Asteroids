@@ -15,7 +15,7 @@ import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShip;
 import com.badlogic.gdx.Input.Keys;
 
 public abstract class WorldManager {
-	public ArrayList<Asteroid> asteroids;
+	private ArrayList<Asteroid> asteroids;
 	private ArrayMap<PowerUp, PowerUpUI> powerUps;
 	protected Timer timer;
 	protected float score;
