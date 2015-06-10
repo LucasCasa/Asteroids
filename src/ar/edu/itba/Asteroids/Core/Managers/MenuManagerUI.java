@@ -26,7 +26,7 @@ public class MenuManagerUI implements Drawable{
 	
 	
 	private MenuManagerUI() {
-		mm = MenuManager.getInstance();
+		
 	}
 	
 	public static MenuManagerUI getInstance(){
