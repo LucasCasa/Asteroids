@@ -21,12 +21,8 @@ public class MenuManagerUI implements Drawable{
 	private static MenuManagerUI self = null;
 	private static final int offSet = 270;
 	private static final float escYPos = Constants.VIRTUAL_HEIGHT / 30;
-	MenuManager mm;
-	
-	
 	
 	private MenuManagerUI() {
-		
 	}
 	
 	public static MenuManagerUI getInstance(){
@@ -38,7 +34,6 @@ public class MenuManagerUI implements Drawable{
 	@Override
 	public void draw(SpriteBatch batch) {
 		drawMenu(batch);
-			
 	}
 	
 	/**
@@ -48,7 +43,7 @@ public class MenuManagerUI implements Drawable{
 	 */
 	private void printSpaceShips(SpriteBatch batch){
 		for(int i = 0;i<Assets.SHIPS.length; i++){
-			if(!mm.spaceShipSelected(i)){
+			if(!MenuManager.getInstance().spaceShipSelected(i)){
 				int sp = Constants.SHIPS_MAX_VEL[i];
 				int accel = Constants.SHIPS_ACCEL[i];
 				int mass = Constants.SHIPS_MASS[i];
@@ -78,9 +73,9 @@ public class MenuManagerUI implements Drawable{
 	
 	private void printPlayersNames(SpriteBatch batch) {
 		Assets.FONT.draw(batch, "Players Names", Constants.VIRTUAL_WIDTH/16, Constants.VIRTUAL_HEIGHT*7/8);
-		for(int i=0;i<mm.getCompleteName()+1;i++){
+		for(int i=0;i<MenuManager.getInstance().getCompleteName()+1;i++){
 			Assets.SMALL_FONT.draw(batch, "Player " + (i+1) + " write your name then press enter to continue", Constants.VIRTUAL_WIDTH/16, Constants.VIRTUAL_HEIGHT*3/4 -100*i);
-			Assets.SMALL_FONT.draw(batch, mm.getName(i), Constants.VIRTUAL_WIDTH/16 + 50, Constants.VIRTUAL_HEIGHT*3/4 -100*i -50 );
+			Assets.SMALL_FONT.draw(batch, MenuManager.getInstance().getName(i), Constants.VIRTUAL_WIDTH/16 + 50, Constants.VIRTUAL_HEIGHT*3/4 -100*i -50 );
 		}
 	}
 	
@@ -132,7 +127,7 @@ public class MenuManagerUI implements Drawable{
 	 * @param batch
 	 */
 	private void drawMenu(SpriteBatch batch){
-		MenuTypes state= mm.getState();
+		MenuTypes state= MenuManager.getInstance().getState();
 		switch(state){
 		case Main:
 			Assets.TITLE_FONT.draw(batch, "Asteroids", Constants.VIRTUAL_WIDTH*2/8, Constants.VIRTUAL_HEIGHT*7/8);
@@ -200,8 +195,8 @@ public class MenuManagerUI implements Drawable{
 			break;
 		case ChooseSpaceShip:
 			Assets.FONT.draw(batch, "Choose SpaceShip", Constants.VIRTUAL_WIDTH/8, Constants.VIRTUAL_HEIGHT*7/8);
-			if(mm.getPlayers()>mm.getSpaceShipsSelected())
-				Assets.FONT.draw(batch, mm.getName(mm.getSpaceShipsSelected()) + " choose SpaceShip", Constants.VIRTUAL_WIDTH*3/16, Constants.VIRTUAL_HEIGHT*6/8);
+			if(MenuManager.getInstance().getPlayers()>MenuManager.getInstance().getSpaceShipsSelected())
+				Assets.FONT.draw(batch, MenuManager.getInstance().getName(MenuManager.getInstance().getSpaceShipsSelected()) + " choose SpaceShip", Constants.VIRTUAL_WIDTH*3/16, Constants.VIRTUAL_HEIGHT*6/8);
 			printSpaceShips(batch);
 			Assets.SMALL_FONT.draw(batch, "Esc - Back", 0,escYPos);
 			break;
