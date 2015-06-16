@@ -37,7 +37,7 @@ public final class SpaceShipCreator {
 		switch(playerNumber){
 		case 1: return new Vector2(offset,Constants.VIRTUAL_HEIGHT - offset);
 		case 2: return new Vector2(Constants.VIRTUAL_WIDTH - offset, Constants.VIRTUAL_HEIGHT - offset);
-		case 3: return new Vector2(offset, offset);
+		case 3: return new Vector2(Constants.VIRTUAL_WIDTH - offset, offset);
 		default: return null;
 		}
 	}

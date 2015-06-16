@@ -22,8 +22,7 @@ public class CollisionTest {
 	}
 	@Test
 	/**
-	 * Se fija que los asteroides no colisiones si no tienen
-	 * que.
+	 * Test for collisions between asteroids that should not happen.
 	 */
 	public void NoCollisionTest() {
 		Asteroid b = new Asteroid(500,500,0,0,1);
@@ -31,7 +30,7 @@ public class CollisionTest {
 	}
 	@Test
 	/**
-	 * Se fija si los asteroides colisionan correctamente
+	 * Tests if Asteroids collide the right way.
 	 */
 	public void YesCollisionTest(){
 		Asteroid b = new Asteroid(0,0,0,0,1);
@@ -39,8 +38,7 @@ public class CollisionTest {
 	}
 	@Test
 	/**
-	 * Se fija si los asteroides pueden sacarle vida a la nave en
-	 * el caso en que tengan que hacerlo
+	 * Checks if the asteroids damage the ship when they have to.
 	 */
 	public void AsteroidTakeLifeTest(){
 		SpaceShip b = new SpaceShip(0, 0, 15, 1, 0, 0, 3);
@@ -50,7 +48,7 @@ public class CollisionTest {
 	}
 	@Test
 	/**
-	 * Se fija que los asteroides no saquen vida cuando no colisionan
+	 * Checks if the asteroids damage the ship when they DONT have to.
 	 */
 	public void AsteroidDontTakeLife(){
 		SpaceShip b = new SpaceShip(150, 150, 15, 1, 0, 0, 3);
@@ -70,11 +68,11 @@ public class CollisionTest {
  		p.add(new Player("Prueba",new SpaceShip(200, 200, 10, 1, 20, 20, 5), 1));
 		WorldManager aux = new WorldManager1Player(p);
 		Asteroid a1,a2,a3,a4,a5;
-		a1 = new Asteroid(0, 60, -1000, 0, 1); // este se va a ir por la derecha
-		a2 = new Asteroid(Constants.VIRTUAL_WIDTH, 60, 1000, 0, 1); // este se va a ir por la izquierda	
-		a3 = new Asteroid(200,0,0,-1000,1); // este se va por abajo
-		a4 = new Asteroid(200,Constants.VIRTUAL_HEIGHT ,0,1000,1); // este se va por arriba
-		a5 = new Asteroid(100,100,0,0,1); // este no se va
+		a1 = new Asteroid(0, 60, -1000, 0, 1); // Exits through the right
+		a2 = new Asteroid(Constants.VIRTUAL_WIDTH, 60, 1000, 0, 1); // Exits through the left
+		a3 = new Asteroid(200,0,0,-1000,1); // Exits downwards
+		a4 = new Asteroid(200,Constants.VIRTUAL_HEIGHT ,0,1000,1); // Exits upwards
+		a5 = new Asteroid(100,100,0,0,1); // Doesn't exit
 		 
 		aux.addAsteroid(a1);
 		aux.addAsteroid(a2);

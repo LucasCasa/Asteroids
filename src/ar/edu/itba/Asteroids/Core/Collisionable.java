@@ -48,18 +48,18 @@ public abstract class Collisionable {
 		float yVel = o.speed.y - speed.y;
 		float dotProduct = xDist*xVel + yDist*yVel;
 		if(dotProduct > 0){ // si los objetos se estan alejando no colisiona !!! 
-		float newVelX =  (speed.x * (mass - o.mass) + (2 * o.mass * o.speed.x)) / (mass + o.mass);
-		float newVelY1 = (speed.y * (mass - o.mass) + (2 * o.mass * o.speed.y)) / (mass + o.mass);
-		float newVelX2 =  (o.speed.x * (o.mass - mass) + (2 * mass * speed.x)) / (o.mass + mass);
-		float newVelY2 = (o.speed.y * (o.mass - mass) + (2 * mass * speed.y)) / (o.mass + mass);
-		speed.x = newVelX;
-		speed.y = newVelY1;
-		o.speed.x = newVelX2;
-		o.speed.y = newVelY2;
-		cPosition.x+= speed.x * deltaTime;
-		cPosition.y+= speed.y * deltaTime;
-		o.cPosition.x+= o.speed.x* deltaTime;
-		o.cPosition.y+= o.speed.y* deltaTime;
+			float newVelX =  (speed.x * (mass - o.mass) + (2 * o.mass * o.speed.x)) / (mass + o.mass);
+			float newVelY1 = (speed.y * (mass - o.mass) + (2 * o.mass * o.speed.y)) / (mass + o.mass);
+			float newVelX2 =  (o.speed.x * (o.mass - mass) + (2 * mass * speed.x)) / (o.mass + mass);
+			float newVelY2 = (o.speed.y * (o.mass - mass) + (2 * mass * speed.y)) / (o.mass + mass);
+			speed.x = newVelX;
+			speed.y = newVelY1;
+			o.speed.x = newVelX2;
+			o.speed.y = newVelY2;
+			cPosition.x+= speed.x * deltaTime;
+			cPosition.y+= speed.y * deltaTime;
+			o.cPosition.x+= o.speed.x* deltaTime;
+			o.cPosition.y+= o.speed.y* deltaTime;
 		}
 	}
 	/**
@@ -86,6 +86,16 @@ public abstract class Collisionable {
 		}
 		
 	}
+	protected void addSpeedX(float amount){
+		speed.x += amount;
+	}
+	protected void addSpeedY(float amount){
+		speed.y += amount;
+	}
+	protected void resetSpeed(){
+		speed.x = 0;
+		speed.y = 0;
+	}
 	public float getMass(){
 		return mass;
 	}
@@ -95,8 +105,8 @@ public abstract class Collisionable {
 	public Vector2 getCPos(){
 		return cPosition;
 	}
-	protected Vector2 getSpeed(){
-		return speed;
+	public Vector2 getSpeed(){
+		return new Vector2(speed.x,speed.y);
 	}
 	public Vector2 getPosition(){
 		return Position.set(cPosition.x - radius, cPosition.y - radius);

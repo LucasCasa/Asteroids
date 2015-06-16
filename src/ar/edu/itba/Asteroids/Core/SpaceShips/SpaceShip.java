@@ -21,7 +21,6 @@ public class SpaceShip extends Collisionable implements Logical {
 	private int startingLives;
 	private boolean extraAcel;
 	private boolean invincible;
-	//private boolean accelerating[] = {false,false,false,false};
 	private boolean active = true;
 	private Vector2 initialPos;
 	private Timer inviTimer = new Timer();
@@ -41,14 +40,14 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * @param y; initial position, in the y component
 	 * @param radius; radius of the SpaceShip
 	 * @param mass; mass of the spaceShip
-	 * @param vel; maximum velocity of the spaceShip
+	 * @param maxvel; maximum velocity of the spaceShip
 	 * @param acel; initial acceleration of the spaceShip
 	 * @param lives; initial amount of lives that the spaceShip has
 	 */
-	public SpaceShip(float x, float y,int radius, int mass, int vel, int acel,int lives){
+	public SpaceShip(float x, float y,int radius, int mass, int maxvel, int acel,int lives){
 		super(new Vector2(x,y), new Vector2(0,0),mass, radius);
 		initialPos = new Vector2(x,y);
-		this.maxVel=vel;
+		this.maxVel=maxvel;
 		this.acelModifier=acel;
 		this.originalAcel=acel;
 		this.lives=lives;
@@ -62,13 +61,13 @@ public class SpaceShip extends Collisionable implements Logical {
 	 */
 	@Override
 	public void update(float deltaTime) {
+		updateAcel();
+		updateVelocity(deltaTime);
 		getCPos().x+= getSpeed().x * deltaTime;
 		getCPos().y+= getSpeed().y * deltaTime;
-		updateVelocity(deltaTime);
 		checkOutOfScreen();
 		updateInvincibility(deltaTime);
 		updateExtraAcel(deltaTime);
-		updateAcel();
 	}
 	
 	public Timer getInviTimer() {
@@ -148,7 +147,7 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * checks if the two objects collide with each other.
 	 * if there is a collision then the spaceship is damaged.
 	 * 
-	 * @param o thr Asteroid
+	 * @param o an Asteroid
 	 * @param deltaTime time since last frame
 	 * 
 	 * @return true if collision, false if not
@@ -200,10 +199,16 @@ public class SpaceShip extends Collisionable implements Logical {
 	 */
 	private void updateVelocity(float deltaTime){
 		if(Math.abs(getSpeed().x) < maxVel || getSpeed().x * acel.x <= 0){
-			getSpeed().x += acel.x * deltaTime;
+			if(Math.abs(getSpeed().x + acel.x*deltaTime) < maxVel) // If it doesn't reach maximum speed, it just adds
+				addSpeedX(acel.x * deltaTime);
+			else  // It adds whatever is left until maximum speed is reached
+				addSpeedX(Math.signum(getSpeed().x)*(maxVel - Math.abs(getSpeed().x)));
 		}	
 		if(Math.abs(getSpeed().y) < maxVel || getSpeed().y * acel.y <= 0){
-			getSpeed().y += acel.y  * deltaTime;
+			if(Math.abs(getSpeed().y + acel.y*deltaTime) < maxVel)
+				addSpeedY(acel.y * deltaTime);
+			else
+				addSpeedY(Math.signum(getSpeed().y)*(maxVel - Math.abs(getSpeed().y)));
 		}
 	}
 
@@ -265,14 +270,6 @@ public class SpaceShip extends Collisionable implements Logical {
 	public float getExtraAcelTotalTime() {
 		return extraAcelTotalTime;
 	}
-
-	/**
-	 * 
-	 * @return an array of boolean telling if it is accelerating in any direction
-	 */
-	//public boolean[] getAccelerating(){
-	//	return accelerating;
-	//}
 	
 	public Vector2 getAcel(){
 		return acel;
@@ -294,17 +291,11 @@ public class SpaceShip extends Collisionable implements Logical {
 	public void reset() {
 		lives = startingLives;
 		getCPos().set(initialPos.x,initialPos.y);
-		getSpeed().set(0, 0);
-		//accelerating[0] = false;
-		//accelerating[1] = false;
-		//accelerating[2] = false;
-		//accelerating[3] = false;
+		resetSpeed();
 	
 		acel.x = 0;
 		acel.y = 0;
 		invincible = false;
 		active = true;
-		
-		
 	}
 }

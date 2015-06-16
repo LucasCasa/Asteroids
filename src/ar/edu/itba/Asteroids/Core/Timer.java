@@ -10,7 +10,7 @@ public class Timer {
 		time = 0;
 	}
 	/**
-	 * Updates the time of the timer, this needs to be called every cicle of the program
+	 * Updates the time of the timer, this needs to be called every cycle of the program
 	 */
 	public void update(float deltaTime){
 		time+= deltaTime;
