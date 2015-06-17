@@ -198,20 +198,26 @@ public class SpaceShip extends Collisionable implements Logical {
 	 * updates the velocity checking if it can
 	 */
 	private void updateVelocity(float deltaTime){
+		
+		addSpeedX(acel.x * deltaTime);
+		addSpeedY(acel.y * deltaTime);
+	}
+	protected void addSpeedX(float amount){
 		if(Math.abs(getSpeed().x) < maxVel || getSpeed().x * acel.x <= 0){
-			if(Math.abs(getSpeed().x + acel.x*deltaTime) < maxVel) // If it doesn't reach maximum speed, it just adds
-				addSpeedX(acel.x * deltaTime);
+			if(Math.abs(getSpeed().x + amount) < maxVel) // If it doesn't reach maximum speed, it just adds
+				super.addSpeedX(amount);
 			else  // It adds whatever is left until maximum speed is reached
-				addSpeedX(Math.signum(getSpeed().x)*(maxVel - Math.abs(getSpeed().x)));
+				super.addSpeedX(Math.signum(getSpeed().x)*(maxVel - Math.abs(getSpeed().x)));
 		}	
+	}
+	protected void addSpeedY(float amount){
 		if(Math.abs(getSpeed().y) < maxVel || getSpeed().y * acel.y <= 0){
-			if(Math.abs(getSpeed().y + acel.y*deltaTime) < maxVel)
-				addSpeedY(acel.y * deltaTime);
+			if(Math.abs(getSpeed().y + amount) < maxVel)
+				super.addSpeedY(amount);
 			else
-				addSpeedY(Math.signum(getSpeed().y)*(maxVel - Math.abs(getSpeed().y)));
+				super.addSpeedY(Math.signum(getSpeed().y)*(maxVel - Math.abs(getSpeed().y)));
 		}
 	}
-
 	public void damage(int amount){
 		if(!this.invincible){
 			this.lives-=amount;
