@@ -52,15 +52,12 @@ public class MenuManager {
 			if(Generate(keyCode)){
 				state=MenuTypes.ChooseSpaceShip;}
 		}else if(state == MenuTypes.NormalScreen && keyCode!=Keys.ESCAPE){
-			ResolutionManager.getInstance().changeNormalResolution(keyCode - 8, false);			
+			ResolutionManager.getInstance().changeNormalResolution(keyCode - 8, fullScreen);			
 		}else if(state == MenuTypes.WideScreen && keyCode!=Keys.ESCAPE){
-			ResolutionManager.getInstance().changeWideResolution(keyCode - 8, false);			
+			ResolutionManager.getInstance().changeWideResolution(keyCode - 8, fullscreen);			
 		}else if(state == MenuTypes.MacScreen && keyCode!=Keys.ESCAPE){
-			ResolutionManager.getInstance().changeMacResolution(keyCode - 8, false);
-		}else if (state == MenuTypes.FullScreen && keyCode!=Keys.ESCAPE){
-				//ResolutionManager.getInstance().changeMacResolution(keyCode, true);
-		}
-		else{
+			ResolutionManager.getInstance().changeMacResolution(keyCode - 8, fullscreen);
+		}else{
 			switch(keyCode){
 			case Keys.ESCAPE:
 				pressedEscape();
