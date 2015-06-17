@@ -52,7 +52,7 @@ public class MenuManager {
 			if(Generate(keyCode)){
 				state=MenuTypes.ChooseSpaceShip;}
 		}else if(state == MenuTypes.NormalScreen && keyCode!=Keys.ESCAPE){
-			ResolutionManager.getInstance().changeNormalResolution(keyCode - 8, fullScreen);			
+			ResolutionManager.getInstance().changeNormalResolution(keyCode - 8, fullscreen);
 		}else if(state == MenuTypes.WideScreen && keyCode!=Keys.ESCAPE){
 			ResolutionManager.getInstance().changeWideResolution(keyCode - 8, fullscreen);			
 		}else if(state == MenuTypes.MacScreen && keyCode!=Keys.ESCAPE){
