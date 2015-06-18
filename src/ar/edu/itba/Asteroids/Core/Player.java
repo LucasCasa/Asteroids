@@ -13,7 +13,7 @@ public class Player implements Logical {
 	private int playerNumber;
 	private float score = 0f;
 	private Timer timer;
-	private boolean shipActive = true; // hay que ver como se da cuenta que es ap;
+	private boolean shipActive = true;
 	private boolean asteroidActive = false; 
 	
 	/**
@@ -90,7 +90,7 @@ public class Player implements Logical {
 		}
 	}
 	/**
-	 * this method neeeds to be called when a player changes what it is controlling
+	 * this method needs to be called when a player changes what it is controlling
 	 */
 	public void changeState(){
 		shipActive = !shipActive;
@@ -121,7 +121,7 @@ public class Player implements Logical {
 	}
 	
 	/**
-	 * Returs the score rounded by 2 decimals and in a String
+	 * Returns the score rounded by 2 decimals and in a String
 	 * @return the Score
 	 */
 	public String getStringScore(){
@@ -140,7 +140,7 @@ public class Player implements Logical {
 		return timer.getTime();
 	}
 	/**
-	 * it resets al the spaceShips logic ( called when playing 2vs1 and a spaceship plays 2 times)
+	 * it resets all the spaceShips logic ( called when playing 2vs1 and a spaceship plays 2 times)
 	 */
 	public void reset() {
 		spaceShip.reset();

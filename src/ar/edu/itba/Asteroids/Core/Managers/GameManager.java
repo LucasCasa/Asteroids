@@ -23,6 +23,7 @@ public class GameManager {
 	private static GameManager self = null;
 	private WorldManager world;
 	private boolean isMenu = true;
+	private boolean laststate = true;
 	private Map<Integer,Connector<SpaceShip,SpaceShipUI>> s;
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private GameManager(){
@@ -64,6 +65,7 @@ public class GameManager {
 	 * @param deltaTime 
 	 */
 	public void update(float deltaTime){
+		changeState();
 		if(isMenu){
 			MenuManager.getInstance().update(deltaTime);
 		}else{
@@ -76,7 +78,20 @@ public class GameManager {
 				players = new ArrayList<Player>();
 			}
 		}
-		
+	}
+	
+	/**
+	 * This method checks if there is a change of state. 
+	 * Clears all the spaceships from the screen,if you change from a game mode to the menu.
+	 */
+	private void changeState() {
+		if(isMenu != laststate){
+			if(isMenu){
+				s.clear();
+				players.clear();
+			}
+		}
+		laststate=isMenu;
 	}
 	public void keyDown(int keyCode){
 		if(isMenu){
@@ -111,7 +126,7 @@ public class GameManager {
 	public void addSpaceShip(int player, Connector<SpaceShip,SpaceShipUI> s, boolean createAsteroidPlayer,boolean statsAsteroid, String name){
 		this.s.put(player, s);
 		if(createAsteroidPlayer){
-			players.add(new Player(name, new AsteroidPlayer(spaceshipPlayersAmount()), s.getBack(), player,statsAsteroid));
+			players.add(new Player(name, new AsteroidPlayer(1), s.getBack(), player,statsAsteroid));
 		}else{
 			players.add(new Player(name, s.getBack(), player));
 		}

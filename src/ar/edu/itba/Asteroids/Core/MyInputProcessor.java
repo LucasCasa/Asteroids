@@ -11,13 +11,13 @@ public class MyInputProcessor implements InputProcessor {
 	}
 	@Override
 	public boolean keyDown (int keyCode) {
-		GameManager.getInstance().keyDown(keyCode);// esto despues tiene que llamar a gameManager
+		GameManager.getInstance().keyDown(keyCode);
 		return false;
 	}
 
 	@Override
 	public boolean keyUp (int keyCode) {
-		GameManager.getInstance().keyUp(keyCode); // esto tambien
+		GameManager.getInstance().keyUp(keyCode);
 		return false;
 	}
 

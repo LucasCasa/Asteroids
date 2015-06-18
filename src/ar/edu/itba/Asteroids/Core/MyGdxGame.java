@@ -35,7 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		standardFont = new BitmapFont();
 		MyInputProcessor MYP = new MyInputProcessor();
 		camera = new OrthographicCamera(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT);
-		Gdx.input.setInputProcessor(MYP); // el que se encarga del manejo del input
+		Gdx.input.setInputProcessor(MYP);
 		camera = new OrthographicCamera();
 	    camera.setToOrtho(false, 800, 600);
 	    viewport = new FitViewport(800, 600, camera);
@@ -52,7 +52,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(img, 0, 0,2048,1536);
 		standardFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(),1,50);
-		// font.draw(batch, "Asteroides", 50, 50); queda como ejemplo
 		GameManager.getInstance().update(Gdx.graphics.getDeltaTime());
 		GameManagerUI.getInstance().draw(batch);
 		batch.end();

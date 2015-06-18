@@ -30,7 +30,6 @@ public final class SpaceShipCreator {
 	
 	/**
 	 * @param playerNumber the player's number
-	 * 
 	 * @return Returns a vector with the x and y starting position for the respective player.
 	 */
 	private static Vector2 startPos(int playerNumber){

@@ -6,7 +6,7 @@ package ar.edu.itba.Asteroids.Core;
  */
 public class Constants {
 
-	//Valores de las naves
+	//Values of the spaceShips
 		public static final int[] SHIPS_RADIUS = {25,20,10,30,20};
 		public static final int[] SHIPS_MASS = {5,3,1,2,3};
 		public static final int[] SHIPS_MAX_VEL = {300,325,500,400,350};

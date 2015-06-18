@@ -7,15 +7,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 /**
  * a Static class that has all the textures
- * @author ME
  *
  */
 public class Assets {
 
-	//Asteroides
+	//Asteroids
 	public static final Texture ASTEROID = new Texture("aster.png");
 	
-	//Naves
+	//SpaceShips
 	public static final Texture[] SHIPS = {new Texture("death.png"),new Texture("capsule.png"),new Texture("nose.png"),new Texture("rosca.png"),new Texture("ufo.png")};
 	
 	
