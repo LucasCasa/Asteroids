@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import ar.edu.itba.Asteroids.Core.Player;
 
 
-public class HighScoreManager implements Serializable{
+public class HighScoreManager{
 	private static HighScoreManager self;
 	
 	private TreeMap<Float, String> highscores;
@@ -42,15 +42,16 @@ public class HighScoreManager implements Serializable{
 		return highscores;
 	}
     
-    public static HighScoreManager deserialize() throws IOException, ClassNotFoundException {
+    public static TreeMap<Float, String> deserialize() throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream("Score.out");
 		ObjectInputStream ois = new ObjectInputStream(fis);
-		HighScoreManager s = (HighScoreManager) ois.readObject();
+		@SuppressWarnings("unchecked")
+		TreeMap<Float, String> s = (TreeMap<Float, String>) ois.readObject();
 		ois.close();
 		return s;
     }
     
-    public static void serialize(HighScoreManager s) throws IOException {
+    public static void serialize(TreeMap<Float, String> s) throws IOException {
         FileOutputStream fos = new FileOutputStream("Score.out");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(s);
@@ -59,21 +60,21 @@ public class HighScoreManager implements Serializable{
 	
 	public void writeScores(){
 	    try {
-	        serialize(this);
+	        serialize(this.highscores);
 	    } catch (IOException e) {
 	        return;
 	    }
 	}
 	
 	public void loadScores(){
-		HighScoreManager s = null;
+		TreeMap<Float, String> s = null;
 		try {
-		    s = (HighScoreManager) deserialize();
+		    s = (TreeMap<Float, String>) deserialize();
 		} catch (ClassNotFoundException | IOException e) {
 
 		} finally{
-			if(s != (HighScoreManager)null){
-				highscores = new TreeMap<Float, String>(s.getHighScores());
+			if(s != (TreeMap<Float, String>)null){
+				highscores = new TreeMap<Float, String>(s);
 			}
 		}
 	}
@@ -95,6 +96,4 @@ public class HighScoreManager implements Serializable{
 			return diff > 0 ? 1 : -1;
 		}
 	}
-	
-	private static final long serialVersionUID = 9203780305782683437L;
 }
