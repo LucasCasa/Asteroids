@@ -13,6 +13,8 @@ public class Constants {
 		public static final int[] SHIPS_ACCEL = {450,500,1200,800,600};
 		public static final int[] SHIPS_LIVES = {6,5,3,4,5};
 		
+		public static final int NUMBER_OF_SHIPS = 5;
+		
 		public static final int MAX_RADIUS = SHIPS_RADIUS[3];
 		public static final int MAX_MASS = SHIPS_MASS[0];
 		public static final int MAX_MAX_VEL = SHIPS_MAX_VEL[2];

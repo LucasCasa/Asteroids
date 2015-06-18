@@ -3,7 +3,7 @@ package ar.edu.itba.Asteroids.Core.Managers;
 import java.util.HashMap;
 import java.util.Map;
 
-import ar.edu.itba.Asteroids.Core.Assets;
+import ar.edu.itba.Asteroids.Core.Constants;
 import ar.edu.itba.Asteroids.Core.SpaceShips.SpaceShipCreator;
 
 import com.badlogic.gdx.Gdx;
@@ -289,7 +289,7 @@ public class MenuManager {
      * This method resets all the spaceShips that have been selected
      */
     private void resetSelected() {
-        for(int i=0;i<Assets.SHIPS.length;i++){
+        for(int i=0;i<Constants.NUMBER_OF_SHIPS;i++){
             selected[i]=false;		
         }
         this.numberOfShipsSelected=0;
