@@ -13,7 +13,13 @@ public abstract class Collisionable {
 	private float mass;
 	private Vector2 collisionPoint;
 	private boolean collision = false;
-	
+	/**
+	 * Creates a new Collisionable object
+	 * @param cPos; A Vector2 with the coordinates of the object's central position
+	 * @param speed; The initial speed
+	 * @param mass; The mass
+	 * @param radius; The radius
+	 */
 	public Collisionable(Vector2 cPos,Vector2 speed,float mass,int radius){
 		cPosition = cPos;
 		this.speed = speed;

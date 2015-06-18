@@ -24,7 +24,7 @@ public class AsteroidPlayer {
 		this.cooldown = baseCooldown + spaceshipAmount * cooldownModifier;
 	}
 	/**
-	 * This method validates if you can increse the amount of asteroids
+	 * This method validates if you can increase the amount of asteroids
 	 * if you can, then it updates the timer and if the time has already passed it ads another one to the reserve
 	 */
 	public void update(float deltaTime){

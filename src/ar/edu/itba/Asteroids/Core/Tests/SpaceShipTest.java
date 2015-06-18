@@ -24,11 +24,11 @@ public class SpaceShipTest {
 		System.out.println(s.getSpeed().x);
 		Assert.assertEquals(100, s.getSpeed().x, EPSILON); // Checks for correct X speed
 		Assert.assertTrue(s.getSpeed().y == 0); // Checks for correct Y speed
-		Assert.assertTrue(Math.abs(s.getCPos().x - (100+100)) < EPSILON); // Checks position
+		Assert.assertEquals(Math.abs(s.getCPos().x),(100+100), EPSILON); // Checks position
 
 		s.acelRight(false);
 		s.update(1);
-		Assert.assertTrue(Math.abs(s.getSpeed().x) - 100 < EPSILON); // Checks for no changes in speed when not accelerating
+		Assert.assertEquals(Math.abs(s.getSpeed().x), 100, EPSILON); // Checks for no changes in speed when not accelerating
 		
 		s.acelRight(true);
 		s.update(1);

@@ -28,6 +28,12 @@ public class Timer {
 		return round(time,2); 
 	}
 
+	/**
+	 * Rounds a number to the amount of decimal places provided
+	 * @param d; The number to be rounded
+	 * @param decimalPlace; The amount of decimal places
+	 * @return The rounded number
+	 */
 	public static float round(float d, int decimalPlace) {
 		BigDecimal bd = new BigDecimal(Float.toString(d));
 		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);

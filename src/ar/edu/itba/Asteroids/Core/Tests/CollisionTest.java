@@ -56,12 +56,7 @@ public class CollisionTest {
 		Assert.assertEquals(3, b.getLives());
 		
 	}
-/*	No entiendo que debería hacer este test 
-	@Test
-	public void EliminatePowerUp(){
-		PowerUpCreator.create();
-	}
-*/
+	
  	@Test
 	public void AsteroidOutOfScreen(){
  		ArrayList<Player> p = new ArrayList<Player>();

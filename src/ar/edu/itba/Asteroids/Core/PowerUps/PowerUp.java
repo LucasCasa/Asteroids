@@ -20,6 +20,7 @@ public abstract class PowerUp extends Collisionable implements Logical{
 		super(pos, new Vector2(0,0), 0, radius);
 	}
 	
+	// No se usa por ahora pero se deja porque en un futuro podría ser usado
 	public void update(float deltaTime){
 	}
 	

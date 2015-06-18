@@ -6,7 +6,7 @@ package ar.edu.itba.Asteroids.Core;
  */
 public class Constants {
 
-	//Values of the spaceShips
+		//Values of the spaceShips
 		public static final int[] SHIPS_RADIUS = {25,20,10,30,20};
 		public static final int[] SHIPS_MASS = {5,3,1,2,3};
 		public static final int[] SHIPS_MAX_VEL = {300,325,500,400,350};
@@ -24,7 +24,7 @@ public class Constants {
 		public static final int VIRTUAL_HEIGHT = 600;
 		public static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
 		
-		//MEJORADORES DE INTERFAZ
+		//INTERFACE VALUES
 		public static final int HORIZONTAL_OFFSET = 25;
 		public static final int VERTICAL_OFFSET = 15;
 		public static final int ICON_SIZE = 35;
