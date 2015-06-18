@@ -12,11 +12,10 @@ import java.util.TreeMap;
 import ar.edu.itba.Asteroids.Core.Player;
 
 
-public class HighScoreManager{
-	private static HighScoreManager self;
-	
+public class HighScoreManager implements Serializable{
+	private static HighScoreManager self; 
 	private TreeMap<Float, String> highscores;
-	
+	private static final long serialVersionUID = 1L;
 	
 	private HighScoreManager(){
 		highscores = new TreeMap<Float, String>(new ScoreComparator());
@@ -71,7 +70,7 @@ public class HighScoreManager{
 		try {
 		    s = (TreeMap<Float, String>) deserialize();
 		} catch (ClassNotFoundException | IOException e) {
-
+			//e.printStackTrace();
 		} finally{
 			if(s != (TreeMap<Float, String>)null){
 				highscores = new TreeMap<Float, String>(s);
